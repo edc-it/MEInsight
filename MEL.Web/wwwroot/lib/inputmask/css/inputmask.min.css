@@ -1,0 +1,8 @@
+/**
+ * Minified by jsDelivr using clean-css v4.2.1.
+ * Original file: /npm/inputmask@4.0.8/css/inputmask.css
+ * 
+ * Do NOT use SRI with dynamically generated files! More information: https://www.jsdelivr.com/using-sri-with-dynamic-files
+ */
+mark.im-caret{animation:1s blink step-end infinite!important}mark.im-caret-select{background-color:rgba(0,0,0,.25)}@keyframes blink{from,to{border-right-color:#000}50%{border-right-color:transparent}}span.im-static{color:grey}div.im-colormask{display:inline-block;border-style:inset;border-width:2px;appearance:textfield;cursor:text}div.im-colormask>input,div.im-colormask>input:-webkit-autofill{position:absolute!important;display:inline-block;background-color:transparent;color:transparent;-webkit-text-fill-color:transparent;transition:background-color 5000s ease-in-out 0s;caret-color:transparent;text-shadow:none;appearance:caret;border-style:none;left:0}div.im-colormask>input:focus{outline:0}div.im-colormask>input::selection{background:0 0}div.im-colormask>input::-moz-selection{background:0 0}div.im-colormask>input:-webkit-autofill~div{background-color:#faffbd}div.im-colormask>div{color:#000;display:inline-block;width:100px}[im-insert=false]{caret-color:red;caret-shape:block}
+/*# sourceMappingURL=/sm/77d2c85e9923ec1d1f744e8ac5004fbe54ea7c5bf28f3900e917d1f9d1fc4ca5.map */

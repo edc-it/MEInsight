@@ -1,0 +1,69 @@
+﻿@model MEL.Web.Areas.Settings.Models.ViewModels.UsersEditViewModel
+
+@{
+    ViewData["Title"] = @Localizer["Edit"].Value + " " + @Localizer["User"].Value;
+}
+
+<h2>@Localizer["Edit"]</h2>
+
+<h4>@Localizer["User"]</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6 col-sm-8">
+        <!--form start-->
+        <form asp-action="Edit" id="main-form">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" name="ParentId" value="@ViewBag.ParentId" />
+            <div class="form-group">
+                <label asp-for="OrganizationId" class="control-label"></label>
+                <select asp-for="OrganizationId" class="form-control custom-select select2 required" asp-items="ViewBag.OrganizationId">
+                    <option disabled selected></option>
+                </select>
+                <span asp-validation-for="OrganizationId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" autocomplete="off" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" autocomplete="off" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" autocomplete="off" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoleId" class="control-label"></label>
+                <select asp-for="RoleId" class="form-control custom-select required" asp-items="ViewBag.RoleId">
+                    <option disabled selected></option>
+                </select>
+                <span asp-validation-for="RoleId" class="text-danger"></span>
+            </div>
+            <!-- button group start -->
+            <div class="form-group text-right mt-5">
+                <a id="cancelbutton" class="btn btn-secondary mr-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
+                    <i class="fas fa-times"></i> @Localizer["Cancel"]
+                </a>
+                <button id="submitbutton" type="submit" value="Save" class="btn btn-primary ladda-button" data-style="expand-left" data-spinner-color="white">
+                    <span class="ladda-label">
+                        <i class="fas fa-check"></i> @Localizer["Save"]
+                    </span>
+                </button>
+            </div>
+            <!-- button group end -->
+        </form>
+        <!--form end-->
+    </div>
+</div>
+
+@section Styles {
+    @{await Html.RenderPartialAsync("_EditStylesPartial");}
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{await Html.RenderPartialAsync("_EditScriptsPartial");}
+}

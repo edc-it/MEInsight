@@ -1,0 +1,8 @@
+/**
+ * Minified by jsDelivr using clean-css v4.2.1.
+ * Original file: /npm/bs4-toast@0.7.1/css/toast.css
+ * 
+ * Do NOT use SRI with dynamically generated files! More information: https://www.jsdelivr.com/using-sri-with-dynamic-files
+ */
+#toast-container{position:sticky;z-index:1055;top:0}#toast-wrapper{position:absolute;top:0;right:0;margin:5px}#toast-container>#toast-wrapper>.toast{min-width:150px;background-color:#fff;border-top:none}#toast-container>#toast-wrapper>.toast>.toast-header strong{padding-right:20px}
+/*# sourceMappingURL=/sm/fd5827f6a68f70049a8e3952a3d485357d984be191c8d3f43607607cbb6c0248.map */

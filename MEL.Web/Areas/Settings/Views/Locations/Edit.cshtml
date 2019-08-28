@@ -1,0 +1,90 @@
+@model MEL.Entities.Reference.RefLocation
+
+@{
+    ViewData["Title"] = @Localizer["Edit"].Value + " " + @Localizer["Location"].Value;
+}
+
+<h2>@Localizer["Edit"]</h2>
+
+<h4>@Localizer["Location"]</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6 col-sm-8">
+        <!--form start-->
+        <form asp-action="Edit" id="main-form">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" name="ParentId" value="@ViewBag.ParentId" />
+            <input type="hidden" asp-for="RefLocationId" />
+            @*[Remote] Validation to validate user input and verify if the LocationId already exists.*@
+            <input type="hidden" value="@Model.RefLocationId" name="LocationCodeInitialValue" />
+
+            <div class="form-group" asp-enabled="LocationName">
+                <!--input start-->
+                <label asp-for="LocationName" class="control-label"></label>
+                <input asp-for="LocationName" autocomplete="off" class="form-control" />
+                <span asp-validation-for="LocationName" class="text-danger"></span>
+                <!--input end-->
+            </div>
+
+
+            <div class="form-group" asp-enabled="RefLocationTypeId">
+                <!--fk select start-->
+                <label asp-for="RefLocationTypeId" class="control-label"></label>
+                <select asp-for="RefLocationTypeId" class="form-control custom-select" asp-items="ViewBag.RefLocationTypeId">
+                </select>
+                <span asp-validation-for="RefLocationTypeId" class="text-danger"></span>
+                <!--fk select end-->
+            </div>
+
+
+            <div class="form-group" asp-enabled="ParentLocationId">
+                <!--fk select start-->
+                <label asp-for="ParentLocationId" class="control-label"></label>
+                <select asp-for="ParentLocationId" class="form-control custom-select" asp-items="ViewBag.ParentLocationId">
+                </select>
+                <span asp-validation-for="ParentLocationId" class="text-danger"></span>
+                <!--fk select end-->
+            </div>
+
+
+            <div class="form-group" asp-enabled="Latitude">
+                <!--input start-->
+                <label asp-for="Latitude" class="control-label"></label>
+                <input asp-for="Latitude" autocomplete="off" class="form-control" />
+                <span asp-validation-for="Latitude" class="text-danger"></span>
+                <!--input end-->
+            </div>
+
+
+            <div class="form-group" asp-enabled="Longitude">
+                <!--input start-->
+                <label asp-for="Longitude" class="control-label"></label>
+                <input asp-for="Longitude" autocomplete="off" class="form-control" />
+                <span asp-validation-for="Longitude" class="text-danger"></span>
+                <!--input end-->
+            </div>
+
+            <!-- button group start -->
+            <div class="form-group text-right mt-5">
+                <a id="cancelbutton" class="btn btn-secondary mr-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
+                    <i class="fas fa-times"></i> @Localizer["Cancel"]
+                </a>
+                <button id="submitbutton" type="submit" value="Save" class="btn btn-primary ladda-button" data-style="expand-left" data-spinner-color="white">
+                    <span class="ladda-label">
+                        <i class="fas fa-check"></i> @Localizer["Save"]
+                    </span>
+                </button>
+            </div>
+            <!-- button group end -->
+        </form>
+        <!--form end-->
+    </div>
+</div>
+
+@section Styles {
+    @{await Html.RenderPartialAsync("_EditStylesPartial");}
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{await Html.RenderPartialAsync("_EditScriptsPartial");}
+}

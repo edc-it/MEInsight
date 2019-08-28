@@ -1,0 +1,212 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+
+using MEL.Data;
+using MEL.Entities.Reference;
+
+namespace MEL.Web.Areas.Settings.Controllers
+{
+    [Area("Settings")]
+    [Authorize]
+    public class LocationsController : Controller
+    {
+        private readonly ApplicationDbContext _context;
+
+        public LocationsController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        // GET: Settings/Locations
+        public async Task<IActionResult> Index()
+        {
+        
+            var applicationDbContext = _context.Locations.Include(r => r.LocationTypes).Include(r => r.ParentLocations);
+            
+            return View(await applicationDbContext.ToListAsync());
+        }
+
+        // GET: Settings/Locations/Details/5
+        public async Task<IActionResult> Details(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var refLocation = await _context.Locations
+                .Include(r => r.LocationTypes)
+                .Include(r => r.ParentLocations)
+                .FirstOrDefaultAsync(m => m.RefLocationId == id);
+            
+            if (refLocation == null)
+            {
+                return NotFound();
+            }
+
+            return View(refLocation);
+        }
+
+        // GET: Settings/Locations/Create
+        [Authorize(Policy = "RequireMELRole")]
+        public IActionResult Create()
+        {
+            ViewData["RefLocationTypeId"] = new SelectList(_context.LocationTypes, "RefLocationTypeId", "LocationType");
+            ViewData["ParentLocationId"] = new SelectList(_context.Locations, "RefLocationId", "RefLocationId");
+            return View();
+        }
+
+        // POST: Settings/Locations/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("RefLocationId,LocationName,RefLocationTypeId,ParentLocationId,Latitude,Longitude")] RefLocation refLocation)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(refLocation);
+                await _context.SaveChangesAsync();
+                
+                TempData["messageType"] = "success";
+                TempData["messageTitle"] = "RECORD CREATED";
+                TempData["message"] = "New record successfully created";
+                
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["RefLocationTypeId"] = new SelectList(_context.LocationTypes, "RefLocationTypeId", "LocationType", refLocation.RefLocationTypeId);
+            ViewData["ParentLocationId"] = new SelectList(_context.Locations, "RefLocationId", "RefLocationId", refLocation.ParentLocationId);
+            return View(refLocation);
+        }
+
+        // GET: Settings/Locations/Edit/5
+        [Authorize(Policy = "RequireMELRole")]
+        public async Task<IActionResult> Edit(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var refLocation = await _context.Locations.FindAsync(id);
+
+            if (refLocation == null)
+            {
+                return NotFound();
+            }
+            ViewData["RefLocationTypeId"] = new SelectList(_context.LocationTypes, "RefLocationTypeId", "LocationType", refLocation.RefLocationTypeId);
+            ViewData["ParentLocationId"] = new SelectList(_context.Locations, "RefLocationId", "RefLocationId", refLocation.ParentLocationId);
+            return View(refLocation);
+        }
+
+        // POST: Settings/Locations/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(string id, [Bind("RefLocationId,LocationName,RefLocationTypeId,ParentLocationId,Latitude,Longitude")] RefLocation refLocation)
+        {
+            if (id != refLocation.RefLocationId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(refLocation);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!RefLocationExists(refLocation.RefLocationId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                
+                TempData["messageType"] = "success";
+                TempData["messageTitle"] = "RECORD UPDATED";
+                TempData["message"] = "Record successfully updated";
+                
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["RefLocationTypeId"] = new SelectList(_context.LocationTypes, "RefLocationTypeId", "LocationType", refLocation.RefLocationTypeId);
+            ViewData["ParentLocationId"] = new SelectList(_context.Locations, "RefLocationId", "RefLocationId", refLocation.ParentLocationId);
+            return View(refLocation);
+        }
+
+        // GET: Settings/Locations/Delete/5
+        [Authorize(Policy = "RequireMELRole")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var refLocation = await _context.Locations
+					.Include(r => r.LocationTypes)
+					.Include(r => r.ParentLocations)
+					.Include(m => m.Organizations)
+					.Include(m => m.Participants)
+					.Include(m => m.SchoolClusters)
+					.Include(m => m.Locations)
+					.FirstOrDefaultAsync(m => m.RefLocationId == id);
+
+            if (refLocation == null)
+            {
+                return NotFound();
+            }
+
+            int relatedCount = 0;
+
+			relatedCount += refLocation.Organizations.Count();    
+            relatedCount += refLocation.Participants.Count();
+			relatedCount += refLocation.SchoolClusters.Count();
+			relatedCount += refLocation.Locations.Count();
+
+			if (relatedCount > 0)
+            {
+                ViewData["hasRelated"] = true;
+            }
+            else
+            {
+                ViewData["hasRelated"] = false;
+            }
+
+            ViewData["RelatedCount"] = relatedCount;
+
+            return View(refLocation);
+        }
+
+        // POST: Settings/Locations/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(string id)
+        {
+            var refLocation = await _context.Locations.FindAsync(id);
+
+            _context.Locations.Remove(refLocation);
+            await _context.SaveChangesAsync();
+        
+            TempData["messageType"] = "success";
+            TempData["messageTitle"] = "RECORD DELETED";
+            TempData["message"] = "Record successfully deleted";
+        
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool RefLocationExists(string id)
+        {
+            return _context.Locations.Any(e => e.RefLocationId == id);
+        }
+    }
+}

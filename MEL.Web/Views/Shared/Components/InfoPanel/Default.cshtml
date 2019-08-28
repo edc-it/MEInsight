@@ -1,0 +1,181 @@
+﻿@model MEL.Web.ViewComponents.InfoPanelViewModel
+@{
+    Guid? userOrganizacionId =
+        _userManager.GetUserAsync(User).Result?.OrganizationId;
+
+    int? organizationIndex =
+         Model.OrganizationParent
+         .Where(x => x.OrganizationId == userOrganizacionId)
+         .FirstOrDefault().Index;
+}
+@* Info Panel Heading *@
+<div class="card mb-3">
+    <div class="card-header">
+        @foreach (var item in Model.OrganizationParent)
+        {
+            if (item.Index == organizationIndex)
+            {
+                <a asp-action="Index"
+                   asp-controller="Organizations"
+                   asp-route-id="@item.OrganizationId"
+                   class="text-decoration-none">
+                    <strong>@Localizer["Organization"]</strong>
+                </a>
+            }
+
+            if (item.Index < organizationIndex)
+            {
+                if (item.OrganizationId == Model.OrganizationId)
+                {
+                    if (Model.IsOrganizationUnit != true)
+                    {
+                        <span> <i class="fas fa-angle-right text-muted" aria-hidden="true"></i> </span>
+                        <a asp-action="Index"
+                           asp-controller="Groups"
+                           asp-route-id="@item.OrganizationId"
+                           class="text-decoration-none">
+                            <strong>@item.OrganizationName</strong>
+                        </a>
+                    }
+                    else
+                    {
+                        <span> <i class="fas fa-angle-right text-muted" aria-hidden="true"></i> </span>
+                        <a asp-action="Index"
+                           asp-controller="Organizations"
+                           asp-route-id="@item.OrganizationId"
+                           class="text-decoration-none">
+                            <strong>@item.OrganizationName</strong>
+                        </a>
+                    }
+
+                }
+                else
+                {
+                    <span> <i class="fas fa-angle-right text-muted" aria-hidden="true"></i> </span>
+                    <a asp-action="Index"
+                       asp-controller="Organizations"
+                       asp-route-id="@item.OrganizationId"
+                       class="text-decoration-none">
+                        <strong>@item.OrganizationName</strong>
+                    </a>
+                }
+            }
+        }
+
+        @if (Model.Group != null)
+        {
+            <span> <i class="fas fa-angle-right text-muted" aria-hidden="true"></i> </span>
+            <a asp-action="Index" asp-controller="GroupEnrollments" asp-route-id="@Model.GroupId"
+               class="text-decoration-none">
+                <strong>@Model.Group</strong>
+            </a>
+        }
+
+    </div>
+    @if (Model.Organization != null)
+    {
+        @* Info Panel Body *@
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-7">
+                    <dl class="mb-0">
+                        @if (Model.Organization != null)
+{
+<dt>
+    @Html.DisplayNameFor(model => model.Organization)
+</dt>
+<dd class="mb-1">
+    @Html.DisplayFor(model => model.Organization) @*<a asp-action="Edit" asp-controller="Organizations" asp-route-id="@Model.OrganizationId">  <i class="fa fa-pencil-square-o text-muted"> </i></a>*@
+</dd>
+}
+
+                        @if (Model.Program != null)
+                        {
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Program)
+                            </dt>
+                            <dd class="mb-1">
+                                @Html.DisplayFor(model => model.Program)
+                                @if (Model.HasAssessment != true)
+                                {
+                                    <span class="small text-muted">
+                                        (@Html.DisplayFor(model => model.Max) @Html.DisplayFor(model => model.AttendanceUnit) / @Html.DisplayFor(model => model.Min) @Html.DisplayFor(model => model.AttendanceUnit) @Localizer["Min"])
+                                    </span>
+                                }
+                            </dd>
+                        }
+
+                        @if (Model.GroupStartDate != null)
+                        {
+                            <dt>
+                                @Localizer["Start/End Date"]
+                            </dt>
+                            <dd class="mb-1">
+                                @Html.DisplayFor(model => model.GroupStartDate) - @Html.DisplayFor(model => model.GroupEndDate)
+                            </dd>
+                        }
+
+                        @if (Model.Group != null)
+                        {
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Group)
+                                @if (Model.GroupClosed == true)
+                                {
+                                    <span style="font-weight:300;" class="label label-default text-uppercase">@Localizer["Closed"]</span>
+                                }
+                                else
+                                {
+                                    <span class="text-primary label label-success text-uppercase">@Localizer["Open"]</span>
+                                }
+                            </dt>
+                            <dd class="mb-1">
+                                @Html.DisplayFor(model => model.Group)
+                                @if (Model.GradeLevel != null)
+                                {
+                                    <span> - @Html.DisplayFor(model => model.GradeLevel)</span>
+                                }
+                            </dd>
+                        }
+                        @if (Model.GroupTeacher != null && Model.HasAssessment != true)
+                        {
+
+                            <dt>
+                                @Html.DisplayFor(model => model.GroupTeacherType)
+                            </dt>
+                            <dd class="mb-1">
+                                @Html.DisplayFor(model => model.GroupTeacher)
+                            </dd>
+                        }
+
+                        @if (Model.GroupFileName != null)
+                        {
+                            <dt>
+                                @Localizer["Training Attendance"]
+                            </dt>
+                            <dd class="mb-1">
+                                <a target="_blank" href="~/uploads/@Model.GroupFileName">@Model.GroupFileName</a>
+                            </dd>
+                        }
+
+                    </dl>
+                </div>
+                <div class="col-md-5 pull-right text-right">
+                    <dl class="mb-0">
+                        @if (Model.LocationParent != null)
+                        {
+                            @foreach (var item in Model.LocationParent)
+                            {
+                                <dt>
+                                    @item.LocationType
+                                </dt>
+                                <dd class="mb-1">
+                                    @item.LocationName
+                                </dd>
+                            }
+                        }
+                    </dl>
+                </div>
+            </div>
+        </div>
+    }
+</div>

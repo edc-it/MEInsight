@@ -1,0 +1,129 @@
+@model IEnumerable<MEL.Entities.Reference.RefStudentType>
+
+@{
+    ViewData["Title"] = @Localizer["Student Type"].Value + " " + @Localizer["List"].Value;
+}
+
+<!--content start-->
+<div class="slide-in-right">
+    <!--heading start-->
+    <div class="card mb-3 heading-panel">
+        <div class="card-body">
+            <h2 class="card-title mt-3 font-weight-bold mb-0">@Localizer["Student Type"]</h2>
+            <span class="card-text text-muted">@Localizer["List of"] @Localizer["Student Type"]</span>
+        </div>
+    </div>
+    <!--heading end-->
+    <!--toolbars start-->
+    <div class="row mb-3">
+        <div class="col-sm-12 col-md-6 d-flex align-items-center justify-content-start">
+            <div id="toolbar" class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                <!--create start-->
+                <div class="btn-group btn-group-sm mb-2" role="group" aria-label="creategroup">
+                    <a policy="RequireCreateRole" asp-action="Create" asp-route-id="@ViewBag.ParentId" role="button" class="btn btn-primary mr-3">
+                        <i class="fas fa-plus"></i> @Localizer["Create New"]
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 d-flex align-items-center justify-content-end">
+            <!--datatable search start-->
+            <div class="input-group input-group-sm d-print-none mb-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-search" aria-hidden="true"></i></span>
+                </div>
+                <input id="searchbox" type="text" class="form-control" placeholder='@Localizer["Search"]' aria-describedby="searchbox">
+            </div>
+            <!--datatable search end-->
+        </div>
+    </div>
+    <!--toolbars end-->
+    <!--datatable start-->
+    <div class="row">
+        <div class="col-sm-12">
+            <!--table start-->
+            <table id="datatable" class="table table-sm table-hover table-striped responsive no-wrap w-100">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.StudentTypeCode)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.StudentType)
+                        </th>
+                        <th class="text-right d-print-none">@Localizer["Actions"]</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StudentTypeCode)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StudentType)
+                            </td>
+                            <td class="text-right d-print-none">
+                                <div class="btn-group btn-group-sm" role="group" aria-label="Actions">
+                                    <a asp-action="Details" asp-route-id="@item.RefStudentTypeId"
+                                       class="btn btn-link text-gray btn-sm d-print-none btn-action"
+                                       data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Details"]'>
+                                        <i class="fas fa-info-circle fa-sm" aria-hidden="true"></i>
+                                    </a>
+
+                                    <a policy="RequireEditRole" asp-action="Edit" asp-route-id="@item.RefStudentTypeId"
+                                       class="btn btn-link text-gray btn-sm d-print-none btn-action"
+                                       data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Edit"]'>
+                                        <i class="fas fa-pencil-alt fa-sm" aria-hidden="true"></i>
+                                    </a>
+
+                                    <a policy="RequireDeleteRole" asp-action="Delete" asp-route-id="@item.RefStudentTypeId"
+                                       class="btn btn-link text-gray btn-sm d-print-none btn-action"
+                                       data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Delete"]'>
+                                        <i class="far fa-trash-alt fa-sm" aria-hidden="true"></i>
+                                    </a>
+                                    @if (ViewBag.NextController != null)
+                                    {
+                                        <a asp-controller="@ViewBag.NextController"
+                                           asp-action="Index"
+                                           asp-route-id="@item.RefStudentTypeId"
+                                           class="btn btn-link btn-sm d-print-none btn-action"
+                                           data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Open"]'>
+                                            <i class="fas fa-chevron-right fa-sm" aria-hidden="true"></i>
+                                        </a>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <!--table end-->
+        </div>
+    </div>
+    <!--datatable end-->
+    <!--datatable pagination start-->
+    <div class="row">
+        <div class="col-sm-12 col-md-5 d-flex align-items-center justify-content-start"><div class="" id="detailfooter"></div></div>
+        <div class="col-sm-12 col-md-7 d-flex align-items-center justify-content-end">
+            <div class="" id="datatables-pagination"></div>
+        </div>
+    </div>
+    <!--datatable pagination end-->
+    <!--footer buttons start-->
+    <div class="row mt-5">
+        <div class="col">
+            <a asp-controller="Home" asp-area="Settings" asp-action="Index" class="btn btn-secondary"><i class="fas fa-chevron-left"></i> @Localizer["Back"]</a>
+        </div>
+        <div class="col text-right"></div>
+    </div>
+    <!--footer buttons end-->
+</div><!--content end-->
+
+@section Styles {
+    @{await Html.RenderPartialAsync("_ListStylesPartial");}
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ListScriptsPartial");}
+}

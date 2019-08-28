@@ -1,0 +1,101 @@
+﻿@model MEL.Web.Areas.Settings.Models.ViewModels.UsersListViewModel
+
+@{
+    ViewData["Title"] = @Localizer["User"].Value + " " + @Localizer["Unlock"].Value;
+}
+
+<h2>@Localizer["Unlock"]</h2>
+
+<div>
+    <h4>@Localizer["User"]</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Organization)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Organization)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AccessFailedCount)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AccessFailedCount)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LockoutEnabled)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LockoutEnabled)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LockoutEnd)
+        </dt>
+    </dl>
+
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+        <dd class="col-sm-10">
+            &nbsp;@Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+        <dd class="col-sm-10">
+            &nbsp;@Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ModifiedBy)
+        </dt>
+        <dd class="col-sm-10">
+            &nbsp;@Html.DisplayFor(model => model.ModifiedBy)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </dt>
+        <dd class="col-sm-10">
+            &nbsp;@Html.DisplayFor(model => model.ModifiedDate)
+        </dd>
+    </dl>
+</div>
+<div>
+    <!--footer buttons start-->
+    <div class="row mt-5">
+        <div class="col">
+            <a asp-action="Index" asp-route-id="@ViewBag.ParentId" class="btn btn-secondary mr-1"><i class="fas fa-chevron-left"></i> @Localizer["Back to List"]</a>
+            <form asp-action="Unlock">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Email" />
+                <div class="form-group">
+                    <i class="fas fa-lock-open"></i><input type="submit" value="@Localizer["Unlock"]" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+        <div class="col text-right"></div>
+    </div>
+    <!--footer buttons end-->
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

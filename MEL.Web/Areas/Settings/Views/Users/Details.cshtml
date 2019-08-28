@@ -1,0 +1,108 @@
+﻿@model MEL.Web.Areas.Settings.Models.ViewModels.UsersListViewModel
+
+@{
+    ViewData["Title"] = @Localizer["User"].Value + " " + @Localizer["Details"].Value;
+}
+
+<h2>@Localizer["Details"]</h2>
+
+<div>
+    <h4>@Localizer["User"]</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Organization)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Organization)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AccessFailedCount)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AccessFailedCount)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LockoutEnabled)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LockoutEnabled)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LockoutEnd)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LockoutEnd)
+            @if (Model.LockoutEnd != null)
+            {
+                <a asp-action="Unlock" asp-route-id="@Model.Id" class="btn btn-secondary btn-sm">
+                    <span class="ladda-label">
+                        <i class="fas fa-unlock" aria-hidden="true"></i> @Localizer["Unlock User Account"]
+                    </span>
+                </a>
+            }
+        </dd>
+    </dl>
+
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+        <dd class="col-sm-10">
+            &nbsp;@Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+        <dd class="col-sm-10">
+            &nbsp;@Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ModifiedBy)
+        </dt>
+        <dd class="col-sm-10">
+            &nbsp;@Html.DisplayFor(model => model.ModifiedBy)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </dt>
+        <dd class="col-sm-10">
+            &nbsp;@Html.DisplayFor(model => model.ModifiedDate)
+        </dd>
+    </dl>
+</div>
+<div>
+    <!--footer buttons start-->
+    <div class="row mt-5">
+        <div class="col">
+            <a asp-action="Index" asp-route-id="@ViewBag.ParentId" class="btn btn-secondary mr-1"><i class="fas fa-chevron-left"></i> @Localizer["Back to List"]</a>
+            <a asp-action="Reset" asp-route-id="@Model.Id" class="btn btn-secondary mr-2">
+                <span class="ladda-label">
+                    <i class="fas fa-redo" aria-hidden="true"></i> @Localizer["Reset Password"]
+                </span>
+            </a>
+            <a policy="RequireEditRole" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> @Localizer["Edit"]</a>
+        </div>
+        <div class="col text-right"></div>
+    </div>
+    <!--footer buttons end-->
+</div>

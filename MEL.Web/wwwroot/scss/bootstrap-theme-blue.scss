@@ -1,0 +1,196 @@
+﻿// Blue theme 1.0
+// M&E Insight
+
+// Variables ===================================================================
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+
+// Color system
+$white: #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #6c757d !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #212529 !default;
+$black: #000 !default;
+
+$grays: () !default;
+
+$grays: map-merge(
+  (
+    "100": $gray-100,
+    "200": $gray-200,
+    "300": $gray-300,
+    "400": $gray-400,
+    "500": $gray-500,
+    "600": $gray-600,
+    "700": $gray-700,
+    "800": $gray-800,
+    "900": $gray-900
+  ),
+  $grays
+);
+
+
+$blue:    #1C628F !default;
+$indigo:  #6610f2 !default;
+$purple:  #6f42c1 !default;
+$pink:    #e83e8c !default;
+$red:     #d9534f !default;
+$orange:  #F47C3C !default;
+$yellow:  #FFB500 !default;
+$green:   #93C54B !default;
+$teal:    #117FA3 !default;
+$cyan:    #3ab6df !default;
+
+$colors: () !default;
+
+$colors: map-merge(
+  (
+    "blue":       $blue,
+    "indigo":     $indigo,
+    "purple":     $purple,
+    "pink":       $pink,
+    "red":        $red,
+    "orange":     $orange,
+    "yellow":     $yellow,
+    "green":      $green,
+    "teal":       $teal,
+    "cyan":       $cyan,
+    "white":      $white,
+    "gray":       $gray-600,
+    "gray-dark":  $gray-800
+  ),
+  $colors
+);
+
+$primary: $blue !default;
+$secondary: $gray-200 !default;
+$success: $green !default;
+$info: $teal !default;
+$warning: $yellow !default;
+$danger: $red !default;
+$light: $gray-100 !default;
+$dark: $gray-800 !default;
+
+$theme-colors: () !default;
+
+$theme-colors: map-merge(
+  (
+    "primary":    $primary,
+    "secondary":  $secondary,
+    "success":    $success,
+    "info":       $info,
+    "warning":    $warning,
+    "danger":     $danger,
+    "light":      $light,
+    "dark":       $dark
+  ),
+  $theme-colors
+);
+
+// Body
+$body-bg: $white !default;
+$body-color: $gray-900 !default;
+
+// Typography
+$font-family-sans-serif: "Roboto", "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+$font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+$font-family-base: $font-family-sans-serif !default;
+
+$headings-font-family: 'Roboto', sans-serif !default;
+
+$headings-font-weight: 700 !default;
+$headings-line-height: 1.2 !default;
+$headings-color: null !default;
+
+$color-variants: ( 
+    100: -10%, 
+    200: -25%, 
+    300: -50%, 
+    400: -75%, 
+    500: 100%, 
+    600: 75%, 
+    700: 50%, 
+    800: 25%, 
+    900: 15% 
+);
+
+$gray-100: map-get($colors, gray-100);
+$gray-200: map-get($colors, gray-200);
+$gray-300: map-get($colors, gray-300);
+$gray-400: map-get($colors, gray-400);
+$gray-500: map-get($colors, gray-500);
+$gray-600: map-get($colors, gray-600);
+$gray-700: map-get($colors, gray-700);
+$gray-800: map-get($colors, gray-800);
+$gray-900: map-get($colors, gray-900);
+
+@import "../lib/bootstrap/scss/bootstrap";
+
+//  Add color variants to $colors
+@each $color-name, $color in $colors {
+    @each $variant-name, $percent in $color-variants {
+        $mix-color: if($percent < 0%, white, black);
+        $colors: map-merge($colors, ($color-name+'-'+$variant-name: mix($color, $mix-color, abs($percent))));
+    }
+}
+
+/* from Bootstrap 4 utilities - replaced $theme-colors with $colors */
+
+// text colors
+@each $color, $value in $colors {
+    @include text-emphasis-variant(".text-#{$color}", $value);
+}
+
+// background colors
+@each $color, $value in $colors {
+    @include bg-variant(".bg-#{$color}", $value);
+}
+
+// background text contrast
+@each $color, $value in $colors {
+    .bg-#{$color} {
+        color: color-yiq($value);
+    }
+}
+
+// border colors
+@each $color, $value in $colors {
+    .border-#{$color} {
+        border-color: $value !important;
+    }
+}
+
+// Alternate buttons
+@each $color, $value in $colors {
+    .btn-#{$color} {
+        @include button-variant($value, $value);
+    }
+}
+
+@each $color, $value in $colors {
+    .btn-outline-#{$color} {
+        @include button-outline-variant($value);
+    }
+}
+
+// custom css
+body {
+    text-rendering: optimizeLegibility;
+}
+
+.btn {
+    -webkit-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out
+}
+
+[class*=btn-outline-] {
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out
+}

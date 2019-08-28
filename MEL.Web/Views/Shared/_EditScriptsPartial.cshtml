@@ -1,0 +1,94 @@
+﻿<environment include="Development">
+    <script src="~/lib/ladda-bootstrap/spin.min.js"></script>
+    <script src="~/lib/ladda-bootstrap/ladda.min.js"></script>
+    <script src="~/lib/select2/dist/js/select2.min.js"></script>
+    <script src="~/lib/select2/dist/js/i18n/en.min.js"></script>
+    <script src="~/lib/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/lib/inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
+    <script src="~/lib/bootbox/dist/bootbox.min.js"></script>
+    <script src="~/lib/jstree-bootstrap-theme/dist/jstree.min.js"></script>
+</environment>
+
+<environment exclude="Development">
+    <script src="~/lib/ladda-bootstrap/spin.min.js" asp-append-version="true"></script>
+    <script src="~/lib/ladda-bootstrap/ladda.min.js" asp-append-version="true"></script>
+    <script src="~/lib/select2/dist/js/select2.min.js" asp-append-version="true"></script>
+    <script src="~/lib/select2/dist/js/i18n/en.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js" asp-append-version="true"></script>
+    <script src="~/lib/inputmask/dist/min/jquery.inputmask.bundle.min.js" asp-append-version="true"></script>
+    <script src="~/lib/bootbox/dist/bootbox.min.js" asp-append-version="true"></script>
+    <script src="~/lib/jstree-bootstrap-theme/dist/jstree.min.js" asp-append-version="true"></script>
+</environment>
+
+<script>
+    $(document).ready(function () {
+        // load CurrentUICulture locale for bootstrap-datepicker i18n translations
+        // https://bootstrap-datepicker.readthedocs.io/en/latest/i18n.html
+        // $.getScript loads the required locale to bind the datepicker event handler
+        var locale = '@System.Globalization.CultureInfo.CurrentUICulture';
+        var url = '/lib/bootstrap-datepicker/dist/locales/bootstrap-datepicker.' + locale + '.min.js'
+        $.getScript(url)
+            .done(function (script, textStatus) {
+                // log valid locale loaded
+                console.log(textStatus + '%c ✔ bootstrap-datepicker ' + locale + ' loaded', 'color: #148f32');
+                // after loading bootstrap-datepicker locale add datepicker to .date input-groups
+                // date input must be type='text' to avoid browser datepickers
+                $('.date')
+                    .datepicker({
+                        language: locale, //use loaded locale language
+                        autoclose: true,
+                        showOnFocus: false,
+                        todayHighlight: true,
+                        disableTouchKeyboard: true,
+                        toggleActive: true,
+                        orientation: 'bottom auto'
+                    })
+                    // https://stackoverflow.com/questions/22335120/jquery-validator-and-datepicker-click-not-validating
+                    .on('change', function () {
+                        $('.date input').valid();  // triggers the validation test only on .date inputs
+                    });
+
+            })
+            .fail(function (jqxhr, settings, exception) {
+                // logs missing datepicker locale in /lib/bootstrap-datepicker/dist/locales/
+                console.log("%c ✖ bootstrap-datepicker '" + locale + "' " + exception + ': ' + jqxhr.status, "color: #FF3B6B");
+            });
+
+        // Select2 search dropdown style for selects
+        $('.select2')
+            .select2({
+                theme: 'bootstrap4',
+                dropdownAutoWidth: true,
+                width: '100%',
+                allowClear: true,
+                selectOnBlur: true,
+                language: 'en'
+            });
+
+        // Disables Submit button after one click if form is valid
+        // sets "loading..." Ladda-button styles
+        // https://stackoverflow.com/questions/10111907/how-to-focus-invalid-fields-with-jquery-validate
+        var validator = $('#main-form').validate({ /* settings */ });
+        $('#submitbutton')
+            .on('click', function (e) {
+                // prevents default submit
+                e.preventDefault();
+
+                var form = $('#main-form');
+                if (form.valid()) {
+                    // activates ladda-button 'loading..' style and disables submit button after one click
+                    var l = Ladda.create(this);
+                    l.start();
+
+                    // disable cancel button after submit
+                    $('#cancelbutton').addClass('disabled');
+                    // submit form
+                    form.submit();
+                }
+                else {
+                    // if form is valid submits, else focus to invalid fields
+                    validator.focusInvalid();
+                }
+            });
+    });
+</script>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!-- select2 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+
+  <!-- select2-bootstrap4-theme -->
+  <link href="https://raw.githack.com/ttskch/select2-bootstrap4-theme/master/dist/select2-bootstrap4.min.css" rel="stylesheet"> <!-- for live demo page -->
+  <link href="select2-bootstrap4.css" rel="stylesheet"> <!-- for local development env -->
+</head>
+
+<body class="pt-5" style="min-height:90vh">
+
+<div class="container">
+  <h3>Example of <a href="https://github.com/ttskch/select2-bootstrap4-theme" target="_blank">@ttskch/select2-bootstrap4-theme</a></h3>
+  <hr>
+
+  <form>
+    <div class="form-group">
+      <label>Example of select</label>
+      <select placeholder="Choose one thing" data-allow-clear="1">
+        <option></option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Example of multiple select</label>
+      <select multiple placeholder="Choose anything" data-allow-clear="1">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Example of disabled select</label>
+      <select disabled placeholder="Cannot choose">
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Example of select with optgroup</label>
+      <select placeholder="Choose one thing">
+        <option></option>
+        <optgroup label="Group A">
+          <option>A1</option>
+          <option>A2</option>
+          <option>A3</option>
+        </optgroup>
+        <optgroup label="Group B">
+          <option>B1</option>
+          <option>B2</option>
+          <option>B3</option>
+        </optgroup>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Example of input-group</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Prepend</span>
+        </div>
+        <select placeholder="Choose on thing">
+          <option></option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Example of validated select</label>
+      <select placeholder="Invalid example" class="form-control is-invalid">
+        <option></option>
+      </select>
+      <div class="invalid-feedback">
+        Something is wrong.
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- bootstrap -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<!-- select2 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+<!-- select2-bootstrap4-theme -->
+<script src="script.js"></script>
+</body>
+</html>

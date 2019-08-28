@@ -1,0 +1,33 @@
+{
+  "name": "iana-tz-data",
+  "version": "2019.1.0",
+  "keywords": [
+    "IANA",
+    "JSON",
+    "data"
+  ],
+  "description": "Npm module for IANA unofficial JSON data",
+  "homepage": "https://github.com/rxaviers/iana-tz-data",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/rxaviers/iana-tz-data.git"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/rxaviers/iana-tz-data/blob/master/LICENSE-MIT"
+    }
+  ],
+  "author": {
+    "name": "Rafael Xavier de Souza",
+    "email": "rxaviers@gmail.com",
+    "url": "http://rafael.xavier.blog.br"
+  },
+  "main": "iana-tz-data.json",
+  "files": [
+    "LICENSE-MIT",
+    "iana-tz-data.json"
+  ],
+  "dependencies": {},
+  "devDependencies": {}
+}

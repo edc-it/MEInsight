@@ -1,0 +1,121 @@
+﻿@model MEL.Entities.Programs.ProgramAssessment
+
+@{
+    ViewData["Title"] = @Localizer["ProgramAssessment"].Value + " " + @Localizer["Details"].Value;
+}
+
+<h2>@Localizer["Details"]</h2>
+
+<div>
+    <h4>@Localizer["ProgramAssessment"]</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AssessmentName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AssessmentName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Max)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Max)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Min)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Min)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MaximumScore)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MaximumScore)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MinimumScore)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MinimumScore)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CompletionScore)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CompletionScore)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Programs)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Programs.ProgramName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AssessmentTypes)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AssessmentTypes.AssessmentType)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AttendanceUnits)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AttendanceUnits.AttendanceUnit)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EvaluationStatus)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EvaluationStatus.EvaluationStatus)
+        </dd>
+    </dl>
+
+    <hr />
+    <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CreatedBy)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Model.CreatedDate?.ToLocalTime().ToString()
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ModifiedBy)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ModifiedBy)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ModifiedDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Model.ModifiedDate?.ToLocalTime().ToString()
+            </dd>
+    </dl>
+
+
+</div>
+<div>
+        <!--footer buttons start-->
+        <div class="row mt-5">
+            <div class="col">
+                <a asp-action="Index" asp-route-id="@ViewBag.ParentId" class="btn btn-secondary mr-1"><i class="fas fa-chevron-left"></i> @Localizer["Back to List"]</a>
+                <a policy="RequireEditRole" asp-action="Edit" asp-route-id="@Model.ProgramAssessmentId" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> @Localizer["Edit"]</a>
+            </div>
+            <div class="col text-right"></div>
+        </div>
+        <!--footer buttons end-->
+</div>

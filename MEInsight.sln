@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29025.244
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MEL.Web", "MEL.Web\MEL.Web.csproj", "{195FE7D6-C4A3-488B-A0C4-9988E0018582}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MEL.Data", "MEL.Data\MEL.Data.csproj", "{19807D3B-BF88-4F93-8541-B050404FCFDE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MEL.Entities", "MEL.Entities\MEL.Entities.csproj", "{62098C0B-52D6-40A0-BE95-60D7CDE8C750}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{195FE7D6-C4A3-488B-A0C4-9988E0018582}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{195FE7D6-C4A3-488B-A0C4-9988E0018582}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{195FE7D6-C4A3-488B-A0C4-9988E0018582}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{195FE7D6-C4A3-488B-A0C4-9988E0018582}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19807D3B-BF88-4F93-8541-B050404FCFDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19807D3B-BF88-4F93-8541-B050404FCFDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19807D3B-BF88-4F93-8541-B050404FCFDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19807D3B-BF88-4F93-8541-B050404FCFDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62098C0B-52D6-40A0-BE95-60D7CDE8C750}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62098C0B-52D6-40A0-BE95-60D7CDE8C750}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62098C0B-52D6-40A0-BE95-60D7CDE8C750}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62098C0B-52D6-40A0-BE95-60D7CDE8C750}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AB8E8D16-E20E-468E-B6A0-FC27F1EE508B}
+	EndGlobalSection
+EndGlobal

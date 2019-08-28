@@ -1,0 +1,304 @@
+@model MEL.Entities.Core.Organization
+
+@{
+    ViewData["Title"] = @Localizer["Create"].Value + " " + @Localizer["Organization"].Value;
+}
+
+<h2>@Localizer["Create"]</h2>
+
+<h4>@Localizer["Organization"]</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6 col-sm-8">
+        <form asp-action="Create" id="main-form">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" name="ParentId" value="@ViewBag.ParentId" />
+
+            <div class="form-group required" asp-enabled="RegistrationDate">
+                <!--date start-->
+                <label asp-for="RegistrationDate" class="control-label"></label>
+                <span class="text-muted small">(@System.Globalization.CultureInfo.CurrentUICulture)</span>
+                <!-- use class .date to enable datepicker -->
+                <div class="input-group date">
+                    <input asp-for="RegistrationDate" autocomplete="off" type="text" class="form-control" placeholder="@System.Globalization.DateTimeFormatInfo.CurrentInfo.ShortDatePattern" />
+                    <span class="input-group-append">
+                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                    </span>
+                </div>
+                <span asp-validation-for="RegistrationDate" class="text-danger"></span>
+                <!--date end-->
+            </div>
+
+            <div class="form-group required" asp-enabled="OrganizationCode">
+                <!--input start-->
+                <label asp-for="OrganizationCode" class="control-label"></label>
+                <input asp-for="OrganizationCode" autocomplete="off" class="form-control" />
+                <span asp-validation-for="OrganizationCode" class="text-danger"></span>
+                <!--input end-->
+            </div>
+
+            <div class="form-group required" asp-enabled="OrganizationName">
+                <!--input start-->
+                <label asp-for="OrganizationName" class="control-label"></label>
+                <input asp-for="OrganizationName" autocomplete="off" class="form-control" />
+                <span asp-validation-for="OrganizationName" class="text-danger"></span>
+                <!--input end-->
+            </div>
+
+            <div class="form-group required" asp-enabled="RefOrganizationTypeId">
+                <!--fk select start-->
+                <label asp-for="RefOrganizationTypeId" class="control-label"></label>
+                <select asp-for="RefOrganizationTypeId" class="form-control custom-select" asp-items="ViewBag.RefOrganizationTypeId">
+                    <option disabled selected></option>
+                </select>
+                <span asp-validation-for="RefOrganizationTypeId" class="text-danger"></span>
+                <!--fk select end-->
+            </div>
+
+            <div class="form-group" asp-enabled="Contact">
+                <!--input start-->
+                <label asp-for="Contact" class="control-label"></label>
+                <input asp-for="Contact" autocomplete="off" class="form-control" />
+                <span asp-validation-for="Contact" class="text-danger"></span>
+                <!--input end-->
+            </div>
+
+            <div class="form-group" asp-enabled="Phone">
+                <!--input start-->
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" autocomplete="off" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+                <!--input end-->
+            </div>
+            @*
+        RefLocation is a self-referencing table with hierarchical (geo)locations.
+        This foreach dynamically generates each required location input by location level
+        i.e. Country -> Province -> District or Level1 -> Level2 -> Level 3 (LocationTypes by level)
+        Only the last level RefLocationId is saved on this record.
+            *@
+            @{
+                // If RefLocationId is enabled
+                if (Configuration["disabled:Organizations:RefLocationId"] != "disabled")
+                {
+                    var i = 0;
+                    @foreach (var item in ViewData["RefLocationTypes"] as IEnumerable<MEL.Entities.Reference.RefLocationType>)
+                    {
+                        @if (item.LocationLevel == 1)
+                        {
+                            <div class="form-group required">
+                                <label class="control-label">@item.LocationType</label>
+                                <select class="form-control required" data-locationlevel="@item.LocationLevel" id="RefLocation@{@item.LocationLevel}Id" name="RefLocationId[@i]" data-val="true" asp-items="@ViewBag.RefLocationId" required>
+                                    <option disabled selected></option>
+                                </select>
+                                <span class="text-danger field-validation-valid" data-valmsg-for="RefLocation@{@item.LocationLevel}Id" data-valmsg-replace="true"></span>
+                            </div>
+                        }
+                        else
+                        {
+                            if (item.LocationLevel == (int)ViewData["RefLocationTypesCount"])
+                            {
+                                <div class="form-group required">
+                                    <label class="control-label">@item.LocationType</label>
+                                    <select class="form-control required" data-locationlevel="@item.LocationLevel" id="RefLocation@{@item.LocationLevel}Id" name="RefLocationId[@i]" data-val="true">
+                                        <option disabled selected></option>
+                                    </select>
+                                    <span class="text-danger field-validation-valid" data-valmsg-for="RefLocationId" data-valmsg-replace="true"></span>
+                                </div>
+                            }
+                            else
+                            {
+                                if (item.LocationLevel == 2)
+                                {
+                                    <div class="form-group required">
+                                        <label class="control-label">@item.LocationType</label>
+                                        <select class="form-control required" data-locationlevel="@item.LocationLevel" id="RefLocation@{@item.LocationLevel}Id" name="RefLocationId[@i]" data-val="true" required>
+                                            <option disabled selected></option>
+                                        </select>
+                                        <span class="text-danger field-validation-valid" data-valmsg-for="RefLocation@{@item.LocationLevel}Id" data-valmsg-replace="true"></span>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="form-group required">
+                                        <label class="control-label">@item.LocationType</label>
+                                        <select class="form-control required" data-locationlevel="@item.LocationLevel" id="RefLocation@{@item.LocationLevel}Id" name="RefLocationId[@i]" data-val="true">
+                                            <option disabled selected></option>
+                                        </select>
+                                        <span class="text-danger field-validation-valid" data-valmsg-for="RefLocation@{@item.LocationLevel}Id" data-valmsg-replace="true"></span>
+                                    </div>
+                                }
+                            }
+                        }
+                        i++;
+                    }
+                }
+            }
+
+            <div class="form-group" asp-enabled="Address">
+                <!--textarea start-->
+                <label asp-for="Address" class="control-label"></label>
+                <textarea asp-for="Address" class="form-control"></textarea>
+                <span asp-validation-for="Address" class="text-danger"></span>
+                <!--textarea end-->
+            </div>
+
+            <div class="form-group" asp-enabled="Latitude">
+                <!--input start-->
+                <label asp-for="Latitude" class="control-label"></label>
+                <input asp-for="Latitude" autocomplete="off" class="form-control" />
+                <span asp-validation-for="Latitude" class="text-danger"></span>
+                <!--input end-->
+            </div>
+
+            <div class="form-group" asp-enabled="Longitude">
+                <!--input start-->
+                <label asp-for="Longitude" class="control-label"></label>
+                <input asp-for="Longitude" autocomplete="off" class="form-control" />
+                <span asp-validation-for="Longitude" class="text-danger"></span>
+                <!--input end-->
+            </div>
+            @* Organization is a self-referencing table with a hierarchical Organization Unit like structure
+        This setting allows MEL Role only to create/edit Organizations set as Organization Units
+            *@
+            @if (AuthorizationService.AuthorizeAsync(User, "RequireMELRole").GetAwaiter().GetResult().Succeeded)
+            {
+                <div class="card my-3">
+                    <div class="card-header">@Localizer["M&E options:"]</div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="control-label">
+                                @Localizer["Create as Organization Unit?"]
+                                <i data-content="@Localizer["Set to 'Yes' if this organization unit will manage other organizations."]"
+                                   data-placement="top"
+                                   data-toggle="popover"
+                                   data-container="body"
+                                   style="cursor:pointer;"
+                                   class="fa fa-info-circle text-muted"
+                                   data-original-title="@Localizer["Organization Unit"]" title="" aria-describedby="popover">
+                                </i>
+                            </label>
+                            <div class="radio" style="margin-top:0;">
+                                <label>@Html.RadioButton("IsOrganizationUnit", "true") @Localizer["Yes"]</label>
+                            </div>
+                            <div class="radio">
+                                <label>@Html.RadioButton("IsOrganizationUnit", "false", new { @checked = true }) @Localizer["No"]</label>
+                            </div>
+                            <span asp-validation-for="IsOrganizationUnit" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="ParentOrganizationId" class="control-label"></label>
+                            <select asp-for="ParentOrganizationId" class="form-control custom-select select2" asp-items="ViewBag.ParentOrganizationId" required></select>
+                            <span asp-validation-for="ParentOrganizationId" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <input type="hidden" name="ParentOrganizationId" value="@ViewBag.ParentId" />
+                <input type="hidden" name="IsOrganizationUnit" value="false" />
+            }
+
+            <!-- button group start -->
+            <div class="form-group text-right mt-5">
+                <a id="cancelbutton" class="btn btn-secondary mr-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
+                    <i class="fas fa-times"></i> @Localizer["Cancel"]
+                </a>
+                <button id="submitbutton" type="submit" value="Create" class="btn btn-primary ladda-button" data-style="expand-left" data-spinner-color="white">
+                    <span class="ladda-label">
+                        <i class="fas fa-check"></i> @Localizer["Create"]
+                    </span>
+                </button>
+            </div>
+            <!-- button group end -->
+        </form>
+    </div>
+</div>
+
+@section Styles {
+    @{await Html.RenderPartialAsync("_CreateStylesPartial");}
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{await Html.RenderPartialAsync("_CreateScriptsPartial");}
+
+    <script>
+    $(document).ready(function () {
+
+        // Counts the total number of available Location level inputs
+        var totalLocationLevels = $('[data-locationlevel]').length;
+
+        // JQuery select2 chained drop-downs by [data-locationlevel]
+        // On change or remove event clears select options and 
+        // requests (Ajax) the new selected location options
+        $('[data-locationlevel]').select2({
+            theme: "bootstrap4",
+            placeholder: " ",
+            dropdownAutoWidth: true,
+            width: '100%',
+            allowClear: true,
+            selectOnBlur: true,
+            language: 'en'
+        })
+            .bind("change remove", function (e) {
+                e.preventDefault();
+
+                var locationLevel = $(this).data('locationlevel');
+                var locationId = $(this).val();
+
+                if (locationId) {
+                    $('[data-locationlevel="' + (locationLevel + 1) + '"]').select2({
+                        placeholder: "@Localizer["Loading..."]",
+                        theme: "bootstrap4",
+                        dropdownAutoWidth: true,
+                        width: '100%'
+                    })
+
+                    $.ajax({
+                        type: "Post",
+                        url: "/Requests/GetLocations/" + locationId,
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.length) {
+                                for (var i = 1; i < (totalLocationLevels); i++) {
+                                    $('[data-locationlevel="' + (locationLevel + i) + '"]').empty().val();
+                                }
+
+                                $('[data-locationlevel="' + (locationLevel + 1) + '"]').append("<option value=''></option>");
+                                $(data).each(function () {
+                                    $('[data-locationlevel="' + (locationLevel + 1) + '"]').append("<option value='" + this.refLocationId + "'>" + this.locationName + "</option>");
+                                });
+                                $('[data-locationlevel="' + (locationLevel + 1) + '"]').select2({
+                                    placeholder: "@Localizer["Select..."]",
+                                    selectOnBlur: true,
+                                    allowClear: true,
+                                    language: 'en',
+                                    theme: "bootstrap4",
+                                    dropdownAutoWidth: true,
+                                    width: '100%'
+                                });
+                            }
+                        }
+                    });
+                }
+                // if the parente level select was removed - clear chained select options
+                // on each lower level select
+                else {
+                    for (var i = 1; i < (totalLocationLevels); i++) {
+                        $('[data-locationlevel="' + (locationLevel + i) + '"]').empty()
+                            .select2({
+                                placeholder: " ",
+                                allowClear: true,
+                                language: 'en',
+                                theme: "bootstrap4",
+                                dropdownAutoWidth: true,
+                                width: '100%'
+                            });
+                    }
+                }
+            });
+    });
+    </script>
+}

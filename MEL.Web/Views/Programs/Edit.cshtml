@@ -1,0 +1,118 @@
+﻿@model MEL.Entities.Programs.Program
+
+@{
+    ViewData["Title"] = @Localizer["Edit"].Value + " " + @Localizer["Program"].Value;
+}
+
+<h2>@Localizer["Edit"]</h2>
+
+<h4>@Localizer["Program"]</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6 col-sm-8">
+        <!--form start-->
+        <form asp-action="Edit" id="main-form">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" name="ParentId" value="@ViewBag.ParentId" />
+            <input type="hidden" asp-for="ProgramId" />
+            <div class="form-group" asp-enabled="ProgramName">
+                <!--input start-->
+                <label asp-for="ProgramName" class="control-label"></label>
+                <input asp-for="ProgramName" autocomplete="off" class="form-control" />
+                <span asp-validation-for="ProgramName" class="text-danger"></span>
+                <!--input end-->
+            </div>
+            
+            <div class="form-group" asp-enabled="RefProgramTypeId">
+                <!--fk select start-->
+                <label asp-for="RefProgramTypeId" class="control-label"></label>
+                <select asp-for="RefProgramTypeId" class="form-control custom-select" asp-items="ViewBag.RefProgramTypeId">
+                </select>
+                <span asp-validation-for="RefProgramTypeId" class="text-danger"></span>
+                <!--fk select end-->
+            </div>
+            
+            <div class="form-group" asp-enabled="Description">
+                <!--textarea start-->
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+                <!--textarea end-->
+            </div>
+            
+            <div class="form-group" asp-enabled="Max">
+                <!--input start-->
+                <label asp-for="Max" class="control-label"></label>
+                <input asp-for="Max" autocomplete="off" class="form-control" />
+                <span asp-validation-for="Max" class="text-danger"></span>
+                <!--input end-->
+            </div>
+            
+            <div class="form-group" asp-enabled="Min">
+                <!--input start-->
+                <label asp-for="Min" class="control-label"></label>
+                <input asp-for="Min" autocomplete="off" class="form-control" />
+                <span asp-validation-for="Min" class="text-danger"></span>
+                <!--input end-->
+            </div>
+            
+            <div class="form-group" asp-enabled="RefAttendanceUnitId">
+                <!--fk select start-->
+                <label asp-for="RefAttendanceUnitId" class="control-label"></label>
+                <select asp-for="RefAttendanceUnitId" class="form-control custom-select" asp-items="ViewBag.RefAttendanceUnitId">
+                </select>
+                <span asp-validation-for="RefAttendanceUnitId" class="text-danger"></span>
+                <!--fk select end-->
+            </div>
+            
+            <div class="form-group" asp-enabled="HasAssessment">
+                <!--checkbox start-->
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="HasAssessment" /> @Html.DisplayNameFor(model => model.HasAssessment)
+                    </label>
+                </div>
+                <!--checkbox end-->
+            </div>
+            <div class="form-group" asp-enabled="DisplayMarks">
+                <!--checkbox start-->
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="DisplayMarks" /> @Html.DisplayNameFor(model => model.DisplayMarks)
+                    </label>
+                </div>
+                <!--checkbox end-->
+            </div>
+            <div class="form-group" asp-enabled="RefOrganizationTypeId">
+                <!--fk select start-->
+                <label asp-for="RefOrganizationTypeId" class="control-label"></label>
+                <select asp-for="RefOrganizationTypeId" class="form-control custom-select" asp-items="ViewBag.RefOrganizationTypeId">
+                </select>
+                <span asp-validation-for="RefOrganizationTypeId" class="text-danger"></span>
+                <!--fk select end-->
+            </div>
+            
+            <!-- button group start -->
+            <div class="form-group text-right mt-5">
+                <a id="cancelbutton" class="btn btn-secondary mr-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
+                    <i class="fas fa-times"></i> @Localizer["Cancel"]
+                </a>
+                <button id="submitbutton" type="submit" value="Save" class="btn btn-primary ladda-button" data-style="expand-left" data-spinner-color="white">
+                    <span class="ladda-label">
+                        <i class="fas fa-check"></i> @Localizer["Save"]
+                    </span>
+                </button>
+            </div>
+            <!-- button group end -->
+        </form>
+        <!--form end-->
+    </div>
+</div>
+
+@section Styles {
+    @{await Html.RenderPartialAsync("_EditStylesPartial");}
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{await Html.RenderPartialAsync("_EditScriptsPartial");}
+}
