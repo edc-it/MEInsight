@@ -240,8 +240,6 @@ namespace MEL.Web.Controllers
                                    CreatedDate = participant.CreatedDate ?? null,
                                    ModifiedBy = participant.ModifiedBy ?? null,
                                    ModifiedDate = participant.ModifiedDate ?? null,
-                                   //Group Enrollments
-                                   EnrollmentCount = participant.GroupEnrollments.Count 
                                });
 
             if (organization.IsOrganizationUnit != true)

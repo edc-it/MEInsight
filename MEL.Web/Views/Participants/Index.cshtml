@@ -44,6 +44,9 @@
                     <span class="input-group-text"><i class="fa fa-search" aria-hidden="true"></i></span>
                 </div>
                 <input id="searchbox" type="text" class="form-control" placeholder='@Localizer["Search"]' aria-describedby="searchbox">
+                <div class="input-group-append">
+                    <button id="search-button" class="btn btn-sm btn-secondary" type="button" id="button-addon2">@Localizer["Search"]</button>
+                </div>
             </div>
             <!--datatable search end-->
         </div>
@@ -56,41 +59,37 @@
             <table id="datatable" class="table table-sm table-hover table-striped responsive no-wrap w-100">
                 <thead>
                     <tr>
-                        <th data-data="name" data-responsivePriority="1">
+                        <th data-data="name" data-name="Name" data-responsivePriority="1">
                             @Localizer["Name"]
                         </th>
-                        <th data-data="participantCode">
+                        <th data-data="participantCode" data-name="ParticipantCode">
                             @Localizer["Participant Code"]
                         </th>
-                        <th data-data="participantType">
+                        <th data-data="participantType" data-name="ParticipantType">
                             @Localizer["Participant Type"]
                         </th>
-                        <th data-data="position" data-visible="false">
+                        <th data-data="position" data-name="Position" data-visible="false">
                             @Localizer["Position"]
                         </th>
-                        <th data-data="sex">
+                        <th data-data="sex" data-name="Sex">
                             @Localizer["Sex"]
                         </th>
-                        <th data-data="organizationName">
+                        <th data-data="organizationName" data-name="OrganizationName">
                             @Localizer["Organization"]
                         </th>
-                        <th data-data="registrationDate">
+                        <th data-data="registrationDate" data-name="RegistrationDate">
                             @Localizer["Registration Date"]
                         </th>
-                        <th data-data="location" data-visible="false">
+                        <th data-data="location" data-name="Location" data-visible="false">
                             @Localizer["Location"]
                         </th>
-                        <th data-data="enrollmentCount" data-visible="false">
-                            @Localizer["Enrolled Count"]
-                        </th>
-                        <th class="text-right d-print-none">
+                        <th data-orderable="false" class="text-right d-print-none">
                             @Localizer["Actions"]
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -292,15 +291,14 @@
 
                 ]
             },
-
             language: {
                 url: getDataTablesLanguage()
             },
             initComplete: function (settings, json) {
 
-        // buttons
-        table.buttons(0, null)
-            .container().appendTo('#toolbar');
+                // init buttons
+                table.buttons(0, null)
+                    .container().appendTo('#toolbar');
             },
             footerCallback: function (row, data, start, end, display) {
                 var api = this.api(), data;
@@ -344,8 +342,9 @@
         var table = $('#datatable').DataTable(dataTableOptions);
 
         // filter table
-        $("#searchbox").on('keyup', function () {
-            table.search(this.value).draw();
+        $("#search-button").on('click', function () {
+            var searchString = $('#searchbox').val();
+            table.search(searchString).draw();
         });
 
         //TOOLTIP INIT
