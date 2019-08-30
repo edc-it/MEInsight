@@ -42,7 +42,7 @@
             <div class="container-fluid">
                 <a class="navbar-brand mb-0" asp-area="" asp-controller="Home" asp-action="AppStart">
                     <img src="~/images/EDCSquareOnly30.png" class="d-inline-block align-top border border-white mr-2" title="Education Development Center, Inc." />
-                    <img src="~/images/MEInsightLogoBlueBg30.png" class="d-inline-block align-middle mr-2" title="A Monitoring and Evaluation Data Management System" />
+                    <img src="~/images/MEInsightLogoBlueBg30.png" class="d-inline-block align-middle mr-2" title="@Localizer["A monitoring and evaluation data management system"]" />
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -51,7 +51,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item @Html.IsSelected(controller: "Home")">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="AppStart">Home</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="AppStart">@Localizer["Home"]</a>
                         </li>
                         <partial name="_NavigationMenu" />
                     </ul>
