@@ -43,8 +43,7 @@ namespace MEL.Web.Controllers
                 .Include(g => g.Participants.ParticipantTypes)
                 .Include(g => g.Groups)
                 .Include(g => g.EnrollmentStatus)
-                .Where(g => g.GroupId == id)
-                .OrderBy(g => g.Participants.NameId);
+                .Where(g => g.GroupId == id);
 
             // Group Details
             var group = await _context.Groups
@@ -73,7 +72,7 @@ namespace MEL.Web.Controllers
             // OrganizationId for "Create New - Participants" buttons route parameter
             ViewData["OrganizationId"] = group.OrganizationId;
 
-            return View(await applicationDbContext.ToListAsync());
+            return View(await applicationDbContext.OrderBy(g => g.Participants.NameId).ToListAsync());
         }
 
         // GET: Attendance

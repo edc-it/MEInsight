@@ -70,7 +70,7 @@ namespace MEL.Web.Controllers
 
                     ViewData["ParentId"] = organization.OrganizationId;
 
-                    return View(await applicationDbContext.ToListAsync());
+                    return View(await applicationDbContext.OrderBy(o => o.OrganizationName).ToListAsync());
 
                 }
                 // return selected id Organization
@@ -97,7 +97,7 @@ namespace MEL.Web.Controllers
                         .Include(o => o.ParentOrganization)
                         .Where(o => o.ParentOrganizationId == id);
 
-                    return View(await applicationDbContext.ToListAsync());
+                    return View(await applicationDbContext.OrderBy(o => o.OrganizationName).ToListAsync());
 
                 }
             }

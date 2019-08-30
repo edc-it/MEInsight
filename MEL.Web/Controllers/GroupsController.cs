@@ -45,7 +45,7 @@ namespace MEL.Web.Controllers
                 .Include(m => m.Teachers)
                 .Where(m => m.OrganizationId == id);
             
-            return View(await applicationDbContext.ToListAsync());
+            return View(await applicationDbContext.OrderBy(m => m.GroupName).ToListAsync());
         }
 
         // GET: Groups/Details/5
