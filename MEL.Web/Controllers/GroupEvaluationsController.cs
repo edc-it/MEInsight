@@ -87,7 +87,7 @@ namespace MEL.Web.Controllers
             ViewData["Max"] = group.Programs.Max;
             ViewData["AttendanceUnit"] = group.Programs.AttendanceUnits.AttendanceUnit;
             ViewData["TrainingProgramId"] = group.ProgramId;
-            ViewData["RefEnrollmentStatusId"] = new SelectList(_context.EnrollmentStatus, "EnrollmentStatusId", "EnrollmentStatus");
+            ViewData["RefEnrollmentStatusId"] = new SelectList(_context.EnrollmentStatus, "RefEnrollmentStatusId", "EnrollmentStatus");
 
             return View(await applicationDbContext.OrderBy(x => x.GroupEnrollments.Participants.LastName).ToListAsync());
         }
@@ -154,7 +154,7 @@ namespace MEL.Web.Controllers
             ViewData["Max"] = group.Programs.Max;
             ViewData["AttendanceUnit"] = group.Programs.AttendanceUnits.AttendanceUnit;
             ViewData["ProgramId"] = group.ProgramId;
-            ViewData["RefEvaluationStatusId"] = new SelectList(_context.EvaluationStatus, "EvaluationStatusId", "EvaluationStatus");
+            ViewData["RefEvaluationStatusId"] = new SelectList(_context.EvaluationStatus, "RefEvaluationStatusId", "EvaluationStatus");
 
             return View(await applicationDbContext.OrderBy(x => x.GroupEnrollments.Participants.LastName).ToListAsync());
         }

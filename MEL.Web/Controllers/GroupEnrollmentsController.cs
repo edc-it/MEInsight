@@ -106,7 +106,7 @@ namespace MEL.Web.Controllers
             ViewData["Max"] = group.Programs.Max;
             ViewData["AttendanceUnit"] = group.Programs.AttendanceUnits.AttendanceUnit;
             ViewData["TrainingProgramId"] = group.ProgramId;
-            ViewData["RefEnrollmentStatusId"] = new SelectList(_context.EnrollmentStatus, "EnrollmentStatusId", "EnrollmentStatus");
+            ViewData["RefEnrollmentStatusId"] = new SelectList(_context.EnrollmentStatus, "RefEnrollmentStatusId", "EnrollmentStatus");
 
             return View(await applicationDbContext.OrderBy(x => x.Participants.LastName).ToListAsync());
         }
