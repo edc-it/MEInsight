@@ -59,7 +59,7 @@ namespace MEL.Web.Areas.Settings.Controllers
         // POST: Settings/TLMDistributionStatus/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RefTLMDistributionStatusId,TLMDistributionStatusCode,DistributionStatus")] RefTLMDistributionStatus refTLMDistributionStatus)
+        public async Task<IActionResult> Create([Bind("RefTLMDistributionStatusId,DistributionStatusCode,DistributionStatus")] RefTLMDistributionStatus refTLMDistributionStatus)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +96,7 @@ namespace MEL.Web.Areas.Settings.Controllers
         // POST: Settings/TLMDistributionStatus/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("RefTLMDistributionStatusId,TLMDistributionStatusCode,DistributionStatus")] RefTLMDistributionStatus refTLMDistributionStatus)
+        public async Task<IActionResult> Edit(int id, [Bind("RefTLMDistributionStatusId,DistributionStatusCode,DistributionStatus")] RefTLMDistributionStatus refTLMDistributionStatus)
         {
             if (id != refTLMDistributionStatus.RefTLMDistributionStatusId)
             {

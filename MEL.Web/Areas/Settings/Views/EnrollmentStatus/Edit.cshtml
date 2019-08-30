@@ -14,7 +14,7 @@
         <form asp-action="Edit" id="main-form">
             <div asp-validation-summary="All" class="text-danger"></div>
             <input type="hidden" name="ParentId" value="@ViewBag.ParentId" />
-            <input type="hidden" asp-for="EnrollmentStatusId" />
+            <input type="hidden" asp-for="RefEnrollmentStatusId" />
             
             <div class="form-group" asp-enabled="EnrollmentStatusCode">
                 <!--input start-->

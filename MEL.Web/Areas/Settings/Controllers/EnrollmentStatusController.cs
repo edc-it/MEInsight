@@ -39,7 +39,7 @@ namespace MEL.Web.Areas.Settings.Controllers
             }
 
             var refEnrollmentStatus = await _context.EnrollmentStatus
-                .FirstOrDefaultAsync(m => m.EnrollmentStatusId == id);
+                .FirstOrDefaultAsync(m => m.RefEnrollmentStatusId == id);
             
             if (refEnrollmentStatus == null)
             {
@@ -59,7 +59,7 @@ namespace MEL.Web.Areas.Settings.Controllers
         // POST: Settings/EnrollmentStatus/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EnrollmentStatusId,EnrollmentStatusCode,EnrollmentStatus")] RefEnrollmentStatus refEnrollmentStatus)
+        public async Task<IActionResult> Create([Bind("RefEnrollmentStatusId,EnrollmentStatusCode,EnrollmentStatus")] RefEnrollmentStatus refEnrollmentStatus)
         {
             if (ModelState.IsValid)
             {
@@ -96,9 +96,9 @@ namespace MEL.Web.Areas.Settings.Controllers
         // POST: Settings/EnrollmentStatus/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EnrollmentStatusId,EnrollmentStatusCode,EnrollmentStatus")] RefEnrollmentStatus refEnrollmentStatus)
+        public async Task<IActionResult> Edit(int id, [Bind("RefEnrollmentStatusId,EnrollmentStatusCode,EnrollmentStatus")] RefEnrollmentStatus refEnrollmentStatus)
         {
-            if (id != refEnrollmentStatus.EnrollmentStatusId)
+            if (id != refEnrollmentStatus.RefEnrollmentStatusId)
             {
                 return NotFound();
             }
@@ -112,7 +112,7 @@ namespace MEL.Web.Areas.Settings.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!RefEnrollmentStatusExists(refEnrollmentStatus.EnrollmentStatusId))
+                    if (!RefEnrollmentStatusExists(refEnrollmentStatus.RefEnrollmentStatusId))
                     {
                         return NotFound();
                     }
@@ -142,7 +142,7 @@ namespace MEL.Web.Areas.Settings.Controllers
 
             var refEnrollmentStatus = await _context.EnrollmentStatus
 					.Include(m => m.GroupEnrollments)
-                    .FirstOrDefaultAsync(m => m.EnrollmentStatusId == id);
+                    .FirstOrDefaultAsync(m => m.RefEnrollmentStatusId == id);
 
             if (refEnrollmentStatus == null)
             {
@@ -186,7 +186,7 @@ namespace MEL.Web.Areas.Settings.Controllers
 
         private bool RefEnrollmentStatusExists(int id)
         {
-            return _context.EnrollmentStatus.Any(e => e.EnrollmentStatusId == id);
+            return _context.EnrollmentStatus.Any(e => e.RefEnrollmentStatusId == id);
         }
     }
 }

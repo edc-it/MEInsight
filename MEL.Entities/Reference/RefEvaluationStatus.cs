@@ -20,7 +20,7 @@ namespace MEL.Entities.Reference
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Display(Name = "Evaluation Status Id")]
         [Column(Order = 0)]
-        public int EvaluationStatusId { get; set; }
+        public int RefEvaluationStatusId { get; set; }
 
         [Required(ErrorMessage = "The {0} field is required.")]
         [MaxLength(25)]

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MEL.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190827051739_CreateApplicationSchema")]
+    [Migration("20190830042449_CreateApplicationSchema")]
     partial class CreateApplicationSchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -933,7 +933,7 @@ namespace MEL.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(150);
 
-                    b.Property<string>("RefEducationAdministratorPositionCode")
+                    b.Property<string>("EducationAdministratorPositionCode")
                         .IsRequired()
                         .HasMaxLength(25);
 
@@ -963,7 +963,7 @@ namespace MEL.Data.Migrations
 
             modelBuilder.Entity("MEL.Entities.Reference.RefEnrollmentStatus", b =>
                 {
-                    b.Property<int>("EnrollmentStatusId")
+                    b.Property<int>("RefEnrollmentStatusId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -975,14 +975,14 @@ namespace MEL.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(25);
 
-                    b.HasKey("EnrollmentStatusId");
+                    b.HasKey("RefEnrollmentStatusId");
 
                     b.ToTable("RefEnrollmentStatus");
                 });
 
             modelBuilder.Entity("MEL.Entities.Reference.RefEvaluationStatus", b =>
                 {
-                    b.Property<int>("EvaluationStatusId")
+                    b.Property<int>("RefEvaluationStatusId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -994,7 +994,7 @@ namespace MEL.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(25);
 
-                    b.HasKey("EvaluationStatusId");
+                    b.HasKey("RefEvaluationStatusId");
 
                     b.ToTable("RefEvaluationStatus");
                 });
@@ -1345,7 +1345,7 @@ namespace MEL.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
-                    b.Property<string>("TLMDistributionStatusCode")
+                    b.Property<string>("DistributionStatusCode")
                         .IsRequired()
                         .HasMaxLength(25);
 

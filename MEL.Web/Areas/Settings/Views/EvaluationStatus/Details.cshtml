@@ -35,7 +35,7 @@
         <div class="row mt-5">
             <div class="col">
                 <a asp-action="Index" asp-route-id="@ViewBag.ParentId" class="btn btn-secondary mr-1"><i class="fas fa-chevron-left"></i> @Localizer["Back to List"]</a>
-                <a policy="RequireEditRole" asp-action="Edit" asp-route-id="@Model.EvaluationStatusId" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> @Localizer["Edit"]</a>
+                <a policy="RequireEditRole" asp-action="Edit" asp-route-id="@Model.RefEvaluationStatusId" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> @Localizer["Edit"]</a>
             </div>
             <div class="col text-right"></div>
         </div>

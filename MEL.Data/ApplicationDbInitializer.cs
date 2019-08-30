@@ -181,9 +181,9 @@ namespace MEL.Data
             {
                 var refEnrollmentStatus = new RefEnrollmentStatus[]
                 {
-                    new RefEnrollmentStatus{ EnrollmentStatusId = 1, EnrollmentStatusCode = "E", EnrollmentStatus = "Enrolled" },
-                    new RefEnrollmentStatus{ EnrollmentStatusId = 2, EnrollmentStatusCode = "C", EnrollmentStatus = "Completed" },
-                    new RefEnrollmentStatus{ EnrollmentStatusId = 3, EnrollmentStatusCode = "C", EnrollmentStatus = "Dropped out" }
+                    new RefEnrollmentStatus{ RefEnrollmentStatusId = 1, EnrollmentStatusCode = "E", EnrollmentStatus = "Enrolled" },
+                    new RefEnrollmentStatus{ RefEnrollmentStatusId = 2, EnrollmentStatusCode = "C", EnrollmentStatus = "Completed" },
+                    new RefEnrollmentStatus{ RefEnrollmentStatusId = 3, EnrollmentStatusCode = "C", EnrollmentStatus = "Dropped out" }
                 };
 
                 foreach (RefEnrollmentStatus item in refEnrollmentStatus)
@@ -209,8 +209,8 @@ namespace MEL.Data
             {
                 var refEvaluationStatus = new RefEvaluationStatus[]
                 {
-                    new RefEvaluationStatus{ EvaluationStatusId = 1, EvaluationStatusCode = "E", EvaluationStatus = "Enrolled" },
-                    new RefEvaluationStatus{ EvaluationStatusId = 2, EvaluationStatusCode = "C", EvaluationStatus = "Completed" }
+                    new RefEvaluationStatus{ RefEvaluationStatusId = 1, EvaluationStatusCode = "E", EvaluationStatus = "Enrolled" },
+                    new RefEvaluationStatus{ RefEvaluationStatusId = 2, EvaluationStatusCode = "C", EvaluationStatus = "Completed" }
                 };
 
                 foreach (RefEvaluationStatus item in refEvaluationStatus)

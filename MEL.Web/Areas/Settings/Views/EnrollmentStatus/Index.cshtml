@@ -66,19 +66,19 @@
                             </td>
                             <td class="text-right d-print-none">
                                 <div class="btn-group btn-group-sm" role="group" aria-label="Actions">
-                                    <a asp-action="Details" asp-route-id="@item.EnrollmentStatusId"
+                                    <a asp-action="Details" asp-route-id="@item.RefEnrollmentStatusId"
                                        class="btn btn-link text-gray btn-sm d-print-none btn-action"
                                        data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Details"]'>
                                         <i class="fas fa-info-circle fa-sm" aria-hidden="true"></i>
                                     </a>
 
-                                    <a policy="RequireEditRole" asp-action="Edit" asp-route-id="@item.EnrollmentStatusId"
+                                    <a policy="RequireEditRole" asp-action="Edit" asp-route-id="@item.RefEnrollmentStatusId"
                                        class="btn btn-link text-gray btn-sm d-print-none btn-action"
                                        data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Edit"]'>
                                         <i class="fas fa-pencil-alt fa-sm" aria-hidden="true"></i>
                                     </a>
 
-                                    <a policy="RequireDeleteRole" asp-action="Delete" asp-route-id="@item.EnrollmentStatusId"
+                                    <a policy="RequireDeleteRole" asp-action="Delete" asp-route-id="@item.RefEnrollmentStatusId"
                                        class="btn btn-link text-gray btn-sm d-print-none btn-action"
                                        data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Delete"]'>
                                         <i class="far fa-trash-alt fa-sm" aria-hidden="true"></i>
@@ -87,7 +87,7 @@
                                     {
                                         <a asp-controller="@ViewBag.NextController"
                                            asp-action="Index"
-                                           asp-route-id="@item.EnrollmentStatusId"
+                                           asp-route-id="@item.RefEnrollmentStatusId"
                                            class="btn btn-link btn-sm d-print-none btn-action"
                                            data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Open"]'>
                                             <i class="fas fa-chevron-right fa-sm" aria-hidden="true"></i>

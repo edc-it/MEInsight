@@ -72,7 +72,7 @@ namespace MEL.Data.Migrations
                 {
                     RefEducationAdministratorPositionId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    RefEducationAdministratorPositionCode = table.Column<string>(maxLength: 25, nullable: false),
+                    EducationAdministratorPositionCode = table.Column<string>(maxLength: 25, nullable: false),
                     EducationAdministratorPosition = table.Column<string>(maxLength: 150, nullable: false)
                 },
                 constraints: table =>
@@ -98,28 +98,28 @@ namespace MEL.Data.Migrations
                 name: "RefEnrollmentStatus",
                 columns: table => new
                 {
-                    EnrollmentStatusId = table.Column<int>(nullable: false)
+                    RefEnrollmentStatusId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     EnrollmentStatusCode = table.Column<string>(maxLength: 25, nullable: false),
                     EnrollmentStatus = table.Column<string>(maxLength: 150, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RefEnrollmentStatus", x => x.EnrollmentStatusId);
+                    table.PrimaryKey("PK_RefEnrollmentStatus", x => x.RefEnrollmentStatusId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "RefEvaluationStatus",
                 columns: table => new
                 {
-                    EvaluationStatusId = table.Column<int>(nullable: false)
+                    RefEvaluationStatusId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     EvaluationStatusCode = table.Column<string>(maxLength: 25, nullable: false),
                     EvaluationStatus = table.Column<string>(maxLength: 150, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RefEvaluationStatus", x => x.EvaluationStatusId);
+                    table.PrimaryKey("PK_RefEvaluationStatus", x => x.RefEvaluationStatusId);
                 });
 
             migrationBuilder.CreateTable(
@@ -367,7 +367,7 @@ namespace MEL.Data.Migrations
                 {
                     RefTLMDistributionStatusId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    TLMDistributionStatusCode = table.Column<string>(maxLength: 25, nullable: false),
+                    DistributionStatusCode = table.Column<string>(maxLength: 25, nullable: false),
                     DistributionStatus = table.Column<string>(maxLength: 50, nullable: false)
                 },
                 constraints: table =>
@@ -777,7 +777,7 @@ namespace MEL.Data.Migrations
                         name: "FK_ProgramAssessment_RefEvaluationStatus_RefEvaluationStatusId",
                         column: x => x.RefEvaluationStatusId,
                         principalTable: "RefEvaluationStatus",
-                        principalColumn: "EvaluationStatusId",
+                        principalColumn: "RefEvaluationStatusId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -1448,7 +1448,7 @@ namespace MEL.Data.Migrations
                         name: "FK_GroupEnrollment_RefEnrollmentStatus_RefEnrollmentStatusId",
                         column: x => x.RefEnrollmentStatusId,
                         principalTable: "RefEnrollmentStatus",
-                        principalColumn: "EnrollmentStatusId",
+                        principalColumn: "RefEnrollmentStatusId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -1490,7 +1490,7 @@ namespace MEL.Data.Migrations
                         name: "FK_GroupEvaluation_RefEvaluationStatus_RefEvaluationStatusId",
                         column: x => x.RefEvaluationStatusId,
                         principalTable: "RefEvaluationStatus",
-                        principalColumn: "EvaluationStatusId",
+                        principalColumn: "RefEvaluationStatusId",
                         onDelete: ReferentialAction.Restrict);
                 });
 

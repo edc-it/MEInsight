@@ -25,7 +25,7 @@ namespace MEL.Entities.Reference
         [MaxLength(25)]
         [Display(Name = "Distribution Status Code")]
         [Column(Order = 1)]
-        public string TLMDistributionStatusCode { get; set; }
+        public string DistributionStatusCode { get; set; }
 
         [Required(ErrorMessage = "The {0} field is required.")]
         [MaxLength(50)]

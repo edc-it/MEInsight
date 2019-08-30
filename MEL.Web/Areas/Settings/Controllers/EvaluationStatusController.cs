@@ -39,7 +39,7 @@ namespace MEL.Web.Areas.Settings.Controllers
             }
 
             var refEvaluationStatus = await _context.EvaluationStatus
-                .FirstOrDefaultAsync(m => m.EvaluationStatusId == id);
+                .FirstOrDefaultAsync(m => m.RefEvaluationStatusId == id);
             
             if (refEvaluationStatus == null)
             {
@@ -59,7 +59,7 @@ namespace MEL.Web.Areas.Settings.Controllers
         // POST: Settings/EvaluationStatus/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EvaluationStatusId,EvaluationStatusCode,EvaluationStatus")] RefEvaluationStatus refEvaluationStatus)
+        public async Task<IActionResult> Create([Bind("RefEvaluationStatusId,EvaluationStatusCode,EvaluationStatus")] RefEvaluationStatus refEvaluationStatus)
         {
             if (ModelState.IsValid)
             {
@@ -96,9 +96,9 @@ namespace MEL.Web.Areas.Settings.Controllers
         // POST: Settings/EvaluationStatus/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EvaluationStatusId,EvaluationStatusCode,EvaluationStatus")] RefEvaluationStatus refEvaluationStatus)
+        public async Task<IActionResult> Edit(int id, [Bind("RefEvaluationStatusId,EvaluationStatusCode,EvaluationStatus")] RefEvaluationStatus refEvaluationStatus)
         {
-            if (id != refEvaluationStatus.EvaluationStatusId)
+            if (id != refEvaluationStatus.RefEvaluationStatusId)
             {
                 return NotFound();
             }
@@ -112,7 +112,7 @@ namespace MEL.Web.Areas.Settings.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!RefEvaluationStatusExists(refEvaluationStatus.EvaluationStatusId))
+                    if (!RefEvaluationStatusExists(refEvaluationStatus.RefEvaluationStatusId))
                     {
                         return NotFound();
                     }
@@ -143,7 +143,7 @@ namespace MEL.Web.Areas.Settings.Controllers
             var refEvaluationStatus = await _context.EvaluationStatus
 					.Include(m => m.GroupEvaluations)
 					.Include(m => m.ProgramAssessments)
-					.FirstOrDefaultAsync(m => m.EvaluationStatusId == id);
+					.FirstOrDefaultAsync(m => m.RefEvaluationStatusId == id);
 
             if (refEvaluationStatus == null)
             {
@@ -188,7 +188,7 @@ namespace MEL.Web.Areas.Settings.Controllers
 
         private bool RefEvaluationStatusExists(int id)
         {
-            return _context.EvaluationStatus.Any(e => e.EvaluationStatusId == id);
+            return _context.EvaluationStatus.Any(e => e.RefEvaluationStatusId == id);
         }
     }
 }

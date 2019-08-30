@@ -25,7 +25,7 @@ namespace MEL.Entities.Reference
         [MaxLength(25)]
         [Display(Name = "Position Code")]
         [Column(Order = 1)]
-        public string RefEducationAdministratorPositionCode { get; set; }
+        public string EducationAdministratorPositionCode { get; set; }
 
         [Required(ErrorMessage = "The {0} field is required.")]
         [MaxLength(150)]

@@ -59,7 +59,7 @@ namespace MEL.Web.Areas.Settings.Controllers
         // POST: Settings/EducationAdministratorPositions/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RefEducationAdministratorPositionId,RefEducationAdministratorPositionCode,EducationAdministratorPosition")] RefEducationAdministratorPosition refEducationAdministratorPosition)
+        public async Task<IActionResult> Create([Bind("RefEducationAdministratorPositionId,EducationAdministratorPositionCode,EducationAdministratorPosition")] RefEducationAdministratorPosition refEducationAdministratorPosition)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +96,7 @@ namespace MEL.Web.Areas.Settings.Controllers
         // POST: Settings/EducationAdministratorPositions/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("RefEducationAdministratorPositionId,RefEducationAdministratorPositionCode,EducationAdministratorPosition")] RefEducationAdministratorPosition refEducationAdministratorPosition)
+        public async Task<IActionResult> Edit(int id, [Bind("RefEducationAdministratorPositionId,EducationAdministratorPositionCode,EducationAdministratorPosition")] RefEducationAdministratorPosition refEducationAdministratorPosition)
         {
             if (id != refEducationAdministratorPosition.RefEducationAdministratorPositionId)
             {
