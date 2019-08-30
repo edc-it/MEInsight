@@ -7,7 +7,7 @@
 
 <h1>@ViewData["Title"]</h1>
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6 col-sm-12">
         <section>
             <form id="account" method="post">
                 <h4>@Localizer["Use your application account to log in"].</h4>
@@ -27,7 +27,7 @@
                     <div class="checkbox">
                         <label asp-for="Input.RememberMe">
                             <input asp-for="Input.RememberMe" />
-                            @Html.DisplayNameFor(m => m.Input.RememberMe) 
+                            @Html.DisplayNameFor(m => m.Input.RememberMe)
                         </label>
                     </div>
                 </div>

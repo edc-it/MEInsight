@@ -38,7 +38,8 @@ namespace MEL.Web.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            //[EmailAddress]
+            [EmailAddress]
+            [Display(Name = "Email")]
             public string Email { get; set; }
 
             [Required]
