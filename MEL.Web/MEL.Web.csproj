@@ -12,14 +12,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Templates\**" />
-    <Content Remove="Templates\**" />
-    <EmbeddedResource Remove="Templates\**" />
-    <None Remove="Templates\**" />
-    <TypeScriptCompile Remove="Templates\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Remove="bundleconfig.json" />
     <Content Remove="compilerconfig.json" />
   </ItemGroup>
@@ -43,14 +35,6 @@
   <ItemGroup>
     <ProjectReference Include="..\MEL.Data\MEL.Data.csproj" />
     <ProjectReference Include="..\MEL.Entities\MEL.Entities.csproj" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <Folder Include="Areas\Identity\Controllers\" />
-    <Folder Include="Areas\Identity\Models\" />
-    <Folder Include="Areas\Settings\Data\" />
-    <Folder Include="wwwroot\uploads\" />
   </ItemGroup>
 
 

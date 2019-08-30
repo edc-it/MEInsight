@@ -8,29 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20190812141704_UpdateApplicationSchema-01.cs" />
-    <Compile Remove="Migrations\20190812141704_UpdateApplicationSchema-01.Designer.cs" />
-    <Compile Remove="Migrations\20190812142039_UpdateApplicationSchema-01.cs" />
-    <Compile Remove="Migrations\20190812142039_UpdateApplicationSchema-01.Designer.cs" />
-    <Compile Remove="Migrations\20190813024713_UpdateApplicationSchema-01.cs" />
-    <Compile Remove="Migrations\20190813024713_UpdateApplicationSchema-01.Designer.cs" />
-    <Compile Remove="Migrations\20190813025550_UpdateApplicationSchema-01.cs" />
-    <Compile Remove="Migrations\20190813025550_UpdateApplicationSchema-01.Designer.cs" />
-    <Compile Remove="Migrations\20190813025713_UpdateApplicationSchema-01.cs" />
-    <Compile Remove="Migrations\20190813025713_UpdateApplicationSchema-01.Designer.cs" />
-    <Compile Remove="Migrations\20190824011822_UpdateApplicationSchema-01.cs" />
-    <Compile Remove="Migrations\20190824011822_UpdateApplicationSchema-01.Designer.cs" />
-    <Compile Remove="Migrations\20190824012052_UpdateApplicationSchema-01.cs" />
-    <Compile Remove="Migrations\20190824012052_UpdateApplicationSchema-01.Designer.cs" />
-    <Compile Remove="Migrations\20190824021705_UpdateApplicationSchema-01.cs" />
-    <Compile Remove="Migrations\20190824021705_UpdateApplicationSchema-01.Designer.cs" />
-    <Compile Remove="Migrations\20190824021951_UpdateApplicationSchema-01.cs" />
-    <Compile Remove="Migrations\20190824021951_UpdateApplicationSchema-01.Designer.cs" />
-    <Compile Remove="Migrations\20190824022749_UpdateApplicationSchema-01.cs" />
-    <Compile Remove="Migrations\20190824022749_UpdateApplicationSchema-01.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
