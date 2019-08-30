@@ -28,7 +28,7 @@ namespace MEL.Data
             /*                  IMPORTANT - CHANGE ADMIN CREDENTIALS                   */
             /*                                                                         */
             /* *********************************************************************** */
-            const string SeedUserName = "admin";
+            const string SeedUserName = "admin@meinsight.edc.org";
             string tempAdminPassword = "ME!Insight4Data";
 
 
