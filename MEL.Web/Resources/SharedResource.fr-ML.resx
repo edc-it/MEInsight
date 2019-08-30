@@ -342,14 +342,8 @@
   <data name="Use your application account to log in" xml:space="preserve">
     <value>Utilisez votre compte d'application pour vous connecter</value>
   </data>
-  <data name="To access the M&amp;E Insight Demo, please use the following account" xml:space="preserve">
-    <value>Pour accéder à la démonstration M &amp; E Insight, veuillez utiliser le compte suivant</value>
-  </data>
   <data name="Username" xml:space="preserve">
     <value>Nom d'utilisateur</value>
-  </data>
-  <data name="Please contact us if you are having trouble login in" xml:space="preserve">
-    <value>S'il vous plaît contactez-nous si vous rencontrez des problèmes pour vous connecter</value>
   </data>
   <data name="Forgot your password?" xml:space="preserve">
     <value>Mot de passe oublié?</value>
@@ -536,9 +530,6 @@
   </data>
   <data name="none selected" xml:space="preserve">
     <value>aucune sélection</value>
-  </data>
-  <data name="score" xml:space="preserve">
-    <value>But</value>
   </data>
   <data name="years old" xml:space="preserve">
     <value>ans</value>
@@ -897,9 +888,6 @@
   <data name="Log in" xml:space="preserve">
     <value>Ouvrir une session</value>
   </data>
-  <data name="Log In" xml:space="preserve">
-    <value>Ouvrir une session</value>
-  </data>
   <data name="Enrollments" xml:space="preserve">
     <value>Inscription</value>
   </data>
@@ -1032,9 +1020,6 @@
   <data name="Reset password" xml:space="preserve">
     <value>Réinitialiser mot de passe</value>
   </data>
-  <data name="Reset Password" xml:space="preserve">
-    <value>Réinitialiser mot de passe</value>
-  </data>
   <data name="Middle name" xml:space="preserve">
     <value>Deuxième prénom</value>
   </data>
@@ -1116,31 +1101,43 @@
   <data name="Attendance unit" xml:space="preserve">
     <value>Unité de présence</value>
   </data>
-  <data name="Attendance Unit" xml:space="preserve">
-    <value>Unité de présence</value>
-  </data>
   <data name="Office" xml:space="preserve">
     <value>Bureau</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>D'accueil</value>
   </data>
-  <data name="An open source Monitoring and Evaluation Data Management System for International Development Projects" xml:space="preserve">
+  <data name="An open source monitoring and evaluation data management system for international development projects" xml:space="preserve">
     <value>Un système open source de gestion des données de suivi et d'évaluation pour les projets de développement international</value>
   </data>
   <data name="Navigate through your organizations, schools, partners, groups / cohorts, and participant enrollment lists" xml:space="preserve">
     <value>Naviguez dans vos organisations, écoles, partenaires, groupes / cohortes et listes d'inscription de participants</value>
   </data>
-  <data name="Visualize and update your application settings, category lists and option choices" xml:space="preserve">
-    <value>Visualisez et mettez à jour les paramètres de votre application, les listes de catégories et les choix d'options</value>
-  </data>
   <data name="View all your active Participants, students, teachers, education administrators or other participant types" xml:space="preserve">
     <value>Affichez tous vos participants actifs, étudiants, enseignants, administrateurs de l’éducation ou autres types de participants</value>
+  </data>
+  <data name="Visualize and update your application settings, category lists and option choices" xml:space="preserve">
+    <value>Visualisez et mettez à jour les paramètres de votre application, les listes de catégories et les choix d'options</value>
   </data>
   <data name="Documentation" xml:space="preserve">
     <value>Documentation</value>
   </data>
   <data name="Read the user guides and documentation" xml:space="preserve">
     <value>Lire les guides de l'utilisateur et la documentation</value>
+  </data>
+  <data name="M&amp;E Insight is an open source monitoring and evaluation data management system for international development projects" xml:space="preserve">
+    <value>M &amp; E Insight est un système de gestion de données de suivi et d'évaluation en source ouverte destiné aux projets de développement international.</value>
+  </data>
+  <data name="Home Page" xml:space="preserve">
+    <value>Page d'accueil</value>
+  </data>
+  <data name="A monitoring and evaluation data management system" xml:space="preserve">
+    <value>Un système de gestion des données de suivi et d'évaluation</value>
+  </data>
+  <data name="Visit M&amp;E Insight on GitHub!" xml:space="preserve">
+    <value>Visitez M &amp; E Insight sur GitHub!</value>
+  </data>
+  <data name="Remember me?" xml:space="preserve">
+    <value>Souviens-toi de moi?</value>
   </data>
 </root>
