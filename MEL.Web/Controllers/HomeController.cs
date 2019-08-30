@@ -39,6 +39,7 @@ namespace MEL.Web.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult SetLanguage(string culture, string returnUrl)
         {
             Response.Cookies.Append(
