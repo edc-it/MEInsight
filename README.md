@@ -11,7 +11,7 @@ Designed to Meet the Challenges of International Development Programs
 
 EDC works in all 50 U.S. states and in 22 countries around the world. We’ve learned that development initiatives share common elements and challenges regarding data management. That’s why we designed M&E Insight to meet the Common Education Data Standards (CEDS). Our adherence to the standards provides a common data vocabulary for every project, including a common set of data elements (e.g., participant types) that can be improved, reused, and replicated for any project.
 
-![M&E Insight application screenshot](docs\images\ssEnrollments.png)
+![M&E Insight application screenshot](Docs\images\ssEnrollments.png)
 
 ## What is M&E Insight?
 M&E Insight is an ASP.NET Core MVC Web Application, built using .NET Core v2.2 framework and the MVC architectural pattern (Model-View-Controller) for its front-end interface. For the back-end, M&E Insight uses Entity Framework (EF) Core as the data access framework with Microsoft SQL Server.
