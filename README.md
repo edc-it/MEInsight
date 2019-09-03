@@ -5,38 +5,20 @@ M&E Insight is a monitoring and evaluation data management system for internatio
 Demo: https://meinsight.edc.org
 
 ## Background
-International development projects are often challenged with managing large amounts of data
-and information across multiple partners and programs. EDC created M&E Insight to streamline the data management process. Developed by programmers who understand the data collection, tracking, and reporting needs of the field, the system works for initiatives of all types and sizes.
+International development projects are often challenged with managing large amounts of data and information across multiple partners and programs. EDC created **M&E Insight** to streamline the data management process. Developed by programmers who understand the data collection, tracking, and reporting needs of the field, the system works for initiatives of all types and sizes.
 
 Designed to Meet the Challenges of International Development Programs
 
 EDC works in all 50 U.S. states and in 22 countries around the world. We’ve learned that development initiatives share common elements and challenges regarding data management. That’s why we designed M&E Insight to meet the Common Education Data Standards (CEDS). Our adherence to the standards provides a common data vocabulary for every project, including a common set of data elements (e.g., participant types) that can be improved, reused, and replicated for any project.
 
-[screenshot]
+![M&E Insight application screenshot](docs\images\ssEnrollments.png)
 
 ## What is M&E Insight?
 M&E Insight is an ASP.NET Core MVC Web Application, built using .NET Core v2.2 framework and the MVC architectural pattern (Model-View-Controller) for its front-end interface. For the back-end, M&E Insight uses Entity Framework (EF) Core as the data access framework with Microsoft SQL Server.
 
-...
-
 M&E Insight is currently available in English, Spanish, and French, but new translations can be easily added.
 
-
-
-## Getting started
-
-### Prerequisites
-
-### Setup
-
-### Technologies implemented
-
-### Documentation
-* Setup guide
-* User guide
-
-### Help and Support
-
+---
 
 ## License
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](LICENSE)
