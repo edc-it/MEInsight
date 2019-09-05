@@ -47,7 +47,7 @@ Download and install the following tools to setup your local development/testing
 
 ### Running M&E Insight
 1. Open the .sln solution file in Visual Studio Community 2019.
-2. (optional) Edit the `appsettings.json` and update the `DefaultConnection` string to match your environment (if left unmodified, by default it will automatically create a `localdb` database named `MEInsight`): 
+2. (optional) Edit the `appsettings.json` file in the `MEL.Web` project and update the `DefaultConnection` string to match your environment (if left unmodified, by default it will automatically create a `localdb` database named `MEInsight`): 
     ```json 
     {
         "Logging": {
@@ -62,7 +62,16 @@ Download and install the following tools to setup your local development/testing
     } 
 
     ```
-3. Build the solution, start debugging and test drive M&E Insight.
+3. Edit the `ApplicationDbInitializer.cs` in the `MEL.Data` project and update the default administrator credentials, currently:
+   ```c#
+   // Username
+   const string SeedUserName = "admin@meinsight.edc.org";
+   
+   // Temporal Password
+   string tempAdminPassword = "ME!Insight4Data";
+   ```
+4. Build the solution, start debugging and test drive M&E Insight. To log in, use the above or updated credentials.
+
 
 ## Documentation
 * Setup guide (coming soon)
