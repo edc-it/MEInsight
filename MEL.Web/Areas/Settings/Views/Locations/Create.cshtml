@@ -13,7 +13,17 @@
         <form asp-action="Create" id="main-form">
             <div asp-validation-summary="All" class="text-danger"></div>
             <input type="hidden" name="ParentId" value="@ViewBag.ParentId" />
-            
+            <input asp-for="ParentLocationId" type="hidden" value="@ViewBag.ParentId" />
+
+            @if (ViewBag.ParentId != null)
+            {
+                <div class="form-group">
+                    <label class="control-label">@Localizer["Parent Location"]</label>
+                    <div class="form-control">@ViewBag.ParentLocationName</div>
+                </div>
+            }
+
+
             <div class="form-group" asp-enabled="RefLocationId">
                 <!--input start-->
                 <label asp-for="RefLocationId" class="control-label"></label>
@@ -21,8 +31,8 @@
                 <span asp-validation-for="RefLocationId" class="text-danger"></span>
                 <!--input end-->
             </div>
-            
-            
+
+
             <div class="form-group" asp-enabled="LocationName">
                 <!--input start-->
                 <label asp-for="LocationName" class="control-label"></label>
@@ -30,30 +40,18 @@
                 <span asp-validation-for="LocationName" class="text-danger"></span>
                 <!--input end-->
             </div>
-            
-            
+
+
             <div class="form-group" asp-enabled="RefLocationTypeId">
                 <!--fk select start-->
                 <label asp-for="RefLocationTypeId" class="control-label"></label>
-                <select asp-for="RefLocationTypeId" class ="form-control custom-select" asp-items="ViewBag.RefLocationTypeId">
+                <select asp-for="RefLocationTypeId" class="form-control custom-select" asp-items="ViewBag.RefLocationTypeId">
                     <option disabled selected></option>
                 </select>
                 <span asp-validation-for="RefLocationTypeId" class="text-danger"></span>
                 <!--fk select end-->
             </div>
-            
-            
-            <div class="form-group" asp-enabled="ParentLocationId">
-                <!--fk select start-->
-                <label asp-for="ParentLocationId" class="control-label"></label>
-                <select asp-for="ParentLocationId" class ="form-control custom-select" asp-items="ViewBag.ParentLocationId">
-                    <option disabled selected></option>
-                </select>
-                <span asp-validation-for="ParentLocationId" class="text-danger"></span>
-                <!--fk select end-->
-            </div>
-            
-            
+
             <div class="form-group" asp-enabled="Latitude">
                 <!--input start-->
                 <label asp-for="Latitude" class="control-label"></label>
@@ -61,8 +59,8 @@
                 <span asp-validation-for="Latitude" class="text-danger"></span>
                 <!--input end-->
             </div>
-            
-            
+
+
             <div class="form-group" asp-enabled="Longitude">
                 <!--input start-->
                 <label asp-for="Longitude" class="control-label"></label>
@@ -70,7 +68,7 @@
                 <span asp-validation-for="Longitude" class="text-danger"></span>
                 <!--input end-->
             </div>
-            
+
             <!-- button group start -->
             <div class="form-group text-right mt-5">
                 <a id="cancelbutton" class="btn btn-secondary mr-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">

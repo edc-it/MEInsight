@@ -19,7 +19,6 @@ namespace MEL.Entities.Core
         [MaxLength(100)]
         [Display(Name = "Student Code")]
         [Column(Order = 1)]
-        [Remote(action: "VerifyStudentCode", controller: "RemoteValidations", HttpMethod = "POST", ErrorMessage = "This Code already exists.", AdditionalFields = "StudentCodeInitialValue")]
         public string StudentCode { get; set; }
 
         [Display(Name = "Student Type")]

@@ -259,19 +259,21 @@
                             <!--fk select end-->
                         </div>
 
-                        <!--date start-->
-                        <label asp-for="BirthDate" class="control-label"></label>
-                        <span class="text-muted small">(@System.Globalization.CultureInfo.CurrentUICulture)</span>
-                        <!-- use class .date to enable datepicker -->
-                        <div class="input-group date birthdate mb-2">
-                            <input asp-for="BirthDate" autocomplete="off" type="text" class="form-control" placeholder="@System.Globalization.DateTimeFormatInfo.CurrentInfo.ShortDatePattern" />
-                            <span class="input-group-append">
-                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                            </span>
+                        <div class="form-group" asp-enabled="BirthDate">
+                            <!--date start-->
+                            <label asp-for="BirthDate" class="control-label"></label>
+                            <span class="text-muted small">(@System.Globalization.CultureInfo.CurrentUICulture)</span>
+                            <!-- use class .date to enable datepicker -->
+                            <div class="input-group date birthdate mb-2">
+                                <input asp-for="BirthDate" autocomplete="off" type="text" class="form-control" placeholder="@System.Globalization.DateTimeFormatInfo.CurrentInfo.ShortDatePattern" />
+                                <span class="input-group-append">
+                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                </span>
+                            </div>
+                            <span asp-validation-for="BirthDate" class="text-danger"></span>
+                            <!--date end-->
                         </div>
-                        <span asp-validation-for="BirthDate" class="text-danger"></span>
-                        <!--date end-->
-
+                        
                         <div class="form-group" asp-enabled="Age">
                             <!--input start-->
                             <label asp-for="Age" class="control-label"></label>
@@ -507,6 +509,7 @@
                     data.instance._open_to(['@ViewBag.OrganizationId'], true);
                     data.instance.select_node(['@ViewBag.OrganizationId'], true);
                     $('#OrganizationId').val('@ViewBag.OrganizationId');
+                    $('#SelectedOrganizationId').html(data.instance.get_selected(true)[0].text);
                 });
                 </text>
             }
@@ -589,19 +592,8 @@
             // *** STUDENTS ***
             // Calculate Age from Birth Date
             //https://stackoverflow.com/questions/4060004/calculate-age-given-the-birth-date-in-the-format-yyyymmdd/7091965#7091965
-            var locale = '@System.Globalization.CultureInfo.CurrentUICulture';
             $('.date.birthdate')
-                .datepicker({
-                    language: locale, //use loaded locale language
-                    autoclose: true,
-                    showOnFocus: false,
-                    todayHighlight: true,
-                    disableTouchKeyboard: true,
-                    toggleActive: true,
-                    orientation: 'bottom auto'
-                })
-                // https://stackoverflow.com/questions/22335120/jquery-validator-and-datepicker-click-not-validating
-                .on('change', function () {
+                .on('change', function (date) {
                     var today = new Date();
                     var birthDate = $(this).datepicker('getDate');
 

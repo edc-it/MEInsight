@@ -19,6 +19,7 @@
             @*[Remote] Validation to validate user input and verify if the Participant and Student Code already exists.*@
             <input type="hidden" value="@Model.ParticipantCode" name="ParticipantCodeInitialValue" />
             <input type="hidden" value="@Model.StudentCode" name="StudentCodeInitialValue" />
+            <input type="hidden" value="@ViewBag.GroupId" name="GroupId" />
 
             <div class="card mb-3">
                 <div class="card-header">
@@ -147,10 +148,10 @@
                     </div>
 
                     @*
-                RefLocation is a self-referencing table with hierarchical (geo)locations.
-                This foreach dynamically generates each required location input by location level
-                i.e. Country -> Province -> District or Level1 -> Level2 -> Level 3 (LocationTypes by level)
-                Only the last level RefLocationId is saved on this record.
+                        RefLocation is a self-referencing table with hierarchical (geo)locations.
+                        This foreach dynamically generates each required location input by location level
+                        i.e. Country -> Province -> District or Level1 -> Level2 -> Level 3 (LocationTypes by level)
+                        Only the last level RefLocationId is saved on this record.
                     *@
                     @{
                         // If RefLocationId is enabled
@@ -417,9 +418,19 @@
 
             <!-- button group start -->
             <div class="form-group text-right mt-5">
-                <a id="cancelbutton" class="btn btn-secondary mr-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
-                    <i class="fas fa-times"></i> @Localizer["Cancel"]
-                </a>
+                @if (ViewBag.GroupId == null)
+                {
+                    <a id="cancelbutton" class="btn btn-secondary mr-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
+                        <i class="fas fa-times"></i> @Localizer["Cancel"]
+                    </a>
+                }
+                else
+                {
+                    <a id="cancelbutton" class="btn btn-secondary mr-2" asp-action="Index" asp-controller="GroupEnrollments" asp-route-id="@ViewBag.GroupId">
+                        <i class="fas fa-times"></i> @Localizer["Cancel"]
+                    </a>
+                }
+
                 <button id="submitbutton" type="submit" value="Save" class="btn btn-primary ladda-button" data-style="expand-left" data-spinner-color="white">
                     <span class="ladda-label">
                         <i class="fas fa-check"></i> @Localizer["Save"]
@@ -510,7 +521,7 @@
                 data.instance.select_node(['@Model.OrganizationId'], true);
                 //$('#OrganizationId').val(data.selected);
                 $('#SelectedOrganizationId').html(data.instance.get_selected(true)[0].text);
-                
+
             });
 
             @*  On Edit page load, pre-populate each RefLocation level chained select.
@@ -668,7 +679,7 @@
             });
 
         });
-            
+
     </script>
 
 }

@@ -40,6 +40,7 @@ namespace MEL.Data
         public DbSet<MEL.Entities.Core.Partner> Partners { get; set; }
         public DbSet<MEL.Entities.Core.SchoolPeriod> SchoolPeriods { get; set; }
         public DbSet<MEL.Entities.Core.SchoolEnrollment> SchoolEnrollments { get; set; }
+        public DbSet<MEL.Entities.Core.SchoolClassroom> SchoolClassrooms { get; set; }
         public DbSet<Participant> Participants { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<MEL.Entities.Core.Teacher> Teachers { get; set; }
@@ -50,6 +51,7 @@ namespace MEL.Data
         public DbSet<MEL.Entities.Reference.RefOrganizationType> OrganizationTypes { get; set; }
         public DbSet<MEL.Entities.Reference.RefSchoolType> SchoolTypes { get; set; }
         public DbSet<MEL.Entities.Reference.RefSchoolLocation> SchoolLocations { get; set; }
+        public DbSet<MEL.Entities.Reference.RefSchoolLanguage> SchoolLanguages { get; set; }
         public DbSet<MEL.Entities.Reference.RefSchoolAdministrationType> SchoolAdministrationTypes { get; set; }
         public DbSet<MEL.Entities.Reference.RefSchoolCluster> SchoolClusters { get; set; }
         public DbSet<MEL.Entities.Reference.RefSchoolStatus> SchoolStatus { get; set; }
@@ -115,6 +117,7 @@ namespace MEL.Data
             builder.Entity<Partner>().HasQueryFilter(p => !p.IsDeleted).ToTable("Partner");
             builder.Entity<SchoolPeriod>().HasQueryFilter(p => !p.IsDeleted).ToTable("SchoolPeriod");
             builder.Entity<SchoolEnrollment>().HasQueryFilter(p => !p.IsDeleted).ToTable("SchoolEnrollment");
+            builder.Entity<SchoolClassroom>().HasQueryFilter(p => !p.IsDeleted).ToTable("SchoolClassroom");
             builder.Entity<Participant>().HasQueryFilter(p => !p.IsDeleted).ToTable("Participant");
             builder.Entity<Student>().HasQueryFilter(p => !p.IsDeleted).ToTable("Student");
             builder.Entity<Teacher>().HasQueryFilter(p => !p.IsDeleted).ToTable("Teacher");
@@ -124,6 +127,7 @@ namespace MEL.Data
             builder.Entity<RefOrganizationType>().ToTable("RefOrganizationType");
             builder.Entity<RefSchoolType>().ToTable("RefSchoolType");
             builder.Entity<RefSchoolLocation>().ToTable("RefSchoolLocation");
+            builder.Entity<RefSchoolLanguage>().ToTable("RefSchoolLanguage");
             builder.Entity<RefSchoolAdministrationType>().ToTable("RefSchoolAdministrationType");
             builder.Entity<RefSchoolCluster>().ToTable("RefSchoolCluster");
             builder.Entity<RefSchoolStatus>().ToTable("RefSchoolStatus");
