@@ -608,6 +608,8 @@ namespace MEL.Web.Controllers
             ViewData["RefSexId"] = new SelectList(_context.Sex, "RefSexId", "Sex", participants.RefSexId);
             ViewData["RefParticipantTypeId"] = participants.RefParticipantTypeId;
 
+            ViewData["GroupId"] = GroupId;
+
             // Students
             if (participants.RefParticipantTypeId == 1)
             {
