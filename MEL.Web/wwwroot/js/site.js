@@ -20,7 +20,7 @@ $('body').on('click', function (e) {
 });
 
 /* 04 - Toggle body container / container-fluid */
-$("#expand").on("click", function () {
+$("#expand-container").on("click", function () {
     $('.content').toggleClass('container container-fluid');
 });
 

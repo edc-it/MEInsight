@@ -24,10 +24,11 @@ namespace MEL.Entities.TLM
         [Display(Name = "TLM Distribution")]
         public Guid TLMDistributionId { get; set; }
 
+        [Required(ErrorMessage = "The {0} field is required.")]
         [DataType(DataType.Date)]
         [Column(Order = 1)]
         [Display(Name = "Registration Date")]
-        public DateTime? RegistrationDate { get; set; }
+        public DateTime RegistrationDate { get; set; }
 
         [Display(Name = "Distribution Period")]
         [Column(Order = 2)]
@@ -96,7 +97,7 @@ namespace MEL.Entities.TLM
 
         [ForeignKey("RefTLMDistributionStatusId")]
         [Display(Name = "Distribution Status")]
-        public virtual RefTLMDistributionStatus DistributionStatus { get; set; }
+        public virtual RefTLMDistributionStatus TLMDistributionStatus { get; set; }
 
 
         [ForeignKey("ParentTLMDistributionId")]

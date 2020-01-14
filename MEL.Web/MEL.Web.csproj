@@ -9,6 +9,7 @@
     <Company>Education Development Center, Inc.</Company>
     <Authors></Authors>
     <Product>M&amp;E Insight</Product>
+    <Version>1.0.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

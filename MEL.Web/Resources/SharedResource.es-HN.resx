@@ -1140,4 +1140,91 @@
   <data name="Remember me?" xml:space="preserve">
     <value>¿Recuérdame?</value>
   </data>
+  <data name="School Language" xml:space="preserve">
+    <value>Lenguaje de la escuela</value>
+  </data>
+  <data name="School Language Id" xml:space="preserve">
+    <value>ID del lenguaje de la escuela</value>
+  </data>
+  <data name="School Language Code" xml:space="preserve">
+    <value>Código del lenguaje de la escuela</value>
+  </data>
+  <data name="School Languages" xml:space="preserve">
+    <value>Lenguajes de la escuela</value>
+  </data>
+  <data name="TLM Distribution Period" xml:space="preserve">
+    <value>Período de distribución de TLM</value>
+  </data>
+  <data name="TLM Distribution Periods" xml:space="preserve">
+    <value>Períodos de distribución de TLM</value>
+  </data>
+  <data name="Teaching and Learning Materials (TLM) Distribution Periods" xml:space="preserve">
+    <value>Períodos de distribución de materiales de enseñanza y aprendizaje (TLM)</value>
+  </data>
+  <data name="Teaching and Learning Materials (TLM) Distributions" xml:space="preserve">
+    <value>Distribuciones de materiales de enseñanza y aprendizaje (TLM)</value>
+  </data>
+  <data name="TLM Distributions" xml:space="preserve">
+    <value>Distribuciones TLM</value>
+  </data>
+  <data name="Re-open Period" xml:space="preserve">
+    <value>Abrir Período</value>
+  </data>
+  <data name="Close TLM Distribution Period" xml:space="preserve">
+    <value>Cerrar período de distribución de TLM</value>
+  </data>
+  <data name="You will set this period as Closed" xml:space="preserve">
+    <value>Establecerá este período como Cerrado</value>
+  </data>
+  <data name="Re-open TLM Distribution Period" xml:space="preserve">
+    <value>Reabrir período de distribución de TLM</value>
+  </data>
+  <data name="Are you sure you want to reopen this period? Updating TLM Distributions will be allowed" xml:space="preserve">
+    <value>¿Seguro que quieres reabrir este período? Se permitirá la actualización de distribuciones TLM</value>
+  </data>
+  <data name="Selected organization To" xml:space="preserve">
+    <value>Organización seleccionada Para</value>
+  </data>
+  <data name="Selected organization From" xml:space="preserve">
+    <value>Organización seleccionada De</value>
+  </data>
+  <data name="Upload TLM Distribution document" xml:space="preserve">
+    <value>Subir documento de distribución TLM</value>
+  </data>
+  <data name="TLM Materials" xml:space="preserve">
+    <value>Materiales TLM</value>
+  </data>
+  <data name="Teaching and Learning Materials (TLM)" xml:space="preserve">
+    <value>Materiales de enseñanza y aprendizaje (TLM)</value>
+  </data>
+  <data name="Upload TLM Material document" xml:space="preserve">
+    <value>Cargar documento de material TLM</value>
+  </data>
+  <data name="Select existing participants to enroll in this Group" xml:space="preserve">
+    <value>Seleccione participantes existentes para inscribirse en este grupo</value>
+  </data>
+  <data name="Filters" xml:space="preserve">
+    <value>Filtros</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filtro</value>
+  </data>
+  <data name="Existing Participants" xml:space="preserve">
+    <value>Participantes existentes</value>
+  </data>
+  <data name="Add Participants" xml:space="preserve">
+    <value>Añadir participantes</value>
+  </data>
+  <data name="Selected Participants to Enroll" xml:space="preserve">
+    <value>Participantes seleccionados para inscribirse</value>
+  </data>
+  <data name="Enroll" xml:space="preserve">
+    <value>Inscribirse</value>
+  </data>
+  <data name="Remove from list" xml:space="preserve">
+    <value>Quitar de la lista</value>
+  </data>
+  <data name="Add Existing" xml:space="preserve">
+    <value>Agregar existente</value>
+  </data>
 </root>

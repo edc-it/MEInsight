@@ -1,4 +1,5 @@
 ﻿using MEL.Entities.Reference;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -25,6 +26,7 @@ namespace MEL.Entities.TLM
         [MaxLength(100)]
         [Display(Name = "TLM Material Code")]
         [Column(Order = 1)]
+        [Remote(action: "VerifyTLMMaterialCode", controller: "RemoteValidations", HttpMethod = "POST", ErrorMessage = "This Code already exists.", AdditionalFields = "TLMMaterialCodeInitialValue")]
         public string TLMMaterialCode { get; set; }
 
         [Required(ErrorMessage = "The {0} field is required.")]

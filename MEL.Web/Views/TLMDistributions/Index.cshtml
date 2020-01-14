@@ -1,0 +1,541 @@
+﻿@model IEnumerable<MEL.Entities.TLM.TLMDistribution>
+
+@{
+    ViewData["Title"] = @Localizer["TLM Distribution"].Value + " " + @Localizer["List"].Value;
+}
+
+<!--content start-->
+<div class="slide-in-right">
+    <!--heading start-->
+    <div class="card mb-3 heading-panel">
+        <div class="card-body">
+            <h2 class="card-title mt-3 font-weight-bold mb-0">@Localizer["TLM Distribution"]</h2>
+            <span class="card-text text-muted">@Localizer["List of"] @Localizer["Teaching and Learning Materials (TLM) Distributions"]</span>
+
+            <ul class="list-unstyled">
+                <li>
+                    <strong>@Localizer["Distribution Period"]: </strong>@ViewBag.DistributionPeriod?.PeriodName
+                </li>
+                <li>
+                    <strong>@Localizer["Start/End Date"]: </strong>@ViewBag.DistributionPeriod?.StartDate?.ToShortDateString() / @ViewBag.DistributionPeriod?.EndDate?.ToShortDateString()
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--heading end-->
+    <!--toolbars start-->
+    <div class="row mb-3">
+        <div class="col-sm-12 col-md-6 d-flex align-items-center justify-content-start">
+            <div id="toolbar" class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+
+
+                @if (ViewBag.Closed == true)
+                {
+                    <!--open button start-->
+                    <div policy="RequireMELRole" class="input-group input-group-sm mb-2 mr-3" role="group" aria-label="closeperiod">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white" id="basic-addon1">M&E:</span>
+                        </div>
+                        <button id="btn-open" type="button" class="btn btn-secondary btn-sm">
+                            <i class="fas fa-lock-alt"></i> @Localizer["Re-open Period"]
+                        </button>
+                    </div>
+                    <!--open button end-->
+                }
+                else
+                {
+                    <!--create start-->
+                    <div class="btn-group btn-group-sm mb-2" role="group" aria-label="creategroup">
+                        <a policy="RequireCreateRole" asp-action="Create" asp-route-id="@ViewBag.ParentId" role="button" class="btn btn-primary mr-3">
+                            <i class="fas fa-plus"></i> @Localizer["Create New"]
+                        </a>
+                    </div>
+
+                    <!--close button start-->
+                    <div policy="RequireMELOfficerRole" class="btn-group btn-group-sm mb-2" role="group" aria-label="closeperiod">
+                        <button id="btn-close" type="button" class="btn btn-warning">
+                            <i class="fas fa-unlock-alt"></i> @Localizer["Close"]
+                        </button>
+                    </div>
+                    <!--close button end-->
+                }
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 d-flex align-items-center justify-content-end">
+            <!--datatable search start-->
+            <div class="input-group input-group-sm d-print-none mb-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-search" aria-hidden="true"></i></span>
+                </div>
+                <input id="searchbox" type="text" class="form-control" placeholder='@Localizer["Search"]' aria-describedby="searchbox">
+            </div>
+            <!--datatable search end-->
+        </div>
+    </div>
+    <!--toolbars end-->
+    <!--datatable start-->
+    <div class="row">
+        <div class="col-sm-12">
+            <table id="datatable" class="table table-sm table-hover table-striped responsive no-wrap w-100">
+                <thead>
+                    <tr>
+                        <th data-data="trackingCode" data-name="TrackingCode" data-responsivePriority="1">
+                            @Localizer["Tracking Code"]
+                        </th>
+                        <th data-data="organizationFrom" data-name="OrganizationFrom">
+                            @Localizer["Organization From"]
+                        </th>
+                        <th data-data="organizationTo" data-name="OrganizationTo">
+                            @Localizer["Organization To"]
+                        </th>
+                        <th data-data="shippedDate" data-name="ShippedDate" data-visible="false">
+                            @Localizer["Shipped Date"]
+                        </th>
+                        <th data-data="receivedDate" data-name="ReceivedDate">
+                            @Localizer["Received Date"]
+                        </th>
+                        <th data-data="distributionStatus" data-name="DistributionStatus">
+                            @Localizer["Distribution Status"]
+                        </th>
+                        <th data-orderable="false" class="text-right d-print-none">
+                            @Localizer["Actions"]
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="text-right"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <!--table start-->
+            @*<table id="datatable" class="table table-sm table-hover table-striped responsive no-wrap w-100">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TrackingCode)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.OrganizationsFrom)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.OrganizationsTo)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ShippedDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ReceivedDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TLMDistributionStatus)
+                            </th>
+                            <th class="text-right d-print-none">@Localizer["Actions"]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <a asp-controller="@ViewBag.NextController"
+                                       asp-action="Index"
+                                       asp-route-id="@item.TLMDistributionId"
+                                       class="text-uppercase text-bold text-decoration-none">
+                                        @Html.DisplayFor(modelItem => item.TrackingCode)
+                                    </a>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OrganizationsFrom.OrganizationName) (@Html.DisplayFor(modelItem => item.OrganizationsFrom.OrganizationCode))
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OrganizationsTo.OrganizationName) (@Html.DisplayFor(modelItem => item.OrganizationsTo.OrganizationCode))
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ShippedDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ReceivedDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TLMDistributionStatus.DistributionStatus)
+                                </td>
+                                <td class="text-right d-print-none">
+                                    <div class="btn-group btn-group-sm" role="group" aria-label="Actions">
+                                        @if (item.Url != null)
+                                        {
+                                            <a target="_blank" href="@item.Url"
+                                               class="btn btn-link text-blue btn-ss d-print-none btn-action"
+                                               data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Document"]">
+                                                <i class="fas fa-file-alt" aria-hidden="true"></i>
+                                            </a>
+                                        }
+                                        <a asp-action="Details" asp-route-id="@item.TLMDistributionId"
+                                           class="btn btn-link text-gray btn-sm d-print-none btn-action"
+                                           data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Details"]'>
+                                            <i class="fas fa-info-circle fa-sm" aria-hidden="true"></i>
+                                        </a>
+                                        @if (ViewBag.Closed != true)
+                                        {
+                                            <a policy="RequireEditRole" asp-action="Edit" asp-route-id="@item.TLMDistributionId"
+                                               class="btn btn-link text-gray btn-sm d-print-none btn-action"
+                                               data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Edit"]'>
+                                                <i class="fas fa-pencil-alt fa-sm" aria-hidden="true"></i>
+                                            </a>
+
+                                            <a policy="RequireDeleteRole" asp-action="Delete" asp-route-id="@item.TLMDistributionId"
+                                               class="btn btn-link text-gray btn-sm d-print-none btn-action"
+                                               data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Delete"]'>
+                                                <i class="far fa-trash-alt fa-sm" aria-hidden="true"></i>
+                                            </a>
+                                        }
+
+                                        @if (ViewBag.NextController != null)
+                                        {
+                                            <a asp-controller="@ViewBag.NextController"
+                                               asp-action="Index"
+                                               asp-route-id="@item.TLMDistributionId"
+                                               class="btn btn-link btn-sm d-print-none btn-action"
+                                               data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Open"]'>
+                                                <i class="fas fa-chevron-right fa-sm" aria-hidden="true"></i>
+                                            </a>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>*@
+            <!--table end-->
+        </div>
+    </div>
+    <!--datatable end-->
+    <!--datatable pagination start-->
+    <div class="row">
+        <div class="col-sm-12 col-md-5 d-flex align-items-center justify-content-start"><div class="" id="detailfooter"></div></div>
+        <div class="col-sm-12 col-md-7 d-flex align-items-center justify-content-end">
+            <div class="" id="datatables-pagination"></div>
+        </div>
+    </div>
+    <!--datatable pagination end-->
+    <!--footer buttons start-->
+    <div class="row mt-5">
+        <div class="col">
+            @if (ViewBag.ParentController != null)
+            {
+                <a asp-controller="@ViewBag.ParentController" class="btn btn-secondary"><i class="fas fa-chevron-left"></i> @Localizer["Back"]</a>
+            }
+        </div>
+        <div class="col text-right"></div>
+    </div>
+    <!--footer buttons end-->
+</div><!--content end-->
+
+@section Styles {
+    @{await Html.RenderPartialAsync("_ListStylesPartial");}
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ServerListScriptsPartial");}
+
+<script>
+        $(document).ready(function () {
+
+            $('#btn-close').on('click', function () {
+                bootbox.confirm({
+                    size: "medium",
+                    title: '@Localizer["Close TLM Distribution Period"]',
+                    message: "@Localizer["You will set this period as Closed"]",
+                    callback: function (result) {
+                        if (result) {
+                            $.ajax({
+                                type: "post",
+                                url: "/Requests/CloseDistribution?id=" + "@ViewBag.ParentId",
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: function (data) {
+                                    if (data.status) {
+                                        window.location.replace("@Url.Action("Index", "TLMDistributions", new { id = ViewBag.ParentId })");
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+
+            $('#btn-open').on('click', function () {
+                bootbox.confirm({
+                    size: "medium",
+                    title: '@Localizer["Re-open TLM Distribution Period"]',
+                    message: "@Localizer["Are you sure you want to reopen this period? Updating TLM Distributions will be allowed"]",
+                    callback: function (result) {
+                        if (result) {
+                            $.ajax({
+                                type: "post",
+                                url: "/Requests/OpenDistribution?id=" + "@ViewBag.ParentId",
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: function (data) {
+                                    if (data.status) {
+                                        window.location.replace("@Url.Action("Index", "TLMDistributions", new { id = ViewBag.ParentId })");
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+
+            Ladda.bind('.ladda-button', { timeout: 2000 });
+            // Use Datatables.net Internationalization i18n
+            function getDataTablesLanguage() {
+                var cultureInfo = '@System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName';
+                if (cultureInfo) {
+                    var path = '/lib/datatables.net/i18n/' + cultureInfo + '.json';
+                }
+                return path;
+            };
+
+            var dataTableOptions = {
+            // Initial order (sort) to apply to the table
+            order: [],
+            // Allows changing the paging display length of the table
+            lengthChange: true,
+            lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+            // Enables the display of a 'processing' indicator when the table is being processed (e.g. a sort).
+            processing: true,
+            // Server side processing
+            serverSide: true,
+            filter: true,
+            orderMulti: false,
+
+            // ?
+            searchHighlight: true,
+            // Highlight the columns being ordered in the table's body
+            orderClasses: true,
+            // Pagination button display options
+            pagingType: "full_numbers",
+            // Change the initial page length (number of rows per page)
+            pageLength: 25,
+            dom:
+                "<'row'"
+                + "<'col-sm-12 col-md-6 justify-content-start'>" // f
+                + "<'col-sm-12 col-md-6 justify-content-end'>" // B
+                + ">"
+                + "<'row'<'col-sm-12 d-flex align-items-center'tr>>"
+                + "<'row'"
+                + "<'col-sm-12 col-md-6 col-form-label 'l>"
+                + "<'col-sm-12 col-md-6 justify-content-end'p>"
+                + ">"
+                + "<'row'<'col-sm-12'i>"
+                + ">"
+            ,
+            responsive: true,
+            autoWidth: true,
+            ajax: {
+                    url: "/Requests/GetTLMDistributions?distributionPeriodId=@ViewBag.ParentId",
+                    data:
+                        function (d) {
+                            //d.refParticipantTypeId = $('#RefParticipantTypeId option:selected').text();
+                            //d.selectedOrganizations = checked_ids;
+                            //d.distributionPeriodId = @ViewBag.ParentId
+                        },
+                        type: "POST",
+                        datatype: "json"
+                },
+            columnDefs: [
+                {
+                    targets: [-1],
+                    width: '70px',
+                    className: 'text-right',
+                    render: function (data, type, full, meta) {
+                        var action = '<div class="btn-group btn-group-sm" role="group" aria-label="Actions">';
+                        action += '<td>';
+
+                        if (full.url != null)
+                        {
+                            action += '<a target="_blank" href="' + full.url + '" class="btn btn-link text-blue btn-ss d-print-none btn-action" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Document"]"><i class="fas fa-file-alt fa-sm" aria-hidden="true"></i></a>';
+                        }
+
+                        action += '<a href="/TLMDistributions/Details/' + full.tlmDistributionId + '" class="btn btn-link text-gray btn-sm d-print-none btn-action" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Details"]"><i class="fas fa-info-circle fa-sm" aria-hidden="true"></i></a>';
+
+                        @if (ViewBag.Closed != true)
+                        {
+                            @if (AuthorizationService.AuthorizeAsync(User, "RequireEditRole").GetAwaiter().GetResult().Succeeded)
+                                {
+                                    @:action += '<a href="/TLMDistributions/Edit/' + full.tlmDistributionId + '" class="btn btn-link text-gray btn-sm d-print-none btn-action" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Edit"]"><i class="fas fa-pencil-alt fa-sm" aria-hidden="true"></i></a>';
+                                }
+
+                            @if (AuthorizationService.AuthorizeAsync(User, "RequireDeleteRole").GetAwaiter().GetResult().Succeeded)
+                                {
+                                    @:action += '<a href="/TLMDistributions/Delete/' + full.tlmDistributionId + '" class="btn btn-link text-gray btn-sm d-print-none btn-action" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Delete"]"><i class="far fa-trash-alt fa-sm" aria-hidden="true"></i></a>';
+                                }
+                        }
+
+                        action += '<a href="/TLMDistributionDetails/Index/' + full.tlmDistributionId + '" class="btn btn-link btn-sm d-print-none btn-action" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Open"]"><i class="fas fa-chevron-right fa-sm" aria-hidden="true"></i></a>';
+                        action += '</td>';
+                        action += '</div>';
+                        return action;
+                            }
+                }],
+            buttons: {
+                dom: {
+                    button: {
+                        className: 'btn btn-secondary btn-sm mb-2'
+                    }
+                },
+                buttons: [
+                    {
+                        extend: 'copy',
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        charset: 'UTF-16LE',
+                        bom: true,
+                        fieldSeparator: ',',
+                        fieldBoundary: '"',
+                        exportOptions: {
+                            columns: ':not(:last-child)'
+                        },
+                        filename: function () {
+                            var date = new Date();
+                            var year = date.getFullYear();
+                            var month = date.getMonth() + 1;
+                            var day = date.getDate();
+                            var hour = date.getHours();
+                            var minutes = date.getMinutes();
+                            var datepart = ((year * 100 + month + 1) * 100 + day) + "_" + (hour * 100 + minutes);
+                            return document.title + "_" + datepart;
+                        }
+                    },
+                    {
+                        extend: 'colvis',
+                    },
+                    {
+                        extend: 'print',
+                        title: '',
+                        autoPrint: true,
+                        exportOptions: {
+                            columns: ':not(:last-child)',
+                            stripHtml: true,
+                            stripNewlines: true
+                        },
+                        customize: function (win) {
+                            $(win.document.body)
+                                .css({
+                                    'font-size': '10pt',
+                                    'padding-top': '0px'
+                                });
+
+                            $(win.document.body).find('table')
+                                .addClass('compact table-bordered')
+                                .css('font-size', 'inherit');
+
+                            //TODO: assign id
+                            var heading = $('.heading-panel').html();
+                            //TODO: assign id
+                            var panel = $('.info-panel').html();
+
+                            // PREPEND PRINT
+                            if (panel) {
+                                $(win.document.body).prepend(
+                                    heading
+                                    + '<br>' +
+                                    panel
+                                );
+                            }
+                            else {
+                                $(win.document.body).prepend(
+                                    heading
+                                );
+                            }
+
+                            // APPEND PRINT
+                            $(win.document.body).append(
+                                $('.dataTables_info').text()
+                                + '<br>'
+                                + '@User.Identity.Name - @DateTime.Now.ToShortDateString()'
+                            );
+                        }
+                    }
+
+                ]
+            },
+            language: {
+                url: getDataTablesLanguage()
+            },
+            initComplete: function (settings, json) {
+
+                // init buttons
+                table.buttons(0, null)
+                    .container().appendTo('#toolbar');
+            },
+            footerCallback: function (row, data, start, end, display) {
+                var api = this.api(), data;
+
+                // Remove the formatting to get integer data for summation
+                var intVal = function (i) {
+                    return typeof i === 'string' ?
+                        i.replace(/[\$,]/g, '') * 1 :
+                        typeof i === 'number' ?
+                            i : 0;
+                };
+
+                // Total over all pages
+                total = api
+                    .column(1)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                // Total over this page
+                pageTotal = api
+                    .column(1, { page: 'current' })
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                // UNCOMMENT TO SHOW FOOTER Update footer
+                //$(api.column(1).footer()).html(
+                //    '' + pageTotal + ' ( ' + total + ' total)'
+                //);
+            }
+        }
+
+        //DATATABLE INIT AND OPTIONS
+        $.fn.dataTable.ext.classes.sPageButton = 'page-item btn-light'; // Change Pagination Button Class
+        $.fn.DataTable.ext.pager.numbers_length = 5;
+        $.fn.dataTable.ext.classes.sPaging = 'dataTables_paginate paging_ pagination-sm flex-wrap mt-2 mt-sm-auto';
+
+        var table = $('#datatable').DataTable(dataTableOptions);
+
+        // filter table
+        $("#search-button").on('click', function () {
+            var searchString = $('#searchbox').val();
+            table.search(searchString).draw();
+        });
+
+        //TOOLTIP INIT
+        $('[data-toggle="tooltip"]').tooltip({
+            animation: true,
+            delay: { "show": 700, "hide": 100 },
+            trigger: 'hover'
+        });
+
+        $('.buttons-html5').tooltip({
+            animation: false,
+            delay: { "show": 700, "hide": 100 },
+            trigger: 'hover'
+        });
+
+        });
+</script>
+}
