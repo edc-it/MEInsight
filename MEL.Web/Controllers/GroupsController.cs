@@ -115,7 +115,7 @@ namespace MEL.Web.Controllers
             ViewData["ParticipantId"] = 
                 new SelectList(_context.Teachers
                 .Include(x => x.Participants)
-                .Where(x => x.Participants.OrganizationId == id)
+                //.Where(x => x.Participants.OrganizationId == id)
                 .Select(x => new {
                     x.ParticipantId,
                     x.Participants.NameId
@@ -170,7 +170,7 @@ namespace MEL.Web.Controllers
             ViewData["ParticipantId"] =
                 new SelectList(_context.Teachers
                 .Include(x => x.Participants)
-                .Where(x => x.Participants.OrganizationId == group.OrganizationId)
+                //.Where(x => x.Participants.OrganizationId == group.OrganizationId)
                 .Select(x => new {
                     x.ParticipantId,
                     x.Participants.NameId
@@ -222,15 +222,15 @@ namespace MEL.Web.Controllers
             ViewData["ParticipantId"] = 
                 new SelectList(_context.Teachers
                 .Include(x => x.Participants)
-                .Where(x => x.Participants.OrganizationId == group.OrganizationId)
+                //.Where(x => x.Participants.OrganizationId == group.OrganizationId)
                 .Select(x => new {
                     x.ParticipantId,
                     x.Participants.NameId
-                }), "ParticipantId", "ParticipantId", group.ParticipantId);
+                }), "ParticipantId", "NameId", group.ParticipantId);
 
             // Get Organization Types
             var refOrganizationTypeId = _context.Organizations
-                .Where(x => x.OrganizationId == id)
+                .Where(x => x.OrganizationId == group.OrganizationId)
                 .Select(x => x.RefOrganizationTypeId)
                 .SingleOrDefault();
 
@@ -295,11 +295,11 @@ namespace MEL.Web.Controllers
             ViewData["ParticipantId"] =
                 new SelectList(_context.Teachers
                 .Include(x => x.Participants)
-                .Where(x => x.Participants.OrganizationId == group.OrganizationId)
+                //.Where(x => x.Participants.OrganizationId == group.OrganizationId)
                 .Select(x => new {
                     x.ParticipantId,
                     x.Participants.NameId
-                }), "ParticipantId", "ParticipantId", group.ParticipantId);
+                }), "ParticipantId", "NameId", group.ParticipantId);
 
             // Get Organization Types
             var refOrganizationTypeId = _context.Organizations

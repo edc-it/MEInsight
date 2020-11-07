@@ -94,12 +94,18 @@ namespace MEL.Web.Controllers
                                    OrganizationId = participant.OrganizationId,
                                    RefParticipantTypeId = participant.RefParticipantTypeId,
                                    ParticipantTypes = participant.ParticipantTypes, //
+                                   ParticipantCohorts = participant.ParticipantCohorts,
                                    ParticipantCode = participant.ParticipantCode,
                                    FirstName = participant.FirstName,
                                    MiddleName = participant.MiddleName,
                                    LastName = participant.LastName,
                                    RefSexId = participant.RefSexId,
                                    Sex = participant.Sex, //
+                                   BirthDate = participant.BirthDate,
+                                   Age = participant.Age,
+                                   Disability = participant.Disability,
+                                   RefDisabilityTypeId = participant.RefDisabilityTypeId,
+                                   DisabilityTypes = participant.DisabilityTypes, //
                                    Phone = participant.Phone,
                                    Mobile = participant.Mobile,
                                    Email = participant.Email,
@@ -113,17 +119,16 @@ namespace MEL.Web.Controllers
                                    StudentTypes = participantStudent.StudentTypes, //
                                    RefStudentSpecializationId = participantStudent.RefStudentSpecializationId,
                                    StudentSpecializations = participantStudent.StudentSpecializations, //
-                                   BirthDate = participantStudent.BirthDate,
-                                   Age = participantStudent.Age,
+                                   RefStudentYearOfStudyId = participantStudent.RefStudentYearOfStudyId,
+                                   StudentYearOfStudies = participantStudent.StudentYearOfStudies,
                                    ParentGuardian = participantStudent.ParentGuardian,
-                                   Disability = participantStudent.Disability,
-                                   RefStudentDisabilityTypeId = participantStudent.RefStudentDisabilityTypeId,
-                                   DisabilityTypes = participantStudent.DisabilityTypes, //
                                    //Teacher
                                    RefTeacherTypeId = participantTeacher.RefTeacherTypeId,
                                    TeacherTypes = participantTeacher.TeacherTypes,
                                    RefTeacherPositionId = participantTeacher.RefTeacherPositionId,
                                    TeacherPositions = participantTeacher.TeacherPositions,
+                                   RefTeacherEmploymentTypeId = participantTeacher.RefTeacherEmploymentTypeId,
+                                   TeacherEmploymentTypes = participantTeacher.TeacherEmploymentTypes,
                                    GradeLevels = participantTeacher.GradeLevels,
                                    //Education Administrator
                                    RefEducationAdministratorTypeId = participantEducationAdministrator.RefEducationAdministratorTypeId,
@@ -238,20 +243,23 @@ namespace MEL.Web.Controllers
             // Participants - All
             // ViewData["ParentId"] = id;
             ViewData["RefSexId"] = new SelectList(_context.Sex, "RefSexId", "Sex");
+            ViewData["RefDisabilityTypeId"] = new SelectList(_context.DisabilityTypes, "RefDisabilityTypeId", "DisabilityType");
             ViewData["RefParticipantTypeId"] = RefParticipantTypeId;
+            ViewData["RefParticipantCohortId"] = new SelectList(_context.ParticipantCohorts, "RefParticipantCohortId", "ParticipantCohort");
 
             // Students
             if (RefParticipantTypeId == 1)
             {
                 ViewData["RefStudentTypeId"] = new SelectList(_context.StudentTypes, "RefStudentTypeId", "StudentType");
                 ViewData["RefStudentSpecializationId"] = new SelectList(_context.StudentSpecializations, "RefStudentSpecializationId", "StudentSpecialization");
-                ViewData["RefStudentDisabilityTypeId"] = new SelectList(_context.DisabilityTypes, "RefStudentDisabilityTypeId", "DisabilityType");
+                ViewData["RefStudentYearOfStudyId"] = new SelectList(_context.StudentYearOfStudies, "RefStudentYearOfStudyId", "StudentYearOfStudy");
             }
             // Teachers
             else if (RefParticipantTypeId == 2)
             {
                 ViewData["RefTeacherTypeId"] = new SelectList(_context.TeacherTypes, "RefTeacherTypeId", "TeacherType");
                 ViewData["RefTeacherPositionId"] = new SelectList(_context.TeacherPositions, "RefTeacherPositionId", "TeacherPosition");
+                ViewData["RefTeacherEmploymentTypeId"] = new SelectList(_context.TeacherEmploymentTypes, "RefTeacherEmploymentTypeId", "TeacherEmploymentType");
             }
             // Education Administrators
             else if (RefParticipantTypeId == 3)
@@ -268,9 +276,9 @@ namespace MEL.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
-            [Bind("ParticipantId,RegistrationDate,OrganizationId,RefParticipantTypeId,ParticipantCode,FirstName,MiddleName,LastName,RefSexId,Phone,Mobile,Email,Facebook,InstantMessenger,RefLocationId,Address")] Participant participant,
-            [Bind("ParticipantId,StudentCode,RefStudentTypeId,RefStudentSpecializationId,BirthDate,Age,ParentGuardian,Disability,RefStudentDisabilityTypeId")] Student student,
-            [Bind("ParticipantId,RefTeacherTypeId,RefTeacherPositionId,GradeLevels")] Teacher teacher,
+            [Bind("ParticipantId,RegistrationDate,OrganizationId,RefParticipantTypeId,RefParticipantCohortId,ParticipantCode,FirstName,MiddleName,LastName,RefSexId,BirthDate,Age,Disability,RefStudentDisabilityTypeId,Phone,Mobile,Email,Facebook,InstantMessenger,RefLocationId,Address")] Participant participant,
+            [Bind("ParticipantId,StudentCode,RefStudentTypeId,RefStudentSpecializationId,RefStudentYearOfStudyId,ParentGuardian")] Student student,
+            [Bind("ParticipantId,RefTeacherTypeId,RefTeacherPositionId,RefTeacherEmploymentTypeId,GradeLevels")] Teacher teacher,
             [Bind("ParticipantId,RefEducationAdministratorTypeId,RefEducationAdministratorPositionId,RefEducationAdministratorOfficeId")] EducationAdministrator educationAdministrator,
             string[] RefLocationId,
             Guid? GroupId
@@ -336,7 +344,7 @@ namespace MEL.Web.Controllers
                         GroupId = group.GroupId,
                         ParticipantId = participant.ParticipantId,
                         RefEnrollmentStatusId = 1, //Status Enrolled
-                        EnrollmentDate = DateTime.Now
+                        EnrollmentDate = participant.RegistrationDate
                     };
 
                     _context.Add(groupEnrollment);
@@ -455,20 +463,23 @@ namespace MEL.Web.Controllers
             // Participants - All
             ViewData["ParentId"] = participant.OrganizationId;
             ViewData["RefSexId"] = new SelectList(_context.Sex, "RefSexId", "Sex");
+            ViewData["RefDisabilityTypeId"] = new SelectList(_context.DisabilityTypes, "RefDisabilityTypeId", "DisabilityType");
             ViewData["RefParticipantTypeId"] = participant.RefParticipantTypeId;
+            ViewData["RefParticipantCohortId"] = new SelectList(_context.ParticipantCohorts, "RefParticipantCohortId", "ParticipantCohort");
 
             // Students
             if (participant.RefParticipantTypeId == 1)
             {
                 ViewData["RefStudentTypeId"] = new SelectList(_context.StudentTypes, "RefStudentTypeId", "StudentType", student.RefStudentTypeId);
                 ViewData["RefStudentSpecializationId"] = new SelectList(_context.StudentSpecializations, "RefStudentSpecializationId", "StudentSpecialization", student.RefStudentSpecializationId);
-                ViewData["RefStudentDisabilityTypeId"] = new SelectList(_context.DisabilityTypes, "RefStudentDisabilityTypeId", "DisabilityType", student.RefStudentDisabilityTypeId);
+                ViewData["RefStudentYearOfStudyId"] = new SelectList(_context.StudentYearOfStudies, "RefStudentYearOfStudyId", "StudentYearOfStudy");
             }
             // Teachers
             else if (participant.RefParticipantTypeId == 2)
             {
                 ViewData["RefTeacherTypeId"] = new SelectList(_context.TeacherTypes, "RefTeacherTypeId", "TeacherType", teacher.RefTeacherTypeId);
                 ViewData["RefTeacherPositionId"] = new SelectList(_context.TeacherPositions, "RefTeacherPositionId", "TeacherPosition", teacher.RefTeacherPositionId);
+                ViewData["RefTeacherEmploymentTypeId"] = new SelectList(_context.TeacherEmploymentTypes, "RefTeacherEmploymentTypeId", "TeacherEmploymentType");
             }
             // Education Administrators
             else if (participant.RefParticipantTypeId == 3)
@@ -528,12 +539,18 @@ namespace MEL.Web.Controllers
                                           OrganizationId = participant.OrganizationId,
                                           RefParticipantTypeId = participant.RefParticipantTypeId,
                                           ParticipantTypes = participant.ParticipantTypes, //
+                                          ParticipantCohorts = participant.ParticipantCohorts,
                                           ParticipantCode = participant.ParticipantCode,
                                           FirstName = participant.FirstName,
                                           MiddleName = participant.MiddleName,
                                           LastName = participant.LastName,
                                           RefSexId = participant.RefSexId,
                                           Sex = participant.Sex, //
+                                          BirthDate = participant.BirthDate,
+                                          Age = participant.Age,
+                                          Disability = participant.Disability,
+                                          RefDisabilityTypeId = participant.RefDisabilityTypeId,
+                                          DisabilityTypes = participant.DisabilityTypes, //
                                           Phone = participant.Phone,
                                           Mobile = participant.Mobile,
                                           Email = participant.Email,
@@ -547,17 +564,16 @@ namespace MEL.Web.Controllers
                                           StudentTypes = participantStudent.StudentTypes, //
                                           RefStudentSpecializationId = participantStudent.RefStudentSpecializationId,
                                           StudentSpecializations = participantStudent.StudentSpecializations, //
-                                          BirthDate = participantStudent.BirthDate,
-                                          Age = participantStudent.Age,
+                                          RefStudentYearOfStudyId = participantStudent.RefStudentYearOfStudyId,
+                                          StudentYearOfStudies = participantStudent.StudentYearOfStudies,
                                           ParentGuardian = participantStudent.ParentGuardian,
-                                          Disability = participantStudent.Disability,
-                                          RefStudentDisabilityTypeId = participantStudent.RefStudentDisabilityTypeId,
-                                          DisabilityTypes = participantStudent.DisabilityTypes, //
-                                                                                                //Teacher
+                                          //Teacher
                                           RefTeacherTypeId = participantTeacher.RefTeacherTypeId,
                                           TeacherTypes = participantTeacher.TeacherTypes,
                                           RefTeacherPositionId = participantTeacher.RefTeacherPositionId,
                                           TeacherPositions = participantTeacher.TeacherPositions,
+                                          RefTeacherEmploymentTypeId = participantTeacher.RefTeacherEmploymentTypeId,
+                                          TeacherEmploymentTypes = participantTeacher.TeacherEmploymentTypes,
                                           GradeLevels = participantTeacher.GradeLevels,
                                           //Education Administrator
                                           RefEducationAdministratorTypeId = participantEducationAdministrator.RefEducationAdministratorTypeId,
@@ -606,7 +622,9 @@ namespace MEL.Web.Controllers
             // Participants - All
             // ViewData["ParentId"] = id;
             ViewData["RefSexId"] = new SelectList(_context.Sex, "RefSexId", "Sex", participants.RefSexId);
+            ViewData["RefDisabilityTypeId"] = new SelectList(_context.DisabilityTypes, "RefDisabilityTypeId", "DisabilityType");
             ViewData["RefParticipantTypeId"] = participants.RefParticipantTypeId;
+            ViewData["RefParticipantCohortId"] = new SelectList(_context.ParticipantCohorts, "RefParticipantCohortId", "ParticipantCohort", participants.RefParticipantCohortId);
 
             ViewData["GroupId"] = GroupId;
 
@@ -615,13 +633,14 @@ namespace MEL.Web.Controllers
             {
                 ViewData["RefStudentTypeId"] = new SelectList(_context.StudentTypes, "RefStudentTypeId", "StudentType", participants.RefStudentTypeId);
                 ViewData["RefStudentSpecializationId"] = new SelectList(_context.StudentSpecializations, "RefStudentSpecializationId", "StudentSpecialization", participants.RefStudentSpecializationId);
-                ViewData["RefStudentDisabilityTypeId"] = new SelectList(_context.DisabilityTypes, "RefStudentDisabilityTypeId", "DisabilityType", participants.RefStudentDisabilityTypeId);
+                ViewData["RefStudentYearOfStudyId"] = new SelectList(_context.StudentYearOfStudies, "RefStudentYearOfStudyId", "StudentYearOfStudy");
             }
             // Teachers
             else if (participants.RefParticipantTypeId == 2)
             {
                 ViewData["RefTeacherTypeId"] = new SelectList(_context.TeacherTypes, "RefTeacherTypeId", "TeacherType", participants.RefTeacherTypeId);
                 ViewData["RefTeacherPositionId"] = new SelectList(_context.TeacherPositions, "RefTeacherPositionId", "TeacherPosition", participants.RefTeacherPositionId);
+                ViewData["RefTeacherEmploymentTypeId"] = new SelectList(_context.TeacherEmploymentTypes, "RefTeacherEmploymentTypeId", "TeacherEmploymentType");
             }
             // Education Administrators
             else if (participants.RefParticipantTypeId == 3)
@@ -639,9 +658,9 @@ namespace MEL.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(
             Guid id,
-            [Bind("ParticipantId,RegistrationDate,OrganizationId,RefParticipantTypeId,ParticipantCode,FirstName,MiddleName,LastName,RefSexId,Phone,Mobile,Email,Facebook,InstantMessenger,RefLocationId,Address")] Participant participant,
-            [Bind("ParticipantId,StudentCode,RefStudentTypeId,RefStudentSpecializationId,BirthDate,Age,ParentGuardian,Disability,RefStudentDisabilityTypeId")] Student student,
-            [Bind("ParticipantId,RefTeacherTypeId,RefTeacherPositionId,GradeLevels")] Teacher teacher,
+            [Bind("ParticipantId,RegistrationDate,OrganizationId,RefParticipantTypeId,RefParticipantCohortId,ParticipantCode,FirstName,MiddleName,LastName,RefSexId,BirthDate,Age,Disability,RefDisabilityTypeId,Phone,Mobile,Email,Facebook,InstantMessenger,RefLocationId,Address")] Participant participant,
+            [Bind("ParticipantId,StudentCode,RefStudentTypeId,RefStudentSpecializationId,RefStudentYearOfStudyId,ParentGuardian")] Student student,
+            [Bind("ParticipantId,RefTeacherTypeId,RefTeacherPositionId,RefTeacherEmploymentTypeId,GradeLevels")] Teacher teacher,
             [Bind("ParticipantId,RefEducationAdministratorTypeId,RefEducationAdministratorPositionId,RefEducationAdministratorOfficeId")] EducationAdministrator educationAdministrator,
             string[] RefLocationId,
             Guid? GroupId
@@ -729,7 +748,7 @@ namespace MEL.Web.Controllers
             int[] excludedParticipantTypesIds = { 1, 2, 3 };
             ViewData["RefParticipantTypeId"] = new SelectList(_context.ParticipantTypes
                 .Where(p => !excludedParticipantTypesIds.Contains(p.RefParticipantTypeId)), "RefParticipantTypeId", "ParticipantType", participant.RefParticipantTypeId);
-
+            ViewData["RefParticipantCohortId"] = new SelectList(_context.ParticipantCohorts, "RefParticipantCohortId", "ParticipantCohort", participant.RefParticipantCohortId);
             ViewData["RefSexId"] = new SelectList(_context.Sex, "RefSexId", "Sex", participant.RefSexId);
             //ViewData["ParentId"] = participant.ParentId;
             return View(participant);
@@ -748,6 +767,7 @@ namespace MEL.Web.Controllers
                 .Include(p => p.Locations)
                 .Include(p => p.Organizations)
                 .Include(p => p.ParticipantTypes)
+                .Include(p => p.ParticipantCohorts)
                 .Include(p => p.Sex)
                 .Include(p => p.Students)
                 .Include(p => p.Teachers)

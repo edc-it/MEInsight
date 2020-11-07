@@ -135,6 +135,12 @@
                                     <span> - @Html.DisplayFor(model => model.GradeLevel)</span>
                                 }
                             </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.GroupId)
+                            </dt>
+                            <dd class="text-muted">
+                                @Html.DisplayFor(model => model.GroupId)
+                            </dd>
                         }
                         @if (Model.GroupTeacher != null && Model.HasAssessment != true)
                         {
@@ -173,6 +179,8 @@
                                 </dd>
                             }
                         }
+                    <dt>OrganizationId</dt>
+                    <dd class="text-muted">@Html.DisplayFor(model => model.OrganizationId)</dd>
                     </dl>
                 </div>
             </div>

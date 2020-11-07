@@ -46,6 +46,9 @@
                 <thead>
                     <tr>
                         <th>
+                            @Html.DisplayNameFor(model => model.RefStudentSpecializationId)
+                        </th>
+                        <th>
                             @Html.DisplayNameFor(model => model.StudentSpecializationCode)
                         </th>
                         <th>
@@ -58,6 +61,9 @@
                     @foreach (var item in Model)
                     {
                         <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RefStudentSpecializationId)
+                            </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.StudentSpecializationCode)
                             </td>

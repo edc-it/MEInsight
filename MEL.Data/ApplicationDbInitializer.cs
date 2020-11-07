@@ -183,7 +183,7 @@ namespace MEL.Data
                 {
                     new RefEnrollmentStatus{ RefEnrollmentStatusId = 1, EnrollmentStatusCode = "E", EnrollmentStatus = "Enrolled" },
                     new RefEnrollmentStatus{ RefEnrollmentStatusId = 2, EnrollmentStatusCode = "C", EnrollmentStatus = "Completed" },
-                    new RefEnrollmentStatus{ RefEnrollmentStatusId = 3, EnrollmentStatusCode = "C", EnrollmentStatus = "Dropped out" }
+                    new RefEnrollmentStatus{ RefEnrollmentStatusId = 3, EnrollmentStatusCode = "D", EnrollmentStatus = "Dropped out" }
                 };
 
                 foreach (RefEnrollmentStatus item in refEnrollmentStatus)

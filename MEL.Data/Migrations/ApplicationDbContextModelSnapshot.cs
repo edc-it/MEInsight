@@ -131,6 +131,10 @@ namespace MEL.Data.Migrations
                     b.Property<string>("Address")
                         .HasMaxLength(384);
 
+                    b.Property<int?>("Age");
+
+                    b.Property<DateTime?>("BirthDate");
+
                     b.Property<string>("CreatedBy")
                         .HasMaxLength(50);
 
@@ -140,6 +144,8 @@ namespace MEL.Data.Migrations
                         .HasMaxLength(50);
 
                     b.Property<DateTimeOffset?>("DeletedDate");
+
+                    b.Property<bool?>("Disability");
 
                     b.Property<string>("Email")
                         .HasMaxLength(320);
@@ -181,7 +187,11 @@ namespace MEL.Data.Migrations
                     b.Property<string>("Phone")
                         .HasMaxLength(20);
 
+                    b.Property<int?>("RefDisabilityTypeId");
+
                     b.Property<string>("RefLocationId");
+
+                    b.Property<int?>("RefParticipantCohortId");
 
                     b.Property<int>("RefParticipantTypeId");
 
@@ -193,7 +203,11 @@ namespace MEL.Data.Migrations
 
                     b.HasIndex("OrganizationId");
 
+                    b.HasIndex("RefDisabilityTypeId");
+
                     b.HasIndex("RefLocationId");
+
+                    b.HasIndex("RefParticipantCohortId");
 
                     b.HasIndex("RefParticipantTypeId");
 
@@ -439,10 +453,6 @@ namespace MEL.Data.Migrations
                 {
                     b.Property<Guid>("ParticipantId");
 
-                    b.Property<int?>("Age");
-
-                    b.Property<DateTime?>("BirthDate");
-
                     b.Property<string>("CreatedBy")
                         .HasMaxLength(50);
 
@@ -452,8 +462,6 @@ namespace MEL.Data.Migrations
                         .HasMaxLength(50);
 
                     b.Property<DateTimeOffset?>("DeletedDate");
-
-                    b.Property<bool?>("Disability");
 
                     b.Property<bool>("IsDeleted");
 
@@ -465,22 +473,22 @@ namespace MEL.Data.Migrations
                     b.Property<string>("ParentGuardian")
                         .HasMaxLength(255);
 
-                    b.Property<int?>("RefStudentDisabilityTypeId");
-
                     b.Property<int?>("RefStudentSpecializationId");
 
                     b.Property<int?>("RefStudentTypeId");
+
+                    b.Property<int?>("RefStudentYearOfStudyId");
 
                     b.Property<string>("StudentCode")
                         .HasMaxLength(100);
 
                     b.HasKey("ParticipantId");
 
-                    b.HasIndex("RefStudentDisabilityTypeId");
-
                     b.HasIndex("RefStudentSpecializationId");
 
                     b.HasIndex("RefStudentTypeId");
+
+                    b.HasIndex("RefStudentYearOfStudyId");
 
                     b.ToTable("Student");
                 });
@@ -509,11 +517,15 @@ namespace MEL.Data.Migrations
 
                     b.Property<DateTimeOffset?>("ModifiedDate");
 
+                    b.Property<int?>("RefTeacherEmploymentTypeId");
+
                     b.Property<int?>("RefTeacherPositionId");
 
                     b.Property<int?>("RefTeacherTypeId");
 
                     b.HasKey("ParticipantId");
+
+                    b.HasIndex("RefTeacherEmploymentTypeId");
 
                     b.HasIndex("RefTeacherPositionId");
 
@@ -828,6 +840,8 @@ namespace MEL.Data.Migrations
 
                     b.Property<int?>("RefOrganizationTypeId");
 
+                    b.Property<int?>("RefProgramDeliveryTypeId");
+
                     b.Property<int?>("RefProgramTypeId");
 
                     b.HasKey("ProgramId");
@@ -835,6 +849,8 @@ namespace MEL.Data.Migrations
                     b.HasIndex("RefAttendanceUnitId");
 
                     b.HasIndex("RefOrganizationTypeId");
+
+                    b.HasIndex("RefProgramDeliveryTypeId");
 
                     b.HasIndex("RefProgramTypeId");
 
@@ -945,6 +961,25 @@ namespace MEL.Data.Migrations
                     b.HasKey("RefAttendanceUnitId");
 
                     b.ToTable("RefAttendanceUnit");
+                });
+
+            modelBuilder.Entity("MEL.Entities.Reference.RefDisabilityType", b =>
+                {
+                    b.Property<int>("RefDisabilityTypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("DisabilityType")
+                        .IsRequired()
+                        .HasMaxLength(150);
+
+                    b.Property<string>("DisabilityTypeCode")
+                        .IsRequired()
+                        .HasMaxLength(25);
+
+                    b.HasKey("RefDisabilityTypeId");
+
+                    b.ToTable("RefDisabilityType");
                 });
 
             modelBuilder.Entity("MEL.Entities.Reference.RefEducationAdministratorOffice", b =>
@@ -1130,6 +1165,25 @@ namespace MEL.Data.Migrations
                     b.ToTable("RefOrganizationType");
                 });
 
+            modelBuilder.Entity("MEL.Entities.Reference.RefParticipantCohort", b =>
+                {
+                    b.Property<int>("RefParticipantCohortId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ParticipantCohort")
+                        .IsRequired()
+                        .HasMaxLength(150);
+
+                    b.Property<string>("ParticipantCohortCode")
+                        .IsRequired()
+                        .HasMaxLength(25);
+
+                    b.HasKey("RefParticipantCohortId");
+
+                    b.ToTable("RefParticipantCohort");
+                });
+
             modelBuilder.Entity("MEL.Entities.Reference.RefParticipantType", b =>
                 {
                     b.Property<int>("RefParticipantTypeId")
@@ -1185,6 +1239,25 @@ namespace MEL.Data.Migrations
                     b.HasKey("RefPartnerTypeId");
 
                     b.ToTable("RefPartnerType");
+                });
+
+            modelBuilder.Entity("MEL.Entities.Reference.RefProgramDeliveryType", b =>
+                {
+                    b.Property<int>("RefProgramDeliveryTypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ProgramDeliveryType")
+                        .IsRequired()
+                        .HasMaxLength(150);
+
+                    b.Property<string>("ProgramDeliveryTypeCode")
+                        .IsRequired()
+                        .HasMaxLength(25);
+
+                    b.HasKey("RefProgramDeliveryTypeId");
+
+                    b.ToTable("RefProgramDeliveryType");
                 });
 
             modelBuilder.Entity("MEL.Entities.Reference.RefProgramType", b =>
@@ -1340,25 +1413,6 @@ namespace MEL.Data.Migrations
                     b.ToTable("RefSex");
                 });
 
-            modelBuilder.Entity("MEL.Entities.Reference.RefStudentDisabilityType", b =>
-                {
-                    b.Property<int>("RefStudentDisabilityTypeId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("DisabilityType")
-                        .IsRequired()
-                        .HasMaxLength(150);
-
-                    b.Property<string>("DisabilityTypeCode")
-                        .IsRequired()
-                        .HasMaxLength(25);
-
-                    b.HasKey("RefStudentDisabilityTypeId");
-
-                    b.ToTable("RefStudentDisabilityType");
-                });
-
             modelBuilder.Entity("MEL.Entities.Reference.RefStudentSpecialization", b =>
                 {
                     b.Property<int>("RefStudentSpecializationId")
@@ -1395,6 +1449,25 @@ namespace MEL.Data.Migrations
                     b.HasKey("RefStudentTypeId");
 
                     b.ToTable("RefStudentType");
+                });
+
+            modelBuilder.Entity("MEL.Entities.Reference.RefStudentYearOfStudy", b =>
+                {
+                    b.Property<int>("RefStudentYearOfStudyId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("StudentYearOfStudy")
+                        .IsRequired()
+                        .HasMaxLength(150);
+
+                    b.Property<string>("StudentYearOfStudyCode")
+                        .IsRequired()
+                        .HasMaxLength(25);
+
+                    b.HasKey("RefStudentYearOfStudyId");
+
+                    b.ToTable("RefStudentYearOfStudy");
                 });
 
             modelBuilder.Entity("MEL.Entities.Reference.RefTLMDistributionStatus", b =>
@@ -1509,6 +1582,25 @@ namespace MEL.Data.Migrations
                     b.HasKey("RefTLMSubjectId");
 
                     b.ToTable("RefTLMSubject");
+                });
+
+            modelBuilder.Entity("MEL.Entities.Reference.RefTeacherEmploymentType", b =>
+                {
+                    b.Property<int>("RefTeacherEmploymentTypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("TeacherEmploymentType")
+                        .IsRequired()
+                        .HasMaxLength(150);
+
+                    b.Property<string>("TeacherEmploymentTypeCode")
+                        .IsRequired()
+                        .HasMaxLength(25);
+
+                    b.HasKey("RefTeacherEmploymentTypeId");
+
+                    b.ToTable("RefTeacherEmploymentType");
                 });
 
             modelBuilder.Entity("MEL.Entities.Reference.RefTeacherPosition", b =>
@@ -1904,9 +1996,17 @@ namespace MEL.Data.Migrations
                         .HasForeignKey("OrganizationId")
                         .OnDelete(DeleteBehavior.Restrict);
 
+                    b.HasOne("MEL.Entities.Reference.RefDisabilityType", "DisabilityTypes")
+                        .WithMany("Participants")
+                        .HasForeignKey("RefDisabilityTypeId");
+
                     b.HasOne("MEL.Entities.Reference.RefLocation", "Locations")
                         .WithMany("Participants")
                         .HasForeignKey("RefLocationId");
+
+                    b.HasOne("MEL.Entities.Reference.RefParticipantCohort", "ParticipantCohorts")
+                        .WithMany("Participants")
+                        .HasForeignKey("RefParticipantCohortId");
 
                     b.HasOne("MEL.Entities.Reference.RefParticipantType", "ParticipantTypes")
                         .WithMany("Participants")
@@ -2013,10 +2113,6 @@ namespace MEL.Data.Migrations
                         .HasForeignKey("ParticipantId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("MEL.Entities.Reference.RefStudentDisabilityType", "DisabilityTypes")
-                        .WithMany("Students")
-                        .HasForeignKey("RefStudentDisabilityTypeId");
-
                     b.HasOne("MEL.Entities.Reference.RefStudentSpecialization", "StudentSpecializations")
                         .WithMany("Students")
                         .HasForeignKey("RefStudentSpecializationId");
@@ -2024,6 +2120,10 @@ namespace MEL.Data.Migrations
                     b.HasOne("MEL.Entities.Reference.RefStudentType", "StudentTypes")
                         .WithMany("Students")
                         .HasForeignKey("RefStudentTypeId");
+
+                    b.HasOne("MEL.Entities.Reference.RefStudentYearOfStudy", "StudentYearOfStudies")
+                        .WithMany("Students")
+                        .HasForeignKey("RefStudentYearOfStudyId");
                 });
 
             modelBuilder.Entity("MEL.Entities.Core.Teacher", b =>
@@ -2032,6 +2132,10 @@ namespace MEL.Data.Migrations
                         .WithMany("Teachers")
                         .HasForeignKey("ParticipantId")
                         .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("MEL.Entities.Reference.RefTeacherEmploymentType", "TeacherEmploymentTypes")
+                        .WithMany("Teachers")
+                        .HasForeignKey("RefTeacherEmploymentTypeId");
 
                     b.HasOne("MEL.Entities.Reference.RefTeacherPosition", "TeacherPositions")
                         .WithMany("Teachers")
@@ -2111,6 +2215,10 @@ namespace MEL.Data.Migrations
                     b.HasOne("MEL.Entities.Reference.RefOrganizationType", "OrganizationTypes")
                         .WithMany("Programs")
                         .HasForeignKey("RefOrganizationTypeId");
+
+                    b.HasOne("MEL.Entities.Reference.RefProgramDeliveryType", "ProgramDeliveryTypes")
+                        .WithMany("Programs")
+                        .HasForeignKey("RefProgramDeliveryTypeId");
 
                     b.HasOne("MEL.Entities.Reference.RefProgramType", "ProgramTypes")
                         .WithMany("Programs")

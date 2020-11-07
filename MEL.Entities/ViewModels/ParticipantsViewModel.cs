@@ -35,6 +35,9 @@ namespace MEL.Entities.ViewModels
         [Display(Name = "Participant Type")]
         public int RefParticipantTypeId { get; set; }
 
+        [Display(Name = "Participant Cohort")]
+        public int? RefParticipantCohortId { get; set; }
+
         [Required(ErrorMessage = "The {0} field is required.")]
         [MaxLength(25)]
         [Display(Name = "Participant Code")]
@@ -90,6 +93,19 @@ namespace MEL.Entities.ViewModels
         [Display(Name = "Sex")]
         public int RefSexId { get; set; }
 
+        [DataType(DataType.Date)]
+        [Display(Name = "Birth Date")]
+        public DateTime? BirthDate { get; set; }
+
+        [Display(Name = "Age")]
+        public int? Age { get; set; }
+
+        [Display(Name = "Has Disability?")]
+        public bool? Disability { get; set; }
+
+        [Display(Name = "Disability Type")]
+        public int? RefDisabilityTypeId { get; set; }
+
         [MaxLength(20)]
         [Display(Name = "Phone")]
         public string Phone { get; set; }
@@ -118,22 +134,6 @@ namespace MEL.Entities.ViewModels
         [Display(Name = "Address")]
         public string Address { get; set; }
 
-        // Navigation properties
-        [ForeignKey("OrganizationId")]
-        [Display(Name = "Organization")]
-        public virtual Organization Organizations { get; set; }
-
-        [ForeignKey("RefParticipantTypeId")]
-        [Display(Name = "Participant Type")]
-        public virtual RefParticipantType ParticipantTypes { get; set; }
-
-        [ForeignKey("RefSexId")]
-        [Display(Name = "Sex")]
-        public virtual RefSex Sex { get; set; }
-
-        [ForeignKey("RefLocationId")]
-        [Display(Name = "Location")]
-        public virtual RefLocation Locations { get; set; }
 
         // Student properties
         [MaxLength(100)]
@@ -147,22 +147,13 @@ namespace MEL.Entities.ViewModels
         [Display(Name = "Student Specialization")]
         public int? RefStudentSpecializationId { get; set; }
 
-        [DataType(DataType.Date)]
-        [Display(Name = "Birth Date")]
-        public DateTime? BirthDate { get; set; }
-
-        [Display(Name = "Age")]
-        public int? Age { get; set; }
+        [Display(Name = "Student Year of Study")]
+        public int? RefStudentYearOfStudyId { get; set; }
 
         [MaxLength(255)]
         [Display(Name = "Parent/Guardian")]
         public string ParentGuardian { get; set; }
 
-        [Display(Name = "Has Disability?")]
-        public bool? Disability { get; set; }
-
-        [Display(Name = "Disability Type")]
-        public int? RefStudentDisabilityTypeId { get; set; }
 
         // Teacher
         [Display(Name = "Teacher Type")]
@@ -170,6 +161,9 @@ namespace MEL.Entities.ViewModels
 
         [Display(Name = "Position")]
         public int? RefTeacherPositionId { get; set; }
+
+        [Display(Name = "Employment Type")]
+        public int? RefTeacherEmploymentTypeId { get; set; }
 
         [MaxLength(50)]
         [Display(Name = "Grades taught?")]
@@ -217,11 +211,35 @@ namespace MEL.Entities.ViewModels
         [Display(Name = "Is Deleted")]
         public bool IsDeleted { get; set; }
 
-        // Navigation Properties
+        // Navigation properties
+        [ForeignKey("OrganizationId")]
+        [Display(Name = "Organization")]
+        public virtual Organization Organizations { get; set; }
+
         // Participant
         [ForeignKey("ParticipantId")]
         public virtual Participant Participants { get; set; }
-        
+
+        [ForeignKey("RefParticipantTypeId")]
+        [Display(Name = "Participant Type")]
+        public virtual RefParticipantType ParticipantTypes { get; set; }
+
+        [ForeignKey("RefParticipantCohortId")]
+        [Display(Name = "Participant Cohort")]
+        public virtual RefParticipantCohort ParticipantCohorts { get; set; }
+
+        [ForeignKey("RefSexId")]
+        [Display(Name = "Sex")]
+        public virtual RefSex Sex { get; set; }
+
+        [ForeignKey("RefDisabilityTypeId")]
+        [Display(Name = "Disability Type")]
+        public virtual RefDisabilityType DisabilityTypes { get; set; }
+
+        [ForeignKey("RefLocationId")]
+        [Display(Name = "Location")]
+        public virtual RefLocation Locations { get; set; }
+
         // Student
         [ForeignKey("RefStudentTypeId")]
         [Display(Name = "Student Type")]
@@ -231,9 +249,9 @@ namespace MEL.Entities.ViewModels
         [Display(Name = "Student Specialization")]
         public virtual RefStudentSpecialization StudentSpecializations { get; set; }
 
-        [ForeignKey("RefStudentDisabilityTypeId")]
-        [Display(Name = "Disability Type")]
-        public virtual RefStudentDisabilityType DisabilityTypes { get; set; }
+        [ForeignKey("RefStudentYearOfStudyId")]
+        [Display(Name = "Student Year of Study")]
+        public virtual RefStudentYearOfStudy StudentYearOfStudies { get; set; }
 
         // Teacher
         [ForeignKey("RefTeacherTypeId")]
@@ -243,6 +261,10 @@ namespace MEL.Entities.ViewModels
         [ForeignKey("RefTeacherPositionId")]
         [Display(Name = "Position")]
         public virtual RefTeacherPosition TeacherPositions { get; set; }
+
+        [ForeignKey("RefTeacherEmploymentTypeId")]
+        [Display(Name = "Employment Type")]
+        public virtual RefTeacherEmploymentType TeacherEmploymentTypes { get; set; }
 
         // Education Administrator
         [ForeignKey("RefEducationAdministratorTypeId")]

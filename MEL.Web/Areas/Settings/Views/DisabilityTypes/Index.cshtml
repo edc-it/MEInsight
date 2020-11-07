@@ -1,7 +1,7 @@
-@model IEnumerable<MEL.Entities.Reference.RefStudentDisabilityType>
+@model IEnumerable<MEL.Entities.Reference.RefDisabilityType>
 
 @{
-    ViewData["Title"] = @Localizer["Student Disability Type"].Value + " " + @Localizer["List"].Value;
+    ViewData["Title"] = @Localizer["Disability Type"].Value + " " + @Localizer["List"].Value;
 }
 
 <!--content start-->
@@ -9,8 +9,8 @@
     <!--heading start-->
     <div class="card mb-3 heading-panel">
         <div class="card-body">
-            <h2 class="card-title mt-3 font-weight-bold mb-0">@Localizer["Student Disability Type"]</h2>
-            <span class="card-text text-muted">@Localizer["List of"] @Localizer["Student Disability Type"]</span>
+            <h2 class="card-title mt-3 font-weight-bold mb-0">@Localizer["Disability Type"]</h2>
+            <span class="card-text text-muted">@Localizer["List of"] @Localizer["Disability Type"]</span>
         </div>
     </div>
     <!--heading end-->
@@ -46,6 +46,9 @@
                 <thead>
                     <tr>
                         <th>
+                            @Html.DisplayNameFor(model => model.RefDisabilityTypeId)
+                        </th>
+                        <th>
                             @Html.DisplayNameFor(model => model.DisabilityTypeCode)
                         </th>
                         <th>
@@ -59,6 +62,9 @@
                     {
                         <tr>
                             <td>
+                                @Html.DisplayFor(modelItem => item.RefDisabilityTypeId)
+                            </td>
+                            <td>
                                 @Html.DisplayFor(modelItem => item.DisabilityTypeCode)
                             </td>
                             <td>
@@ -66,19 +72,19 @@
                             </td>
                             <td class="text-right d-print-none">
                                 <div class="btn-group btn-group-sm" role="group" aria-label="Actions">
-                                    <a asp-action="Details" asp-route-id="@item.RefStudentDisabilityTypeId"
+                                    <a asp-action="Details" asp-route-id="@item.RefDisabilityTypeId"
                                        class="btn btn-link text-gray btn-sm d-print-none btn-action"
                                        data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Details"]'>
                                         <i class="fas fa-info-circle fa-sm" aria-hidden="true"></i>
                                     </a>
 
-                                    <a policy="RequireEditRole" asp-action="Edit" asp-route-id="@item.RefStudentDisabilityTypeId"
+                                    <a policy="RequireEditRole" asp-action="Edit" asp-route-id="@item.RefDisabilityTypeId"
                                        class="btn btn-link text-gray btn-sm d-print-none btn-action"
                                        data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Edit"]'>
                                         <i class="fas fa-pencil-alt fa-sm" aria-hidden="true"></i>
                                     </a>
 
-                                    <a policy="RequireDeleteRole" asp-action="Delete" asp-route-id="@item.RefStudentDisabilityTypeId"
+                                    <a policy="RequireDeleteRole" asp-action="Delete" asp-route-id="@item.RefDisabilityTypeId"
                                        class="btn btn-link text-gray btn-sm d-print-none btn-action"
                                        data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Delete"]'>
                                         <i class="far fa-trash-alt fa-sm" aria-hidden="true"></i>
@@ -87,7 +93,7 @@
                                     {
                                         <a asp-controller="@ViewBag.NextController"
                                            asp-action="Index"
-                                           asp-route-id="@item.RefStudentDisabilityTypeId"
+                                           asp-route-id="@item.RefDisabilityTypeId"
                                            class="btn btn-link btn-sm d-print-none btn-action"
                                            data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Open"]'>
                                             <i class="fas fa-chevron-right fa-sm" aria-hidden="true"></i>

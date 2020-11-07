@@ -42,28 +42,32 @@ namespace MEL.Entities.Core
         [Column(Order = 3)]
         public int RefParticipantTypeId { get; set; }
 
+        [Display(Name = "Participant Type")]
+        [Column(Order = 4)]
+        public int? RefParticipantCohortId { get; set; }
+
         [Required(ErrorMessage = "The {0} field is required.")]
         [MaxLength(100)]
         [Display(Name = "Participant Code")]
-        [Column(Order = 4)]
+        [Column(Order = 5)]
         [Remote(action: "VerifyParticipantCode", controller: "RemoteValidations", HttpMethod = "POST", ErrorMessage = "This Code already exists.", AdditionalFields = "ParticipantCodeInitialValue")]
         public string ParticipantCode { get; set; }
 
         [Required(ErrorMessage = "The {0} field is required.")]
         [MaxLength(35)]
         [Display(Name = "First name")]
-        [Column(Order = 5)]
+        [Column(Order = 6)]
         public string FirstName { get; set; }
 
         [MaxLength(35)]
         [Display(Name = "Middle name")]
-        [Column(Order = 6)]
+        [Column(Order = 7)]
         public string MiddleName { get; set; }
 
         [Required(ErrorMessage = "The {0} field is required.")]
         [MaxLength(35)]
         [Display(Name = "Surname/Last name")]
-        [Column(Order = 7)]
+        [Column(Order = 8)]
         public string LastName { get; set; }
 
         [NotMapped]
@@ -98,42 +102,59 @@ namespace MEL.Entities.Core
 
         [Required(ErrorMessage = "The {0} field is required.")]
         [Display(Name = "Sex")]
-        [Column(Order = 8)]
+        [Column(Order = 9)]
         public int RefSexId { get; set; }
+
+        [DataType(DataType.Date)]
+        [Display(Name = "Birth Date")]
+        [Column(Order = 10)]
+        public DateTime? BirthDate { get; set; }
+
+        [Display(Name = "Age")]
+        [Column(Order = 11)]
+        public int? Age { get; set; }
+
+        [Display(Name = "Has Disability?")]
+        [Column(Order = 12)]
+        public bool? Disability { get; set; }
+
+        [Display(Name = "Disability Type")]
+        [Column(Order = 13)]
+        public int? RefDisabilityTypeId { get; set; }
 
         [MaxLength(20)]
         [Display(Name = "Phone")]
-        [Column(Order = 9)]
+        [Column(Order = 14)]
         public string Phone { get; set; }
 
         [MaxLength(20)]
         [Display(Name = "Mobile")]
-        [Column(Order = 10)]
+        [Column(Order = 15)]
         public string Mobile { get; set; }
 
         [MaxLength(320)]
         [Display(Name = "Email")]
-        [Column(Order = 11)]
+        [Column(Order = 16)]
         public string Email { get; set; }
 
         [MaxLength(200)]
         [Display(Name = "Facebook")]
-        [Column(Order = 12)]
+        [Column(Order = 17)]
         public string Facebook { get; set; }
 
         [MaxLength(200)]
         [Display(Name = "Instant Messenger")]
-        [Column(Order = 13)]
+        [Column(Order = 18)]
         public string InstantMessenger { get; set; }
 
         [Display(Name = "Location")]
-        [Column(Order = 14)]
+        [Column(Order = 19)]
         public string RefLocationId { get; set; }
 
         [MaxLength(384)]
         [DataType(DataType.MultilineText)]
         [Display(Name = "Address")]
-        [Column(Order = 15)]
+        [Column(Order = 20)]
         public string Address { get; set; }
 
         // Navigation properties
@@ -145,9 +166,17 @@ namespace MEL.Entities.Core
         [Display(Name = "Participant Type")]
         public virtual RefParticipantType ParticipantTypes { get; set; }
 
+        [ForeignKey("RefParticipantCohortId")]
+        [Display(Name = "Participant Cohort")]
+        public virtual RefParticipantCohort ParticipantCohorts { get; set; }
+
         [ForeignKey("RefSexId")]
         [Display(Name = "Sex")]
         public virtual RefSex Sex { get; set; }
+
+        [ForeignKey("RefDisabilityTypeId")]
+        [Display(Name = "Disability Type")]
+        public virtual RefDisabilityType DisabilityTypes { get; set; }
 
         [ForeignKey("RefLocationId")]
         [Display(Name = "Location")]
@@ -157,9 +186,6 @@ namespace MEL.Entities.Core
         public virtual ICollection<Teacher> Teachers { get; set; }
         public virtual ICollection<EducationAdministrator> EducationAdministrators { get; set; }
         public virtual ICollection<GroupEnrollment> GroupEnrollments { get; set; }
-
-
-
 
     }
 }

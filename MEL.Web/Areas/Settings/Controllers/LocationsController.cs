@@ -51,7 +51,14 @@ namespace MEL.Web.Areas.Settings.Controllers
                 .Select(x => x.ParentLocations.ParentLocationId)
                 .FirstOrDefaultAsync();
 
-            ViewData["MaxLocationLevel"] = await _context.LocationTypes.MaxAsync(x => x.LocationLevel);
+            if (_context.LocationTypes.Any())
+            {
+                ViewData["MaxLocationLevel"] = await _context.LocationTypes.MaxAsync(x => x.LocationLevel);
+            }
+            else
+            {
+                ViewData["MaxLocationLevel"] = null;
+            }
             
             return View(await applicationDbContext.ToListAsync());
         }

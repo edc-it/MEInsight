@@ -277,6 +277,10 @@ namespace MEL.Web.Controllers
                                    ParticipantCode = participant.ParticipantCode,
                                    Name = participant.Name,
                                    Sex = participant.Sex.Sex, //
+                                   BirthDate = participant.BirthDate ?? null,
+                                   Age = participant.Age ?? null,
+                                   Disability = participant.Disability ?? null,
+                                   DisabilityType = participant.DisabilityTypes.DisabilityType ?? null, //
                                    RefLocationId = participant.RefLocationId,
                                    Location = participant.Organizations.Locations.LocationTypes.LocationLevel == 4 ? participant.Organizations.Locations.ParentLocations.LocationName + ", " + participant.Organizations.Locations.ParentLocations.ParentLocations.LocationName
                                                 : participant.Organizations.Locations.LocationTypes.LocationLevel == 3 ? participant.Organizations.Locations.LocationName + ", " + participant.Organizations.Locations.ParentLocations.LocationName
@@ -286,12 +290,12 @@ namespace MEL.Web.Controllers
                                    StudentCode = participantStudent.StudentCode ?? null,
                                    StudentType = participantStudent.StudentTypes.StudentType ?? null, //
                                    StudentSpecialization = participantStudent.StudentSpecializations.StudentSpecialization ?? null, //
-                                   BirthDate = participantStudent.BirthDate ?? null,
-                                   Age = participantStudent.Age ?? null,
-                                   Disability = participantStudent.Disability ?? null,
-                                   DisabilityType = participantStudent.DisabilityTypes.DisabilityType ?? null, //
+                                   StudentYearOfStudy = participantStudent.StudentYearOfStudies.StudentYearOfStudy ?? null,
+
                                    TeacherType = participantTeacher.TeacherTypes.TeacherType ?? null,
                                    TeacherPosition = participantTeacher.TeacherPositions.TeacherPosition ?? null,
+                                   TeacherEmploymentType = participantTeacher.TeacherEmploymentTypes.TeacherEmploymentType ?? null,
+
                                    GradeLevels = participantTeacher.GradeLevels ?? null,
                                    //Education Administrator
                                    EducationAdministratorType = participantEducationAdministrator.EducationAdministratorTypes.EducationAdministratorType ?? null,
@@ -334,6 +338,7 @@ namespace MEL.Web.Controllers
                 var organizationIds = childOrganizations
                         .Select(x => x.OrganizationId)
                             .ToList();
+                organizationIds.Add(organization.OrganizationId);
 
                 participants = participants
                     .Where(p => organizationIds

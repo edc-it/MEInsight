@@ -46,6 +46,9 @@
                 <thead>
                     <tr>
                         <th>
+                            @Html.DisplayNameFor(model => model.RefEvaluationStatusId)
+                        </th>
+                        <th>
                             @Html.DisplayNameFor(model => model.EvaluationStatusCode)
                         </th>
                         <th>
@@ -58,6 +61,9 @@
                     @foreach (var item in Model)
                     {
                         <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RefEvaluationStatusId)
+                            </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.EvaluationStatusCode)
                             </td>

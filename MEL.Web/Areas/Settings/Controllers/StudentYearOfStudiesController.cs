@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,23 +14,23 @@ namespace MEL.Web.Areas.Settings.Controllers
 {
     [Area("Settings")]
     [Authorize]
-    public class StudentDisabilityTypesController : Controller
+    public class StudentYearOfStudiesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public StudentDisabilityTypesController(ApplicationDbContext context)
+        public StudentYearOfStudiesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Settings/StudentDisabilityTypes
+        // GET: Settings/StudentYearOfStudies
         public async Task<IActionResult> Index()
         {
         
-            return View(await _context.DisabilityTypes.ToListAsync());
+            return View(await _context.StudentYearOfStudies.ToListAsync());
         }
 
-        // GET: Settings/StudentDisabilityTypes/Details/5
+        // GET: Settings/StudentYearOfStudies/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -38,32 +38,32 @@ namespace MEL.Web.Areas.Settings.Controllers
                 return NotFound();
             }
 
-            var refStudentDisabilityType = await _context.DisabilityTypes
-                .FirstOrDefaultAsync(m => m.RefStudentDisabilityTypeId == id);
+            var refStudentYearOfStudy = await _context.StudentYearOfStudies
+                .FirstOrDefaultAsync(m => m.RefStudentYearOfStudyId == id);
             
-            if (refStudentDisabilityType == null)
+            if (refStudentYearOfStudy == null)
             {
                 return NotFound();
             }
 
-            return View(refStudentDisabilityType);
+            return View(refStudentYearOfStudy);
         }
 
-        // GET: Settings/StudentDisabilityTypes/Create
-        [Authorize(Policy = "RequireMELRole")]
+        // GET: Settings/StudentYearOfStudies/Create
+        [Authorize(Policy = "RequireCreateRole")]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Settings/StudentDisabilityTypes/Create
+        // POST: Settings/StudentYearOfStudies/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RefStudentDisabilityTypeId,DisabilityTypeCode,DisabilityType")] RefStudentDisabilityType refStudentDisabilityType)
+        public async Task<IActionResult> Create([Bind("RefStudentYearOfStudyId,StudentYearOfStudyCode,StudentYearOfStudy")] RefStudentYearOfStudy refStudentYearOfStudy)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(refStudentDisabilityType);
+                _context.Add(refStudentYearOfStudy);
                 await _context.SaveChangesAsync();
                 
                 TempData["messageType"] = "success";
@@ -72,11 +72,11 @@ namespace MEL.Web.Areas.Settings.Controllers
                 
                 return RedirectToAction(nameof(Index));
             }
-            return View(refStudentDisabilityType);
+            return View(refStudentYearOfStudy);
         }
 
-        // GET: Settings/StudentDisabilityTypes/Edit/5
-        [Authorize(Policy = "RequireMELRole")]
+        // GET: Settings/StudentYearOfStudies/Edit/5
+        [Authorize(Policy = "RequireEditRole")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -84,21 +84,21 @@ namespace MEL.Web.Areas.Settings.Controllers
                 return NotFound();
             }
 
-            var refStudentDisabilityType = await _context.DisabilityTypes.FindAsync(id);
+            var refStudentYearOfStudy = await _context.StudentYearOfStudies.FindAsync(id);
 
-            if (refStudentDisabilityType == null)
+            if (refStudentYearOfStudy == null)
             {
                 return NotFound();
             }
-            return View(refStudentDisabilityType);
+            return View(refStudentYearOfStudy);
         }
 
-        // POST: Settings/StudentDisabilityTypes/Edit/5
+        // POST: Settings/StudentYearOfStudies/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("RefStudentDisabilityTypeId,DisabilityTypeCode,DisabilityType")] RefStudentDisabilityType refStudentDisabilityType)
+        public async Task<IActionResult> Edit(int id, [Bind("RefStudentYearOfStudyId,StudentYearOfStudyCode,StudentYearOfStudy")] RefStudentYearOfStudy refStudentYearOfStudy)
         {
-            if (id != refStudentDisabilityType.RefStudentDisabilityTypeId)
+            if (id != refStudentYearOfStudy.RefStudentYearOfStudyId)
             {
                 return NotFound();
             }
@@ -107,12 +107,12 @@ namespace MEL.Web.Areas.Settings.Controllers
             {
                 try
                 {
-                    _context.Update(refStudentDisabilityType);
+                    _context.Update(refStudentYearOfStudy);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!RefStudentDisabilityTypeExists(refStudentDisabilityType.RefStudentDisabilityTypeId))
+                    if (!RefStudentYearOfStudyExists(refStudentYearOfStudy.RefStudentYearOfStudyId))
                     {
                         return NotFound();
                     }
@@ -128,11 +128,11 @@ namespace MEL.Web.Areas.Settings.Controllers
                 
                 return RedirectToAction(nameof(Index));
             }
-            return View(refStudentDisabilityType);
+            return View(refStudentYearOfStudy);
         }
 
-        // GET: Settings/StudentDisabilityTypes/Delete/5
-        [Authorize(Policy = "RequireMELRole")]
+        // GET: Settings/StudentYearOfStudies/Delete/5
+        [Authorize(Policy = "RequireDeleteRole")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -140,20 +140,20 @@ namespace MEL.Web.Areas.Settings.Controllers
                 return NotFound();
             }
 
-            var refStudentDisabilityType = await _context.DisabilityTypes
-					.Include(m => m.Students)
-					.FirstOrDefaultAsync(m => m.RefStudentDisabilityTypeId == id);
+            var refStudentYearOfStudy = await _context.StudentYearOfStudies
+                    .FirstOrDefaultAsync(m => m.RefStudentYearOfStudyId == id);
 
-            if (refStudentDisabilityType == null)
+            if (refStudentYearOfStudy == null)
             {
                 return NotFound();
             }
 
             int relatedCount = 0;
+                
 
-			relatedCount += refStudentDisabilityType.Students.Count();
+            //relatedCount += refStudentYearOfStudy.ICollection.Count();
 
-			if (relatedCount > 0)
+            if(relatedCount > 0)
             {
                 ViewData["hasRelated"] = true;
             }
@@ -164,17 +164,17 @@ namespace MEL.Web.Areas.Settings.Controllers
 
             ViewData["RelatedCount"] = relatedCount;
 
-            return View(refStudentDisabilityType);
+            return View(refStudentYearOfStudy);
         }
 
-        // POST: Settings/StudentDisabilityTypes/Delete/5
+        // POST: Settings/StudentYearOfStudies/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var refStudentDisabilityType = await _context.DisabilityTypes.FindAsync(id);
+            var refStudentYearOfStudy = await _context.StudentYearOfStudies.FindAsync(id);
 
-            _context.DisabilityTypes.Remove(refStudentDisabilityType);
+            _context.StudentYearOfStudies.Remove(refStudentYearOfStudy);
             await _context.SaveChangesAsync();
         
             TempData["messageType"] = "success";
@@ -184,9 +184,9 @@ namespace MEL.Web.Areas.Settings.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool RefStudentDisabilityTypeExists(int id)
+        private bool RefStudentYearOfStudyExists(int id)
         {
-            return _context.DisabilityTypes.Any(e => e.RefStudentDisabilityTypeId == id);
+            return _context.StudentYearOfStudies.Any(e => e.RefStudentYearOfStudyId == id);
         }
     }
 }

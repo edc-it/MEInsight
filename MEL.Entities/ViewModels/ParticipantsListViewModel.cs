@@ -75,6 +75,22 @@ namespace MEL.Entities.ViewModels
         [Display(Name = "Sex")]
         public string SexId { get; set; }
 
+        [DataType(DataType.Date)]
+        [Display(Name = "Birth Date")]
+        public DateTime? BirthDate { get; set; }
+
+        [Display(Name = "Age")]
+        public int? Age { get; set; }
+
+        [Display(Name = "Has Disability?")]
+        public bool? Disability { get; set; }
+
+        [Display(Name = "Disability Type")]
+        public int? RefStudentDisabilityTypeId { get; set; }
+
+        [Display(Name = "Disability Type")]
+        public string DisabilityType { get; set; }
+
         [MaxLength(20)]
         [Display(Name = "Phone")]
         public string Phone { get; set; }
@@ -124,25 +140,17 @@ namespace MEL.Entities.ViewModels
         [Display(Name = "Student Specialization")]
         public string StudentSpecialization { get; set; }
 
-        [DataType(DataType.Date)]
-        [Display(Name = "Birth Date")]
-        public DateTime? BirthDate { get; set; }
+        [Display(Name = "Student Year of Study")]
+        public int? RefStudentYearOfStudyId { get; set; }
 
-        [Display(Name = "Age")]
-        public int? Age { get; set; }
+        [Display(Name = "Student Year of Study")]
+        public string StudentYearOfStudy { get; set; }
 
         [MaxLength(255)]
         [Display(Name = "Parent/Guardian")]
         public string ParentGuardian { get; set; }
 
-        [Display(Name = "Has Disability?")]
-        public bool? Disability { get; set; }
-
-        [Display(Name = "Disability Type")]
-        public int? RefStudentDisabilityTypeId { get; set; }
-
-        [Display(Name = "Disability Type")]
-        public string DisabilityType { get; set; }
+        
 
         // Teacher
         [Display(Name = "Teacher Type")]
@@ -156,6 +164,12 @@ namespace MEL.Entities.ViewModels
 
         [Display(Name = "Position")]
         public string TeacherPosition { get; set; }
+
+        [Display(Name = "Employment Type")]
+        public int? RefTeacherEmploymentTypeId { get; set; }
+
+        [Display(Name = "Employment Type")]
+        public string TeacherEmploymentType { get; set; }
 
         [MaxLength(50)]
         [Display(Name = "Grades taught?")]

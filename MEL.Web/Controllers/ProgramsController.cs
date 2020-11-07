@@ -36,7 +36,8 @@ namespace MEL.Web.Controllers
             var applicationDbContext = _context.Programs
                 .Include(p => p.AttendanceUnits)
                 .Include(p => p.OrganizationTypes)
-                .Include(p => p.ProgramTypes);
+                .Include(p => p.ProgramTypes)
+                .Include(p => p.ProgramDeliveryTypes);
             
             return View(await applicationDbContext.ToListAsync());
         }
@@ -53,6 +54,7 @@ namespace MEL.Web.Controllers
                 .Include(p => p.AttendanceUnits)
                 .Include(p => p.OrganizationTypes)
                 .Include(p => p.ProgramTypes)
+                .Include(p => p.ProgramDeliveryTypes)
                 .FirstOrDefaultAsync(m => m.ProgramId == id);
             
             if (program == null)
@@ -71,13 +73,14 @@ namespace MEL.Web.Controllers
             ViewData["RefAttendanceUnitId"] = new SelectList(_context.AttendanceUnits, "RefAttendanceUnitId", "AttendanceUnit");
             ViewData["RefOrganizationTypeId"] = new SelectList(_context.OrganizationTypes, "RefOrganizationTypeId", "OrganizationType");
             ViewData["RefProgramTypeId"] = new SelectList(_context.ProgramTypes, "RefProgramTypeId", "ProgramType");
+            ViewData["RefProgramDeliveryTypeId"] = new SelectList(_context.ProgramDeliveryTypes, "RefProgramDeliveryTypeId", "ProgramDeliveryType");
             return View();
         }
 
         // POST: Programs/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProgramId,ProgramName,RefProgramTypeId,Description,Max,Min,RefAttendanceUnitId,HasAssessment,DisplayMarks,RefOrganizationTypeId")] MEL.Entities.Programs.Program program)
+        public async Task<IActionResult> Create([Bind("ProgramId,ProgramName,RefProgramTypeId,RefProgramDeliveryTypeId,Description,Max,Min,RefAttendanceUnitId,HasAssessment,DisplayMarks,RefOrganizationTypeId")] MEL.Entities.Programs.Program program)
         {
             if (ModelState.IsValid)
             {
@@ -94,6 +97,8 @@ namespace MEL.Web.Controllers
             ViewData["RefAttendanceUnitId"] = new SelectList(_context.AttendanceUnits, "RefAttendanceUnitId", "AttendanceUnit", program.RefAttendanceUnitId);
             ViewData["RefOrganizationTypeId"] = new SelectList(_context.OrganizationTypes, "RefOrganizationTypeId", "OrganizationType", program.RefOrganizationTypeId);
             ViewData["RefProgramTypeId"] = new SelectList(_context.ProgramTypes, "RefProgramTypeId", "ProgramType", program.RefProgramTypeId);
+            ViewData["RefProgramDeliveryTypeId"] = new SelectList(_context.ProgramDeliveryTypes, "RefProgramDeliveryTypeId", "ProgramDeliveryType");
+
             return View(program);
         }
 
@@ -116,13 +121,15 @@ namespace MEL.Web.Controllers
             ViewData["RefAttendanceUnitId"] = new SelectList(_context.AttendanceUnits, "RefAttendanceUnitId", "AttendanceUnit", program.RefAttendanceUnitId);
             ViewData["RefOrganizationTypeId"] = new SelectList(_context.OrganizationTypes, "RefOrganizationTypeId", "OrganizationType", program.RefOrganizationTypeId);
             ViewData["RefProgramTypeId"] = new SelectList(_context.ProgramTypes, "RefProgramTypeId", "ProgramType", program.RefProgramTypeId);
+            ViewData["RefProgramDeliveryTypeId"] = new SelectList(_context.ProgramDeliveryTypes, "RefProgramDeliveryTypeId", "ProgramDeliveryType");
+
             return View(program);
         }
 
         // POST: Programs/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProgramId,ProgramName,RefProgramTypeId,Description,Max,Min,RefAttendanceUnitId,HasAssessment,DisplayMarks,RefOrganizationTypeId")] MEL.Entities.Programs.Program program)
+        public async Task<IActionResult> Edit(int id, [Bind("ProgramId,ProgramName,RefProgramTypeId,RefProgramDeliveryTypeId,Description,Max,Min,RefAttendanceUnitId,HasAssessment,DisplayMarks,RefOrganizationTypeId")] MEL.Entities.Programs.Program program)
         {
             if (id != program.ProgramId)
             {
@@ -158,6 +165,7 @@ namespace MEL.Web.Controllers
             ViewData["RefAttendanceUnitId"] = new SelectList(_context.AttendanceUnits, "RefAttendanceUnitId", "AttendanceUnit", program.RefAttendanceUnitId);
             ViewData["RefOrganizationTypeId"] = new SelectList(_context.OrganizationTypes, "RefOrganizationTypeId", "OrganizationType", program.RefOrganizationTypeId);
             ViewData["RefProgramTypeId"] = new SelectList(_context.ProgramTypes, "RefProgramTypeId", "ProgramType", program.RefProgramTypeId);
+            ViewData["RefProgramDeliveryTypeId"] = new SelectList(_context.ProgramDeliveryTypes, "RefProgramDeliveryTypeId", "ProgramDeliveryType");
 
             return View(program);
         }

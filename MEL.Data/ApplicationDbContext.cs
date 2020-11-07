@@ -60,14 +60,17 @@ namespace MEL.Data
         public DbSet<MEL.Entities.Reference.RefPartnerSector> PartnerSectors { get; set; }
 
         public DbSet<MEL.Entities.Reference.RefParticipantType> ParticipantTypes { get; set; }
+        public DbSet<MEL.Entities.Reference.RefParticipantCohort> ParticipantCohorts { get; set; }
         public DbSet<MEL.Entities.Reference.RefSex> Sex { get; set; }
-        
+        public DbSet<MEL.Entities.Reference.RefDisabilityType> DisabilityTypes { get; set; }
+
         public DbSet<MEL.Entities.Reference.RefStudentType> StudentTypes { get; set; }
         public DbSet<MEL.Entities.Reference.RefStudentSpecialization> StudentSpecializations { get; set; }
-        public DbSet<MEL.Entities.Reference.RefStudentDisabilityType> DisabilityTypes { get; set; }
+        public DbSet<MEL.Entities.Reference.RefStudentYearOfStudy> StudentYearOfStudies { get; set; }
         
         public DbSet<MEL.Entities.Reference.RefTeacherType> TeacherTypes { get; set; }
         public DbSet<MEL.Entities.Reference.RefTeacherPosition> TeacherPositions { get; set; }
+        public DbSet<MEL.Entities.Reference.RefTeacherEmploymentType> TeacherEmploymentTypes { get; set; }
 
         public DbSet<MEL.Entities.Reference.RefEducationAdministratorType> EducationAdministratorTypes { get; set; }
         public DbSet<MEL.Entities.Reference.RefEducationAdministratorPosition> EducationAdministratorPositions { get; set; }
@@ -80,6 +83,8 @@ namespace MEL.Data
         public DbSet<MEL.Entities.Reference.RefAssessmentType> AssessmentTypes { get; set; }
 
         public DbSet<MEL.Entities.Reference.RefProgramType> ProgramTypes { get; set; }
+        public DbSet<MEL.Entities.Reference.RefProgramDeliveryType> ProgramDeliveryTypes { get; set; }
+
         public DbSet<MEL.Entities.Reference.RefAttendanceUnit> AttendanceUnits { get; set; }
         
         public DbSet<MEL.Entities.Reference.RefTLMDistributionStatus> TLMDistributionStatus { get; set; }
@@ -136,14 +141,17 @@ namespace MEL.Data
             builder.Entity<RefPartnerSector>().ToTable("RefPartnerSector");
 
             builder.Entity<RefParticipantType>().ToTable("RefParticipantType");
+            builder.Entity<RefParticipantCohort>().ToTable("RefParticipantCohort");
             builder.Entity<RefSex>().ToTable("RefSex");
+            builder.Entity<RefDisabilityType>().ToTable("RefDisabilityType");
 
             builder.Entity<RefStudentType>().ToTable("RefStudentType");
             builder.Entity<RefStudentSpecialization>().ToTable("RefStudentSpecialization");
-            builder.Entity<RefStudentDisabilityType>().ToTable("RefStudentDisabilityType");
+            builder.Entity<RefStudentYearOfStudy>().ToTable("RefStudentYearOfStudy");
 
             builder.Entity<RefTeacherType>().ToTable("RefTeacherType");
             builder.Entity<RefTeacherPosition>().ToTable("RefTeacherPosition");
+            builder.Entity<RefTeacherEmploymentType>().ToTable("RefTeacherEmploymentType");
 
             builder.Entity<RefEducationAdministratorType>().ToTable("RefEducationAdministratorType");
             builder.Entity<RefEducationAdministratorPosition>().ToTable("RefEducationAdministratorPosition");
@@ -155,6 +163,7 @@ namespace MEL.Data
             builder.Entity<RefAssessmentType>().ToTable("RefAssessmentType");
 
             builder.Entity<RefProgramType>().ToTable("RefProgramType");
+            builder.Entity<RefProgramDeliveryType>().ToTable("RefProgramDeliveryType");
             builder.Entity<RefAttendanceUnit>().ToTable("RefAttendanceUnit");
 
             builder.Entity<RefTLMDistributionStatus>().ToTable("RefTLMDistributionStatus");

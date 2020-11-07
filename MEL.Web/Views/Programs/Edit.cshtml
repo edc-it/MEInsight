@@ -22,7 +22,7 @@
                 <span asp-validation-for="ProgramName" class="text-danger"></span>
                 <!--input end-->
             </div>
-            
+
             <div class="form-group" asp-enabled="RefProgramTypeId">
                 <!--fk select start-->
                 <label asp-for="RefProgramTypeId" class="control-label"></label>
@@ -31,7 +31,16 @@
                 <span asp-validation-for="RefProgramTypeId" class="text-danger"></span>
                 <!--fk select end-->
             </div>
-            
+
+            <div class="form-group" asp-enabled="RefProgramDeliveryTypeId">
+                <!--fk select start-->
+                <label asp-for="RefProgramDeliveryTypeId" class="control-label"></label>
+                <select asp-for="RefProgramDeliveryTypeId" class="form-control custom-select" asp-items="ViewBag.RefProgramDeliveryTypeId">
+                </select>
+                <span asp-validation-for="RefProgramDeliveryTypeId" class="text-danger"></span>
+                <!--fk select end-->
+            </div>
+
             <div class="form-group" asp-enabled="Description">
                 <!--textarea start-->
                 <label asp-for="Description" class="control-label"></label>
@@ -39,7 +48,7 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
                 <!--textarea end-->
             </div>
-            
+
             <div class="form-group" asp-enabled="Max">
                 <!--input start-->
                 <label asp-for="Max" class="control-label"></label>
@@ -47,7 +56,7 @@
                 <span asp-validation-for="Max" class="text-danger"></span>
                 <!--input end-->
             </div>
-            
+
             <div class="form-group" asp-enabled="Min">
                 <!--input start-->
                 <label asp-for="Min" class="control-label"></label>
@@ -55,7 +64,7 @@
                 <span asp-validation-for="Min" class="text-danger"></span>
                 <!--input end-->
             </div>
-            
+
             <div class="form-group" asp-enabled="RefAttendanceUnitId">
                 <!--fk select start-->
                 <label asp-for="RefAttendanceUnitId" class="control-label"></label>
@@ -64,7 +73,7 @@
                 <span asp-validation-for="RefAttendanceUnitId" class="text-danger"></span>
                 <!--fk select end-->
             </div>
-            
+
             <div class="form-group" asp-enabled="HasAssessment">
                 <!--checkbox start-->
                 <div class="checkbox">
@@ -91,7 +100,7 @@
                 <span asp-validation-for="RefOrganizationTypeId" class="text-danger"></span>
                 <!--fk select end-->
             </div>
-            
+
             <!-- button group start -->
             <div class="form-group text-right mt-5">
                 <a id="cancelbutton" class="btn btn-secondary mr-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">

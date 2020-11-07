@@ -5,34 +5,35 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
+
 namespace MEL.Entities.Reference
 {
-    public class RefStudentDisabilityType
+    public class RefTeacherEmploymentType
     {
-        public RefStudentDisabilityType()
+        public RefTeacherEmploymentType()
         {
-            this.Students = new HashSet<Student>();
+            this.Teachers = new HashSet<Teacher>();
         }
 
         [Key]
         [Required(ErrorMessage = "The {0} field is required.")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Display(Name = "Disability Type Id")]
+        [Display(Name = "Employment Type Id")]
         [Column(Order = 0)]
-        public int RefStudentDisabilityTypeId { get; set; }
+        public int RefTeacherEmploymentTypeId { get; set; }
 
         [Required(ErrorMessage = "The {0} field is required.")]
         [MaxLength(25)]
-        [Display(Name = "Disability Type Code")]
+        [Display(Name = "Employment Type Code")]
         [Column(Order = 1)]
-        public string DisabilityTypeCode { get; set; }
+        public string TeacherEmploymentTypeCode { get; set; }
 
         [Required(ErrorMessage = "The {0} field is required.")]
         [MaxLength(150)]
-        [Display(Name = "Disability Type")]
+        [Display(Name = "Employment Type")]
         [Column(Order = 2)]
-        public string DisabilityType { get; set; }
+        public string TeacherEmploymentType { get; set; }
 
-        public virtual ICollection<Student> Students { get; set; }
+        public virtual ICollection<Teacher> Teachers { get; set; }
     }
 }

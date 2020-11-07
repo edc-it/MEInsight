@@ -1,13 +1,13 @@
-@model MEL.Entities.Reference.RefStudentDisabilityType
+﻿@model MEL.Entities.Reference.RefTeacherEmploymentType
 
 @{
-    ViewData["Title"] = @Localizer["Student Disability Type"].Value + " " + @Localizer["Delete"].Value;
+    ViewData["Title"] = @Localizer["Teacher Employment Type"].Value + " " + @Localizer["Delete"].Value;
 }
 
 <h2>@Localizer["Delete"]</h2>
 
 <div>
-    <h4>@Localizer["Student Disability Type"]</h4>
+    <h4>@Localizer["Teacher Employment Type"]</h4>
     <hr />
     @if (ViewBag.hasRelated == true)
     {
@@ -23,16 +23,16 @@
     }
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DisabilityTypeCode)
+            @Html.DisplayNameFor(model => model.TeacherEmploymentTypeCode)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DisabilityTypeCode)
+            @Html.DisplayFor(model => model.TeacherEmploymentTypeCode)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DisabilityType)
+            @Html.DisplayNameFor(model => model.TeacherEmploymentType)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DisabilityType)
+            @Html.DisplayFor(model => model.TeacherEmploymentType)
         </dd>
     </dl>
     <hr />
@@ -40,7 +40,7 @@
     </dl>
     
     <form asp-action="Delete" id="main-form">
-        <input type="hidden" asp-for="RefStudentDisabilityTypeId" />
+        <input type="hidden" asp-for="RefTeacherEmploymentTypeId" />
             <!-- button group start -->
             <div class="form-group mt-5">
                 <a id="cancelbutton" class="btn btn-secondary mr-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">

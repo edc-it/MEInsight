@@ -28,10 +28,14 @@ namespace MEL.Entities.Core
         [Display(Name = "Position")]
         [Column(Order = 2)]
         public int? RefTeacherPositionId { get; set; }
+        
+        [Display(Name = "Employment Type")]
+        [Column(Order = 3)]
+        public int? RefTeacherEmploymentTypeId { get; set; }
 
         [MaxLength(50)]
         [Display(Name = "Grades taught?")]
-        [Column(Order = 3)]
+        [Column(Order = 4)]
         public string GradeLevels { get; set; }
 
         //Navigation properties
@@ -45,7 +49,11 @@ namespace MEL.Entities.Core
         [ForeignKey("RefTeacherPositionId")]
         [Display(Name = "Position")]
         public virtual RefTeacherPosition TeacherPositions { get; set; }
-        
+
+        [ForeignKey("RefTeacherEmploymentTypeId")]
+        [Display(Name = "Employment Type")]
+        public virtual RefTeacherEmploymentType TeacherEmploymentTypes { get; set; }
+
         public virtual ICollection<Group> Groups { get; set; }
     }
 }

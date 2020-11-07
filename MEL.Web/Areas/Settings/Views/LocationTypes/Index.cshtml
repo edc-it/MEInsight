@@ -46,6 +46,9 @@
                 <thead>
                     <tr>
                         <th>
+                            @Html.DisplayNameFor(model => model.RefLocationTypeId)
+                        </th>
+                        <th>
                             @Html.DisplayNameFor(model => model.LocationTypeCode)
                         </th>
                         <th>
@@ -61,6 +64,9 @@
                     @foreach (var item in Model)
                     {
                         <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RefLocationTypeId)
+                            </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.LocationTypeCode)
                             </td>
