@@ -553,7 +553,7 @@
     <value>Etudiant</value>
   </data>
   <data name="Surname/Last name" xml:space="preserve">
-    <value>Nom/ nom de famille </value>
+    <value>Nom/ nom de famille</value>
   </data>
   <data name="Attendance" xml:space="preserve">
     <value>Présence</value>
@@ -579,8 +579,8 @@
   <data name="Quantity Received" xml:space="preserve">
     <value>Quantité reçue</value>
   </data>
-  <data name="Loading..." xml:space="preserve">
-    <value>Chargement...</value>
+  <data name="Loading…" xml:space="preserve">
+    <value>Chargement…</value>
   </data>
   <data name="Position" xml:space="preserve">
     <value>Position</value>
@@ -832,7 +832,7 @@
     <value>Id de langue TLM</value>
   </data>
   <data name="School Cluster Id" xml:space="preserve">
-    <value>Id de groupe scolaire </value>
+    <value>Id de groupe scolaire</value>
   </data>
   <data name="Sex Id" xml:space="preserve">
     <value>Id de sexe</value>
@@ -946,7 +946,7 @@
     <value>Nouveau</value>
   </data>
   <data name="M&amp;E options:" xml:space="preserve">
-    <value>Options de S &amp; E :</value>
+    <value>Options de S &amp; E:</value>
   </data>
   <data name="Organization" xml:space="preserve">
     <value>Organisation</value>
@@ -991,7 +991,7 @@
     <value>Nombre d’inscrit</value>
   </data>
   <data name="School Cluster" xml:space="preserve">
-    <value>groupe  scolaire </value>
+    <value>Groupe scolaire</value>
   </data>
   <data name="expand" xml:space="preserve">
     <value>Développez</value>
@@ -1026,11 +1026,11 @@
   <data name="Choose file" xml:space="preserve">
     <value>Choisissez fichier</value>
   </data>
-  <data name="Select..." xml:space="preserve">
-    <value>Sélectionnez...</value>
+  <data name="Select…" xml:space="preserve">
+    <value>Sélectionnez…</value>
   </data>
   <data name="Set to 'Yes' if this organization will manage other organizations." xml:space="preserve">
-    <value>La valeur « Oui » si cet organisme va gérer les autres organisations.</value>
+    <value>La valeur «Oui» si cet organisme va gérer les autres organisations</value>
   </data>
   <data name="Sex" xml:space="preserve">
     <value>Sexe</value>
@@ -1042,7 +1042,7 @@
     <value>Système de gestion de données</value>
   </data>
   <data name="Request culture provider:" xml:space="preserve">
-    <value>Demande les informations de culture :</value>
+    <value>Demande les informations de culture:</value>
   </data>
   <data name="Upload" xml:space="preserve">
     <value>Télécharger</value>
@@ -1057,7 +1057,7 @@
     <value>Terminé</value>
   </data>
   <data name="Has Disability?" xml:space="preserve">
-    <value>une personne handicapée</value>
+    <value>Une personne handicapée?</value>
   </data>
   <data name="School Administration Type" xml:space="preserve">
     <value>Type d’Administration scolaire</value>
@@ -1126,7 +1126,7 @@
     <value>Lire les guides de l'utilisateur et la documentation</value>
   </data>
   <data name="M&amp;E Insight is an open source monitoring and evaluation data management system for international development projects" xml:space="preserve">
-    <value>M &amp; E Insight est un système de gestion de données de suivi et d'évaluation en source ouverte destiné aux projets de développement international.</value>
+    <value>M &amp; E Insight est un système de gestion de données de suivi et d'évaluation en source ouverte destiné aux projets de développement international</value>
   </data>
   <data name="Home Page" xml:space="preserve">
     <value>Page d'accueil</value>
