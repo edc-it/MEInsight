@@ -52,7 +52,7 @@
                 <!--fk select start-->
                 <label asp-for="RefGradeLevelId" class="control-label"></label>
                 <select asp-for="RefGradeLevelId" class="form-control custom-select" asp-items="ViewBag.RefGradeLevelId">
-                    <option disabled selected></option>
+                    <option></option>
                 </select>
                 <span asp-validation-for="RefGradeLevelId" class="text-danger"></span>
                 <!--fk select end-->
@@ -109,7 +109,7 @@
             <div class="form-group" asp-enabled="ParticipantId">
                 <!--fk select start-->
                 <label asp-for="ParticipantId" class="control-label"></label>
-                <select asp-for="ParticipantId" class="form-control custom-select" asp-items="ViewBag.ParticipantId">
+                <select asp-for="ParticipantId" class="form-control custom-select select2" asp-items="ViewBag.ParticipantId">
                     <option disabled selected></option>
                 </select>
                 <span asp-validation-for="ParticipantId" class="text-danger"></span>
@@ -172,7 +172,14 @@
            $('.date.enddate')
                .on("changeDate", function (e) {
                     checkDates();
+               });
+
+            $(function () {
+                $('input[type="text"]').change(function () {
+                    this.value = $.trim(this.value);
                 });
+            });
+
         });
     </script>
 }

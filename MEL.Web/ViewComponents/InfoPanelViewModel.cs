@@ -80,6 +80,9 @@ namespace MEL.Web.ViewComponents
         [Display(Name = "Is Administrator?")]
         public bool? IsOrganizationUnit { get; set; }
 
+        [Display(Name = "Is Tenant?")]
+        public bool? IsTenant { get; set; }
+
 
         public IEnumerable<OrganizationParent> OrganizationParent { get; set; }
         public IEnumerable<LocationParent> LocationParent { get; set; }

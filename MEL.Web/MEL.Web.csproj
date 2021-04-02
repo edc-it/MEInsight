@@ -9,6 +9,7 @@
     <Company>Education Development Center, Inc.</Company>
     <Authors></Authors>
     <Product>M&amp;E Insight</Product>
+    <Version>1.0.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,7 +28,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
     <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.18" />
   </ItemGroup>
 

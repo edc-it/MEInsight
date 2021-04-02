@@ -6,6 +6,7 @@ using MEL.Entities.Identity;
 //using MEL.Web.Areas.Identity;
 using MEL.Web.Areas.Settings.Models.ViewModels;
 using MEL.Web.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 //using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +17,7 @@ using Microsoft.EntityFrameworkCore;
 namespace MEL.Web.Areas.Settings.Controllers
 {
     [Area("Settings")]
-    //[Authorize(Policy = "RequireAdministratorRole")]
+    [Authorize(Policy = "RequireAdministratorRole")]
     public class UsersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -93,7 +94,7 @@ namespace MEL.Web.Areas.Settings.Controllers
         }
 
         // GET: ApplicationUsers/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             ViewData["RoleId"] = new SelectList(_roleManager.Roles
                 .Where(x => x.Name != "Administrator")
@@ -105,6 +106,27 @@ namespace MEL.Web.Areas.Settings.Controllers
 
             ViewData["OrganizationId"] = new SelectList(_context.Organizations
                 .Where(x => x.IsOrganizationUnit == true), "OrganizationId", "OrganizationName");
+
+            // *** For JSTree ***
+            //Logged User OrganizationId
+            Guid? userOrganizacionId = (await _userManager.GetUserAsync(HttpContext.User))?.OrganizationId;
+
+            if (userOrganizacionId == null)
+            {
+                return NotFound();
+            }
+
+            //Get Logged User Organization
+            var organization = await _context.Organizations
+                    .SingleOrDefaultAsync(o => o.OrganizationId == userOrganizacionId);
+
+            if (organization == null)
+            {
+                return NotFound();
+            }
+
+            //Returns the top hiearchy organization for JSTree
+            ViewData["ParentOrganizationId"] = organization.OrganizationId;
 
             return View();
         }

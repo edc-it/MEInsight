@@ -19,7 +19,6 @@ namespace MEL.Entities.Core
         [MaxLength(100)]
         [Display(Name = "Student Code")]
         [Column(Order = 1)]
-        [Remote(action: "VerifyStudentCode", controller: "RemoteValidations", HttpMethod = "POST", ErrorMessage = "This Code already exists.", AdditionalFields = "StudentCodeInitialValue")]
         public string StudentCode { get; set; }
 
         [Display(Name = "Student Type")]
@@ -30,27 +29,14 @@ namespace MEL.Entities.Core
         [Column(Order = 3)]
         public int? RefStudentSpecializationId { get; set; }
 
-        [DataType(DataType.Date)]
-        [Display(Name = "Birth Date")]
-        [Column(Order = 4)]
-        public DateTime? BirthDate { get; set; }
-
-        [Display(Name = "Age")]
-        [Column(Order = 5)]
-        public int? Age { get; set; }
-
         [MaxLength(255)]
         [Display(Name = "Parent/Guardian")]
-        [Column(Order = 6)]
+        [Column(Order = 4)]
         public string ParentGuardian { get; set; }
 
-        [Display(Name = "Has Disability?")]
-        [Column(Order = 7)]
-        public bool? Disability { get; set; }
-
-        [Display(Name = "Disability Type")]
-        [Column(Order = 8)]
-        public int? RefStudentDisabilityTypeId { get; set; }
+        [Display(Name = "Year of Study")]
+        [Column(Order = 5)]
+        public int? RefStudentYearOfStudyId { get; set; }
 
         // Navigation Properties
         [ForeignKey("RefStudentTypeId")]
@@ -61,9 +47,11 @@ namespace MEL.Entities.Core
         [Display(Name = "Student Specialization")]
         public virtual RefStudentSpecialization StudentSpecializations { get; set; }
 
-        [ForeignKey("RefStudentDisabilityTypeId")]
-        [Display(Name = "Disability Type")]
-        public virtual RefStudentDisabilityType DisabilityTypes { get; set; }
+        [ForeignKey("RefStudentYearOfStudyId")]
+        [Display(Name = "Student Year of Study")]
+        public virtual RefStudentYearOfStudy StudentYearOfStudies { get; set; }
+
+
 
         [ForeignKey("ParticipantId")]
         public virtual Participant Participants { get; set; }

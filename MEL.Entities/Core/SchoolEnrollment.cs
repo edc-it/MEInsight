@@ -36,7 +36,7 @@ namespace MEL.Entities.Core
 
         [Display(Name = "Grade Level")]
         [Column(Order = 5)]
-        public int RefSchoolGradeLevelId { get; set; }
+        public int RefGradeLevelId { get; set; }
 
         [Display(Name = "Male")]
         [Column(Order = 6)]
@@ -67,7 +67,7 @@ namespace MEL.Entities.Core
         [Display(Name = "Participant Type")]
         public virtual RefParticipantType ParticipantTypes { get; set; }
 
-        [ForeignKey("RefSchoolGradeLevelId")]
+        [ForeignKey("RefGradeLevelId")]
         [Display(Name = "Grade Level")]
         public virtual RefGradeLevel GradeLevels { get; set; }
 

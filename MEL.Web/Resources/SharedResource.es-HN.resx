@@ -579,7 +579,7 @@
   <data name="Quantity Received" xml:space="preserve">
     <value>Cantidad recibida</value>
   </data>
-  <data name="Loading..." xml:space="preserve">
+  <data name="Loading…" xml:space="preserve">
     <value>Cargando…</value>
   </data>
   <data name="Position" xml:space="preserve">
@@ -601,13 +601,13 @@
     <value>Código Conjunto de Materiales TLM</value>
   </data>
   <data name="Barcode" xml:space="preserve">
-    <value>Código de barras </value>
+    <value>Código de barras</value>
   </data>
   <data name="School Status Code" xml:space="preserve">
     <value>Código de Estado del Centro Educativo</value>
   </data>
   <data name="Organization Code" xml:space="preserve">
-    <value>Código de Organización </value>
+    <value>Código de Organización</value>
   </data>
   <data name="Tracking Code" xml:space="preserve">
     <value>Código de Rastreo</value>
@@ -661,7 +661,7 @@
     <value>Código Tipo de Ubicación</value>
   </data>
   <data name="Attendance Unit Code" xml:space="preserve">
-    <value>Código Unidad para Asistencia. </value>
+    <value>Código Unidad para Asistencia</value>
   </data>
   <data name="Office Code" xml:space="preserve">
     <value>Código Unidad/Departamento</value>
@@ -694,7 +694,7 @@
     <value>Desbloquear cuenta de usuario</value>
   </data>
   <data name="Description" xml:space="preserve">
-    <value>Descripción </value>
+    <value>Descripción</value>
   </data>
   <data name="TLM Distribution Detail" xml:space="preserve">
     <value>Detalle de la Distribución TLM</value>
@@ -721,7 +721,7 @@
     <value>Documento</value>
   </data>
   <data name="Duration" xml:space="preserve">
-    <value>Duración </value>
+    <value>Duración</value>
   </data>
   <data name="Age" xml:space="preserve">
     <value>Edad</value>
@@ -871,7 +871,7 @@
     <value>Id Ubicación</value>
   </data>
   <data name="Attendance Unit Id" xml:space="preserve">
-    <value>Id Unidad para Asistencia. </value>
+    <value>Id Unidad para Asistencia</value>
   </data>
   <data name="Office Id" xml:space="preserve">
     <value>Id Unidad/Departamento</value>
@@ -922,13 +922,13 @@
     <value>No</value>
   </data>
   <data name="You cannot delete this record. You must first delete any related records." xml:space="preserve">
-    <value>No puede borrar este registro, primero debe eliminar cualquier registro relacionado. </value>
+    <value>No puede borrar este registro, primero debe eliminar cualquier registro relacionado.</value>
   </data>
   <data name="You cannot apply the status of" xml:space="preserve">
-    <value>No puedes aplicar el estado </value>
+    <value>No puedes aplicar el estado</value>
   </data>
   <data name="You cannot register more than" xml:space="preserve">
-    <value>No se puede registrar mas de </value>
+    <value>No se puede registrar mas de</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Nombre</value>
@@ -946,16 +946,16 @@
     <value>Nuevo</value>
   </data>
   <data name="M&amp;E options:" xml:space="preserve">
-    <value>Opciones de ME&amp;L</value>
+    <value>Opciones de ME&amp;L:</value>
   </data>
   <data name="Organization" xml:space="preserve">
-    <value>Organización </value>
+    <value>Organización</value>
   </data>
   <data name="Parent Organization" xml:space="preserve">
     <value>Organización de la cual depende</value>
   </data>
   <data name="Organization From" xml:space="preserve">
-    <value>Organización que Envía </value>
+    <value>Organización que Envía</value>
   </data>
   <data name="Organization To" xml:space="preserve">
     <value>Organización que Recibe</value>
@@ -979,7 +979,7 @@
     <value>Periodo Escolar</value>
   </data>
   <data name="Contact" xml:space="preserve">
-    <value>Persona de contacto </value>
+    <value>Persona de contacto</value>
   </data>
   <data name="First name" xml:space="preserve">
     <value>Primer nombre</value>
@@ -1026,7 +1026,7 @@
   <data name="Choose file" xml:space="preserve">
     <value>Seleccionar Archivo</value>
   </data>
-  <data name="Select..." xml:space="preserve">
+  <data name="Select…" xml:space="preserve">
     <value>Seleccionar…</value>
   </data>
   <data name="Set to 'Yes' if this organization will manage other organizations." xml:space="preserve">
@@ -1042,7 +1042,7 @@
     <value>Sistema de Gestión de Datos</value>
   </data>
   <data name="Request culture provider:" xml:space="preserve">
-    <value>Solicitud de Proveedor de Cultura</value>
+    <value>Solicitud de Proveedor de Cultura:</value>
   </data>
   <data name="Upload" xml:space="preserve">
     <value>Subir Archivo</value>
@@ -1078,7 +1078,7 @@
     <value>Tipo de Material TLM</value>
   </data>
   <data name="Organization Type" xml:space="preserve">
-    <value>Tipo de Organización </value>
+    <value>Tipo de Organización</value>
   </data>
   <data name="Participant Type" xml:space="preserve">
     <value>Tipo de participante</value>
@@ -1090,7 +1090,7 @@
     <value>Tipo de Ubicación</value>
   </data>
   <data name="Location" xml:space="preserve">
-    <value>Ubicación </value>
+    <value>Ubicación</value>
   </data>
   <data name="Parent Location" xml:space="preserve">
     <value>Ubicación de la cual depende</value>
@@ -1099,7 +1099,7 @@
     <value>Ubicación del Centro Educativo</value>
   </data>
   <data name="Attendance unit" xml:space="preserve">
-    <value>Unidad para Asistencia. </value>
+    <value>Unidad para Asistencia</value>
   </data>
   <data name="Office" xml:space="preserve">
     <value>Unidad/Departamento</value>
@@ -1123,7 +1123,7 @@
     <value>Documentación</value>
   </data>
   <data name="Read the user guides and documentation" xml:space="preserve">
-    <value>Lea las guías de usuario y la documentación.</value>
+    <value>Lea las guías de usuario y la documentación</value>
   </data>
   <data name="M&amp;E Insight is an open source monitoring and evaluation data management system for international development projects" xml:space="preserve">
     <value>M&amp;E Insight es un sistema de gestión de datos de monitoreo y evaluación de código abierto para proyectos de desarrollo internacional</value>
@@ -1132,12 +1132,99 @@
     <value>Página de inicio</value>
   </data>
   <data name="A monitoring and evaluation data management system" xml:space="preserve">
-    <value>Un sistema de gestión de datos de seguimiento y evaluación.</value>
+    <value>Un sistema de gestión de datos de seguimiento y evaluación</value>
   </data>
   <data name="Visit M&amp;E Insight on GitHub!" xml:space="preserve">
     <value>¡Visita M&amp;E Insight en GitHub!</value>
   </data>
   <data name="Remember me?" xml:space="preserve">
     <value>¿Recuérdame?</value>
+  </data>
+  <data name="School Language" xml:space="preserve">
+    <value>Lenguaje de la escuela</value>
+  </data>
+  <data name="School Language Id" xml:space="preserve">
+    <value>ID del lenguaje de la escuela</value>
+  </data>
+  <data name="School Language Code" xml:space="preserve">
+    <value>Código del lenguaje de la escuela</value>
+  </data>
+  <data name="School Languages" xml:space="preserve">
+    <value>Lenguajes de la escuela</value>
+  </data>
+  <data name="TLM Distribution Period" xml:space="preserve">
+    <value>Período de distribución de TLM</value>
+  </data>
+  <data name="TLM Distribution Periods" xml:space="preserve">
+    <value>Períodos de distribución de TLM</value>
+  </data>
+  <data name="Teaching and Learning Materials (TLM) Distribution Periods" xml:space="preserve">
+    <value>Períodos de distribución de materiales de enseñanza y aprendizaje (TLM)</value>
+  </data>
+  <data name="Teaching and Learning Materials (TLM) Distributions" xml:space="preserve">
+    <value>Distribuciones de materiales de enseñanza y aprendizaje (TLM)</value>
+  </data>
+  <data name="TLM Distributions" xml:space="preserve">
+    <value>Distribuciones TLM</value>
+  </data>
+  <data name="Re-open Period" xml:space="preserve">
+    <value>Abrir Período</value>
+  </data>
+  <data name="Close TLM Distribution Period" xml:space="preserve">
+    <value>Cerrar período de distribución de TLM</value>
+  </data>
+  <data name="You will set this period as Closed" xml:space="preserve">
+    <value>Establecerá este período como Cerrado</value>
+  </data>
+  <data name="Re-open TLM Distribution Period" xml:space="preserve">
+    <value>Reabrir período de distribución de TLM</value>
+  </data>
+  <data name="Are you sure you want to reopen this period? Updating TLM Distributions will be allowed" xml:space="preserve">
+    <value>¿Seguro que quieres reabrir este período? Se permitirá la actualización de distribuciones TLM</value>
+  </data>
+  <data name="Selected organization To" xml:space="preserve">
+    <value>Organización seleccionada Para</value>
+  </data>
+  <data name="Selected organization From" xml:space="preserve">
+    <value>Organización seleccionada De</value>
+  </data>
+  <data name="Upload TLM Distribution document" xml:space="preserve">
+    <value>Subir documento de distribución TLM</value>
+  </data>
+  <data name="TLM Materials" xml:space="preserve">
+    <value>Materiales TLM</value>
+  </data>
+  <data name="Teaching and Learning Materials (TLM)" xml:space="preserve">
+    <value>Materiales de enseñanza y aprendizaje (TLM)</value>
+  </data>
+  <data name="Upload TLM Material document" xml:space="preserve">
+    <value>Cargar documento de material TLM</value>
+  </data>
+  <data name="Select existing participants to enroll in this Group" xml:space="preserve">
+    <value>Seleccione participantes existentes para inscribirse en este grupo</value>
+  </data>
+  <data name="Filters" xml:space="preserve">
+    <value>Filtros</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filtro</value>
+  </data>
+  <data name="Existing Participants" xml:space="preserve">
+    <value>Participantes existentes</value>
+  </data>
+  <data name="Add Participants" xml:space="preserve">
+    <value>Añadir participantes</value>
+  </data>
+  <data name="Selected Participants to Enroll" xml:space="preserve">
+    <value>Participantes seleccionados para inscribirse</value>
+  </data>
+  <data name="Enroll" xml:space="preserve">
+    <value>Inscribirse</value>
+  </data>
+  <data name="Remove from list" xml:space="preserve">
+    <value>Quitar de la lista</value>
+  </data>
+  <data name="Add Existing" xml:space="preserve">
+    <value>Agregar existente</value>
   </data>
 </root>

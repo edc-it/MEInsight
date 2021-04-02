@@ -1,0 +1,174 @@
+﻿@model MEL.Entities.TLM.TLMMaterial
+
+@{
+    ViewData["Title"] = @Localizer["TLM Material"].Value + " " + @Localizer["Details"].Value;
+}
+
+<h2>@Localizer["Details"]</h2>
+
+<div>
+    <h4>@Localizer["TLMMaterial"]</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TLMMaterialCode)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TLMMaterialCode)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TLMMaterialName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TLMMaterialName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RatioNumerator)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RatioNumerator)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RatioDenominator)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RatioDenominator)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Barcode)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Barcode)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TLMMaterialTypes)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TLMMaterialTypes.TLMMaterialType)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.GradeLevels)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.GradeLevels.GradeLevel)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TLMLanguages)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TLMLanguages.TLMLanguage)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TLMSubjects)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TLMSubjects.TLMSubject)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TLMGroups)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TLMGroups.TLMGroup)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TLMMaterialSets)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TLMMaterialSets.TLMMaterialSet)
+        </dd>
+        @if (Model.FileName != null)
+        {
+            <dt class="col-sm-2">
+                @Localizer["Document"]
+            </dt>
+            <dd class="col-sm-10">
+                <a target="_blank" href="@Model.Url">@Localizer["TLM Material"]</a>
+            </dd>
+        }
+    </dl>
+
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.CreatedDate?.ToLocalTime().ToString()
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ModifiedBy)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ModifiedBy)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.ModifiedDate?.ToLocalTime().ToString()
+        </dd>
+    </dl>
+</div>
+
+<div class="row">
+    <div class="col-sm-5">
+        <div class="card ">
+            <div class="card-header">
+                @Localizer["Upload TLM Material document"]
+            </div>
+            <div class="card-body">
+                <small class="text-muted card-text">@Localizer["Formats accepted: .pdf .doc .docx .jpeg .png"]</small><br />
+                <small class="text-muted card-text">@Localizer["Max file size: 50MB"]</small><br />
+                <form method="post" enctype="multipart/form-data" asp-controller="TLMMaterials" asp-action="Upload">
+                    <input type="hidden" name="id" value="@Model.TLMMaterialId" />
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" name="file" class="custom-file custom-file-input" id="inputGroupFile" aria-describedby="inputGroupFileAddon">
+                            <label class="custom-file-label" for="inputGroupFile">@Localizer["Choose file"]</label>
+                        </div>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary border" type="submit" id="inputGroupFileAddon"><i class="fas fa-upload"></i> @Localizer["Upload"]</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <!--footer buttons start-->
+    <div class="row mt-5">
+        <div class="col">
+            <a asp-action="Index" asp-route-id="@ViewBag.ParentId" class="btn btn-secondary mr-1"><i class="fas fa-chevron-left"></i> @Localizer["Back to List"]</a>
+            <a policy="RequireEditRole" asp-action="Edit" asp-route-id="@Model.TLMMaterialId" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> @Localizer["Edit"]</a>
+        </div>
+        <div class="col text-right"></div>
+    </div>
+    <!--footer buttons end-->
+</div>
+@section Styles {
+
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_DetailsScriptsPartial");}
+    <script>
+    $(document).ready(function () {
+
+        // Initialize bs-custom-file-input
+        bsCustomFileInput.init()
+    });
+    </script>
+}

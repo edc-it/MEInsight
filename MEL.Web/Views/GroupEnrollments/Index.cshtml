@@ -39,30 +39,34 @@
                 else
                 {
                     <!--create start-->
-                    <div class="btn-group btn-group-sm mb-2" role="group" aria-label="creategroup">
-                        <!--button group start-->
-                        <!--create button dropdown start-->
-                        <div policy="RequireCreateRole" class="btn-group btn-group-sm" role="group">
-                            <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-plus"></i> @Localizer["Create New"]
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="btnGroup1Drop1">
-                                <!--dropdown items by ParticipantType-->
-                                @foreach (var item in (IEnumerable<SelectListItem>)ViewBag.ParticipantTypeId)
-                                {
-                                    <a asp-action="Create" asp-route-OrganizationId="@ViewBag.OrganizationId" asp-controller="Participants" asp-route-GroupId="@ViewBag.ParentId" asp-route-RefParticipantTypeId="@item.Value" role="button" class="btn btn-primary dropdown-item">
-                                        <i class="fas fa-plus"></i> @Localizer["New"] @item.Text
-                                    </a>
-                                }
+            <div class="btn-group btn-group-sm mb-2" role="group" aria-label="creategroup">
+                <!--button group start-->
+                <!--create button dropdown start-->
+                <div policy="RequireCreateRole" class="btn-group btn-group-sm" role="group">
+                    <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-plus"></i> @Localizer["Create New"]
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="btnGroup1Drop1">
+                        <!--dropdown items by ParticipantType-->
+                        @foreach (var item in (IEnumerable<SelectListItem>)ViewBag.ParticipantTypeId)
+                        {
+                            <a asp-action="Create" asp-route-OrganizationId="@ViewBag.OrganizationId" asp-controller="Participants" asp-route-GroupId="@ViewBag.ParentId" asp-route-RefParticipantTypeId="@item.Value" role="button" class="btn btn-primary dropdown-item">
+                                <i class="fas fa-plus"></i> @Localizer["New"] @item.Text
+                            </a>
+                        }
 
-                            </div>
-                        </div>
-                        <!--create button dropdown end-->
-                        @*<a policy="RequireCreateRole" asp-route-id="@ViewBag.ParentId" asp-action="Enroll" class="btn btn-secondary"><i class="fas fa-user-plus"></i> @Localizer["Enroll Existing"]</a>*@
-                        <!--update attendance button start-->
-                        <a policy="RequireEditRole" asp-route-id="@ViewBag.ParentId" asp-action="Attendance" class="btn btn-secondary"><i class="far fa-calendar-alt"></i> @Localizer["Update Attendance"]</a>
-                        <!--update attendance button end-->
                     </div>
+                </div>
+                <!--enroll button start-->
+                <a policy="RequireCreateRole" asp-route-id="@ViewBag.ParentId" asp-action="Create" class="btn btn-primary"><i class="fas fa-user-plus"></i> @Localizer["Add Existing"]</a>
+                <!--enroll button end-->
+                <!--create button dropdown end-->
+                @*<a policy="RequireCreateRole" asp-route-id="@ViewBag.ParentId" asp-action="Enroll" class="btn btn-secondary"><i class="fas fa-user-plus"></i> @Localizer["Enroll Existing"]</a>*@
+                <!--update attendance button start-->
+                <a policy="RequireEditRole" asp-route-id="@ViewBag.ParentId" asp-action="Attendance" class="btn btn-secondary"><i class="far fa-calendar-alt"></i> @Localizer["Update Attendance"]</a>
+                <!--update attendance button end-->
+
+            </div>
                     <!--create end-->
 
                     <!--close button start-->
@@ -123,7 +127,7 @@
                         <th>
                             @Html.DisplayNameFor(model => model.EnrollmentStatus)
                         </th>
-                        @*<th class="text-right d-print-none">@Localizer["Actions"]</th>*@
+                        <th class="text-right d-print-none">@Localizer["Actions"]</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -148,7 +152,7 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.EnrollmentStatus.EnrollmentStatus)
                             </td>
-                            @*<td class="text-right d-print-none">
+                            <td class="text-right d-print-none">
                                 <div class="btn-group btn-group-sm" role="group" aria-label="Actions">
                                     <a asp-action="Details" asp-route-id="@item.GroupEnrollmentId"
                                        class="btn btn-link text-gray btn-sm d-print-none btn-action"
@@ -156,17 +160,27 @@
                                         <i class="fas fa-info-circle fa-sm" aria-hidden="true"></i>
                                     </a>
 
-                                    <a policy="RequireEditRole" asp-action="Edit" asp-route-id="@item.GroupEnrollmentId"
-                                       class="btn btn-link text-gray btn-sm d-print-none btn-action"
-                                       data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Edit"]'>
-                                        <i class="fas fa-pencil-alt fa-sm" aria-hidden="true"></i>
-                                    </a>
+                                    @if (ViewBag.Closed != true)
+                                    {
+                                        <a policy="RequireEditRole" asp-action="Edit" asp-route-id="@item.GroupEnrollmentId"
+                                           class="btn btn-link text-gray btn-sm d-print-none btn-action"
+                                           data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Edit"]'>
+                                            <i class="fas fa-pencil-alt fa-sm" aria-hidden="true"></i>
+                                        </a>
 
-                                    <a policy="RequireDeleteRole" asp-action="Delete" asp-route-id="@item.GroupEnrollmentId"
-                                       class="btn btn-link text-gray btn-sm d-print-none btn-action"
-                                       data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Delete"]'>
-                                        <i class="far fa-trash-alt fa-sm" aria-hidden="true"></i>
-                                    </a>
+                                        <a policy="RequireEditRole" asp-controller="Participants" asp-action="Edit" asp-route-id="@item.ParticipantId" asp-route-GroupId="@item.GroupId"
+                                           class="btn btn-link text-gray btn-sm d-print-none btn-action"
+                                           data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Edit"]'>
+                                            <i class="fas fa-user-edit fa-sm" aria-hidden="true"></i>
+                                        </a>
+
+                                        <a policy="RequireDeleteRole" asp-action="Delete" asp-route-id="@item.GroupEnrollmentId"
+                                           class="btn btn-link text-gray btn-sm d-print-none btn-action"
+                                           data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Delete"]'>
+                                            <i class="far fa-trash-alt fa-sm" aria-hidden="true"></i>
+                                        </a>
+                                    }
+
                                     @if (ViewBag.NextController != null)
                                     {
                                         <a asp-controller="@ViewBag.NextController"
@@ -178,7 +192,7 @@
                                         </a>
                                     }
                                 </div>
-                            </td>*@
+                            </td>
                         </tr>
                     }
                 </tbody>

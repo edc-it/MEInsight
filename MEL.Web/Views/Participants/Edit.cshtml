@@ -19,6 +19,7 @@
             @*[Remote] Validation to validate user input and verify if the Participant and Student Code already exists.*@
             <input type="hidden" value="@Model.ParticipantCode" name="ParticipantCodeInitialValue" />
             <input type="hidden" value="@Model.StudentCode" name="StudentCodeInitialValue" />
+            <input type="hidden" value="@ViewBag.GroupId" name="GroupId" />
 
             <div class="card mb-3">
                 <div class="card-header">
@@ -65,6 +66,16 @@
                         </div>
                     </div>
 
+                    <div class="form-group required" asp-enabled="RefParticipantCohortId">
+                        <!--fk select start-->
+                        <label asp-for="RefParticipantCohortId" class="control-label"></label>
+                        <select asp-for="RefParticipantCohortId" class="form-control custom-select" asp-items="ViewBag.RefParticipantCohortId">
+                            <option disabled selected></option>
+                        </select>
+                        <span asp-validation-for="RefParticipantCohortId" class="text-danger"></span>
+                        <!--fk select end-->
+                    </div>
+
                     <div class="form-group required" asp-enabled="ParticipantCode">
                         <!--input start-->
                         <label asp-for="ParticipantCode" class="control-label"></label>
@@ -104,6 +115,53 @@
                         </select>
                         <span asp-validation-for="RefSexId" class="text-danger"></span>
                         <!--fk select end-->
+                    </div>
+
+                    <!--date start-->
+                    <label asp-for="BirthDate" class="control-label"></label>
+                    <span class="text-muted small">(@System.Globalization.CultureInfo.CurrentUICulture)</span>
+                    <!-- use class .date to enable datepicker -->
+                    <div class="input-group date birthdate mb-2">
+                        <input asp-for="BirthDate" autocomplete="off" type="text" class="form-control" placeholder="@System.Globalization.DateTimeFormatInfo.CurrentInfo.ShortDatePattern" />
+                        <span class="input-group-append">
+                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                        </span>
+                    </div>
+                    <span asp-validation-for="BirthDate" class="text-danger"></span>
+                    <!--date end-->
+
+                    <div class="form-group" asp-enabled="Age">
+                        <!--input start-->
+                        <label asp-for="Age" class="control-label"></label>
+                        <input asp-for="Age" type="number" autocomplete="off" class="form-control" data-val="true" />
+                        <span asp-validation-for="Age" class="text-danger"></span>
+                        <!--input end-->
+                    </div>
+
+                    <div class="card" asp-enabled="DisabilityPanel">
+                        <div class="card-body pb-0">
+                            <div class="form-group">
+                                <label asp-for="Disability" class="control-label"></label>
+                                <div class="radio">
+                                    <label>@Html.RadioButton("Disability", "true") @Localizer["Yes"]</label>
+                                </div>
+                                <div class="radio">
+                                    <label>@Html.RadioButton("Disability", "false") @Localizer["No"]</label>
+                                </div>
+                                <span asp-validation-for="Disability" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group disabilityoptions" asp-enabled="RefStudentDisabilityTypeId">
+                                <!--fk select start-->
+                                <label asp-for="RefDisabilityTypeId" class="control-label"></label>
+                                <select asp-for="RefDisabilityTypeId" class="form-control custom-select" asp-items="ViewBag.RefDisabilityTypeId">
+                                    <option disabled selected></option>
+                                </select>
+                                <span asp-validation-for="RefDisabilityTypeId" class="text-danger"></span>
+                                <!--fk select end-->
+                            </div>
+
+                        </div>
                     </div>
 
                     <div class="form-group" asp-enabled="Phone">
@@ -147,10 +205,10 @@
                     </div>
 
                     @*
-                RefLocation is a self-referencing table with hierarchical (geo)locations.
-                This foreach dynamically generates each required location input by location level
-                i.e. Country -> Province -> District or Level1 -> Level2 -> Level 3 (LocationTypes by level)
-                Only the last level RefLocationId is saved on this record.
+        RefLocation is a self-referencing table with hierarchical (geo)locations.
+        This foreach dynamically generates each required location input by location level
+        i.e. Country -> Province -> District or Level1 -> Level2 -> Level 3 (LocationTypes by level)
+        Only the last level RefLocationId is saved on this record.
                     *@
                     @{
                         // If RefLocationId is enabled
@@ -249,6 +307,7 @@
                                     <!--fk select start-->
                                     <label asp-for="RefStudentTypeId" class="control-label"></label>
                                     <select asp-for="RefStudentTypeId" class="form-control custom-select" asp-items="ViewBag.RefStudentTypeId">
+                                        <option disabled selected></option>
                                     </select>
                                     <span asp-validation-for="RefStudentTypeId" class="text-danger"></span>
                                     <!--fk select end-->
@@ -258,30 +317,20 @@
                                     <!--fk select start-->
                                     <label asp-for="RefStudentSpecializationId" class="control-label"></label>
                                     <select asp-for="RefStudentSpecializationId" class="form-control custom-select" asp-items="ViewBag.RefStudentSpecializationId">
+                                        <option disabled selected></option>
                                     </select>
                                     <span asp-validation-for="RefStudentSpecializationId" class="text-danger"></span>
                                     <!--fk select end-->
                                 </div>
 
-                                <!--date start-->
-                                <label asp-for="BirthDate" class="control-label"></label>
-                                <span class="text-muted small">(@System.Globalization.CultureInfo.CurrentUICulture)</span>
-                                <!-- use class .date to enable datepicker -->
-                                <div class="input-group date birthdate mb-2">
-                                    <input asp-for="BirthDate" autocomplete="off" type="text" class="form-control" placeholder="@System.Globalization.DateTimeFormatInfo.CurrentInfo.ShortDatePattern" />
-                                    <span class="input-group-append">
-                                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                    </span>
-                                </div>
-                                <span asp-validation-for="BirthDate" class="text-danger"></span>
-                                <!--date end-->
-
-                                <div class="form-group" asp-enabled="Age">
-                                    <!--input start-->
-                                    <label asp-for="Age" class="control-label"></label>
-                                    <input asp-for="Age" type="number" autocomplete="off" class="form-control" data-val="true" />
-                                    <span asp-validation-for="Age" class="text-danger"></span>
-                                    <!--input end-->
+                                <div class="form-group" asp-enabled="RefStudentYearOfStudyId">
+                                    <!--fk select start-->
+                                    <label asp-for="RefStudentYearOfStudyId" class="control-label"></label>
+                                    <select asp-for="RefStudentYearOfStudyId" class="form-control custom-select" asp-items="ViewBag.RefStudentYearOfStudyId">
+                                        <option disabled selected></option>
+                                    </select>
+                                    <span asp-validation-for="RefStudentYearOfStudyId" class="text-danger"></span>
+                                    <!--fk select end-->
                                 </div>
 
                                 <div class="form-group" asp-enabled="ParentGuardian">
@@ -290,32 +339,6 @@
                                     <input asp-for="ParentGuardian" autocomplete="off" class="form-control" />
                                     <span asp-validation-for="ParentGuardian" class="text-danger"></span>
                                     <!--input end-->
-                                </div>
-
-                                <div class="card" asp-enabled="DisabilityPanel">
-                                    <div class="card-body pb-0">
-                                        <div class="form-group">
-                                            <label asp-for="Disability" class="control-label"></label>
-                                            <div class="radio">
-                                                <label>@Html.RadioButton("Disability", "true") @Localizer["Yes"]</label>
-                                            </div>
-                                            <div class="radio">
-                                                <label>@Html.RadioButton("Disability", "false") @Localizer["No"]</label>
-                                            </div>
-                                            <span asp-validation-for="Disability" class="text-danger"></span>
-                                        </div>
-
-                                        <div class="form-group disabilityoptions" asp-enabled="RefStudentDisabilityTypeId">
-                                            <!--fk select start-->
-                                            <label asp-for="RefStudentDisabilityTypeId" class="control-label"></label>
-                                            <select asp-for="RefStudentDisabilityTypeId" class="form-control custom-select" asp-items="ViewBag.RefStudentDisabilityTypeId">
-                                                <option disabled selected></option>
-                                            </select>
-                                            <span asp-validation-for="RefStudentDisabilityTypeId" class="text-danger"></span>
-                                            <!--fk select end-->
-                                        </div>
-
-                                    </div>
                                 </div>
 
                             </div>
@@ -342,6 +365,7 @@
                                     <!--fk select start-->
                                     <label asp-for="RefTeacherTypeId" class="control-label"></label>
                                     <select asp-for="RefTeacherTypeId" class="form-control custom-select" asp-items="ViewBag.RefTeacherTypeId">
+                                        <option disabled selected></option>
                                     </select>
                                     <span asp-validation-for="RefTeacherTypeId" class="text-danger"></span>
                                     <!--fk select end-->
@@ -351,8 +375,19 @@
                                     <!--fk select start-->
                                     <label asp-for="RefTeacherPositionId" class="control-label"></label>
                                     <select asp-for="RefTeacherPositionId" class="form-control custom-select" asp-items="ViewBag.RefTeacherPositionId">
+                                        <option disabled selected></option>
                                     </select>
                                     <span asp-validation-for="RefTeacherPositionId" class="text-danger"></span>
+                                    <!--fk select end-->
+                                </div>
+
+                                <div class="form-group" asp-enabled="RefTeacherEmploymentTypeId">
+                                    <!--fk select start-->
+                                    <label asp-for="RefTeacherEmploymentTypeId" class="control-label"></label>
+                                    <select asp-for="RefTeacherEmploymentTypeId" class="form-control custom-select" asp-items="ViewBag.RefTeacherEmploymentTypeId">
+                                        <option disabled selected></option>
+                                    </select>
+                                    <span asp-validation-for="RefTeacherEmploymentTypeId" class="text-danger"></span>
                                     <!--fk select end-->
                                 </div>
 
@@ -387,6 +422,7 @@
                                     <!--fk select start-->
                                     <label asp-for="RefEducationAdministratorTypeId" class="control-label"></label>
                                     <select asp-for="RefEducationAdministratorTypeId" class="form-control custom-select" asp-items="ViewBag.RefEducationAdministratorTypeId">
+                                        <option disabled selected></option>
                                     </select>
                                     <span asp-validation-for="RefEducationAdministratorTypeId" class="text-danger"></span>
                                     <!--fk select end-->
@@ -396,6 +432,7 @@
                                     <!--fk select start-->
                                     <label asp-for="RefEducationAdministratorPositionId" class="control-label"></label>
                                     <select asp-for="RefEducationAdministratorPositionId" class="form-control custom-select" asp-items="ViewBag.RefEducationAdministratorPositionId">
+                                        <option disabled selected></option>
                                     </select>
                                     <span asp-validation-for="RefEducationAdministratorPositionId" class="text-danger"></span>
                                     <!--fk select end-->
@@ -405,6 +442,7 @@
                                     <!--fk select start-->
                                     <label asp-for="RefEducationAdministratorOfficeId" class="control-label"></label>
                                     <select asp-for="RefEducationAdministratorOfficeId" class="form-control custom-select" asp-items="ViewBag.RefEducationAdministratorOfficeId">
+                                        <option disabled selected></option>
                                     </select>
                                     <span asp-validation-for="RefEducationAdministratorOfficeId" class="text-danger"></span>
                                     <!--fk select end-->
@@ -417,9 +455,19 @@
 
             <!-- button group start -->
             <div class="form-group text-right mt-5">
-                <a id="cancelbutton" class="btn btn-secondary mr-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
-                    <i class="fas fa-times"></i> @Localizer["Cancel"]
-                </a>
+                @if (ViewBag.GroupId == null)
+                {
+                    <a id="cancelbutton" class="btn btn-secondary mr-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
+                        <i class="fas fa-times"></i> @Localizer["Cancel"]
+                    </a>
+                }
+                else
+                {
+                    <a id="cancelbutton" class="btn btn-secondary mr-2" asp-action="Index" asp-controller="GroupEnrollments" asp-route-id="@ViewBag.GroupId">
+                        <i class="fas fa-times"></i> @Localizer["Cancel"]
+                    </a>
+                }
+
                 <button id="submitbutton" type="submit" value="Save" class="btn btn-primary ladda-button" data-style="expand-left" data-spinner-color="white">
                     <span class="ladda-label">
                         <i class="fas fa-check"></i> @Localizer["Save"]
@@ -510,7 +558,7 @@
                 data.instance.select_node(['@Model.OrganizationId'], true);
                 //$('#OrganizationId').val(data.selected);
                 $('#SelectedOrganizationId').html(data.instance.get_selected(true)[0].text);
-                
+
             });
 
             @*  On Edit page load, pre-populate each RefLocation level chained select.
@@ -668,7 +716,7 @@
             });
 
         });
-            
+
     </script>
 
 }

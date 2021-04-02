@@ -14,6 +14,7 @@ namespace MEL.Entities.Reference
         public RefGradeLevel()
         {
             this.SchoolEnrollments = new HashSet<SchoolEnrollment>();
+            this.SchoolClassrooms = new HashSet<SchoolClassroom>();
             this.TLMMaterials = new HashSet<TLMMaterial>();
             this.Groups = new HashSet<Group>();
         }
@@ -43,6 +44,7 @@ namespace MEL.Entities.Reference
         public string GradeLevelId { get; set; }
 
         public virtual ICollection<SchoolEnrollment> SchoolEnrollments { get; set; }
+        public virtual ICollection<SchoolClassroom> SchoolClassrooms { get; set; }
         public virtual ICollection<TLMMaterial> TLMMaterials { get; set; }
         public virtual ICollection<Group> Groups { get; set; }
     }

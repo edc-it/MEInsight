@@ -46,6 +46,9 @@
                 <thead>
                     <tr>
                         <th>
+                            @Html.DisplayNameFor(model => model.RefSchoolClusterId)
+                        </th>
+                        <th>
                             @Html.DisplayNameFor(model => model.SchoolClusterCode)
                         </th>
                         <th>
@@ -61,6 +64,9 @@
                     @foreach (var item in Model)
                     {
                         <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RefSchoolClusterId)
+                            </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.SchoolClusterCode)
                             </td>

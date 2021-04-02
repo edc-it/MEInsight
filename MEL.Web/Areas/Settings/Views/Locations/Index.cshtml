@@ -1,4 +1,4 @@
-@model IEnumerable<MEL.Entities.Reference.RefLocation>
+@model IEnumerable<MEL.Web.Areas.Settings.Models.ViewModels.LocationsViewModel>
 
 @{
     ViewData["Title"] = @Localizer["Location"].Value + " " + @Localizer["List"].Value;
@@ -46,19 +46,22 @@
                 <thead>
                     <tr>
                         <th>
+                            @Html.DisplayNameFor(model => model.RefLocationId)
+                        </th>
+                        <th>
                             @Html.DisplayNameFor(model => model.LocationName)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Latitude)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Longitude)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.LocationTypes)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.ParentLocations)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Latitude)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Longitude)
                         </th>
                         <th class="text-right d-print-none">@Localizer["Actions"]</th>
                     </tr>
@@ -68,19 +71,35 @@
                     {
                         <tr>
                             <td>
+                                @if (ViewBag.NextController != null && ViewBag.MaxLocationLevel != item.LocationLevel)
+                                {
+                                    <a asp-controller="@ViewBag.NextController"
+                                       asp-action="Index"
+                                       asp-route-id="@item.RefLocationId"
+                                       class="btn btn-link btn-sm d-print-none btn-action text-uppercase"
+                                       data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Open"]'>
+                                        @Html.DisplayFor(modelItem => item.RefLocationId)
+                                    </a>
+                                }
+                                else
+                                {
+                                    @Html.DisplayFor(modelItem => item.RefLocationId)
+                                }
+                            </td>
+                            <td>
                                 @Html.DisplayFor(modelItem => item.LocationName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LocationType)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ParentLocation)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Latitude)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Longitude)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.LocationTypes.LocationType)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ParentLocations.RefLocationId)
                             </td>
                             <td class="text-right d-print-none">
                                 <div class="btn-group btn-group-sm" role="group" aria-label="Actions">
@@ -101,7 +120,7 @@
                                        data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Delete"]'>
                                         <i class="far fa-trash-alt fa-sm" aria-hidden="true"></i>
                                     </a>
-                                    @if (ViewBag.NextController != null)
+                                    @if (ViewBag.NextController != null && ViewBag.MaxLocationLevel != item.LocationLevel)
                                     {
                                         <a asp-controller="@ViewBag.NextController"
                                            asp-action="Index"
@@ -132,7 +151,15 @@
     <!--footer buttons start-->
     <div class="row mt-5">
         <div class="col">
-            <a asp-controller="Home" asp-area="Settings" asp-action="Index" class="btn btn-secondary"><i class="fas fa-chevron-left"></i> @Localizer["Back"]</a>
+            @if (ViewBag.ParentId == null)
+            {
+                <a asp-controller="Home" asp-area="Settings" asp-action="Index" class="btn btn-secondary"><i class="fas fa-chevron-left"></i> @Localizer["Back"]</a>
+            }
+            else
+            {
+                <a asp-controller="Locations" asp-area="Settings" asp-action="Index" asp-route-id="@ViewBag.BackParentId" class="btn btn-secondary"><i class="fas fa-chevron-left"></i> @Localizer["Back"]</a>
+            }
+
         </div>
         <div class="col text-right"></div>
     </div>

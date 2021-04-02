@@ -46,6 +46,9 @@
                 <thead>
                     <tr>
                         <th>
+                            @Html.DisplayNameFor(model => model.RefGradeLevelId)
+                        </th>
+                        <th>
                             @Html.DisplayNameFor(model => model.GradeLevelCode)
                         </th>
                         <th>
@@ -61,6 +64,9 @@
                     @foreach (var item in Model)
                     {
                         <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RefGradeLevelId)
+                            </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.GradeLevelCode)
                             </td>

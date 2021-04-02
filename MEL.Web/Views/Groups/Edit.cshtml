@@ -18,10 +18,9 @@
 
             <input type="hidden" asp-for="Url" />
             <input type="hidden" asp-for="FileName" />
-            <input type="hidden" asp-for="ProgramId" />
 
             @*[Remote] Validation to validate user input and verify if the Organization Code already exists.*@
-            <input type="hidden" value="@Model.GroupCode" name="InitialValue" />
+            <input type="hidden" value="@Model.GroupCode" name="GroupCodeInitialValue" />
 
             @* Allows RequireMELRol to change/move the Group to a different Organization *@
             @if (AuthorizationService.AuthorizeAsync(User, "RequireMELRole").GetAwaiter().GetResult().Succeeded)
@@ -141,7 +140,7 @@
             <div class="form-group" asp-enabled="ParticipantId">
                 <!--fk select start-->
                 <label asp-for="ParticipantId" class="control-label"></label>
-                <select asp-for="ParticipantId" class="form-control custom-select" asp-items="ViewBag.ParticipantId">
+                <select asp-for="ParticipantId" class="form-control custom-select select2" asp-items="ViewBag.ParticipantId">
                 </select>
                 <span asp-validation-for="ParticipantId" class="text-danger"></span>
                 <!--fk select end-->

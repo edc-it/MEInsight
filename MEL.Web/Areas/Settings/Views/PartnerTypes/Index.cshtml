@@ -46,6 +46,9 @@
                 <thead>
                     <tr>
                         <th>
+                            @Html.DisplayNameFor(model => model.RefPartnerTypeId)
+                        </th>
+                        <th>
                             @Html.DisplayNameFor(model => model.PartnerTypeCode)
                         </th>
                         <th>
@@ -58,6 +61,9 @@
                     @foreach (var item in Model)
                     {
                         <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RefPartnerTypeId)
+                            </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.PartnerTypeCode)
                             </td>

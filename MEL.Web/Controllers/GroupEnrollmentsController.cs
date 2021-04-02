@@ -30,7 +30,6 @@ namespace MEL.Web.Controllers
         public async Task<IActionResult> Index(Guid? id)
         {
         
-            ViewData["NextController"] = "GroupEvaluations";
             ViewData["ParentController"] = "Groups";
             ViewData["ParentId"] = id;
 
@@ -113,7 +112,7 @@ namespace MEL.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Attendance(List<GroupEnrollment> attendance, Guid? id, Guid? groupEnrollmentId)
+        public async Task<IActionResult> Attendance(List<GroupEnrollment> attendance, Guid? id)
         {
             ViewData["ParentId"] = id;
 
@@ -153,20 +152,21 @@ namespace MEL.Web.Controllers
                 .Include(g => g.Groups)
                 .Include(g => g.Participants)
                 .FirstOrDefaultAsync(m => m.GroupEnrollmentId == id);
-            
+
             if (groupEnrollment == null)
             {
                 return NotFound();
             }
 
             ViewData["ParentId"] = groupEnrollment.GroupId;
+            ViewData["Closed"] = groupEnrollment.Groups.Closed;
 
             return View(groupEnrollment);
         }
 
         // GET: GroupEnrollments/Create
         [Authorize(Policy = "RequireCreateRole")]
-        public IActionResult Create(Guid? id)
+        public async Task<IActionResult> Create(Guid? id)
         {
 
             if (id == null)
@@ -174,8 +174,40 @@ namespace MEL.Web.Controllers
                 return NotFound();
             }
 
+            // *** For JSTree ***
+            //Logged User OrganizationId
+            Guid? userOrganizacionId = (await _userManager.GetUserAsync(HttpContext.User))?.OrganizationId;
+
+            if (userOrganizacionId == null)
+            {
+                return NotFound();
+            }
+
+            //Get Logged User Organization
+            var organization = await _context.Organizations
+                    .SingleOrDefaultAsync(o => o.OrganizationId == userOrganizacionId);
+
+            if (organization == null)
+            {
+                return NotFound();
+            }
+
+            //Returns the top hiearchy organization for JSTree
+            ViewData["ParentOrganizationId"] = organization.OrganizationId;
+
+            //Get OrganizationId to filter only the Participants from the Group.Organization
+            var group = _context.Groups
+                .Where(t => t.GroupId == id)
+                .FirstOrDefault();
+
+            ViewData["CurrentOrganizationId"] = group.OrganizationId;
+            ViewData["Group"] = group;
+
+            ViewData["GroupStartDate"] = group.StartDate.ToShortDateString();
+            ViewData["GroupEndDate"] = group.EndDate?.ToShortDateString();
+
             ViewData["ParentId"] = id;
-            ViewData["RefEnrollmentStatusId"] = new SelectList(_context.EnrollmentStatus, "EnrollmentStatusId", "EnrollmentStatus");
+            ViewData["RefEnrollmentStatusId"] = new SelectList(_context.EnrollmentStatus, "RefEnrollmentStatusId", "EnrollmentStatus");
             ViewData["GroupId"] = new SelectList(_context.Groups, "GroupId", "GroupCode");
             ViewData["ParticipantId"] = new SelectList(_context.Participants, "ParticipantId", "FirstName");
             return View();
@@ -184,12 +216,30 @@ namespace MEL.Web.Controllers
         // POST: GroupEnrollments/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("GroupEnrollmentId,GroupId,ParticipantId,EnrollmentDate,Attendance,StatusDate,RefEnrollmentStatusId")] GroupEnrollment groupEnrollment)
+        public async Task<IActionResult> Create(Guid?[] ParticipantId, DateTime? EnrollmentDate, Guid GroupId)
+        //public async Task<IActionResult> Create([Bind("GroupEnrollmentId,GroupId,ParticipantId,EnrollmentDate,Attendance,StatusDate,RefEnrollmentStatusId")] GroupEnrollment groupEnrollment)
         {
             if (ModelState.IsValid)
             {
-                groupEnrollment.GroupEnrollmentId = Guid.NewGuid();
-                _context.Add(groupEnrollment);
+
+                var group = await _context.Groups
+                   .Include(x => x.Programs)
+                   .Where(x => x.GroupId == GroupId)
+                   .FirstOrDefaultAsync();
+
+                foreach (var item in ParticipantId)
+                {
+                    GroupEnrollment groupEnrollment = new GroupEnrollment
+                    {
+                        GroupEnrollmentId = Guid.NewGuid(),
+                        ParticipantId = item.Value,
+                        EnrollmentDate = EnrollmentDate,
+                        RefEnrollmentStatusId = 1,
+                        GroupId = GroupId,
+                    };
+                    _context.Add(groupEnrollment);
+                }
+
                 await _context.SaveChangesAsync();
                 
                 TempData["messageType"] = "success";
@@ -197,13 +247,13 @@ namespace MEL.Web.Controllers
                 TempData["message"] = "New record successfully created";
                 
                 //return RedirectToAction(nameof(Index));
-                return RedirectToAction(nameof(Index), new { id = groupEnrollment.GroupId });
+                return RedirectToAction(nameof(Index), new { id = group.GroupId });
             }
-            ViewData["RefEnrollmentStatusId"] = new SelectList(_context.EnrollmentStatus, "EnrollmentStatusId", "EnrollmentStatus", groupEnrollment.RefEnrollmentStatusId);
-            ViewData["GroupId"] = new SelectList(_context.Groups, "GroupId", "GroupCode", groupEnrollment.GroupId);
-            ViewData["ParticipantId"] = new SelectList(_context.Participants, "ParticipantId", "FirstName", groupEnrollment.ParticipantId);
-            ViewData["ParentId"] = groupEnrollment.GroupId;
-            return View(groupEnrollment);
+            //ViewData["RefEnrollmentStatusId"] = new SelectList(_context.EnrollmentStatus, "RefEnrollmentStatusId", "EnrollmentStatus", groupEnrollment.RefEnrollmentStatusId);
+            //ViewData["GroupId"] = new SelectList(_context.Groups, "GroupId", "GroupCode", groupEnrollment.GroupId);
+            //ViewData["ParticipantId"] = new SelectList(_context.Participants, "ParticipantId", "FirstName", groupEnrollment.ParticipantId);
+            //ViewData["ParentId"] = groupEnrollment.GroupId;
+            return View();
         }
 
         // GET: GroupEnrollments/Edit/5
@@ -215,16 +265,19 @@ namespace MEL.Web.Controllers
                 return NotFound();
             }
 
-            var groupEnrollment = await _context.GroupEnrollments.FindAsync(id);
+            var groupEnrollment = await _context.GroupEnrollments
+                .Include(x => x.Groups)
+                .Where(x => x.GroupEnrollmentId == id)
+                .FirstOrDefaultAsync();
 
             if (groupEnrollment == null)
             {
                 return NotFound();
             }
             ViewData["ParentId"] = groupEnrollment.GroupId;
-            ViewData["RefEnrollmentStatusId"] = new SelectList(_context.EnrollmentStatus, "EnrollmentStatusId", "EnrollmentStatus", groupEnrollment.RefEnrollmentStatusId);
-            ViewData["GroupId"] = new SelectList(_context.Groups, "GroupId", "GroupCode", groupEnrollment.GroupId);
-            ViewData["ParticipantId"] = new SelectList(_context.Participants, "ParticipantId", "FirstName", groupEnrollment.ParticipantId);
+            ViewData["RefEnrollmentStatusId"] = new SelectList(_context.EnrollmentStatus, "RefEnrollmentStatusId", "EnrollmentStatus", groupEnrollment.RefEnrollmentStatusId);
+            ViewData["GroupId"] = new SelectList(_context.Groups
+                .Where(x => x.OrganizationId == groupEnrollment.Groups.OrganizationId), "GroupId", "GroupName", groupEnrollment.GroupId);
             return View(groupEnrollment);
         }
 
@@ -264,7 +317,7 @@ namespace MEL.Web.Controllers
                 //return RedirectToAction(nameof(Index));                
                 return RedirectToAction(nameof(Index), new { id = groupEnrollment.GroupId });
             }
-            ViewData["RefEnrollmentStatusId"] = new SelectList(_context.EnrollmentStatus, "EnrollmentStatusId", "EnrollmentStatus", groupEnrollment.RefEnrollmentStatusId);
+            ViewData["RefEnrollmentStatusId"] = new SelectList(_context.EnrollmentStatus, "RefEnrollmentStatusId", "EnrollmentStatus", groupEnrollment.RefEnrollmentStatusId);
             ViewData["GroupId"] = new SelectList(_context.Groups, "GroupId", "GroupCode", groupEnrollment.GroupId);
             ViewData["ParticipantId"] = new SelectList(_context.Participants, "ParticipantId", "FirstName", groupEnrollment.ParticipantId);
             ViewData["ParentId"] = groupEnrollment.GroupId;

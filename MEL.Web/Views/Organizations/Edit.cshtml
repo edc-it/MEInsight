@@ -111,7 +111,7 @@
                 {
                     <div class="form-group required">
                         <label class="control-label">@item.LocationType</label>
-                        <select class="form-control required" data-locationlevel="@item.LocationLevel" id="RefLocation@{@item.LocationLevel}Id" name="RefLocationId[@i]" data-val="true" asp-items="@ViewBag.RefLocationId" required>
+                        <select class="form-control" data-locationlevel="@item.LocationLevel" id="RefLocation@{@item.LocationLevel}Id" name="RefLocationId[@i]" data-val="true" asp-items="@ViewBag.RefLocationId" required>
                             <option disabled selected></option>
                         </select>
                         <span class="text-danger field-validation-valid" data-valmsg-for="RefLocation@{@item.LocationLevel}Id" data-valmsg-replace="true"></span>
@@ -123,7 +123,7 @@
                     {
                         <div class="form-group required">
                             <label class="control-label">@item.LocationType</label>
-                            <select class="form-control required" data-locationlevel="@item.LocationLevel" id="RefLocation@{@item.LocationLevel}Id" name="RefLocationId[@i]" data-val="true">
+                            <select class="form-control" data-locationlevel="@item.LocationLevel" id="RefLocation@{@item.LocationLevel}Id" name="RefLocationId[@i]" data-val="true">
                                 <option disabled selected></option>
                             </select>
                             <span class="text-danger field-validation-valid" data-valmsg-for="RefLocationId" data-valmsg-replace="true"></span>
@@ -135,7 +135,7 @@
                         {
                             <div class="form-group required">
                                 <label class="control-label">@item.LocationType</label>
-                                <select class="form-control required" data-locationlevel="@item.LocationLevel" id="RefLocation@{@item.LocationLevel}Id" name="RefLocationId[@i]" data-val="true">
+                                <select class="form-control" data-locationlevel="@item.LocationLevel" id="RefLocation@{@item.LocationLevel}Id" name="RefLocationId[@i]" data-val="true">
                                     <option disabled selected></option>
                                 </select>
                                 <span class="text-danger field-validation-valid" data-valmsg-for="RefLocation@{@item.LocationLevel}Id" data-valmsg-replace="true"></span>
@@ -145,7 +145,7 @@
                         {
                             <div class="form-group required">
                                 <label class="control-label">@item.LocationType</label>
-                                <select class="form-control required" data-locationlevel="@item.LocationLevel" id="RefLocation@{@item.LocationLevel}Id" name="RefLocationId[@i]" data-val="true">
+                                <select class="form-control" data-locationlevel="@item.LocationLevel" id="RefLocation@{@item.LocationLevel}Id" name="RefLocationId[@i]" data-val="true">
                                     <option disabled selected></option>
                                 </select>
                                 <span class="text-danger field-validation-valid" data-valmsg-for="RefLocation@{@item.LocationLevel}Id" data-valmsg-replace="true"></span>
@@ -156,7 +156,7 @@
                 i++;
             }
 
-            @if (AuthorizationService.AuthorizeAsync(User, "RequireMELRole").GetAwaiter().GetResult().Succeeded)
+            @if (AuthorizationService.AuthorizeAsync(User, "RequireMELRole").GetAwaiter().GetResult().Succeeded && Model.IsTenant != true )
             {
                 <div class="card my-3">
                     <div class="card-header">@Localizer["M&E options:"]</div>

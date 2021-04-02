@@ -10,6 +10,12 @@ namespace MEL.Entities.Core
 {
     public class School : BaseEntity
     {
+        public School()
+        {
+            this.SchoolEnrollments = new HashSet<SchoolEnrollment>();
+            this.SchoolClassrooms = new HashSet<SchoolClassroom>();
+        }
+
         [Key]
         [Required(ErrorMessage = "The {0} field is required.")]
         [Display(Name = "Organization")]
@@ -30,29 +36,33 @@ namespace MEL.Entities.Core
         [Column(Order = 3)]
         public int? RefSchoolLocationId { get; set; }
 
-        [Display(Name = "School Administration Type")]
+        [Display(Name = "School Language")]
         [Column(Order = 4)]
+        public int? RefSchoolLanguageId { get; set; }
+
+        [Display(Name = "School Administration Type")]
+        [Column(Order = 5)]
         public int? RefSchoolAdministrationTypeId { get; set; }
 
         [Display(Name = "Partner")]
-        [Column(Order = 5)]
+        [Column(Order = 6)]
         public Guid? PartnerId { get; set; }
 
         [Display(Name = "Is Cluster Center?")]
-        [Column(Order = 6)]
+        [Column(Order = 7)]
         public bool? IsClusterCenter { get; set; }
 
         [Display(Name = "School Cluster")]
-        [Column(Order = 7)]
+        [Column(Order = 8)]
         public int? RefSchoolClusterId { get; set; }
 
         [Display(Name = "School Status")]
-        [Column(Order = 8)]
+        [Column(Order = 9)]
         public int? RefSchoolStatusId { get; set; }
 
         [MaxLength(150)]
         [Display(Name = "HeadTeacher")]
-        [Column(Order = 9)]
+        [Column(Order = 10)]
         public string HeadTeacher { get; set; }
 
         // Navigation properties
@@ -67,6 +77,10 @@ namespace MEL.Entities.Core
         [ForeignKey("RefSchoolLocationId")]
         [Display(Name = "School Location")]
         public virtual RefSchoolLocation SchoolLocations { get; set; }
+
+        [ForeignKey("RefSchoolLanguageId")]
+        [Display(Name = "School Language")]
+        public virtual RefSchoolLanguage SchoolLanguages { get; set; }
 
         [ForeignKey("RefSchoolAdministrationTypeId")]
         [Display(Name = "School Administration Type")]
@@ -83,6 +97,9 @@ namespace MEL.Entities.Core
         [ForeignKey("RefSchoolStatusId")]
         [Display(Name = "Status")]
         public virtual RefSchoolStatus SchoolStatus { get; set; }
+
+        public virtual ICollection<SchoolEnrollment> SchoolEnrollments { get; set; }
+        public virtual ICollection<SchoolClassroom> SchoolClassrooms { get; set; }
 
     }
 }

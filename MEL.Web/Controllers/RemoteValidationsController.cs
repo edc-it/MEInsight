@@ -192,6 +192,28 @@ namespace MEL.Web.Controllers
 
             return Json(true);
         }
+
+        /// <summary>
+        /// Uses [Remote] to validate user input and verify if the TLM Material Code already exists in the database.
+        /// </summary>
+        /// <param name="TLMMaterialCode"></param>
+        /// <param name="TLMMaterialCodeInitialValue"></param>
+        /// <returns>false (not valid) if code already exists</returns>
+        [AcceptVerbs("Post")]
+        public IActionResult VerifyTLMMaterialCode(string TLMMaterialCode, string TLMMaterialCodeInitialValue)
+        {
+            if (TLMMaterialCode == TLMMaterialCodeInitialValue)
+            {
+                return Json(true);
+            }
+
+            if (_context.TLMMaterials.Any(e => e.TLMMaterialCode == TLMMaterialCode))
+            {
+                return Json(false);
+            }
+
+            return Json(true);
+        }
     }
 }
 

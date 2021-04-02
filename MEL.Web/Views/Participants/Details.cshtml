@@ -23,6 +23,12 @@
                     @Html.DisplayFor(model => model.RegistrationDate)
                 </dd>
                 <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.ParticipantCohorts)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.ParticipantCohorts.ParticipantCohort)
+                </dd>
+                <dt class="col-sm-2">
                     @Html.DisplayNameFor(model => model.ParticipantCode)
                 </dt>
                 <dd class="col-sm-10">
@@ -101,6 +107,31 @@
                     @Html.DisplayFor(model => model.Sex.Sex)
                 </dd>
                 <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.BirthDate)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.BirthDate)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Age)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Age)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Disability)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Disability)
+                </dd>
+
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DisabilityTypes)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DisabilityTypes.DisabilityType)
+                </dd>
+                <dt class="col-sm-2">
                     @Html.DisplayNameFor(model => model.Locations)
                 </dt>
                 <dd class="col-sm-10">
@@ -126,28 +157,10 @@
                         @Html.DisplayFor(model => model.StudentCode)
                     </dd>
                     <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.BirthDate)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.BirthDate)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Age)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Age)
-                    </dd>
-                    <dt class="col-sm-2">
                         @Html.DisplayNameFor(model => model.ParentGuardian)
                     </dt>
                     <dd class="col-sm-10">
                         @Html.DisplayFor(model => model.ParentGuardian)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Disability)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Disability)
                     </dd>
                     <dt class="col-sm-2">
                         @Html.DisplayNameFor(model => model.StudentTypes)
@@ -162,16 +175,10 @@
                         @Html.DisplayFor(model => model.StudentSpecializations.StudentSpecialization)
                     </dd>
                     <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.DisabilityTypes)
+                        @Html.DisplayNameFor(model => model.StudentYearOfStudies)
                     </dt>
                     <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.DisabilityTypes.DisabilityType)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Participants)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Participants.FirstName)
+                        @Html.DisplayFor(model => model.StudentYearOfStudies.StudentYearOfStudy)
                     </dd>
                 </dl>
             </div>
@@ -203,6 +210,12 @@
                     </dt>
                     <dd class="col-sm-10">
                         @Html.DisplayFor(model => model.TeacherPositions.TeacherPosition)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.TeacherEmploymentTypes)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.TeacherEmploymentTypes.TeacherEmploymentType)
                     </dd>
                 </dl>
             </div>

@@ -13,7 +13,6 @@ namespace MEL.Entities.Reference
         {
             this.Participants = new HashSet<Participant>();
             this.SchoolEnrollments = new HashSet<SchoolEnrollment>();
-
         }
 
         [Key]
@@ -37,5 +36,6 @@ namespace MEL.Entities.Reference
 
         public virtual ICollection<Participant> Participants { get; set; }
         public virtual ICollection<SchoolEnrollment> SchoolEnrollments { get; set; }
+
     }
 }

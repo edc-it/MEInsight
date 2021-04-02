@@ -62,6 +62,7 @@ namespace MEL.Web.ViewComponents
                         Organization = organization.OrganizationName,
                         OrganizationCode = organization.OrganizationCode,
                         IsOrganizationUnit = organization.IsOrganizationUnit,
+                        IsTenant = organization.IsTenant,
                         OrganizationParent = (IEnumerable<OrganizationParent>)organizationParents,
                         LocationParent = (IEnumerable<LocationParent>)organizationLocations
                     };
