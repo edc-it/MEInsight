@@ -249,7 +249,7 @@ namespace MEL.Data
 
             foreach (var entry in ChangeTracker.Entries())
             {
-                if (entry.Entity is BaseEntity baseEntity)
+                if (entry.Entity is BaseEntity)
                 {
                     switch (entry.State)
                     {

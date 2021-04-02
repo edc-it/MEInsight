@@ -33,19 +33,19 @@ namespace MEL.Data
 
 
             // Seed database
-			// Create Organization Types (required to create the default Organization)
-			if (!_context.OrganizationTypes.Any())
-			{
-				var refOrganizationType = new RefOrganizationType[]
-				{
-					new RefOrganizationType{ RefOrganizationTypeId = 1, OrganizationTypeCode = "OU", OrganizationType = "Organization Unit" },
-					new RefOrganizationType{ RefOrganizationTypeId = 2, OrganizationTypeCode = "School", OrganizationType = "School" }
-				};
+            // Create Organization Types (required to create the default Organization)
+            if (!_context.OrganizationTypes.Any())
+            {
+                var refOrganizationType = new RefOrganizationType[]
+                {
+                    new RefOrganizationType{ RefOrganizationTypeId = 1, OrganizationTypeCode = "OU", OrganizationType = "Organization Unit" },
+                    new RefOrganizationType{ RefOrganizationTypeId = 2, OrganizationTypeCode = "School", OrganizationType = "School" }
+                };
 
-				foreach (RefOrganizationType item in refOrganizationType)
-				{
-					_context.OrganizationTypes.Add(item);
-				}
+                foreach (RefOrganizationType item in refOrganizationType)
+                {
+                    _context.OrganizationTypes.Add(item);
+                }
 
                 // SET IDENTITY_INSERT requires ALTER TABLE permissions on SQL server
                 await _context.Database.OpenConnectionAsync();
@@ -61,31 +61,32 @@ namespace MEL.Data
                 }
             }
 
-			// Create Default Organization
-			if (!_context.Organizations.Any())
-			{
-				var organization = new Organization[]
-				{
-					new Organization {
-						OrganizationId = new Guid("9c1f1204-62d7-46a2-b5b0-a94affa54b22"),
-						RefOrganizationTypeId = 1,
-						OrganizationName = "Management Organization",
-						OrganizationCode = "MO01",
-						CreatedBy = "admin",
-						CreatedDate = DateTime.Now,
-						IsTenant = true,
-						IsOrganizationUnit = true
+            // Create Default Organization
+            if (!_context.Organizations.Any())
+            {
+                var organization = new Organization[]
+                {
+                    new Organization {
+                        OrganizationId = new Guid("9c1f1204-62d7-46a2-b5b0-a94affa54b22"),
+                        RefOrganizationTypeId = 1,
+                        OrganizationName = "Management Organization",
+                        OrganizationCode = "MO01",
+                        CreatedBy = "admin",
+                        CreatedDate = DateTime.Now,
+                        RegistrationDate = DateTime.Now,
+                        IsTenant = true,
+                        IsOrganizationUnit = true
 
-					}
+                    }
 
-				};
+                };
 
-				foreach (Organization item in organization)
-				{
-					_context.Organizations.Add(item);
-				}
-				await _context.SaveChangesAsync();
-			}
+                foreach (Organization item in organization)
+                {
+                    _context.Organizations.Add(item);
+                }
+                await _context.SaveChangesAsync();
+            }
 
             //Add Application Roles
             List<ApplicationRole> applicationRole = new List<ApplicationRole>
@@ -257,6 +258,59 @@ namespace MEL.Data
                     _context.Database.CloseConnection();
                 }
             }
+
+            //ProgramTypes
+            if (!_context.ProgramTypes.Any())
+            {
+                var refProgramTypes = new RefProgramType[]
+                {
+                    new RefProgramType{ RefProgramTypeId = 1, ProgramTypeCode = "D01", ProgramType = "Default Program Type" }
+                };
+
+                foreach (RefProgramType item in refProgramTypes)
+                {
+                    _context.ProgramTypes.Add(item);
+                }
+
+                await _context.Database.OpenConnectionAsync();
+                try
+                {
+                    await _context.Database.ExecuteSqlCommandAsync("SET IDENTITY_INSERT dbo.RefProgramType ON");
+                    await _context.SaveChangesAsync();
+                    await _context.Database.ExecuteSqlCommandAsync("SET IDENTITY_INSERT dbo.RefProgramType OFF");
+                }
+                finally
+                {
+                    _context.Database.CloseConnection();
+                }
+            }
+
+            //ProgramTypes
+            if (!_context.Programs.Any())
+            {
+                var programs = new Program[]
+                {
+                    new Program{ ProgramId = 1, RefProgramTypeId = 1, RefAttendanceUnitId = 1, ProgramName = "Default Program" }
+                };
+
+                foreach (Program item in programs)
+                {
+                    _context.Programs.Add(item);
+                }
+
+                await _context.Database.OpenConnectionAsync();
+                try
+                {
+                    await _context.Database.ExecuteSqlCommandAsync("SET IDENTITY_INSERT dbo.Program ON");
+                    await _context.SaveChangesAsync();
+                    await _context.Database.ExecuteSqlCommandAsync("SET IDENTITY_INSERT dbo.Program OFF");
+                }
+                finally
+                {
+                    _context.Database.CloseConnection();
+                }
+            }
+
         }
     }
 }
