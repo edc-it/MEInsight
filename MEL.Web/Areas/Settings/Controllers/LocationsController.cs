@@ -90,15 +90,24 @@ namespace MEL.Web.Areas.Settings.Controllers
         [Authorize(Policy = "RequireMELRole")]
         public async Task<IActionResult> Create(string id)
         {
-            var parent = await _context.Locations
+            if (id != null)
+            {
+                var parent = await _context.Locations
                 .Include(x => x.LocationTypes)
                 .Where(x => x.RefLocationId == id)
                 .FirstOrDefaultAsync();
-
-            ViewData["RefLocationTypeId"] = new SelectList(_context.LocationTypes
+                
+                ViewData["RefLocationTypeId"] = new SelectList(_context.LocationTypes
                 .Where(x => x.LocationLevel > parent.LocationTypes.LocationLevel), "RefLocationTypeId", "LocationType");
-            ViewData["ParentLocationName"] = parent.LocationName;
-            ViewData["ParentId"] = id;
+                
+                ViewData["ParentLocationName"] = parent.LocationName;
+                
+                ViewData["ParentId"] = id;
+            }
+            else
+            {
+                ViewData["RefLocationTypeId"] = new SelectList(_context.LocationTypes, "RefLocationTypeId", "LocationType");
+            }
             
             return View();
         }
