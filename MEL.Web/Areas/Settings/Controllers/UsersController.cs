@@ -6,6 +6,7 @@ using MEL.Entities.Identity;
 //using MEL.Web.Areas.Identity;
 using MEL.Web.Areas.Settings.Models.ViewModels;
 using MEL.Web.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 //using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +17,7 @@ using Microsoft.EntityFrameworkCore;
 namespace MEL.Web.Areas.Settings.Controllers
 {
     [Area("Settings")]
-    //[Authorize(Policy = "RequireAdministratorRole")]
+    [Authorize(Policy = "RequireAdministratorRole")]
     public class UsersController : Controller
     {
         private readonly ApplicationDbContext _context;
