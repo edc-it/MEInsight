@@ -112,7 +112,7 @@ namespace MEL.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Attendance(List<GroupEnrollment> attendance, Guid? id, Guid? groupEnrollmentId)
+        public async Task<IActionResult> Attendance(List<GroupEnrollment> attendance, Guid? id)
         {
             ViewData["ParentId"] = id;
 
