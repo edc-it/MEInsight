@@ -80,14 +80,19 @@
                 <div class="col-md-7">
                     <dl class="mb-0">
                         @if (Model.Organization != null)
-{
-<dt>
-    @Html.DisplayNameFor(model => model.Organization)
-</dt>
-<dd class="mb-1">
-    @Html.DisplayFor(model => model.Organization) @*<a asp-action="Edit" asp-controller="Organizations" asp-route-id="@Model.OrganizationId">  <i class="fa fa-pencil-square-o text-muted"> </i></a>*@
-</dd>
-}
+                        {
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Organization)
+                            </dt>
+                            <dd class="mb-1">
+                                @Html.DisplayFor(model => model.Organization)
+                                @if (Model.IsTenant == true)
+                                {
+                                    <a policy="RequireAdministratorRole" asp-action="Edit" asp-controller="Organizations" asp-route-id="@Model.OrganizationId"> <i class="far fa-edit"></i></a>
+                                }
+
+                            </dd>
+                        }
 
                         @if (Model.Program != null)
                         {
@@ -179,8 +184,8 @@
                                 </dd>
                             }
                         }
-                    <dt>OrganizationId</dt>
-                    <dd class="text-muted">@Html.DisplayFor(model => model.OrganizationId)</dd>
+                        <dt>OrganizationId</dt>
+                        <dd class="text-muted">@Html.DisplayFor(model => model.OrganizationId)</dd>
                     </dl>
                 </div>
             </div>

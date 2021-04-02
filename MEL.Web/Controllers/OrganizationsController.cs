@@ -284,7 +284,7 @@ namespace MEL.Web.Controllers
         // POST: Organizations/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("OrganizationId,RegistrationDate,OrganizationCode,OrganizationName,RefOrganizationTypeId,ParentOrganizationId,Contact,Phone,RefLocationId,Address,Latitude,Longitude,IsOrganizationUnit")] Organization organization, string[] RefLocationId)
+        public async Task<IActionResult> Edit(Guid id, [Bind("OrganizationId,RegistrationDate,OrganizationCode,OrganizationName,RefOrganizationTypeId,ParentOrganizationId,Contact,Phone,RefLocationId,Address,Latitude,Longitude,IsOrganizationUnit,IsTenant")] Organization organization, string[] RefLocationId)
         {
             if (id != organization.OrganizationId)
             {
@@ -299,11 +299,14 @@ namespace MEL.Web.Controllers
                     // Gets the last non-null item in RefLocationId array,
                     // the array might have null values for locations left empty
                     // and this assigns the last non-null location to RefLocationId
-                    var location =
+                    if (RefLocationId.Length != 0)
+                    {
+                        var location =
                         (from r in RefLocationId where !string.IsNullOrEmpty(r) select r)
                         .OrderByDescending(r => r).Count();
 
-                    organization.RefLocationId = RefLocationId[location - 1];
+                        organization.RefLocationId = RefLocationId[location - 1];
+                    }
 
                     _context.Update(organization);
                     await _context.SaveChangesAsync();

@@ -156,7 +156,7 @@
                 i++;
             }
 
-            @if (AuthorizationService.AuthorizeAsync(User, "RequireMELRole").GetAwaiter().GetResult().Succeeded)
+            @if (AuthorizationService.AuthorizeAsync(User, "RequireMELRole").GetAwaiter().GetResult().Succeeded && Model.IsTenant != true )
             {
                 <div class="card my-3">
                     <div class="card-header">@Localizer["M&E options:"]</div>
