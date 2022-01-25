@@ -14,6 +14,7 @@ using MEL.Web.Extensions;
 using MEL.Entities.Programs;
 using Microsoft.EntityFrameworkCore.Query;
 using MEL.Entities.ViewModels;
+using Microsoft.Extensions.Configuration;
 
 namespace MEL.Web.Controllers
 {
@@ -22,11 +23,13 @@ namespace MEL.Web.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IConfiguration _configuration = null;
 
-        public ParticipantsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public ParticipantsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, IConfiguration configuration)
         {
             _context = context;
             _userManager = userManager;
+            _configuration = configuration;
         }
 
         // GET: Participants
@@ -65,6 +68,52 @@ namespace MEL.Web.Controllers
             .Include(p => p.Organizations)
             .Include(p => p.ParticipantTypes)
             .Include(p => p.Sex);
+            return View(await participant.ToListAsync());
+
+        }
+
+        // GET: Participants
+        public async Task<IActionResult> Search()
+        {
+
+            ViewData["NextController"] = "";
+            ViewData["ParentController"] = "";
+            ViewData["ParentId"] = "";
+
+            //Logged User OrganizationId
+            Guid? userOrganizacionId = (await _userManager.GetUserAsync(HttpContext.User))?.OrganizationId;
+
+            if (userOrganizacionId == null)
+            {
+                return NotFound();
+            }
+
+            //Get Logged User Organization
+            var organization = await _context.Organizations
+                    .SingleOrDefaultAsync(o => o.OrganizationId == userOrganizacionId);
+
+            if (organization == null)
+            {
+                return NotFound();
+            }
+
+            //Returns the top hiearchy organization for JSTree
+            ViewData["ParentOrganizationId"] = organization.OrganizationId;
+
+            // SelectList for "Create New" (ParticipantType) button
+            ViewData["ParticipantTypeId"] = new SelectList(_context.ParticipantTypes, "RefParticipantTypeId", "ParticipantType");
+
+            var participant = _context.Participants
+            .Include(p => p.Locations)
+            .Include(p => p.Organizations)
+            .Include(p => p.ParticipantTypes)
+            .Include(p => p.Sex);
+
+            if (_configuration["URL"] != null)
+            {
+                ViewData["URL"] = _configuration["URL"];
+            }
+
             return View(await participant.ToListAsync());
 
         }

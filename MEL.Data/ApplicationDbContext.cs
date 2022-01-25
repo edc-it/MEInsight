@@ -212,7 +212,7 @@ namespace MEL.Data
                 builder.Model.FindEntityType(typeof(IdentityUserClaim<string>)),
                 builder.Model.FindEntityType(typeof(IdentityUserLogin<string>)),
                 builder.Model.FindEntityType(typeof(IdentityUserToken<string>)),
-                builder.Model.FindEntityType(typeof(IdentityRoleClaim<string>)),
+                builder.Model.FindEntityType(typeof(IdentityRoleClaim<string>))
             };
 
             var cascadeFKs = builder.Model.GetEntityTypes()

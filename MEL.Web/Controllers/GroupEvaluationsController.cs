@@ -225,7 +225,7 @@ namespace MEL.Web.Controllers
             ViewData["ParentId"] = id;
             ViewData["RefEvaluationStatusId"] = new SelectList(_context.EvaluationStatus, "EvaluationStatusId", "EvaluationStatus");
             ViewData["GroupEnrollmentId"] = new SelectList(_context.GroupEnrollments, "GroupEnrollmentId", "GroupEnrollmentId");
-            ViewData["ProgramAssessmentId"] = new SelectList(_context.ProgramAssessments, "ProgramAssessmentId", "AssessmentName");
+            ViewData["ProgramAssessmentId"] = new SelectList(_context.ProgramAssessments.OrderBy(x => x.ProgramAssessmentId), "ProgramAssessmentId", "AssessmentName");
             return View();
         }
 

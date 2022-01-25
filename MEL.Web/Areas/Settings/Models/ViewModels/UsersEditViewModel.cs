@@ -11,7 +11,7 @@ namespace MEL.Web.Areas.Settings.Models.ViewModels
     public class UsersEditViewModel
     {
         [Required]
-        [EmailAddress]
+        // [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
 

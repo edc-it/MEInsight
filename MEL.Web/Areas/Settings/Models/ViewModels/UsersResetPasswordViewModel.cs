@@ -9,7 +9,7 @@ namespace MEL.Web.Areas.Settings.Models.ViewModels
     public class UsersResetPasswordViewModel
     {
         [Required]
-        [EmailAddress]
+        //[EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
