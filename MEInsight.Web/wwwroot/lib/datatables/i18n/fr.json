@@ -1,0 +1,34 @@
+﻿{
+  "sProcessing": "<i class='text-muted fa fa-refresh fa-spin fa-fw'></i><span> Traitement en cours...</span>",
+  "sSearch": "Rechercher&nbsp;:",
+  "sLengthMenu": "Afficher <select class='form-control input-sm' name='datatable_length' aria-controls='datatable'><option value='10'>10</option><option value='25'>25</option><option value='50'>50</option><option value='-1'>Tout</option></select> &eacute;l&eacute;ments",
+  "sInfo": "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+  "sInfoEmpty": "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+  "sInfoFiltered": "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+  "sInfoPostFix": "",
+  "sLoadingRecords": "<span> Chargement en cours...</span>",
+  "sZeroRecords": "Aucun &eacute;l&eacute;ment &agrave; afficher",
+  "sEmptyTable": "Aucune donn&eacute;e disponible dans le tableau",
+  "oPaginate": {
+    "sFirst": "Premier",
+    "sPrevious": "Pr&eacute;c&eacute;dent",
+    "sNext": "Suivant",
+    "sLast": "Dernier"
+  },
+  "oAria": {
+    "sSortAscending": ": activer pour trier la colonne par ordre croissant",
+    "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+  },
+  "buttons": {
+    "csv": "<i class='fa fa-external-link' aria-hidden='true'></i> Exportation",
+    "excel": "<i class='fa fa-external-link' aria-hidden='true'></i> Exportation",
+    "copy": "<i class='fa fa-files-o' aria-hidden='true'></i> Copie",
+    "copyTitle": "Ajouté au presse-papiers",
+    "copySuccess": {
+      "_": "%d lignes copiées",
+      "1": "1 ligne copiée"
+    },
+    "colvis": "<i class='fa fa-columns' aria-hidden='true'></i> Colonnes",
+    "print": "<i class='fa fa-print' aria-hidden='true'></i> Imprimer"
+  }
+}
