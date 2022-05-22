@@ -193,6 +193,7 @@ namespace MEInsight.Web.Data
             builder.Entity<GroupEvaluation>().HasQueryFilter(p => !p.IsDeleted).ToTable("GroupEvaluation");
             builder.Entity<GroupEvaluation>().HasIndex(t => t.GroupEnrollmentId);
 
+        }
         //Override SaveChanges - enables Soft-Delete
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
