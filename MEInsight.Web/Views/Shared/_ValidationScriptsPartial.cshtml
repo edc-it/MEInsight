@@ -1,0 +1,31 @@
+﻿<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    // Use JQuery validation with Bootstrap 4 validation classes
+    //$.validator.setDefaults({
+    //    errorElement: 'span',
+    //    errorPlacement: function (error, element) {
+    //        error.addClass('invalid-feedback');
+    //        element.closest('.form-group').append(error);
+    //    },
+    //    highlight: function (element, errorClass, validClass) {
+    //        $(element).addClass('is-invalid');
+    //    },
+    //    unhighlight: function (element, errorClass, validClass) {
+    //        $(element).removeClass('is-invalid');
+    //    }
+    //});
+
+    $.validator.setDefaults({
+        errorClass: "",
+        validClass: "",
+        highlight: function(element, errorClass, validClass) {
+            $(element).addClass("is-invalid").removeClass("is-valid");
+            $(element.form).find("[data-valmsg-for=" + element.id + "]").addClass("invalid-feedback");
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).addClass("is-valid").removeClass("is-invalid");
+            $(element.form).find("[data-valmsg-for=" + element.id + "]").removeClass("invalid-feedback");
+        }
+    });
+</script>

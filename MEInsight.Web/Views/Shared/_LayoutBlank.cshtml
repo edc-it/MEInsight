@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <meta name="description" content="M&E Insight is an open source monitoring and evaluation data management system for international development projects" />
+    <!-- Bootstrap v5.1.3 + custom theme -->
+    <link rel="stylesheet" href="~/css/bootstrap-theme-endeavour.min.css" asp-append-version="true" />
+    <!-- Fontawesome-free v6.1.1 -->
+    <link rel="stylesheet" href="~/lib/fontawesome-free/css/all.min.css" asp-append-version="true" />
+    <!-- Waves v0.7.6 -->
+    <link rel="stylesheet" href="~/lib/node-waves/dist/waves.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+
+    <!-- View Styles -->
+    @if (IsSectionDefined("Styles"))
+    {
+        @RenderSection("Styles", required: false)
+    }
+    <!-- Application styles v1.0 -->
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="container content">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col d-flex align-items-center justify-content-start">
+                    <span class="navbar-text small text-muted">
+                        M&E Insight <text>v</text>@typeof(Program)?.Assembly?.GetName()?.Version?.ToString() | &copy; @DateTime.Now.Year <a class="text-decoration-none" href="https://www.edc.org" target="_blank">Education Development Center, Inc.</a>
+                    </span>
+                </div>
+                <div class="col d-flex align-items-center justify-content-center">
+                    <partial name="_SelectLanguagePartial" />
+                </div>
+                <div class="col d-flex align-items-center justify-content-end">
+                    <span class="navbar-text small text-muted">
+                        @User?.Identity?.Name - @System.Globalization.CultureInfo.CurrentUICulture
+                    </span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JQuery v3.6.0 -->
+    <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+    <!-- Bootstrap v5.1.3 -->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
+    <!-- Waves v0.7.6 -->
+    <script src="~/lib/node-waves/dist/waves.min.js" asp-append-version="true"></script>
+    <!-- Application JS v1.0 -->
+    <script src="~/js/site.min.js" asp-append-version="true"></script>
+    
+    @if (TempData["message"] != null)
+    {
+        string? messageTitle = TempData["messageTitle"]?.ToString();
+        string? message = TempData["message"]?.ToString();
+        string? messageType = TempData["messageType"]?.ToString();
+        <script>
+            $(document).bsToast({
+                header: {
+                    text: '<i class="fas fa-check-circle"></i> @(Localizer[messageTitle])'
+                },
+                body: '@Localizer[message]'
+            });
+        </script>
+    }
+
+    <!-- View Scripts -->
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,185 @@
+@model MEInsight.Entities.Programs.Group
+
+@{
+    ViewData["Title"] = @Localizer["Create"].Value + " " + @Localizer["Group"].Value;
+}
+
+<h2>@Localizer["Create"]</h2>
+
+<h4>@Localizer["Group"]</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6 col-sm-8">
+        <form asp-action="Create" id="main-form">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" name="OrganizationId" value="@ViewBag.ParentId" />
+
+            <div class="form-group required" asp-enabled="GroupCode">
+                <!--input start-->
+                <label asp-for="GroupCode" class="control-label"></label>
+                <i data-content="@Localizer["Recommended: Year-OrganizationCode-LocationCode-Group-Month-Day"]"
+                   data-placement="top"
+                   data-toggle="popover"
+                   data-container="body"
+                   style="cursor:pointer;"
+                   class="fas fa-info-circle text-muted"
+                   data-original-title="" title="" aria-describedby="popover">
+                </i>
+                <input asp-for="GroupCode" autocomplete="off" class="form-control" />
+                <span asp-validation-for="GroupCode" class="text-danger"></span>
+                <!--input end-->
+            </div>
+
+            <div class="form-group" asp-enabled="GroupName">
+                <!--input start-->
+                <label asp-for="GroupName" class="control-label"></label>
+                <input asp-for="GroupName" autocomplete="off" class="form-control" />
+                <span asp-validation-for="GroupName" class="text-danger"></span>
+                <!--input end-->
+            </div>
+
+            <div class="form-group" asp-enabled="ProgramId">
+                <!--fk select start-->
+                <label asp-for="ProgramId" class="control-label"></label>
+                <select asp-for="ProgramId" class="form-control custom-select" asp-items="ViewBag.ProgramId">
+                    <option disabled selected></option>
+                </select>
+                <span asp-validation-for="ProgramId" class="text-danger"></span>
+                <!--fk select end-->
+            </div>
+
+            <div class="form-group" asp-enabled="RefGradeLevelId">
+                <!--fk select start-->
+                <label asp-for="RefGradeLevelId" class="control-label"></label>
+                <select asp-for="RefGradeLevelId" class="form-control custom-select" asp-items="ViewBag.RefGradeLevelId">
+                    <option></option>
+                </select>
+                <span asp-validation-for="RefGradeLevelId" class="text-danger"></span>
+                <!--fk select end-->
+            </div>
+
+            <div class="form-group" asp-enabled="StartDate">
+                <!--date start-->
+                <label asp-for="StartDate" class="control-label"></label>
+                <i data-content="@Localizer["For School Enrollment - set this date to the academic year start date, for Training events - set to start of training"]"
+                   data-placement="top"
+                   data-toggle="popover"
+                   data-container="body"
+                   style="cursor:pointer;"
+                   class="fas fa-info-circle text-muted"
+                   data-original-title="" title="" aria-describedby="popover">
+                </i>
+                <span class="text-muted small">(@System.Globalization.CultureInfo.CurrentUICulture)</span>
+                <!-- use class .date to enable datepicker -->
+                <!-- use class .startdate to enable start/end date validation -->
+                <div class="input-group date startdate">
+                    <input asp-for="StartDate" autocomplete="off" type="text" class="form-control" placeholder="@System.Globalization.DateTimeFormatInfo.CurrentInfo.ShortDatePattern" />
+                    <span class="input-group-append">
+                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                    </span>
+                </div>
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+                <!--date end-->
+            </div>
+
+            <div class="form-group" asp-enabled="EndDate">
+                <!--date start-->
+                <label asp-for="EndDate" class="control-label"></label>
+                <i data-content="@Localizer["For School Enrollment - set this date to the academic year end date, for Training events - set to end of training"]"
+                   data-placement="top"
+                   data-toggle="popover"
+                   data-container="body"
+                   style="cursor:pointer;"
+                   class="fas fa-info-circle text-muted"
+                   data-original-title="" title="" aria-describedby="popover">
+                </i>
+                <span class="text-muted small">(@System.Globalization.CultureInfo.CurrentUICulture)</span>
+                <!-- use class .date to enable datepicker -->
+                <!-- use class .enddate to enable start/end date validation -->
+                <div class="input-group date enddate">
+                    <input asp-for="EndDate" autocomplete="off" type="text" class="form-control" placeholder="@System.Globalization.DateTimeFormatInfo.CurrentInfo.ShortDatePattern" />
+                    <span class="input-group-append">
+                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                    </span>
+                </div>
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+                <!--date end-->
+            </div>
+
+            <div class="form-group" asp-enabled="ParticipantId">
+                <!--fk select start-->
+                <label asp-for="ParticipantId" class="control-label"></label>
+                <select asp-for="ParticipantId" class="form-control custom-select select2" asp-items="ViewBag.ParticipantId">
+                    <option disabled selected></option>
+                </select>
+                <span asp-validation-for="ParticipantId" class="text-danger"></span>
+                <!--fk select end-->
+            </div>
+
+            <!-- button group start -->
+            <div class="form-group text-right mt-5">
+                <a id="cancelbutton" class="btn btn-secondary mr-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
+                    <i class="fas fa-times"></i> @Localizer["Cancel"]
+                </a>
+                <button id="submitbutton" type="submit" value="Create" class="btn btn-primary ladda-button" data-style="expand-left" data-spinner-color="white">
+                    <span class="ladda-label">
+                        <i class="fas fa-check"></i> @Localizer["Create"]
+                    </span>
+                </button>
+            </div>
+            <!-- button group end -->
+        </form>
+    </div>
+</div>
+
+@section Styles {
+    @{await Html.RenderPartialAsync("_CreateStylesPartial");}
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{await Html.RenderPartialAsync("_CreateScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+
+            var cultureInfo = '@System.Globalization.CultureInfo.CurrentCulture.DisplayName';
+
+            //Validate that End Date input is not before Start Date
+            function checkDates() {
+                var startDate = $('.date.startdate').datepicker('getDate');
+                var endDate = $('.date.enddate').datepicker('getDate');
+                if (startDate != null && endDate != null) {
+                    if (startDate > endDate) {
+
+                        bootbox.alert({
+                            title: '@Localizer["Incorrect date"]',
+                            message: "@Localizer["The End Date must occur after the Start Date"]",
+                            centerVertical: true,
+                            backdrop: true,
+                            onEscape: false,
+                            size: "medium",
+
+                        });
+                        $('#EndDate').val('');
+                    }
+                }
+            }
+
+            $('.date.startdate')
+                .on("changeDate", function (e) {
+                    checkDates();
+                });
+
+           $('.date.enddate')
+               .on("changeDate", function (e) {
+                    checkDates();
+               });
+
+            $(function () {
+                $('input[type="text"]').change(function () {
+                    this.value = $.trim(this.value);
+                });
+            });
+
+        });
+    </script>
+}

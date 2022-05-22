@@ -1,0 +1,43 @@
+@model MEInsight.Entities.Reference.RefEducationAdministratorType
+
+@{
+    ViewData["Title"] = @Localizer["Education Administrator Type"].Value + " " + @Localizer["Details"].Value;
+}
+
+<h2>@Localizer["Details"]</h2>
+
+<div>
+    <h4>@Localizer["Education Administrator Type"]</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EducationAdministratorTypeCode)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EducationAdministratorTypeCode)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EducationAdministratorType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EducationAdministratorType)
+        </dd>
+    </dl>
+
+    <hr />
+    <dl class="row">
+    </dl>
+
+
+</div>
+<div>
+        <!--footer buttons start-->
+        <div class="row mt-5">
+            <div class="col">
+                <a asp-action="Index" asp-route-id="@ViewBag.ParentId" class="btn btn-secondary mr-1"><i class="fas fa-chevron-left"></i> @Localizer["Back to List"]</a>
+                <a policy="RequireEditRole" asp-action="Edit" asp-route-id="@Model.RefEducationAdministratorTypeId" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> @Localizer["Edit"]</a>
+            </div>
+            <div class="col text-right"></div>
+        </div>
+        <!--footer buttons end-->
+</div>

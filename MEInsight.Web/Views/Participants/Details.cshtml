@@ -1,0 +1,294 @@
+@model MEInsight.Web.Models.ParticipantsViewModel
+
+@{
+    ViewData["Title"] = @Localizer["Participant"].Value + " " + @Localizer["Details"].Value;
+}
+
+<h2>@Localizer["Details"]</h2>
+
+<div>
+    <h4>@Localizer["Participant"]</h4>
+    <hr />
+
+    <div class="card mb-3">
+        <div class="card-header">
+            Participant
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.RegistrationDate)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.RegistrationDate)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.ParticipantCohorts)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.ParticipantCohorts.ParticipantCohort)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.ParticipantCode)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.ParticipantCode)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.FirstName)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.MiddleName)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.MiddleName)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.LastName)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.LastName)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Phone)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Phone)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Mobile)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Mobile)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Facebook)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Facebook)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.InstantMessenger)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.InstantMessenger)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Address)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Address)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Organizations)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Organizations.OrganizationCode)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.ParticipantTypes)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.ParticipantTypes.ParticipantType)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Sex)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Sex.Sex)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.BirthDate)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.BirthDate)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Age)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Age)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Disability)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Disability)
+                </dd>
+
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DisabilityTypes)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DisabilityTypes.DisabilityType)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Locations)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Locations.RefLocationId)
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    @if (Model.RefParticipantTypeId == 1)
+    {
+        // Student
+        <div class="card mb-3">
+            <div class="card-header">
+                Student
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.StudentCode)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.StudentCode)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.ParentGuardian)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.ParentGuardian)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.StudentTypes)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.StudentTypes.StudentType)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.StudentSpecializations)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.StudentSpecializations.StudentSpecialization)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.StudentYearOfStudies)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.StudentYearOfStudies.StudentYearOfStudy)
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    }
+
+    @if (Model.RefParticipantTypeId == 2)
+    {
+        <div class="card mb-3">
+            <div class="card-header">
+                Education Administrator
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.GradeLevels)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.GradeLevels)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.TeacherTypes)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.TeacherTypes.TeacherType)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.TeacherPositions)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.TeacherPositions.TeacherPosition)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.TeacherEmploymentTypes)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.TeacherEmploymentTypes.TeacherEmploymentType)
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    }
+
+    @if (Model.RefParticipantTypeId == 3)
+    {
+        <div class="card">
+            <div class="card-header">
+                Education Administrator
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.EducationAdministratorTypes)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.EducationAdministratorTypes.EducationAdministratorType)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.EducationAdministratorPositions)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.EducationAdministratorPositions.EducationAdministratorPosition)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.EducationAdministratorOffices)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.EducationAdministratorOffices.EducationAdministratorOffice)
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    }
+
+    <hr />
+    <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.CreatedBy)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CreatedBy)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.CreatedDate)
+                </dt>
+                <dd class="col-sm-10">
+                    @Model.CreatedDate?.ToLocalTime().ToString()
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.ModifiedBy)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.ModifiedBy)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.ModifiedDate)
+                </dt>
+                <dd class="col-sm-10">
+                    @Model.ModifiedDate?.ToLocalTime().ToString()
+                </dd>
+        </dl>
+</div>
+<div>
+    <!--footer buttons start-->
+    <div class="row mt-5">
+        <div class="col">
+            <a asp-action="Index" asp-route-id="@ViewBag.ParentId" class="btn btn-secondary mr-1"><i class="fas fa-chevron-left"></i> @Localizer["Back to List"]</a>
+            <a policy="RequireEditRole" asp-action="Edit" asp-route-id="@Model.ParticipantId" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> @Localizer["Edit"]</a>
+        </div>
+        <div class="col text-right"></div>
+    </div>
+    <!--footer buttons end-->
+</div>

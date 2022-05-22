@@ -1,0 +1,174 @@
+﻿@model MEInsight.Web.Areas.Settings.Models.ViewModels.UsersRegisterViewModel
+
+@{
+    ViewData["Title"] = @Localizer["Create"].Value + " " + @Localizer["User"].Value;
+}
+
+<h2>@Localizer["Create"]</h2>
+
+<h4>@Localizer["User"]</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6 col-sm-8">
+        <form asp-action="Create" id="main-form">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" name="ParentId" value="@ViewBag.ParentId" />
+
+            @*<div class="form-group">
+                    <label asp-for="OrganizationId" class="control-label"></label>
+                    <select asp-for="OrganizationId" class="form-control required curstom-select select2" asp-items="ViewBag.OrganizationId">
+                        <option disabled selected></option>
+                    </select>
+                    <span asp-validation-for="OrganizationId" class="text-danger"></span>
+                </div>*@
+
+            <div class="card mb-3" asp-enabled="OrganizationId">
+                <div class="card-header">
+                    Organization
+                </div>
+                <div class="card-body pb-2">
+                    <!--fk tree start-->
+                    <div class="input-group input-group-sm">
+                        <input type="text" id="tree-search" autocomplete="off" placeholder="@Localizer["Search"]" class="form-control search-input" value="" />
+                        <span class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-search"></i></span>
+                        </span>
+                    </div>
+                    <small><a href="#" id="collapse">@Localizer["collapse"]</a> / <a href="#" id="expand">@Localizer["expand"]</a></small>
+                    <div id="tree-container" class="px-3 py-1">
+                        <div id="tree" class="mb-5"></div>
+                    </div>
+                    <input asp-for="OrganizationId" required type="hidden" />
+                    <div class="border-top pt-1">
+                        <span>@Localizer["Selected organization"]: <span id="SelectedOrganizationId"><span class="text-muted">@Localizer["none selected"]</span></span></span>
+                    </div>
+                    <span asp-validation-for="OrganizationId" class="text-danger"></span>
+                    <!--fk tree end-->
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" autocomplete="off" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" autocomplete="off" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" autocomplete="off" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" autocomplete="off" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword" class="control-label"></label>
+                <input asp-for="ConfirmPassword" class="form-control" autocomplete="off" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoleId" class="control-label"></label>
+                <select asp-for="RoleId" class="form-control custom-select required" asp-items="ViewBag.RoleId">
+                    <option disabled selected></option>
+                </select>
+                <span asp-validation-for="RoleId" class="text-danger"></span>
+            </div>
+
+            <!--input field end-->
+            <!-- button group start -->
+            <div class="form-group text-right mt-5">
+                <a id="cancelbutton" class="btn btn-secondary mr-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
+                    <i class="fas fa-times"></i> @Localizer["Cancel"]
+                </a>
+                <button id="submitbutton" type="submit" value="Create" class="btn btn-primary ladda-button" data-style="expand-left" data-spinner-color="white">
+                    <span class="ladda-label">
+                        <i class="fas fa-check"></i> @Localizer["Create"]
+                    </span>
+                </button>
+            </div>
+            <!-- button group end -->
+        </form>
+    </div>
+</div>
+
+@section Styles {
+    @{await Html.RenderPartialAsync("_CreateStylesPartial");}
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{await Html.RenderPartialAsync("_CreateScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+
+            // *** FOR JSTREE ***
+            // Allows JQuery Validator to validate input hidden fields.
+            // The selected Organization in the JStree plugin is a hidden input field
+            // that its value gets updated on JStree change event.
+            // This validates the selection of the Organization in the JStree on submit
+            $("#main-form").data("validator").settings.ignore = "";
+
+            // Initialize and load the JStree plugin, loading the Organization hierarchy structure
+            // from the JSON request. The ['search'] plugin is enabled.
+            var tree = $('#tree').jstree({
+                'core': {
+                    'data': {
+                        "url": "/Requests/GetOrganizationTree/?id=@ViewBag.ParentOrganizationId",
+                        "dataType": "json"
+                    },
+                    "check_callback": false,
+                    'themes': {
+                        'name': 'proton',
+                        'responsive': true
+                    },
+                    'multiple': false
+                },
+                "search": {
+                    "case_sensitive": false,
+                    "show_only_matches": true,
+                    "show_only_matches_children": true
+                },
+                "plugins": ["search"]
+            });
+
+            // Expands or Collapses the JStree
+            var instance = $('#tree').jstree(true);
+            $("#collapse").on("click", function () {
+                instance.close_all();
+            });
+
+            $("#expand").on("click", function () {
+                instance.open_all();
+            });
+
+            // JStree Search on keyup
+            var from = false;
+            $('#tree-search').keyup(function () {
+                if (from) {
+                    clearTimeout(from);
+                }
+                from = setTimeout(function () {
+                    var v = $('#tree-search').val();
+                    $('#tree').jstree(true).search(v);
+                }, 250);
+            });
+
+            // JStree-From on node select, update hidden input field OrganizationId
+            // and display "You selected: " html.
+            tree.on('changed.jstree', function (e, data) {
+                e.preventDefault();
+                if (data.selected) {
+                    $('#OrganizationId').val(data.selected);
+                    $('#SelectedOrganizationId').html(data.instance.get_selected(true)[0].text);
+                }
+            });
+
+        });
+    </script>
+}

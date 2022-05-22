@@ -1,0 +1,263 @@
+﻿@* ******* Model as <List> ******* *@
+@model List<MEInsight.Entities.Programs.GroupEvaluation>
+
+@{
+    ViewData["Title"] = @Localizer["Group Evaluation"].Value + " " + @Localizer["List"].Value;
+}
+
+<!--content start-->
+    <div class="slide-in-right">
+        <!--heading start-->
+        <div class="card mb-3 heading-panel">
+            <div class="card-body">
+                <h2 class="card-title mt-3 font-weight-bold mb-0">@Localizer["Group Evaluation"]</h2>
+                <span class="card-text text-muted">@Localizer["Update Scores"]</span>
+            </div>
+        </div>
+        <!--heading end-->
+        @await Component.InvokeAsync("InfoPanel", new { id = Convert.ToString(ViewBag.ParentId), controller = "GroupEnrollments" })
+        <!--toolbars start-->
+        <div class="row mb-3">
+            <div class="col-sm-12 col-md-6 d-flex align-items-center justify-content-start">
+                <div id="toolbar" class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 d-flex align-items-center justify-content-end">
+                <!--datatable search start-->
+                <div class="input-group input-group-sm d-print-none mb-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-search" aria-hidden="true"></i></span>
+                    </div>
+                    <input id="searchbox" type="text" class="form-control" placeholder='@Localizer["Search"]' aria-describedby="searchbox">
+                </div>
+                <!--datatable search end-->
+            </div>
+        </div>
+        <!--toolbars end-->
+        <!--datatable start-->
+        <div class="row">
+            <div class="col-sm-12">
+                <form id="main-form" asp-action="Grade">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" value="@ViewBag.ParentId" name="GroupId" id="GroupId" />
+                    <input type="hidden" value="@ViewBag.GroupEnrollmentId" name="GroupEnrollmentId" id="GroupId" />
+                    <!--table start-->
+                    <table id="datatable" class="table table-sm table-hover table-striped responsive no-wrap w-100">
+                        <thead>
+                            <tr>
+                                <th data-priority="1">
+                                    @Localizer["Name"]
+                                </th>
+                                <th>
+                                    @Localizer["Participant Code"]
+                                </th>
+                                <th>
+                                    @Localizer["Sex"]
+                                </th>
+                                @for (int d = 0; d < Model.Select(x => x.ProgramAssessments).Distinct().Count(); d++)
+                                {
+                                    <th data-priority="1" data-orderable="false" data-width="150px" class="text-right">
+                                        <div style="white-space:normal;">
+                                            <span style="cursor:default;" title="@Html.Raw(Model[d].ProgramAssessments.AssessmentName)">
+                                                @Html.Raw(Model[d].ProgramAssessments.AssessmentName)
+                                            </span>
+                                        </div>
+                                    </th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ var participant = Model.Select(x => new
+                                {
+                                    x.GroupEnrollments
+                                }).Distinct().ToList();
+                            }
+
+                            @{int f = 0; }
+                            @for (int d = 0; d < participant.Count(); d++)
+                            {
+                                <tr>
+                                    <td class="text-uppercase text-bold">
+                                        @Html.Raw(participant[d].GroupEnrollments.Participants.Name)
+                                    </td>
+                                    <td>
+                                        @Html.Raw(participant[d].GroupEnrollments.Participants.ParticipantCode)
+                                    </td>
+                                    <td>
+                                        @Html.Raw(participant[d].GroupEnrollments.Participants.Sex.SexId)
+                                    </td>
+                                    @{ var programAssessment = Model.Where(x => x.GroupEnrollments.GroupEnrollmentId == participant[d].GroupEnrollments.GroupEnrollmentId).ToList(); }
+                                    @for (int i = 0; i < programAssessment.Count; i++)
+                                    {
+                                        <td id="marks">
+                                            @Html.Hidden("score.Index", (@f + 10))
+
+                                            @Html.Hidden("score[" + (@f + 10) + "].GroupEvaluationId", programAssessment[i].GroupEvaluationId)
+                                            @Html.Hidden("score[" + (@f + 10) + "].GroupEnrollmentId", programAssessment[i].GroupEnrollmentId)
+                                            @Html.Hidden("score[" + (@f + 10) + "].ProgramAssessmentId", programAssessment[i].ProgramAssessmentId)
+
+                                            <div class="input-group input-group-sm">
+                                                @Html.TextBox("score[" + (@f + 10) + "].Score", programAssessment[i].Score, new { @Class = "score form-control input-sm validate text-right", data_score = f, tabindex = f + 1, data_val = "true", data_val_required = @Localizer["This field is required"].Value, autocomplete="off" })
+                                                @*<span class="input-group-append" id="basic-addon2">%</span>*@
+                                                @*<select class="form-control custom-select status input-sm" name="grade[@(i + 10)].RefEvaluationStatusId" id="grade[@(i + 10)].RefEvaluationStatusId" data-completed="@i">
+                                                    @foreach (SelectListItem item in (IEnumerable<SelectListItem>)ViewBag.RefEvaluationStatusId)
+                                                    {
+                                                        if (item.Value == Model[i].RefEvaluationStatusId.ToString())
+                                                        {
+                                                            <option value="@(item.Value)" selected="selected">@item.Text</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="@(item.Value)">@item.Text</option>
+                                                        }
+                                                    }
+                                                </select>*@
+                                            </div>
+                                            <span style="display:block;" data-valmsg-for="programAssessment[@(f + 10)].Score" class="text-danger field-validation-valid" data-valmsg-replace="true"></span>
+                                        </td>
+                                        f++;
+                                    }
+
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <!--table end-->
+                </form>
+
+            </div>
+        </div>
+        <!--datatable end-->
+        <!--datatable pagination start-->
+        <div class="row">
+            <div class="col-sm-12 col-md-5 d-flex align-items-center justify-content-start"><div class="" id="detailfooter"></div></div>
+            <div class="col-sm-12 col-md-7 d-flex align-items-center justify-content-end">
+                <div class="" id="datatables-pagination"></div>
+            </div>
+        </div>
+        <!--datatable pagination end-->
+        <!--footer buttons start-->
+        <div class="row mt-5">
+            <div class="col">
+                @if (ViewBag.ParentController != null)
+                {
+                    <a asp-controller="ViewBag.ParentController" asp-route-id="@ViewBag.ParentId" class="btn btn-secondary"><i class="fas fa-chevron-left"></i> @Localizer["Back"]</a>
+                }
+            </div>
+            <div class="col text-right">
+                <br />
+                <div class="form-group">
+                    <a class="btn btn-secondary" asp-action="Index" asp-route-id="@ViewBag.ParentId"><i class="fa fa-times" aria-hidden="true"></i> @Localizer["Cancel"]</a>
+                    <button id="submitbutton" type="submit" value="Attendance" class="btn btn-secondary ladda-button" data-style="expand-left" data-spinner-color="black">
+                        <span class="ladda-label">
+                            <i class="fa fa-check" aria-hidden="true"></i> @Localizer["Save"]
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!--footer buttons end-->
+    </div><!--content end-->
+
+@section Styles {
+    @{await Html.RenderPartialAsync("_UpdateListStylesPartial");}
+    <style>
+        .status {
+            max-width: 120px;
+        }
+
+        .attendance {
+            max-width: 70px;
+        }
+
+        .table td {
+            vertical-align: baseline;
+        }
+    </style>
+
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_UpdateListScriptsPartial");}
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+
+        //Set to validate "hidden" required fields (with .validate class) that might be set to hidden or display none by Datatables responsive
+        //$.validator.setDefaults({ ignore: ":hidden:not(.validate)" });
+
+        $(document).ready(function () {
+
+            //Accept only numbers from 0 to 999 on Score
+            Inputmask.extendAliases({
+                'score': {
+                    alias: "numeric",
+                    mask: "999",
+                    placeholder: '',
+                    allowPlus: false,
+                    allowMinus: false
+                }
+            });
+
+            Inputmask("score").mask(".score");
+
+            @*var min = @ViewBag.Min;
+            var max = @ViewBag.Max;
+
+            //if max is 0 - Training Attendance is manually updated
+            if (max != 0) {
+                $(".score").on("focusout", function () {
+                    var approved = $(this).val();
+                    if (approved > max) {
+                        $(this).val("");
+                        var index = this.name.split('[').pop().split(']').shift();
+                        $('[name="score[' + index + '].RefEvaluationStatusId"]').val("1");
+                        console.log('cannot register more than')
+                        $.toast({
+                            title: '<i class="fas fa-check-circle"> @Localizer["Alert"]</i> ',
+                            subtitle: '',
+                            content: '@Localizer["You cannot register more than"] <strong>" + max + " @Localizer["score"] @Html.Raw(@ViewBag.AttendanceUnit)</strong> @Localizer["for this training."]',
+                            type: 'primary',
+                            delay: 5000,
+                            pause_on_hover: true
+                        });
+                        //toastr.error("@Localizer["You cannot register more than"] <strong>" + max + " @Localizer["score"] @Html.Raw(@ViewBag.AttendanceUnit)</strong> @Localizer["for this training."]", "Error!");
+                    }
+                    //Status = 1 -enrolled
+                    if (approved < min) {
+                        var index = this.name.split('[').pop().split(']').shift();
+                        $('[name="score[' + index + '].RefEnrollmentStatusId"]').val("1");
+                    }
+                    //Status = 2 -completed
+                    if (approved >= min && approved <= max) {
+                        var index = this.name.split('[').pop().split(']').shift();
+                        $('[name="score[' + index + '].RefEnrollmentStatusId"]').val("2");
+                    }
+                });
+
+                $(".status").change(function () {
+                    console.log('status');
+                    var status = $(this).val();
+                    var index = this.name.split('[').pop().split(']').shift();
+                    var approved = $('input[name="score[' + index + '].Score"]').val();
+                    var $status = $('[name="score[' + index + '].RefEvaluationStatusId"]');
+                    if (status == "2") {
+                        if (approved < min) {
+
+                            $('[name="score[' + index + '].RefEvaluationStatusId"]').val("1");
+                            console.log('toast - cannot apply status of')
+                            //toastr.error("@Localizer["You cannot apply the status of"] <strong>@Localizer["COMPLETED"]</strong> @Localizer["if the attendance"] @Html.Raw(@ViewBag.AttendanceUnit) @Localizer["are less than the"] <strong>" + min + " @ViewBag.AttendanceUnit</strong> @Localizer["required by the Training."] <br /><br />@Localizer["Status has been reset."]", "Error!");
+                        }
+                    }
+                });
+            }*@
+
+            //Prevent Enter Key from submitting form
+            $(window).keydown(function(event){
+                if(event.keyCode == 13) {
+                    event.preventDefault();
+                    return false;
+                }
+            });
+        });
+    </script>
+}

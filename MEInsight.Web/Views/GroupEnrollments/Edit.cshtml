@@ -1,0 +1,70 @@
+@model MEInsight.Entities.Programs.GroupEnrollment
+
+@{
+    ViewData["Title"] = @Localizer["Edit"].Value + " " + @Localizer["GroupEnrollment"].Value;
+}
+
+<h2>@Localizer["Edit"]</h2>
+
+<h4>@Localizer["GroupEnrollment"]</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6 col-sm-8">
+        <!--form start-->
+        <form asp-action="Edit" id="main-form">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" name="ParentId" value="@ViewBag.ParentId" />
+            <input type="hidden" asp-for="ParticipantId" value="@Model.ParticipantId" />
+            <input type="hidden" asp-for="ParticipantId" value="@Model.StatusDate" />
+            <input type="hidden" asp-for="ParticipantId" value="@Model.ParticipantId" />
+            <input type="hidden" asp-for="ParticipantId" value="@Model.Attendance" />
+
+            <input type="hidden" asp-for="GroupEnrollmentId" />
+            <div class="form-group" asp-enabled="GroupId">
+                <!--fk select start-->
+                <label asp-for="GroupId" class="control-label"></label>
+                <select asp-for="GroupId" class="form-control custom-select" asp-items="ViewBag.GroupId">
+                </select>
+                <span asp-validation-for="GroupId" class="text-danger"></span>
+                <!--fk select end-->
+            </div>
+
+            <div class="form-group" asp-enabled="EnrollmentDate">
+                <!--date start-->
+                <label asp-for="EnrollmentDate" class="control-label"></label>
+                <span class="text-muted small">(@System.Globalization.CultureInfo.CurrentUICulture)</span>
+                <!-- use class .date to enable datepicker -->
+                <div class="input-group date">
+                    <input asp-for="EnrollmentDate" autocomplete="off" type="text" class="form-control" placeholder="@System.Globalization.DateTimeFormatInfo.CurrentInfo.ShortDatePattern" />
+                    <span class="input-group-append">
+                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                    </span>
+                </div>
+                <span asp-validation-for="EnrollmentDate" class="text-danger"></span>
+                <!--date end-->
+            </div>
+
+            <!-- button group start -->
+            <div class="form-group text-right mt-5">
+                <a id="cancelbutton" class="btn btn-secondary mr-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
+                    <i class="fas fa-times"></i> @Localizer["Cancel"]
+                </a>
+                <button id="submitbutton" type="submit" value="Save" class="btn btn-primary ladda-button" data-style="expand-left" data-spinner-color="white">
+                    <span class="ladda-label">
+                        <i class="fas fa-check"></i> @Localizer["Save"]
+                    </span>
+                </button>
+            </div>
+            <!-- button group end -->
+        </form>
+        <!--form end-->
+    </div>
+</div>
+
+@section Styles {
+    @{await Html.RenderPartialAsync("_EditStylesPartial");}
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{await Html.RenderPartialAsync("_EditScriptsPartial");}
+}

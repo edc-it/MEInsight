@@ -1,0 +1,104 @@
+﻿@using MEInsight.Web.Extensions
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <!-- Bootstrap v5.1.3 + custom theme -->
+    <link rel="stylesheet" href="~/css/bootstrap-theme-endeavour.min.css" asp-append-version="true" />
+    <!-- Fontawesome-free v6.1.1 -->
+    <link rel="stylesheet" href="~/lib/fontawesome-free/css/all.min.css" asp-append-version="true" />
+    <!-- Waves v0.7.6 -->
+    <link rel="stylesheet" href="~/lib/node-waves/dist/waves.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+
+    <!-- View Styles -->
+    @if (IsSectionDefined("Styles"))
+    {
+        @RenderSection("Styles", required: false)
+    }
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand mb-0" asp-area="" asp-controller="Home" asp-action="AppStart">
+                    <img src="~/images/EDCSquareOnly30.png" class="d-inline-block align-top border border-white mr-2" title="Education Development Center, Inc." />
+                    <img src="~/images/MEInsightLogoBlueBg30.png" class="d-inline-block align-middle mr-2" title="@Localizer["A monitoring and evaluation data management system"]" />
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item @Html.IsSelected(controller: "Home")">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="AppStart">@Localizer["Home"]</a>
+                        </li>
+                        <partial name="_NavigationMenu" />
+                    </ul>
+                    <ul class="navbar-nav flex-grow-1 flex-sm-row-reverse">
+                        <partial name="_NavigationSettingsMenu" />
+                        <partial name="_LoginPartial" />
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container-fluid">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col d-flex align-items-center justify-content-start">
+                    <span class="navbar-text small text-muted">
+                        M&E Insight <text>v</text>@typeof(Program)?.Assembly?.GetName()?.Version?.ToString() | &copy; @DateTime.Now.Year <a class="text-decoration-none" href="https://www.edc.org" target="_blank">Education Development Center, Inc.</a>
+                    </span>
+                </div>
+                <div class="col d-flex align-items-center justify-content-center">
+                    <partial name="_SelectLanguagePartial" />
+                </div>
+                <div class="col d-flex align-items-center justify-content-end">
+                    <span class="navbar-text small text-muted">
+                        @User?.Identity?.Name - @System.Globalization.CultureInfo.CurrentUICulture
+                    </span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JQuery v3.6.0 -->
+    <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+    <!-- Bootstrap v5.1.3 -->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
+    <!-- Waves v0.7.6 -->
+    <script src="~/lib/node-waves/dist/waves.min.js" asp-append-version="true"></script>
+    <!-- Application JS v1.0 -->
+    <script src="~/js/site.min.js" asp-append-version="true"></script>
+    
+    @if (TempData["message"] != null)
+    {
+        string? messageTitle = TempData["messageTitle"]?.ToString();
+        string? message = TempData["message"]?.ToString();
+        string? messageType = TempData["messageType"]?.ToString();
+        <script>
+            $(document).bsToast({
+                header: {
+                    text: '<i class="fas fa-check-circle"></i> @(Localizer[messageTitle])'
+                },
+                body: '@Localizer[message]'
+            });
+        </script>
+    }
+
+    <!-- View Scripts -->
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

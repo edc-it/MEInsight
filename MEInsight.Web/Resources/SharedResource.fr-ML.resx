@@ -1,0 +1,1230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Administrator Type" xml:space="preserve">
+    <value>Type d'administrateur</value>
+  </data>
+  <data name="ParticipantId" xml:space="preserve">
+    <value>ParticipantId</value>
+  </data>
+  <data name="RefEducationAdministratorTypeId" xml:space="preserve">
+    <value>RefEducationAdministratorTypeId</value>
+  </data>
+  <data name="RefEducationAdministratorPositionId" xml:space="preserve">
+    <value>RefEducationAdministratorPositionId</value>
+  </data>
+  <data name="RefEducationAdministratorOfficeId" xml:space="preserve">
+    <value>RefEducationAdministratorOfficeId</value>
+  </data>
+  <data name="Is Organization Unit?" xml:space="preserve">
+    <value>Est l'organisation unité?</value>
+  </data>
+  <data name="Participant Code" xml:space="preserve">
+    <value>Code du participant</value>
+  </data>
+  <data name="Partner Code" xml:space="preserve">
+    <value>Code partenaire</value>
+  </data>
+  <data name="Partner Sector" xml:space="preserve">
+    <value>Secteur partenaire</value>
+  </data>
+  <data name="School Code" xml:space="preserve">
+    <value>Code d'établissement</value>
+  </data>
+  <data name="Partner" xml:space="preserve">
+    <value>Partenaire</value>
+  </data>
+  <data name="Is Cluster Center?" xml:space="preserve">
+    <value>Cluster Center est-il?</value>
+  </data>
+  <data name="HeadTeacher" xml:space="preserve">
+    <value>Chef enseignant</value>
+  </data>
+  <data name="Grade Level" xml:space="preserve">
+    <value>Niveau scolaire</value>
+  </data>
+  <data name="Grades taught?" xml:space="preserve">
+    <value>Les notes enseignées?</value>
+  </data>
+  <data name="Is Deleted" xml:space="preserve">
+    <value>Est supprimé</value>
+  </data>
+  <data name="Created Date" xml:space="preserve">
+    <value>Date de création</value>
+  </data>
+  <data name="Deleted By" xml:space="preserve">
+    <value>Supprimé par</value>
+  </data>
+  <data name="Group" xml:space="preserve">
+    <value>Groupe</value>
+  </data>
+  <data name="Program" xml:space="preserve">
+    <value>Programme</value>
+  </data>
+  <data name="Group Code" xml:space="preserve">
+    <value>Code de groupe</value>
+  </data>
+  <data name="Group Enrollment" xml:space="preserve">
+    <value>Inscription de groupe</value>
+  </data>
+  <data name="Status Date" xml:space="preserve">
+    <value>Date de statut</value>
+  </data>
+  <data name="Enrollment Status" xml:space="preserve">
+    <value>État de l'inscription</value>
+  </data>
+  <data name="Evaluation Id" xml:space="preserve">
+    <value>ID d'évaluation</value>
+  </data>
+  <data name="Enrollment" xml:space="preserve">
+    <value>Inscription</value>
+  </data>
+  <data name="Program Assessment" xml:space="preserve">
+    <value>Évaluation du programme</value>
+  </data>
+  <data name="Score" xml:space="preserve">
+    <value>But</value>
+  </data>
+  <data name="Evaluation Status" xml:space="preserve">
+    <value>Statut d'évaluation</value>
+  </data>
+  <data name="Program Type" xml:space="preserve">
+    <value>Type de programme</value>
+  </data>
+  <data name="Has Assessment?" xml:space="preserve">
+    <value>A l'évaluation?</value>
+  </data>
+  <data name="Program Assessment Id" xml:space="preserve">
+    <value>ID d'évaluation du programme</value>
+  </data>
+  <data name="Assessment" xml:space="preserve">
+    <value>Évaluation</value>
+  </data>
+  <data name="Assessment Type" xml:space="preserve">
+    <value>Type d'évaluation</value>
+  </data>
+  <data name="Track Attendance" xml:space="preserve">
+    <value>Suivi de piste</value>
+  </data>
+  <data name="Maximum Score" xml:space="preserve">
+    <value>Score maximum</value>
+  </data>
+  <data name="Minimum Score" xml:space="preserve">
+    <value>Score minimum</value>
+  </data>
+  <data name="Completion Score" xml:space="preserve">
+    <value>Score d'achèvement</value>
+  </data>
+  <data name="Completion Status" xml:space="preserve">
+    <value>L'état d'achèvement</value>
+  </data>
+  <data name="Assessment Type Id" xml:space="preserve">
+    <value>Type d'évaluation</value>
+  </data>
+  <data name="Assessment Type Code" xml:space="preserve">
+    <value>Code du type d'évaluation</value>
+  </data>
+  <data name="Unit Id" xml:space="preserve">
+    <value>Identifiant de l'unité</value>
+  </data>
+  <data name="Education Administrator Type Id" xml:space="preserve">
+    <value>Identifiant du type d'administrateur d'éducation</value>
+  </data>
+  <data name="Education Administrator Type Code" xml:space="preserve">
+    <value>Code de type d'administrateur de l'éducation</value>
+  </data>
+  <data name="Education Administrator Type" xml:space="preserve">
+    <value>Type d'administrateur d'éducation</value>
+  </data>
+  <data name="Enrollment Status Id" xml:space="preserve">
+    <value>ID de statut d'inscription</value>
+  </data>
+  <data name="Enrollment Status Code" xml:space="preserve">
+    <value>Code de statut d'inscription</value>
+  </data>
+  <data name="Evaluation Status Id" xml:space="preserve">
+    <value>ID de statut d'évaluation</value>
+  </data>
+  <data name="Evaluation Status Code" xml:space="preserve">
+    <value>Code de statut d'évaluation</value>
+  </data>
+  <data name="Grade Level Id" xml:space="preserve">
+    <value>Identifiant de niveau</value>
+  </data>
+  <data name="Grade Level Code" xml:space="preserve">
+    <value>Code de niveau</value>
+  </data>
+  <data name="Grade Id" xml:space="preserve">
+    <value>Id de grade</value>
+  </data>
+  <data name="Location Level" xml:space="preserve">
+    <value>Niveau d'emplacement</value>
+  </data>
+  <data name="Participant Type Id" xml:space="preserve">
+    <value>Identifiant du type de participant</value>
+  </data>
+  <data name="Participant Type Code" xml:space="preserve">
+    <value>Code de type de participant</value>
+  </data>
+  <data name="Sector Id" xml:space="preserve">
+    <value>Identifiant du secteur</value>
+  </data>
+  <data name="Sector Code" xml:space="preserve">
+    <value>Code de secteur</value>
+  </data>
+  <data name="Sector" xml:space="preserve">
+    <value>Secteur</value>
+  </data>
+  <data name="Program Type Id" xml:space="preserve">
+    <value>ID du type de programme</value>
+  </data>
+  <data name="Program Type Code" xml:space="preserve">
+    <value>Code de type de programme</value>
+  </data>
+  <data name="Administration Type Id" xml:space="preserve">
+    <value>ID de type d'administration</value>
+  </data>
+  <data name="Administration Type Code" xml:space="preserve">
+    <value>Code de type d'administration</value>
+  </data>
+  <data name="Administration Type" xml:space="preserve">
+    <value>Type d'administration</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>Assujettir</value>
+  </data>
+  <data name="Set" xml:space="preserve">
+    <value>Ensemble</value>
+  </data>
+  <data name="Ratio Numerator" xml:space="preserve">
+    <value>Ratio Numérateur</value>
+  </data>
+  <data name="Ratio Denominator" xml:space="preserve">
+    <value>Dénominateur de rapport</value>
+  </data>
+  <data name="Reset password confirmation" xml:space="preserve">
+    <value>Réinitialiser la confirmation du mot de passe</value>
+  </data>
+  <data name="Your password has been reset. Please " xml:space="preserve">
+    <value>Votre mot de passe a été réinitialisé. S'il vous plaît</value>
+  </data>
+  <data name="click here to log in" xml:space="preserve">
+    <value>Cliquez ici pour vous identifier</value>
+  </data>
+  <data name="Reset your password" xml:space="preserve">
+    <value>réinitialisez votre mot de passe</value>
+  </data>
+  <data name="Log out" xml:space="preserve">
+    <value>Connectez - Out</value>
+  </data>
+  <data name="You have successfully logged out of the application" xml:space="preserve">
+    <value>Vous vous êtes déconnecté de l'application avec succès</value>
+  </data>
+  <data name="Use your application account to log in" xml:space="preserve">
+    <value>Utilisez votre compte d'application pour vous connecter</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Nom d'utilisateur</value>
+  </data>
+  <data name="Forgot your password?" xml:space="preserve">
+    <value>Mot de passe oublié?</value>
+  </data>
+  <data name="Enter your email" xml:space="preserve">
+    <value>Entrer votre Email</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Soumettre</value>
+  </data>
+  <data name="You do not have access to this resource" xml:space="preserve">
+    <value>Vous n'avez pas accès à cette ressource</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profil</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Bonjour</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>S'identifier</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Connectez - Out</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Réglages</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Utilisateurs</value>
+  </data>
+  <data name="New record successfully created" xml:space="preserve">
+    <value>Nouvel enregistrement créé avec succès</value>
+  </data>
+  <data name="RECORD UPDATED" xml:space="preserve">
+    <value>ENREGISTREMENT À JOUR</value>
+  </data>
+  <data name="Record successfully updated" xml:space="preserve">
+    <value>Enregistrement mis à jour avec succès</value>
+  </data>
+  <data name="Record successfully deleted" xml:space="preserve">
+    <value>Enregistrement supprimé avec succès</value>
+  </data>
+  <data name="A Monitoring and Evaluation" xml:space="preserve">
+    <value>Un suivi et évaluation</value>
+  </data>
+  <data name="Alert" xml:space="preserve">
+    <value>Alerte</value>
+  </data>
+  <data name="Are you sure you want to reopen this Group? Reopening will reset Completion status for all enrolled participants. Updating attendance will be allowed." xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir rouvrir ce groupe? La réouverture réinitialisera le statut d'achèvement pour tous les participants inscrits. La mise à jour de la présence sera autorisée.</value>
+  </data>
+  <data name="Are you sure?" xml:space="preserve">
+    <value>Êtes-vous sûr?</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Retour</value>
+  </data>
+  <data name="Change your account settings" xml:space="preserve">
+    <value>Modifier les paramètres de votre compte</value>
+  </data>
+  <data name="Change/move Group to a different Organization" xml:space="preserve">
+    <value>Changer / déplacer le groupe dans une autre organisation</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Fermer</value>
+  </data>
+  <data name="Complete Enrollment" xml:space="preserve">
+    <value>Inscription complète</value>
+  </data>
+  <data name="Create as Organization Unit?" xml:space="preserve">
+    <value>Créer comme unité d'organisation?</value>
+  </data>
+  <data name="Education Administrator Office" xml:space="preserve">
+    <value>Bureau de l'administrateur de l'éducation</value>
+  </data>
+  <data name="Education Administrator Position" xml:space="preserve">
+    <value>Poste d'administrateur en éducation</value>
+  </data>
+  <data name="Education Administrator" xml:space="preserve">
+    <value>Administrateur de l'éducation</value>
+  </data>
+  <data name="Enroll Existing" xml:space="preserve">
+    <value>Inscription existante</value>
+  </data>
+  <data name="For School Enrollment - set this date to the academic year end date, for Training events - set to end of training" xml:space="preserve">
+    <value>Pour l'inscription à l'école - définissez cette date sur la date de fin d'année scolaire, pour les événements de formation - définissez la fin de la formation</value>
+  </data>
+  <data name="For School Enrollment - set this date to the academic year start date, for Training events - set to start of training" xml:space="preserve">
+    <value>Pour l'inscription à l'école - définissez cette date sur la date de début de l'année scolaire, pour les événements de formation - définissez le début de la formation</value>
+  </data>
+  <data name="Formats accepted: .pdf .doc .docx .jpeg .png" xml:space="preserve">
+    <value>Formats acceptés: .pdf .doc .docx .jpeg .png</value>
+  </data>
+  <data name="Group Attendance" xml:space="preserve">
+    <value>Présence en groupe</value>
+  </data>
+  <data name="Group Enrollments" xml:space="preserve">
+    <value>Inscriptions de groupe</value>
+  </data>
+  <data name="Group Evaluation" xml:space="preserve">
+    <value>Évaluation de groupe</value>
+  </data>
+  <data name="Group Evaluations" xml:space="preserve">
+    <value>Évaluations de groupe</value>
+  </data>
+  <data name="GroupEnrollment" xml:space="preserve">
+    <value>Inscription en groupe</value>
+  </data>
+  <data name="GroupEvaluation" xml:space="preserve">
+    <value>Évaluation du groupe</value>
+  </data>
+  <data name="Groups" xml:space="preserve">
+    <value>Groupes</value>
+  </data>
+  <data name="List of" xml:space="preserve">
+    <value>Liste de</value>
+  </data>
+  <data name="M&amp;E Admin Option:" xml:space="preserve">
+    <value>Option d'administration S &amp; E:</value>
+  </data>
+  <data name="Manage your account" xml:space="preserve">
+    <value>Gérer votre compte</value>
+  </data>
+  <data name="Max file size: 50MB" xml:space="preserve">
+    <value>Taille maximale du fichier: 50 Mo</value>
+  </data>
+  <data name="Organization Unit" xml:space="preserve">
+    <value>Unité d'organisation</value>
+  </data>
+  <data name="ProgramAssessment" xml:space="preserve">
+    <value>Évaluation du programme</value>
+  </data>
+  <data name="Re-open Group" xml:space="preserve">
+    <value>Re-ouvrir le groupe</value>
+  </data>
+  <data name="Recommended: Year-OrganizationCode-LocationCode-Group-Month-Day" xml:space="preserve">
+    <value>Recommandé: Année-OrganisationCode-EmplacementCode-Groupe-Mois-Jour</value>
+  </data>
+  <data name="Ref School Administration Type" xml:space="preserve">
+    <value>Type d'administration d'école de référence</value>
+  </data>
+  <data name="Selected organization" xml:space="preserve">
+    <value>Organisation sélectionnée</value>
+  </data>
+  <data name="Set to 'Yes' if this organization unit will manage other organizations." xml:space="preserve">
+    <value>Définissez sur 'Oui' si cette unité d'organisation gérera d'autres organisations.</value>
+  </data>
+  <data name="Student Disability Type" xml:space="preserve">
+    <value>Type d'invalidité de l'étudiant</value>
+  </data>
+  <data name="TLM Distribution Status" xml:space="preserve">
+    <value>Statut de distribution TLM</value>
+  </data>
+  <data name="TLM" xml:space="preserve">
+    <value>TLM</value>
+  </data>
+  <data name="Teacher Position" xml:space="preserve">
+    <value>Poste d'enseignant</value>
+  </data>
+  <data name="The End Date must occur after the Start Date" xml:space="preserve">
+    <value>La date de fin doit être postérieure à la date de début</value>
+  </data>
+  <data name="This field is required" xml:space="preserve">
+    <value>Ce champ est requis</value>
+  </data>
+  <data name="Update Evaluations" xml:space="preserve">
+    <value>Mettre à jour les évaluations</value>
+  </data>
+  <data name="Update Scores" xml:space="preserve">
+    <value>Mettre à jour les scores</value>
+  </data>
+  <data name="Upload Group Attendance document" xml:space="preserve">
+    <value>Télécharger le document de présence du groupe</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>Utilisateur</value>
+  </data>
+  <data name="You will set this group as Completed. Please enter Completion Date:" xml:space="preserve">
+    <value>Vous définissez ce groupe comme Terminé. Veuillez entrer la date d'achèvement:</value>
+  </data>
+  <data name="collapse" xml:space="preserve">
+    <value>effondrer</value>
+  </data>
+  <data name="none selected" xml:space="preserve">
+    <value>aucune sélection</value>
+  </data>
+  <data name="years old" xml:space="preserve">
+    <value>ans</value>
+  </data>
+  <data name="Are you sure you want to delete this?" xml:space="preserve">
+    <value>Voulez-vous vraiment supprimer cet élément ?</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>Ouvert</value>
+  </data>
+  <data name="Access denied" xml:space="preserve">
+    <value>Accès refusé</value>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="Modified By" xml:space="preserve">
+    <value>Modifié par</value>
+  </data>
+  <data name="Student" xml:space="preserve">
+    <value>Etudiant</value>
+  </data>
+  <data name="Surname/Last name" xml:space="preserve">
+    <value>Nom/ nom de famille</value>
+  </data>
+  <data name="Attendance" xml:space="preserve">
+    <value>Présence</value>
+  </data>
+  <data name="Total Attendance" xml:space="preserve">
+    <value>Totale présence</value>
+  </data>
+  <data name="Training Attendance" xml:space="preserve">
+    <value>Présence de la formation</value>
+  </data>
+  <data name="Min Attendance" xml:space="preserve">
+    <value>Présence minimale</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Recherche</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="Quantity Shipped" xml:space="preserve">
+    <value>Quantité expédiée</value>
+  </data>
+  <data name="Quantity Received" xml:space="preserve">
+    <value>Quantité reçue</value>
+  </data>
+  <data name="Loading…" xml:space="preserve">
+    <value>Chargement…</value>
+  </data>
+  <data name="Position" xml:space="preserve">
+    <value>Position</value>
+  </data>
+  <data name="Mobile" xml:space="preserve">
+    <value>Mobile</value>
+  </data>
+  <data name="Closed" xml:space="preserve">
+    <value>Fermé</value>
+  </data>
+  <data name="Closed By" xml:space="preserve">
+    <value>Fermée par</value>
+  </data>
+  <data name="Position Code" xml:space="preserve">
+    <value>Code de poste</value>
+  </data>
+  <data name="TLM Material Set Code" xml:space="preserve">
+    <value>Code des matériel TLM</value>
+  </data>
+  <data name="Barcode" xml:space="preserve">
+    <value>code-barre</value>
+  </data>
+  <data name="School Status Code" xml:space="preserve">
+    <value>Code de Statut de l'école</value>
+  </data>
+  <data name="Organization Code" xml:space="preserve">
+    <value>Code de l’Organisation</value>
+  </data>
+  <data name="Tracking Code" xml:space="preserve">
+    <value>Code de suivi</value>
+  </data>
+  <data name="Student Code" xml:space="preserve">
+    <value>N° Inscription Scolaire</value>
+  </data>
+  <data name="Distribution Status Code" xml:space="preserve">
+    <value>Code d’état de distribution</value>
+  </data>
+  <data name="TLM Group Code" xml:space="preserve">
+    <value>Code groupe TLM</value>
+  </data>
+  <data name="TLM Language Code" xml:space="preserve">
+    <value>Code de langue TLM</value>
+  </data>
+  <data name="TLM Material Code" xml:space="preserve">
+    <value>Code matière TLM</value>
+  </data>
+  <data name="School Cluster Code" xml:space="preserve">
+    <value>Code de groupe scolaire</value>
+  </data>
+  <data name="TLM Subject Code" xml:space="preserve">
+    <value>Code de sujet TLM</value>
+  </data>
+  <data name="Student Type Code" xml:space="preserve">
+    <value>Code de Type étudiant</value>
+  </data>
+  <data name="Disability Type Code" xml:space="preserve">
+    <value>Code de Type d'handicap</value>
+  </data>
+  <data name="Teacher Type Code" xml:space="preserve">
+    <value>Code de Type d’enseignant</value>
+  </data>
+  <data name="School Type Code" xml:space="preserve">
+    <value>Code de Type d’école</value>
+  </data>
+  <data name="Specialization Code" xml:space="preserve">
+    <value>Code de la spécialisation</value>
+  </data>
+  <data name="TLM Material Type Code" xml:space="preserve">
+    <value>Code de Type de matériau de TLM</value>
+  </data>
+  <data name="Organization Type Code" xml:space="preserve">
+    <value>Code de Type d’organisation</value>
+  </data>
+  <data name="Partner Type Code" xml:space="preserve">
+    <value>Code de Type de partenaire</value>
+  </data>
+  <data name="Location Type Code" xml:space="preserve">
+    <value>Code de Type de magasin</value>
+  </data>
+  <data name="Attendance Unit Code" xml:space="preserve">
+    <value>Code unité de présence</value>
+  </data>
+  <data name="Office Code" xml:space="preserve">
+    <value>Code du Bureau</value>
+  </data>
+  <data name="School Location Code" xml:space="preserve">
+    <value>Code de localisation de l’école</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Commentaire</value>
+  </data>
+  <data name="TLM Material Set" xml:space="preserve">
+    <value>Jeu de matière de TLM</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Mot de passe</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Created By" xml:space="preserve">
+    <value>Créé par</value>
+  </data>
+  <data name="Is Tenant?" xml:space="preserve">
+    <value>Est locataire ?</value>
+  </data>
+  <data name="Unlock" xml:space="preserve">
+    <value>Déverrouiller</value>
+  </data>
+  <data name="Unlock User Account" xml:space="preserve">
+    <value>Déverrouiller le compte d’utilisateur</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="TLM Distribution Detail" xml:space="preserve">
+    <value>Détail de Distribution TLM</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Détails</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Adresse</value>
+  </data>
+  <data name="Distribution Parent" xml:space="preserve">
+    <value>Parent de distribution</value>
+  </data>
+  <data name="TLM Distribution" xml:space="preserve">
+    <value>Distribution de TLM</value>
+  </data>
+  <data name="Teacher" xml:space="preserve">
+    <value>Enseignant</value>
+  </data>
+  <data name="Teacher/Facilitator" xml:space="preserve">
+    <value>Enseignant/formateur</value>
+  </data>
+  <data name="Document" xml:space="preserve">
+    <value>Document</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Durée</value>
+  </data>
+  <data name="Age" xml:space="preserve">
+    <value>Age</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Editer</value>
+  </data>
+  <data name="The {0} field is required." xml:space="preserve">
+    <value>Le champ {0} est obligatoire.</value>
+  </data>
+  <data name="The Attendance field is required" xml:space="preserve">
+    <value>Le champ de la présence est obligatoire</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="School" xml:space="preserve">
+    <value>École</value>
+  </data>
+  <data name="Specialization" xml:space="preserve">
+    <value>Spécialisation</value>
+  </data>
+  <data name="Student Specialization" xml:space="preserve">
+    <value>Spécialisation Étudiant</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Statut</value>
+  </data>
+  <data name="Distribution Status" xml:space="preserve">
+    <value>Statut de distribution</value>
+  </data>
+  <data name="School Status" xml:space="preserve">
+    <value>Statut de l'école</value>
+  </data>
+  <data name="This Code already exists." xml:space="preserve">
+    <value>Ce Code existe déjà.</value>
+  </data>
+  <data name="Evaluations" xml:space="preserve">
+    <value>Évaluations</value>
+  </data>
+  <data name="Facebook" xml:space="preserve">
+    <value>Facebook</value>
+  </data>
+  <data name="Closed Date" xml:space="preserve">
+    <value>Date de fermeture</value>
+  </data>
+  <data name="Shipped Date" xml:space="preserve">
+    <value>Date d’envoi</value>
+  </data>
+  <data name="Evaluation Date" xml:space="preserve">
+    <value>Date de l’évaluation</value>
+  </data>
+  <data name="End Date" xml:space="preserve">
+    <value>Date de fin</value>
+  </data>
+  <data name="Completion Date" xml:space="preserve">
+    <value>Date d’achèvement</value>
+  </data>
+  <data name="Start Date" xml:space="preserve">
+    <value>Date de début</value>
+  </data>
+  <data name="Start/End Date" xml:space="preserve">
+    <value>Date de début et de fin</value>
+  </data>
+  <data name="Enrollment Date" xml:space="preserve">
+    <value>Date d’inscription</value>
+  </data>
+  <data name="Birth Date" xml:space="preserve">
+    <value>Date de naissance</value>
+  </data>
+  <data name="Received Date" xml:space="preserve">
+    <value>Date de réception</value>
+  </data>
+  <data name="Registration Date" xml:space="preserve">
+    <value>Date d’inscription</value>
+  </data>
+  <data name="Incorrect date" xml:space="preserve">
+    <value>Date incorrecte</value>
+  </data>
+  <data name="TLM Group" xml:space="preserve">
+    <value>Groupe TLM</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="Male" xml:space="preserve">
+    <value>Masculin</value>
+  </data>
+  <data name="Disabled Male" xml:space="preserve">
+    <value>Homme handicapé</value>
+  </data>
+  <data name="Position Id" xml:space="preserve">
+    <value>Identification de position</value>
+  </data>
+  <data name="TLM Material Set Id" xml:space="preserve">
+    <value>Id du jeu matière TLM</value>
+  </data>
+  <data name="School Status Id" xml:space="preserve">
+    <value>Id de Statut de l'école</value>
+  </data>
+  <data name="Distribution Status Id" xml:space="preserve">
+    <value>Id d’état de distribution</value>
+  </data>
+  <data name="TLM Group Id" xml:space="preserve">
+    <value>Id du groupe TLM</value>
+  </data>
+  <data name="TLM Language Id" xml:space="preserve">
+    <value>Id de langue TLM</value>
+  </data>
+  <data name="School Cluster Id" xml:space="preserve">
+    <value>Id de groupe scolaire</value>
+  </data>
+  <data name="Sex Id" xml:space="preserve">
+    <value>Id de sexe</value>
+  </data>
+  <data name="TLM Subject Id" xml:space="preserve">
+    <value>Id d’objet TLM</value>
+  </data>
+  <data name="Student Type Id" xml:space="preserve">
+    <value>Id de Type étudiant</value>
+  </data>
+  <data name="Disability Type Id" xml:space="preserve">
+    <value>Id de Type d'handicap</value>
+  </data>
+  <data name="Teacher Type Id" xml:space="preserve">
+    <value>Id de Type d’enseignant</value>
+  </data>
+  <data name="School Type Id" xml:space="preserve">
+    <value>Id de Type d’école</value>
+  </data>
+  <data name="Specialization Id" xml:space="preserve">
+    <value>Id de la spécialisation</value>
+  </data>
+  <data name="TLM Material Type Id" xml:space="preserve">
+    <value>Id de Type de matériau de TLM</value>
+  </data>
+  <data name="Organization Type Id" xml:space="preserve">
+    <value>Id de Type d’organisation</value>
+  </data>
+  <data name="Partner Type Id" xml:space="preserve">
+    <value>Id de Type de partenaire</value>
+  </data>
+  <data name="Location Type Id" xml:space="preserve">
+    <value>Location Type Id</value>
+  </data>
+  <data name="Location Id" xml:space="preserve">
+    <value>Code d’emplacement</value>
+  </data>
+  <data name="Attendance Unit Id" xml:space="preserve">
+    <value>Id d’unité d’assistance</value>
+  </data>
+  <data name="Office Id" xml:space="preserve">
+    <value>Office Id</value>
+  </data>
+  <data name="School Location Id" xml:space="preserve">
+    <value>Code d’emplacement de l’école</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Langue</value>
+  </data>
+  <data name="TLM Language" xml:space="preserve">
+    <value>Langue TLM</value>
+  </data>
+  <data name="Log in" xml:space="preserve">
+    <value>Ouvrir une session</value>
+  </data>
+  <data name="Enrollments" xml:space="preserve">
+    <value>Inscription</value>
+  </data>
+  <data name="Latitude" xml:space="preserve">
+    <value>Latitude</value>
+  </data>
+  <data name="List" xml:space="preserve">
+    <value>Liste</value>
+  </data>
+  <data name="Longitude" xml:space="preserve">
+    <value>Longitude</value>
+  </data>
+  <data name="Update Attendance" xml:space="preserve">
+    <value>Mise à jour de fréquentation</value>
+  </data>
+  <data name="TLM Material" xml:space="preserve">
+    <value>Matériel TLM</value>
+  </data>
+  <data name="School Enrollment" xml:space="preserve">
+    <value>Inscription scolaire</value>
+  </data>
+  <data name="Instant Messenger" xml:space="preserve">
+    <value>Messagerie instantanée</value>
+  </data>
+  <data name="Female" xml:space="preserve">
+    <value>Femme</value>
+  </data>
+  <data name="Disabled Female" xml:space="preserve">
+    <value>Femmes handicapées</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Non</value>
+  </data>
+  <data name="You cannot delete this record. You must first delete any related records." xml:space="preserve">
+    <value>Vous ne pouvez pas supprimer ce dossier. Vous devez d’abord supprimer tous les enregistrements associés.</value>
+  </data>
+  <data name="You cannot apply the status of" xml:space="preserve">
+    <value>Vous ne pouvez pas appliquer le statut de</value>
+  </data>
+  <data name="You cannot register more than" xml:space="preserve">
+    <value>Vous ne pouvez pas enregistrer plus de</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="Filename" xml:space="preserve">
+    <value>Nom de fichier</value>
+  </data>
+  <data name="TLM Material Name" xml:space="preserve">
+    <value>Nom de matière de TLM</value>
+  </data>
+  <data name="Period name" xml:space="preserve">
+    <value>Nom de la période</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>Nouveau</value>
+  </data>
+  <data name="M&amp;E options:" xml:space="preserve">
+    <value>Options de S &amp; E:</value>
+  </data>
+  <data name="Organization" xml:space="preserve">
+    <value>Organisation</value>
+  </data>
+  <data name="Parent Organization" xml:space="preserve">
+    <value>Organisation parente</value>
+  </data>
+  <data name="Organization From" xml:space="preserve">
+    <value>Organisation de</value>
+  </data>
+  <data name="Organization To" xml:space="preserve">
+    <value>Organisation à</value>
+  </data>
+  <data name="Organizations" xml:space="preserve">
+    <value>Organisations</value>
+  </data>
+  <data name="Parent/Guardian" xml:space="preserve">
+    <value>Nom et prénoms du père, mère ou tuteur</value>
+  </data>
+  <data name="Participant" xml:space="preserve">
+    <value>Participant</value>
+  </data>
+  <data name="Participants" xml:space="preserve">
+    <value>Participants</value>
+  </data>
+  <data name="Distribution Period" xml:space="preserve">
+    <value>Période de répartition</value>
+  </data>
+  <data name="School Period" xml:space="preserve">
+    <value>Période scolaire</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="First name" xml:space="preserve">
+    <value>Prénom</value>
+  </data>
+  <data name="Received By" xml:space="preserve">
+    <value>Reçus par</value>
+  </data>
+  <data name="Enrolled Count" xml:space="preserve">
+    <value>Nombre d’inscrit</value>
+  </data>
+  <data name="School Cluster" xml:space="preserve">
+    <value>Groupe scolaire</value>
+  </data>
+  <data name="expand" xml:space="preserve">
+    <value>Développez</value>
+  </data>
+  <data name="Create New" xml:space="preserve">
+    <value>Créer de nouvelles</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Créer</value>
+  </data>
+  <data name="RECORD CREATED" xml:space="preserve">
+    <value>ENREGISTREMENT  CRÉÉE</value>
+  </data>
+  <data name="RECORD DELETED" xml:space="preserve">
+    <value>ENREGISTREMENT DE SUPPRIMÉ</value>
+  </data>
+  <data name="Back to List" xml:space="preserve">
+    <value>Retour à la liste</value>
+  </data>
+  <data name="Display as Marks?" xml:space="preserve">
+    <value>Affichage comme marque ?</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Remise à zéro</value>
+  </data>
+  <data name="Reset password" xml:space="preserve">
+    <value>Réinitialiser mot de passe</value>
+  </data>
+  <data name="Middle name" xml:space="preserve">
+    <value>Deuxième prénom</value>
+  </data>
+  <data name="Choose file" xml:space="preserve">
+    <value>Choisissez fichier</value>
+  </data>
+  <data name="Select…" xml:space="preserve">
+    <value>Sélectionnez…</value>
+  </data>
+  <data name="Set to 'Yes' if this organization will manage other organizations." xml:space="preserve">
+    <value>La valeur «Oui» si cet organisme va gérer les autres organisations</value>
+  </data>
+  <data name="Sex" xml:space="preserve">
+    <value>Sexe</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Oui</value>
+  </data>
+  <data name="Data Management System" xml:space="preserve">
+    <value>Système de gestion de données</value>
+  </data>
+  <data name="Request culture provider:" xml:space="preserve">
+    <value>Demande les informations de culture:</value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value>Télécharger</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Téléphone</value>
+  </data>
+  <data name="TLM Subject" xml:space="preserve">
+    <value>Sujet TLM</value>
+  </data>
+  <data name="COMPLETED" xml:space="preserve">
+    <value>Terminé</value>
+  </data>
+  <data name="Has Disability?" xml:space="preserve">
+    <value>Une personne handicapée?</value>
+  </data>
+  <data name="School Administration Type" xml:space="preserve">
+    <value>Type d’Administration scolaire</value>
+  </data>
+  <data name="Student Type" xml:space="preserve">
+    <value>Type de l’étudiant</value>
+  </data>
+  <data name="School Type" xml:space="preserve">
+    <value>Type d’école</value>
+  </data>
+  <data name="Disability Type" xml:space="preserve">
+    <value>Type d'handicap</value>
+  </data>
+  <data name="Teacher Type" xml:space="preserve">
+    <value>Type de l’enseignant</value>
+  </data>
+  <data name="TLM Material Type" xml:space="preserve">
+    <value>Type de matériau de TLM</value>
+  </data>
+  <data name="Organization Type" xml:space="preserve">
+    <value>Type d’organisation</value>
+  </data>
+  <data name="Participant Type" xml:space="preserve">
+    <value>Type de participant</value>
+  </data>
+  <data name="Partner Type" xml:space="preserve">
+    <value>Type de partenaire</value>
+  </data>
+  <data name="Location Type" xml:space="preserve">
+    <value>Type d’emplacement</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Emplacement</value>
+  </data>
+  <data name="Parent Location" xml:space="preserve">
+    <value>Emplacement du parent</value>
+  </data>
+  <data name="School Location" xml:space="preserve">
+    <value>Emplacement de l’école</value>
+  </data>
+  <data name="Attendance unit" xml:space="preserve">
+    <value>Unité de présence</value>
+  </data>
+  <data name="Office" xml:space="preserve">
+    <value>Bureau</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>D'accueil</value>
+  </data>
+  <data name="An open source monitoring and evaluation data management system for international development projects" xml:space="preserve">
+    <value>Un système open source de gestion des données de suivi et d'évaluation pour les projets de développement international</value>
+  </data>
+  <data name="Navigate through your organizations, schools, partners, groups / cohorts, and participant enrollment lists" xml:space="preserve">
+    <value>Naviguez dans vos organisations, écoles, partenaires, groupes / cohortes et listes d'inscription de participants</value>
+  </data>
+  <data name="View all your active Participants, students, teachers, education administrators or other participant types" xml:space="preserve">
+    <value>Affichez tous vos participants actifs, étudiants, enseignants, administrateurs de l’éducation ou autres types de participants</value>
+  </data>
+  <data name="Visualize and update your application settings, category lists and option choices" xml:space="preserve">
+    <value>Visualisez et mettez à jour les paramètres de votre application, les listes de catégories et les choix d'options</value>
+  </data>
+  <data name="Documentation" xml:space="preserve">
+    <value>Documentation</value>
+  </data>
+  <data name="Read the user guides and documentation" xml:space="preserve">
+    <value>Lire les guides de l'utilisateur et la documentation</value>
+  </data>
+  <data name="M&amp;E Insight is an open source monitoring and evaluation data management system for international development projects" xml:space="preserve">
+    <value>M &amp; E Insight est un système de gestion de données de suivi et d'évaluation en source ouverte destiné aux projets de développement international</value>
+  </data>
+  <data name="Home Page" xml:space="preserve">
+    <value>Page d'accueil</value>
+  </data>
+  <data name="A monitoring and evaluation data management system" xml:space="preserve">
+    <value>Un système de gestion des données de suivi et d'évaluation</value>
+  </data>
+  <data name="Visit M&amp;E Insight on GitHub!" xml:space="preserve">
+    <value>Visitez M &amp; E Insight sur GitHub!</value>
+  </data>
+  <data name="Remember me?" xml:space="preserve">
+    <value>Souviens-toi de moi?</value>
+  </data>
+  <data name="School Language Id" xml:space="preserve">
+    <value>Id de langue d'école</value>
+  </data>
+  <data name="School Language Code" xml:space="preserve">
+    <value>Code de langue de l'école</value>
+  </data>
+  <data name="School Language" xml:space="preserve">
+    <value>Langue de l'école</value>
+  </data>
+  <data name="School Languages" xml:space="preserve">
+    <value>Langues scolaires</value>
+  </data>
+  <data name="TLM Distribution Period" xml:space="preserve">
+    <value>Période de distribution de TLM</value>
+  </data>
+  <data name="TLM Distribution Periods" xml:space="preserve">
+    <value>Périodes de distribution de TLM</value>
+  </data>
+  <data name="Teaching and Learning Materials (TLM) Distribution Periods" xml:space="preserve">
+    <value>Périodes de distribution du matériel d'enseignement et d'apprentissage</value>
+  </data>
+  <data name="Teaching and Learning Materials (TLM) Distributions" xml:space="preserve">
+    <value>Distributions de matériel d'enseignement et d'apprentissage</value>
+  </data>
+  <data name="TLM Distributions" xml:space="preserve">
+    <value>Distributions TLM</value>
+  </data>
+  <data name="Re-open Period" xml:space="preserve">
+    <value>Rouvrir Période</value>
+  </data>
+  <data name="Close TLM Distribution Period" xml:space="preserve">
+    <value>Fermer période de distribution TLM</value>
+  </data>
+  <data name="You will set this period as Closed" xml:space="preserve">
+    <value>Vous allez définir cette période comme fermée</value>
+  </data>
+  <data name="Re-open TLM Distribution Period" xml:space="preserve">
+    <value>Rouvrir la période de distribution de TLM</value>
+  </data>
+  <data name="Are you sure you want to reopen this period? Updating TLM Distributions will be allowed" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir rouvrir cette période? La mise à jour des distributions TLM sera autorisée</value>
+  </data>
+  <data name="Selected organization To" xml:space="preserve">
+    <value>Organisation sélectionnée Pour</value>
+  </data>
+  <data name="Selected organization From" xml:space="preserve">
+    <value>Organisation sélectionnée De</value>
+  </data>
+  <data name="Upload TLM Distribution document" xml:space="preserve">
+    <value>Télécharger le document de distribution TLM</value>
+  </data>
+  <data name="TLM Materials" xml:space="preserve">
+    <value>Matériaux TLM</value>
+  </data>
+  <data name="Teaching and Learning Materials (TLM)" xml:space="preserve">
+    <value>Matériel d'enseignement et d'apprentissage</value>
+  </data>
+  <data name="Upload TLM Material document" xml:space="preserve">
+    <value>Télécharger le document matériel TLM</value>
+  </data>
+  <data name="Select existing participants to enroll in this Group" xml:space="preserve">
+    <value>Sélectionner les participants existants pour s'inscrire dans ce groupe</value>
+  </data>
+  <data name="Filters" xml:space="preserve">
+    <value>Les filtres</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filtre</value>
+  </data>
+  <data name="Existing Participants" xml:space="preserve">
+    <value>Participants existants</value>
+  </data>
+  <data name="Add Participants" xml:space="preserve">
+    <value>Ajouter des participants</value>
+  </data>
+  <data name="Selected Participants to Enroll" xml:space="preserve">
+    <value>Participants sélectionnés à s'inscrire</value>
+  </data>
+  <data name="Enroll" xml:space="preserve">
+    <value>Inscrire</value>
+  </data>
+  <data name="Remove from list" xml:space="preserve">
+    <value>Retirer de la liste</value>
+  </data>
+  <data name="Add Existing" xml:space="preserve">
+    <value>Ajouter existant</value>
+  </data>
+</root>

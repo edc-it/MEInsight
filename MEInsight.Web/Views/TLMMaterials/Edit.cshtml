@@ -1,0 +1,162 @@
+﻿@model MEInsight.Entities.TLM.TLMMaterial
+
+@{
+    ViewData["Title"] = @Localizer["Edit"].Value + " " + @Localizer["TLM Material"].Value;
+}
+
+<h2>@Localizer["Edit"]</h2>
+
+<h4>@Localizer["TLM Material"]</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6 col-sm-8">
+        <!--form start-->
+        <form asp-action="Edit" id="main-form">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" name="ParentId" value="@ViewBag.ParentId" />
+            <input type="hidden" asp-for="TLMMaterialId" />
+            @*[Remote] Validation to validate user input and verify if the TLM Material Code already exists.*@
+            <input type="hidden" value="@Model.TLMMaterialCode" name="TLMMaterialCodeInitialValue" />
+
+            <div class="form-group" asp-enabled="TLMMaterialCode">
+                <!--input start-->
+                <label asp-for="TLMMaterialCode" class="control-label"></label>
+                <input asp-for="TLMMaterialCode" autocomplete="off" class="form-control" />
+                <span asp-validation-for="TLMMaterialCode" class="text-danger"></span>
+                <!--input end-->
+            </div>
+
+            <div class="form-group" asp-enabled="TLMMaterialName">
+                <!--input start-->
+                <label asp-for="TLMMaterialName" class="control-label"></label>
+                <input asp-for="TLMMaterialName" autocomplete="off" class="form-control" />
+                <span asp-validation-for="TLMMaterialName" class="text-danger"></span>
+                <!--input end-->
+            </div>
+
+            <div class="form-group" asp-enabled="Description">
+                <!--input start-->
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" autocomplete="off" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+                <!--input end-->
+            </div>
+
+            <div class="form-group" asp-enabled="RefTLMMaterialTypeId">
+                <!--fk select start-->
+                <label asp-for="RefTLMMaterialTypeId" class="control-label"></label>
+                <select asp-for="RefTLMMaterialTypeId" class="form-control custom-select" asp-items="ViewBag.RefTLMMaterialTypeId">
+                </select>
+                <span asp-validation-for="RefTLMMaterialTypeId" class="text-danger"></span>
+                <!--fk select end-->
+            </div>
+
+            <div class="form-group" asp-enabled="RefGradeLevelId">
+                <!--fk select start-->
+                <label asp-for="RefGradeLevelId" class="control-label"></label>
+                <select asp-for="RefGradeLevelId" class="form-control custom-select" asp-items="ViewBag.RefGradeLevelId">
+                </select>
+                <span asp-validation-for="RefGradeLevelId" class="text-danger"></span>
+                <!--fk select end-->
+            </div>
+
+            <div class="form-group" asp-enabled="RefTLMLanguageId">
+                <!--fk select start-->
+                <label asp-for="RefTLMLanguageId" class="control-label"></label>
+                <select asp-for="RefTLMLanguageId" class="form-control custom-select" asp-items="ViewBag.RefTLMLanguageId">
+                </select>
+                <span asp-validation-for="RefTLMLanguageId" class="text-danger"></span>
+                <!--fk select end-->
+            </div>
+
+            <div class="form-group" asp-enabled="RefTLMSubjectId">
+                <!--fk select start-->
+                <label asp-for="RefTLMSubjectId" class="control-label"></label>
+                <select asp-for="RefTLMSubjectId" class="form-control custom-select" asp-items="ViewBag.RefTLMSubjectId">
+                </select>
+                <span asp-validation-for="RefTLMSubjectId" class="text-danger"></span>
+                <!--fk select end-->
+            </div>
+
+            <div class="form-group" asp-enabled="RefTLMGroupId">
+                <!--fk select start-->
+                <label asp-for="RefTLMGroupId" class="control-label"></label>
+                <select asp-for="RefTLMGroupId" class="form-control custom-select" asp-items="ViewBag.RefTLMGroupId">
+                </select>
+                <span asp-validation-for="RefTLMGroupId" class="text-danger"></span>
+                <!--fk select end-->
+            </div>
+
+            <div class="form-group" asp-enabled="RefTLMMaterialSetId">
+                <!--fk select start-->
+                <label asp-for="RefTLMMaterialSetId" class="control-label"></label>
+                <select asp-for="RefTLMMaterialSetId" class="form-control custom-select" asp-items="ViewBag.RefTLMMaterialSetId">
+                </select>
+                <span asp-validation-for="RefTLMMaterialSetId" class="text-danger"></span>
+                <!--fk select end-->
+            </div>
+
+            <div class="form-group" asp-enabled="RatioNumerator">
+                <!--input start-->
+                <label asp-for="RatioNumerator" class="control-label"></label>
+                <input asp-for="RatioNumerator" autocomplete="off" class="form-control" />
+                <span asp-validation-for="RatioNumerator" class="text-danger"></span>
+                <!--input end-->
+            </div>
+
+            <div class="form-group" asp-enabled="RatioDenominator">
+                <!--input start-->
+                <label asp-for="RatioDenominator" class="control-label"></label>
+                <input asp-for="RatioDenominator" autocomplete="off" class="form-control" />
+                <span asp-validation-for="RatioDenominator" class="text-danger"></span>
+                <!--input end-->
+            </div>
+
+            <div class="form-group" asp-enabled="Url">
+                <!--input start-->
+                <label asp-for="Url" class="control-label"></label>
+                <input asp-for="Url" autocomplete="off" class="form-control" />
+                <span asp-validation-for="Url" class="text-danger"></span>
+                <!--input end-->
+            </div>
+
+            <div class="form-group" asp-enabled="FileName">
+                <!--input start-->
+                <label asp-for="FileName" class="control-label"></label>
+                <input asp-for="FileName" autocomplete="off" class="form-control" />
+                <span asp-validation-for="FileName" class="text-danger"></span>
+                <!--input end-->
+            </div>
+
+            <div class="form-group" asp-enabled="Barcode">
+                <!--input start-->
+                <label asp-for="Barcode" class="control-label"></label>
+                <input asp-for="Barcode" autocomplete="off" class="form-control" />
+                <span asp-validation-for="Barcode" class="text-danger"></span>
+                <!--input end-->
+            </div>
+
+            <!-- button group start -->
+            <div class="form-group text-right mt-5">
+                <a id="cancelbutton" class="btn btn-secondary mr-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
+                    <i class="fas fa-times"></i> @Localizer["Cancel"]
+                </a>
+                <button id="submitbutton" type="submit" value="Save" class="btn btn-primary ladda-button" data-style="expand-left" data-spinner-color="white">
+                    <span class="ladda-label">
+                        <i class="fas fa-check"></i> @Localizer["Save"]
+                    </span>
+                </button>
+            </div>
+            <!-- button group end -->
+        </form>
+        <!--form end-->
+    </div>
+</div>
+
+@section Styles {
+    @{await Html.RenderPartialAsync("_EditStylesPartial");}
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{await Html.RenderPartialAsync("_EditScriptsPartial");}
+}

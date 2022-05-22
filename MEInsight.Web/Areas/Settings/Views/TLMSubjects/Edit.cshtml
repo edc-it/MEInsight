@@ -1,0 +1,59 @@
+@model MEInsight.Entities.Reference.RefTLMSubject
+
+@{
+    ViewData["Title"] = @Localizer["Edit"].Value + " " + @Localizer["TLM Subject"].Value;
+}
+
+<h2>@Localizer["Edit"]</h2>
+
+<h4>@Localizer["TLM Subject"]</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6 col-sm-8">
+        <!--form start-->
+        <form asp-action="Edit" id="main-form">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" name="ParentId" value="@ViewBag.ParentId" />
+            <input type="hidden" asp-for="RefTLMSubjectId" />
+            
+            <div class="form-group" asp-enabled="TLMSubjectCode">
+                <!--input start-->
+                <label asp-for="TLMSubjectCode" class="control-label"></label>
+                <input asp-for="TLMSubjectCode" autocomplete="off" class="form-control" />
+                <span asp-validation-for="TLMSubjectCode" class="text-danger"></span>
+                <!--input end-->
+            </div>
+            
+            
+            <div class="form-group" asp-enabled="TLMSubject">
+                <!--input start-->
+                <label asp-for="TLMSubject" class="control-label"></label>
+                <input asp-for="TLMSubject" autocomplete="off" class="form-control" />
+                <span asp-validation-for="TLMSubject" class="text-danger"></span>
+                <!--input end-->
+            </div>
+            
+            <!-- button group start -->
+            <div class="form-group text-right mt-5">
+                <a id="cancelbutton" class="btn btn-secondary mr-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
+                    <i class="fas fa-times"></i> @Localizer["Cancel"]
+                </a>
+                <button id="submitbutton" type="submit" value="Save" class="btn btn-primary ladda-button" data-style="expand-left" data-spinner-color="white">
+                    <span class="ladda-label">
+                        <i class="fas fa-check"></i> @Localizer["Save"]
+                    </span>
+                </button>
+            </div>
+            <!-- button group end -->
+        </form>
+        <!--form end-->
+    </div>
+</div>
+
+@section Styles {
+    @{await Html.RenderPartialAsync("_EditStylesPartial");}
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{await Html.RenderPartialAsync("_EditScriptsPartial");}
+}

@@ -1,0 +1,24 @@
+﻿@using MEInsight.Web
+@using MEInsight.Web.Models
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers.Localization
+@addTagHelper *, MEInsight.Web
+
+@* View-based authorization *@
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+
+@* Localizations *@
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+@* Identity *@
+@using Microsoft.AspNetCore.Identity
+@using MEInsight.Entities.Identity
+@inject UserManager<ApplicationUser> _userManager
+
+@* Configurations *@
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration

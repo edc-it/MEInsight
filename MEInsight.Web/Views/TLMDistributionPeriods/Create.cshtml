@@ -1,0 +1,116 @@
+﻿@model MEInsight.Entities.TLM.TLMDistributionPeriod
+
+@{
+    ViewData["Title"] = @Localizer["Create"].Value + " " + @Localizer["TLM Distribution Period"].Value;
+}
+
+<h2>@Localizer["Create"]</h2>
+
+<h4>@Localizer["TLM Distribution Period"]</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6 col-sm-8">
+        <form asp-action="Create" id="main-form">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" name="ParentId" value="@ViewBag.ParentId" />
+            <div class="form-group" asp-enabled="PeriodName">
+                <!--input start-->
+                <label asp-for="PeriodName" class="control-label"></label>
+                <input asp-for="PeriodName" autocomplete="off" class="form-control" />
+                <span asp-validation-for="PeriodName" class="text-danger"></span>
+                <!--input end-->
+            </div>
+
+            <div class="form-group" asp-enabled="StartDate">
+                <!--date start-->
+                <label asp-for="StartDate" class="control-label"></label>
+                <span class="text-muted small">(@System.Globalization.CultureInfo.CurrentUICulture)</span>
+                <!-- use class .date to enable datepicker -->
+                <!-- use class .startdate to enable start/end date validation -->
+                <div class="input-group date startdate">
+                    <input asp-for="StartDate" autocomplete="off" type="text" class="form-control" placeholder="@System.Globalization.DateTimeFormatInfo.CurrentInfo.ShortDatePattern" />
+                    <span class="input-group-append">
+                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                    </span>
+                </div>
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+                <!--date end-->
+            </div>
+
+            <div class="form-group" asp-enabled="EndDate">
+                <!--date start-->
+                <label asp-for="EndDate" class="control-label"></label>
+                <span class="text-muted small">(@System.Globalization.CultureInfo.CurrentUICulture)</span>
+                <!-- use class .date to enable datepicker -->
+                <!-- use class .enddate to enable start/end date validation -->
+                <div class="input-group date enddate">
+                    <input asp-for="EndDate" autocomplete="off" type="text" class="form-control" placeholder="@System.Globalization.DateTimeFormatInfo.CurrentInfo.ShortDatePattern" />
+                    <span class="input-group-append">
+                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                    </span>
+                </div>
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+                <!--date end-->
+            </div>
+
+            <!-- button group start -->
+            <div class="form-group text-right mt-5">
+                <a id="cancelbutton" class="btn btn-secondary mr-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
+                    <i class="fas fa-times"></i> @Localizer["Cancel"]
+                </a>
+                <button id="submitbutton" type="submit" value="Create" class="btn btn-primary ladda-button" data-style="expand-left" data-spinner-color="white">
+                    <span class="ladda-label">
+                        <i class="fas fa-check"></i> @Localizer["Create"]
+                    </span>
+                </button>
+            </div>
+            <!-- button group end -->
+        </form>
+    </div>
+</div>
+
+@section Styles {
+    @{await Html.RenderPartialAsync("_CreateStylesPartial");}
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{await Html.RenderPartialAsync("_CreateScriptsPartial");}
+<script>
+        $(document).ready(function () {
+
+            var cultureInfo = '@System.Globalization.CultureInfo.CurrentCulture.DisplayName';
+
+            //Validate that End Date input is not before Start Date
+            function checkDates() {
+                var startDate = $('.date.startdate').datepicker('getDate');
+                var endDate = $('.date.enddate').datepicker('getDate');
+                if (startDate != null && endDate != null) {
+                    if (startDate > endDate) {
+
+                        bootbox.alert({
+                            title: '@Localizer["Incorrect date"]',
+                            message: "@Localizer["The End Date must occur after the Start Date"]",
+                            centerVertical: true,
+                            backdrop: true,
+                            onEscape: false,
+                            size: "medium",
+
+                        });
+                        $('#EndDate').val('');
+                    }
+                }
+            }
+
+            $('.date.startdate')
+                .on("changeDate", function (e) {
+                    checkDates();
+                });
+
+           $('.date.enddate')
+               .on("changeDate", function (e) {
+                    checkDates();
+                });
+        });
+</script>
+
+}
