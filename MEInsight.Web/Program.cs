@@ -190,9 +190,10 @@ app.UseAuthorization();
 app.UseCookiePolicy();
 app.UseSession();
 
-app.MapControllerRoute(
-    name: "areas",
-    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+app.MapAreaControllerRoute(
+    name: "SettingsArea",
+    areaName: "Settings",
+    pattern: "Settings/{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",
