@@ -10,7 +10,7 @@
         <!--heading start-->
         <div class="card mb-3 heading-panel">
             <div class="card-body">
-                <h2 class="card-title mt-3 font-weight-bold mb-0">@Localizer["Group Attendance"]</h2>
+                <h2 class="card-title mt-3 fw-bold mb-0">@Localizer["Group Attendance"]</h2>
                 <span class="card-text text-muted">@Localizer["Update Attendance"]</span>
             </div>
         </div>
@@ -57,7 +57,7 @@
                                 <th>
                                     @Localizer["Sex"]
                                 </th>
-                                <th class="text-right" data-priority="1">
+                                <th class="text-end" data-priority="1">
                                     @Localizer["Total Attendance"] @ViewBag.AttendanceUnit / @Localizer["Status"]
                                 </th>
                             </tr>
@@ -79,15 +79,15 @@
                                     <td>
                                         @Html.Raw(Model[i].Participants.Sex.SexId)
                                     </td>
-                                    <td class="text-right">
+                                    <td class="text-end">
                                         <div class="input-group input-group-sm d-flex justify-content-end">
-                                            @Html.TextBox("attendance[" + (@i + 10) + "].Attendance", Model[i].Attendance, new { @Class = "attendance form-control input-sm validate text-right", data_attendance = i, tabindex = i + 1, data_val = "true", data_val_required = Localizer["The Attendance field is required"].Value, autocomplete = "off" })
+                                            @Html.TextBox("attendance[" + (@i + 10) + "].Attendance", Model[i].Attendance, new { @Class = "attendance form-control input-sm validate text-end", data_attendance = i, tabindex = i + 1, data_val = "true", data_val_required = Localizer["The Attendance field is required"].Value, autocomplete = "off" })
                                             <div class="input-group-append">
                                                 <span class="input-group-text">
                                                     @ViewBag.AttendanceUnit
                                                 </span>
                                             </div>
-                                            <select class="form-control custom-select status input-sm" name="attendance[@(i + 10)].RefEnrollmentStatusId" id="attendance[@(i + 10)].RefEnrollmentStatusId" data-completed="@i">
+                                            <select class="form-control form-select status input-sm" name="attendance[@(i + 10)].RefEnrollmentStatusId" id="attendance[@(i + 10)].RefEnrollmentStatusId" data-completed="@i">
                                                 @foreach (SelectListItem item in (IEnumerable<SelectListItem>)ViewBag.RefEnrollmentStatusId)
                                                 {
                                                     if (item.Value == Model[i].RefEnrollmentStatusId.ToString())
@@ -129,7 +129,7 @@
                     <a asp-controller="ViewBag.ParentController" asp-route-id="@ViewBag.ParentId" class="btn btn-secondary"><i class="fas fa-chevron-left"></i> @Localizer["Back"]</a>
                 }
             </div>
-            <div class="col text-right">
+            <div class="col text-end">
                 <br />
                 <div class="form-group">
                     <a class="btn btn-secondary" asp-action="Index" asp-route-id="@ViewBag.ParentId"><i class="fa fa-times" aria-hidden="true"></i> @Localizer["Cancel"]</a>

@@ -9,7 +9,7 @@
     <!--heading start-->
     <div class="card mb-3 heading-panel">
         <div class="card-body">
-            <h2 class="card-title mt-3 font-weight-bold mb-0">@Localizer["TLM Distribution"]</h2>
+            <h2 class="card-title mt-3 fw-bold mb-0">@Localizer["TLM Distribution"]</h2>
             <span class="card-text text-muted">@Localizer["List of"] @Localizer["Teaching and Learning Materials (TLM) Distributions"]</span>
 
             <ul class="list-unstyled">
@@ -32,7 +32,7 @@
                 @if (ViewBag.Closed == true)
                 {
                     <!--open button start-->
-                    <div policy="RequireMELRole" class="input-group input-group-sm mb-2 mr-3" role="group" aria-label="closeperiod">
+                    <div policy="RequireMELRole" class="input-group input-group-sm mb-2 me-3" role="group" aria-label="closeperiod">
                         <div class="input-group-prepend">
                             <span class="input-group-text bg-white" id="basic-addon1">M&E:</span>
                         </div>
@@ -46,7 +46,7 @@
                 {
                     <!--create start-->
                     <div class="btn-group btn-group-sm mb-2" role="group" aria-label="creategroup">
-                        <a policy="RequireCreateRole" asp-action="Create" asp-route-id="@ViewBag.ParentId" role="button" class="btn btn-primary mr-3">
+                        <a policy="RequireCreateRole" asp-action="Create" asp-route-id="@ViewBag.ParentId" role="button" class="btn btn-primary me-3">
                             <i class="fas fa-plus"></i> @Localizer["Create New"]
                         </a>
                     </div>
@@ -97,7 +97,7 @@
                         <th data-data="distributionStatus" data-name="DistributionStatus">
                             @Localizer["Distribution Status"]
                         </th>
-                        <th data-orderable="false" class="text-right d-print-none">
+                        <th data-orderable="false" class="text-end d-print-none">
                             @Localizer["Actions"]
                         </th>
                     </tr>
@@ -110,7 +110,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td class="text-right"></td>
+                        <td class="text-end"></td>
                     </tr>
                 </tbody>
             </table>
@@ -136,7 +136,7 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.TLMDistributionStatus)
                             </th>
-                            <th class="text-right d-print-none">@Localizer["Actions"]</th>
+                            <th class="text-end d-print-none">@Localizer["Actions"]</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -166,32 +166,32 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.TLMDistributionStatus.DistributionStatus)
                                 </td>
-                                <td class="text-right d-print-none">
+                                <td class="text-end d-print-none">
                                     <div class="btn-group btn-group-sm" role="group" aria-label="Actions">
                                         @if (item.Url != null)
                                         {
                                             <a target="_blank" href="@item.Url"
                                                class="btn btn-link text-blue btn-ss d-print-none btn-action"
-                                               data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Document"]">
+                                               data-container="body" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Document"]">
                                                 <i class="fas fa-file-alt" aria-hidden="true"></i>
                                             </a>
                                         }
                                         <a asp-action="Details" asp-route-id="@item.TLMDistributionId"
                                            class="btn btn-link text-gray btn-sm d-print-none btn-action"
-                                           data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Details"]'>
+                                           data-container="body" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Details"]'>
                                             <i class="fas fa-info-circle fa-sm" aria-hidden="true"></i>
                                         </a>
                                         @if (ViewBag.Closed != true)
                                         {
                                             <a policy="RequireEditRole" asp-action="Edit" asp-route-id="@item.TLMDistributionId"
                                                class="btn btn-link text-gray btn-sm d-print-none btn-action"
-                                               data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Edit"]'>
+                                               data-container="body" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Edit"]'>
                                                 <i class="fas fa-pencil-alt fa-sm" aria-hidden="true"></i>
                                             </a>
 
                                             <a policy="RequireDeleteRole" asp-action="Delete" asp-route-id="@item.TLMDistributionId"
                                                class="btn btn-link text-gray btn-sm d-print-none btn-action"
-                                               data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Delete"]'>
+                                               data-container="body" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Delete"]'>
                                                 <i class="far fa-trash-alt fa-sm" aria-hidden="true"></i>
                                             </a>
                                         }
@@ -202,7 +202,7 @@
                                                asp-action="Index"
                                                asp-route-id="@item.TLMDistributionId"
                                                class="btn btn-link btn-sm d-print-none btn-action"
-                                               data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Open"]'>
+                                               data-container="body" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Open"]'>
                                                 <i class="fas fa-chevron-right fa-sm" aria-hidden="true"></i>
                                             </a>
                                         }
@@ -232,7 +232,7 @@
                 <a asp-controller="@ViewBag.ParentController" class="btn btn-secondary"><i class="fas fa-chevron-left"></i> @Localizer["Back"]</a>
             }
         </div>
-        <div class="col text-right"></div>
+        <div class="col text-end"></div>
     </div>
     <!--footer buttons end-->
 </div><!--content end-->
@@ -353,32 +353,32 @@
                 {
                     targets: [-1],
                     width: '70px',
-                    className: 'text-right',
+                    className: 'text-end',
                     render: function (data, type, full, meta) {
                         var action = '<div class="btn-group btn-group-sm" role="group" aria-label="Actions">';
                         action += '<td>';
 
                         if (full.url != null)
                         {
-                            action += '<a target="_blank" href="' + full.url + '" class="btn btn-link text-blue btn-ss d-print-none btn-action" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Document"]"><i class="fas fa-file-alt fa-sm" aria-hidden="true"></i></a>';
+                            action += '<a target="_blank" href="' + full.url + '" class="btn btn-link text-blue btn-ss d-print-none btn-action" data-container="body" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Document"]"><i class="fas fa-file-alt fa-sm" aria-hidden="true"></i></a>';
                         }
 
-                        action += '<a href="/TLMDistributions/Details/' + full.tlmDistributionId + '" class="btn btn-link text-gray btn-sm d-print-none btn-action" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Details"]"><i class="fas fa-info-circle fa-sm" aria-hidden="true"></i></a>';
+                        action += '<a href="/TLMDistributions/Details/' + full.tlmDistributionId + '" class="btn btn-link text-gray btn-sm d-print-none btn-action" data-container="body" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Details"]"><i class="fas fa-info-circle fa-sm" aria-hidden="true"></i></a>';
 
                         @if (ViewBag.Closed != true)
                         {
                             @if (AuthorizationService.AuthorizeAsync(User, "RequireEditRole").GetAwaiter().GetResult().Succeeded)
                                 {
-                                    @:action += '<a href="/TLMDistributions/Edit/' + full.tlmDistributionId + '" class="btn btn-link text-gray btn-sm d-print-none btn-action" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Edit"]"><i class="fas fa-pencil-alt fa-sm" aria-hidden="true"></i></a>';
+                                    @:action += '<a href="/TLMDistributions/Edit/' + full.tlmDistributionId + '" class="btn btn-link text-gray btn-sm d-print-none btn-action" data-container="body" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Edit"]"><i class="fas fa-pencil-alt fa-sm" aria-hidden="true"></i></a>';
                                 }
 
                             @if (AuthorizationService.AuthorizeAsync(User, "RequireDeleteRole").GetAwaiter().GetResult().Succeeded)
                                 {
-                                    @:action += '<a href="/TLMDistributions/Delete/' + full.tlmDistributionId + '" class="btn btn-link text-gray btn-sm d-print-none btn-action" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Delete"]"><i class="far fa-trash-alt fa-sm" aria-hidden="true"></i></a>';
+                                    @:action += '<a href="/TLMDistributions/Delete/' + full.tlmDistributionId + '" class="btn btn-link text-gray btn-sm d-print-none btn-action" data-container="body" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Delete"]"><i class="far fa-trash-alt fa-sm" aria-hidden="true"></i></a>';
                                 }
                         }
 
-                        action += '<a href="/TLMDistributionDetails/Index/' + full.tlmDistributionId + '" class="btn btn-link btn-sm d-print-none btn-action" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Open"]"><i class="fas fa-chevron-right fa-sm" aria-hidden="true"></i></a>';
+                        action += '<a href="/TLMDistributionDetails/Index/' + full.tlmDistributionId + '" class="btn btn-link btn-sm d-print-none btn-action" data-container="body" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Open"]"><i class="fas fa-chevron-right fa-sm" aria-hidden="true"></i></a>';
                         action += '</td>';
                         action += '</div>';
                         return action;
@@ -524,7 +524,7 @@
         });
 
         //TOOLTIP INIT
-        $('[data-toggle="tooltip"]').tooltip({
+        $('[data-bs-toggle="tooltip"]').tooltip({
             animation: true,
             delay: { "show": 700, "hide": 100 },
             trigger: 'hover'

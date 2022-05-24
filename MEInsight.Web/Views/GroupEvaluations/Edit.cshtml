@@ -18,7 +18,7 @@
             <div class="form-group" asp-enabled="GroupEnrollmentId">
                 <!--fk select start-->
                 <label asp-for="GroupEnrollmentId" class="control-label"></label>
-                <select asp-for="GroupEnrollmentId" class="form-control custom-select" asp-items="ViewBag.GroupEnrollmentId">
+                <select asp-for="GroupEnrollmentId" class="form-control form-select" asp-items="ViewBag.GroupEnrollmentId">
                 </select>
                 <span asp-validation-for="GroupEnrollmentId" class="text-danger"></span>
                 <!--fk select end-->
@@ -35,7 +35,7 @@
             <div class="form-group" asp-enabled="ProgramAssessmentId">
                 <!--fk select start-->
                 <label asp-for="ProgramAssessmentId" class="control-label"></label>
-                <select asp-for="ProgramAssessmentId" class="form-control custom-select" asp-items="ViewBag.ProgramAssessmentId">
+                <select asp-for="ProgramAssessmentId" class="form-control form-select" asp-items="ViewBag.ProgramAssessmentId">
                 </select>
                 <span asp-validation-for="ProgramAssessmentId" class="text-danger"></span>
                 <!--fk select end-->
@@ -60,15 +60,15 @@
             <div class="form-group" asp-enabled="RefEvaluationStatusId">
                 <!--fk select start-->
                 <label asp-for="RefEvaluationStatusId" class="control-label"></label>
-                <select asp-for="RefEvaluationStatusId" class="form-control custom-select" asp-items="ViewBag.RefEvaluationStatusId">
+                <select asp-for="RefEvaluationStatusId" class="form-control form-select" asp-items="ViewBag.RefEvaluationStatusId">
                 </select>
                 <span asp-validation-for="RefEvaluationStatusId" class="text-danger"></span>
                 <!--fk select end-->
             </div>
             
             <!-- button group start -->
-            <div class="form-group text-right mt-5">
-                <a id="cancelbutton" class="btn btn-secondary mr-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
+            <div class="form-group text-end mt-5">
+                <a id="cancelbutton" class="btn btn-secondary me-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
                     <i class="fas fa-times"></i> @Localizer["Cancel"]
                 </a>
                 <button id="submitbutton" type="submit" value="Save" class="btn btn-primary ladda-button" data-style="expand-left" data-spinner-color="white">

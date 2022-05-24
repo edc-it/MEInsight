@@ -58,7 +58,7 @@
                                 @Localizer["Create as Organization Unit?"]
                                 <i data-content="@Localizer["Set to 'Yes' if this organization unit will manage other organizations. Set to 'No' if this organization will store groups of participants."]"
                                    data-placement="top"
-                                   data-toggle="popover"
+                                   data-bs-toggle="popover"
                                    data-container="body"
                                    style="cursor:pointer;"
                                    class="fa fa-info-circle text-muted"
@@ -76,7 +76,7 @@
 
                         <div class="form-group">
                             <label asp-for="ParentOrganizationId" class="control-label"></label>
-                            <select asp-for="ParentOrganizationId" class="form-control custom-select select2" asp-items="ViewBag.ParentOrganizationId" required></select>
+                            <select asp-for="ParentOrganizationId" class="form-control form-select select2" asp-items="ViewBag.ParentOrganizationId" required></select>
                             <span asp-validation-for="ParentOrganizationId" class="text-danger"></span>
                         </div>
                     </div>
@@ -91,7 +91,7 @@
             <div class="form-group required" asp-enabled="RefOrganizationTypeId">
                 <!--fk select start-->
                 <label asp-for="RefOrganizationTypeId" class="control-label"></label>
-                <select asp-for="RefOrganizationTypeId" class="form-control custom-select" asp-items="ViewBag.RefOrganizationTypeId">
+                <select asp-for="RefOrganizationTypeId" class="form-control form-select" asp-items="ViewBag.RefOrganizationTypeId">
                     <option disabled selected></option>
                 </select>
                 <span asp-validation-for="RefOrganizationTypeId" class="text-danger"></span>
@@ -207,8 +207,8 @@
 
 
             <!-- button group start -->
-            <div class="form-group text-right mt-5">
-                <a id="cancelbutton" class="btn btn-secondary mr-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
+            <div class="form-group text-end mt-5">
+                <a id="cancelbutton" class="btn btn-secondary me-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
                     <i class="fas fa-times"></i> @Localizer["Cancel"]
                 </a>
                 <button id="submitbutton" type="submit" value="Create" class="btn btn-primary ladda-button" data-style="expand-left" data-spinner-color="white">

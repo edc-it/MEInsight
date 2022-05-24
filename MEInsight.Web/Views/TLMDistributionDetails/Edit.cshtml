@@ -33,7 +33,7 @@
             <div class="form-group" asp-enabled="TLMMaterialId">
                 <!--fk select start-->
                 <label asp-for="TLMMaterialId" class="control-label"></label>
-                <select asp-for="TLMMaterialId" class="form-control custom-select select2" asp-items="ViewBag.TLMMaterialId">
+                <select asp-for="TLMMaterialId" class="form-control form-select select2" asp-items="ViewBag.TLMMaterialId">
                 </select>
                 <span asp-validation-for="TLMMaterialId" class="text-danger"></span>
                 <!--fk select end-->
@@ -64,8 +64,8 @@
             </div>
             
             <!-- button group start -->
-            <div class="form-group text-right mt-5">
-                <a id="cancelbutton" class="btn btn-secondary mr-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
+            <div class="form-group text-end mt-5">
+                <a id="cancelbutton" class="btn btn-secondary me-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
                     <i class="fas fa-times"></i> @Localizer["Cancel"]
                 </a>
                 <button id="submitbutton" type="submit" value="Save" class="btn btn-primary ladda-button" data-style="expand-left" data-spinner-color="white">

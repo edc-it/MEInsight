@@ -45,7 +45,7 @@
             <div class="form-group" asp-enabled="RefLocationTypeId">
                 <!--fk select start-->
                 <label asp-for="RefLocationTypeId" class="control-label"></label>
-                <select asp-for="RefLocationTypeId" class="form-control custom-select" asp-items="ViewBag.RefLocationTypeId">
+                <select asp-for="RefLocationTypeId" class="form-control form-select" asp-items="ViewBag.RefLocationTypeId">
                     <option disabled selected></option>
                 </select>
                 <span asp-validation-for="RefLocationTypeId" class="text-danger"></span>
@@ -70,8 +70,8 @@
             </div>
 
             <!-- button group start -->
-            <div class="form-group text-right mt-5">
-                <a id="cancelbutton" class="btn btn-secondary mr-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
+            <div class="form-group text-end mt-5">
+                <a id="cancelbutton" class="btn btn-secondary me-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
                     <i class="fas fa-times"></i> @Localizer["Cancel"]
                 </a>
                 <button id="submitbutton" type="submit" value="Create" class="btn btn-primary ladda-button" data-style="expand-left" data-spinner-color="white">

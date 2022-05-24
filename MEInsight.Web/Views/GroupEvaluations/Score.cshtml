@@ -10,7 +10,7 @@
         <!--heading start-->
         <div class="card mb-3 heading-panel">
             <div class="card-body">
-                <h2 class="card-title mt-3 font-weight-bold mb-0">@Localizer["Group Evaluation"]</h2>
+                <h2 class="card-title mt-3 fw-bold mb-0">@Localizer["Group Evaluation"]</h2>
                 <span class="card-text text-muted">@Localizer["Update Scores"]</span>
             </div>
         </div>
@@ -56,7 +56,7 @@
                                 </th>
                                 @for (int d = 0; d < Model.Select(x => x.ProgramAssessments).Distinct().Count(); d++)
                                 {
-                                    <th data-priority="1" data-orderable="false" data-width="150px" class="text-right">
+                                    <th data-priority="1" data-orderable="false" data-width="150px" class="text-end">
                                         <div style="white-space:normal;">
                                             <span style="cursor:default;" title="@Html.Raw(Model[d].ProgramAssessments.AssessmentName)">
                                                 @Html.Raw(Model[d].ProgramAssessments.AssessmentName)
@@ -97,9 +97,9 @@
                                             @Html.Hidden("score[" + (@f + 10) + "].ProgramAssessmentId", programAssessment[i].ProgramAssessmentId)
 
                                             <div class="input-group input-group-sm">
-                                                @Html.TextBox("score[" + (@f + 10) + "].Score", programAssessment[i].Score, new { @Class = "score form-control input-sm validate text-right", data_score = f, tabindex = f + 1, data_val = "true", data_val_required = @Localizer["This field is required"].Value, autocomplete="off" })
+                                                @Html.TextBox("score[" + (@f + 10) + "].Score", programAssessment[i].Score, new { @Class = "score form-control input-sm validate text-end", data_score = f, tabindex = f + 1, data_val = "true", data_val_required = @Localizer["This field is required"].Value, autocomplete="off" })
                                                 @*<span class="input-group-append" id="basic-addon2">%</span>*@
-                                                @*<select class="form-control custom-select status input-sm" name="grade[@(i + 10)].RefEvaluationStatusId" id="grade[@(i + 10)].RefEvaluationStatusId" data-completed="@i">
+                                                @*<select class="form-control form-select status input-sm" name="grade[@(i + 10)].RefEvaluationStatusId" id="grade[@(i + 10)].RefEvaluationStatusId" data-completed="@i">
                                                     @foreach (SelectListItem item in (IEnumerable<SelectListItem>)ViewBag.RefEvaluationStatusId)
                                                     {
                                                         if (item.Value == Model[i].RefEvaluationStatusId.ToString())
@@ -145,7 +145,7 @@
                     <a asp-controller="ViewBag.ParentController" asp-route-id="@ViewBag.ParentId" class="btn btn-secondary"><i class="fas fa-chevron-left"></i> @Localizer["Back"]</a>
                 }
             </div>
-            <div class="col text-right">
+            <div class="col text-end">
                 <br />
                 <div class="form-group">
                     <a class="btn btn-secondary" asp-action="Index" asp-route-id="@ViewBag.ParentId"><i class="fa fa-times" aria-hidden="true"></i> @Localizer["Cancel"]</a>

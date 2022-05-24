@@ -9,14 +9,14 @@
         <!--heading start-->
         <div class="card mb-3 heading-panel">
             <div class="card-body">
-                <h2 class="card-title mt-3 font-weight-bold mb-0">@Localizer["Group Enrollments"]</h2>
+                <h2 class="card-title mt-3 fw-bold mb-0">@Localizer["Group Enrollments"]</h2>
                 <span class="card-text text-muted">@Localizer["Select existing participants to enroll in this Group"]</span>
             </div>
         </div>
         <!--heading end-->
 
         <div class="card mb-3">
-            <div class="card-header" data-toggle="collapse" href="#collapseFilters" aria-expanded="true">
+            <div class="card-header" data-bs-toggle="collapse" href="#collapseFilters" aria-expanded="true">
                 @Localizer["Filters"]
             </div>
             <div class="collapse show" id="collapseFilters">
@@ -74,7 +74,7 @@
         </div>
         <!--Existing Participants-->
         <div class="card mb-3">
-            <div class="card-header" data-toggle="collapse" href="#collapseExisting" aria-expanded="true">
+            <div class="card-header" data-bs-toggle="collapse" href="#collapseExisting" aria-expanded="true">
                 @Localizer["Existing Participants"]
             </div>
             <div class="collapse show" id="collapseExisting">
@@ -170,7 +170,7 @@
 
         <!--Selected Participants-->
         <div class="card">
-            <div class="card-header" data-toggle="collapse" href="#collapseSelected" aria-expanded="true">
+            <div class="card-header" data-bs-toggle="collapse" href="#collapseSelected" aria-expanded="true">
                 @Localizer["Selected Participants to Enroll"]
             </div>
             <div class="collapse show" id="collapseSelected">
@@ -510,7 +510,7 @@
             });
 
             //TOOLTIP INIT
-            $('[data-toggle="tooltip"]').tooltip({
+            $('[data-bs-toggle="tooltip"]').tooltip({
                 animation: true,
                 delay: { "show": 700, "hide": 100 },
                 trigger: 'hover'

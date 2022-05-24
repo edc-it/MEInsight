@@ -16,7 +16,7 @@
             <input type="hidden" name="ParentId" value="@ViewBag.ParentId" />
             <div class="form-group">
                 <label asp-for="OrganizationId" class="control-label"></label>
-                <select asp-for="OrganizationId" class="form-control custom-select select2 required" asp-items="ViewBag.OrganizationId">
+                <select asp-for="OrganizationId" class="form-control form-select select2 required" asp-items="ViewBag.OrganizationId">
                     <option disabled selected></option>
                 </select>
                 <span asp-validation-for="OrganizationId" class="text-danger"></span>
@@ -38,14 +38,14 @@
             </div>
             <div class="form-group">
                 <label asp-for="RoleId" class="control-label"></label>
-                <select asp-for="RoleId" class="form-control custom-select required" asp-items="ViewBag.RoleId">
+                <select asp-for="RoleId" class="form-control form-select required" asp-items="ViewBag.RoleId">
                     <option disabled selected></option>
                 </select>
                 <span asp-validation-for="RoleId" class="text-danger"></span>
             </div>
             <!-- button group start -->
-            <div class="form-group text-right mt-5">
-                <a id="cancelbutton" class="btn btn-secondary mr-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
+            <div class="form-group text-end mt-5">
+                <a id="cancelbutton" class="btn btn-secondary me-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
                     <i class="fas fa-times"></i> @Localizer["Cancel"]
                 </a>
                 <button id="submitbutton" type="submit" value="Save" class="btn btn-primary ladda-button" data-style="expand-left" data-spinner-color="white">

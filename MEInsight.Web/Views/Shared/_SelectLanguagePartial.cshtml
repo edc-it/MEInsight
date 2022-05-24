@@ -19,10 +19,10 @@
         <div class="input-group input-group-sm">
             <div class="input-group-prepend ">
                 <span class="input-group-text d-none d-sm-none d-md-block d-lg-block d-xl-block" id="language-selector">
-                    <i class="fas fa-globe mr-1" aria-hidden="true"></i>@Localizer["Language"]:
+                    <i class="fas fa-globe me-1" aria-hidden="true"></i>@Localizer["Language"]:
                 </span>
             </div>
-            <select class="form-control custom-select" name="culture" asp-for="@requestCulture.RequestCulture.UICulture.Name" asp-items="cultureItems" aria-label="Language" aria-describedby="language-selector"></select>
+            <select class="form-control form-select" name="culture" asp-for="@requestCulture.RequestCulture.UICulture.Name" asp-items="cultureItems" aria-label="Language" aria-describedby="language-selector"></select>
         </div>
     </form>
 </div>

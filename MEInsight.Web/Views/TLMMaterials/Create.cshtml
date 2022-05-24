@@ -40,7 +40,7 @@
             <div class="form-group" asp-enabled="RefTLMMaterialTypeId">
                 <!--fk select start-->
                 <label asp-for="RefTLMMaterialTypeId" class="control-label"></label>
-                <select asp-for="RefTLMMaterialTypeId" class ="form-control custom-select" asp-items="ViewBag.RefTLMMaterialTypeId">
+                <select asp-for="RefTLMMaterialTypeId" class ="form-control form-select" asp-items="ViewBag.RefTLMMaterialTypeId">
                     <option disabled selected></option>
                 </select>
                 <span asp-validation-for="RefTLMMaterialTypeId" class="text-danger"></span>
@@ -50,7 +50,7 @@
             <div class="form-group" asp-enabled="RefGradeLevelId">
                 <!--fk select start-->
                 <label asp-for="RefGradeLevelId" class="control-label"></label>
-                <select asp-for="RefGradeLevelId" class ="form-control custom-select" asp-items="ViewBag.RefGradeLevelId">
+                <select asp-for="RefGradeLevelId" class ="form-control form-select" asp-items="ViewBag.RefGradeLevelId">
                     <option disabled selected></option>
                 </select>
                 <span asp-validation-for="RefGradeLevelId" class="text-danger"></span>
@@ -60,7 +60,7 @@
             <div class="form-group" asp-enabled="RefTLMLanguageId">
                 <!--fk select start-->
                 <label asp-for="RefTLMLanguageId" class="control-label"></label>
-                <select asp-for="RefTLMLanguageId" class ="form-control custom-select" asp-items="ViewBag.RefTLMLanguageId">
+                <select asp-for="RefTLMLanguageId" class ="form-control form-select" asp-items="ViewBag.RefTLMLanguageId">
                     <option disabled selected></option>
                 </select>
                 <span asp-validation-for="RefTLMLanguageId" class="text-danger"></span>
@@ -70,7 +70,7 @@
             <div class="form-group" asp-enabled="RefTLMSubjectId">
                 <!--fk select start-->
                 <label asp-for="RefTLMSubjectId" class="control-label"></label>
-                <select asp-for="RefTLMSubjectId" class ="form-control custom-select" asp-items="ViewBag.RefTLMSubjectId">
+                <select asp-for="RefTLMSubjectId" class ="form-control form-select" asp-items="ViewBag.RefTLMSubjectId">
                     <option disabled selected></option>
                 </select>
                 <span asp-validation-for="RefTLMSubjectId" class="text-danger"></span>
@@ -80,7 +80,7 @@
             <div class="form-group" asp-enabled="RefTLMGroupId">
                 <!--fk select start-->
                 <label asp-for="RefTLMGroupId" class="control-label"></label>
-                <select asp-for="RefTLMGroupId" class ="form-control custom-select" asp-items="ViewBag.RefTLMGroupId">
+                <select asp-for="RefTLMGroupId" class ="form-control form-select" asp-items="ViewBag.RefTLMGroupId">
                     <option disabled selected></option>
                 </select>
                 <span asp-validation-for="RefTLMGroupId" class="text-danger"></span>
@@ -90,7 +90,7 @@
             <div class="form-group" asp-enabled="RefTLMMaterialSetId">
                 <!--fk select start-->
                 <label asp-for="RefTLMMaterialSetId" class="control-label"></label>
-                <select asp-for="RefTLMMaterialSetId" class ="form-control custom-select" asp-items="ViewBag.RefTLMMaterialSetId">
+                <select asp-for="RefTLMMaterialSetId" class ="form-control form-select" asp-items="ViewBag.RefTLMMaterialSetId">
                     <option disabled selected></option>
                 </select>
                 <span asp-validation-for="RefTLMMaterialSetId" class="text-danger"></span>
@@ -122,8 +122,8 @@
             </div>
             
             <!-- button group start -->
-            <div class="form-group text-right mt-5">
-                <a id="cancelbutton" class="btn btn-secondary mr-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
+            <div class="form-group text-end mt-5">
+                <a id="cancelbutton" class="btn btn-secondary me-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
                     <i class="fas fa-times"></i> @Localizer["Cancel"]
                 </a>
                 <button id="submitbutton" type="submit" value="Create" class="btn btn-primary ladda-button" data-style="expand-left" data-spinner-color="white">

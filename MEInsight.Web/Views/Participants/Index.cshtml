@@ -9,7 +9,7 @@
     <!--heading start-->
     <div class="card mb-3 heading-panel">
         <div class="card-body">
-            <h2 class="card-title mt-3 font-weight-bold mb-0">@Localizer["Participant"]</h2>
+            <h2 class="card-title mt-3 fw-bold mb-0">@Localizer["Participant"]</h2>
             <span class="card-text text-muted">@Localizer["List of"] @Localizer["Participants"]</span>
         </div>
     </div>
@@ -19,7 +19,7 @@
         <div class="col-sm-12 col-md-6 d-flex align-items-center justify-content-start">
             <div id="toolbar" class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                 <!--create start-->
-                <div class="btn-group btn-group-sm mb-2 mr-3" role="group" aria-label="creategroup">
+                <div class="btn-group btn-group-sm mb-2 me-3" role="group" aria-label="creategroup">
                     <div policy="RequireCreateRole" class="btn-group btn-group-sm" role="group">
                         <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-plus"></i> @Localizer["Create New"]
@@ -118,7 +118,7 @@
     <div class="row mt-5">
         <div class="col">
         </div>
-        <div class="col text-right"></div>
+        <div class="col text-end"></div>
     </div>
     <!--footer buttons end-->
 </div><!--content end-->
@@ -194,15 +194,15 @@
                     render: function (data, type, full, meta) {
                         var action = '<div class="btn-group btn-group-sm" role="group" aria-label="Actions">';
                         action += '<td>';
-                        action += '<a href="/Participants/Details/' + full.participantId + '" class="btn btn-link text-gray btn-sm d-print-none btn-action" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Details"]"><i class="fas fa-info-circle fa-sm" aria-hidden="true"></i></a>';
+                        action += '<a href="/Participants/Details/' + full.participantId + '" class="btn btn-link text-gray btn-sm d-print-none btn-action" data-container="body" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Details"]"><i class="fas fa-info-circle fa-sm" aria-hidden="true"></i></a>';
                         @if (AuthorizationService.AuthorizeAsync(User, "RequireEditRole").GetAwaiter().GetResult().Succeeded)
                                 {
-                                    @:action += '<a href="/Participants/Edit/' + full.participantId + '" class="btn btn-link text-gray btn-sm d-print-none btn-action" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Edit"]"><i class="fas fa-pencil-alt fa-sm" aria-hidden="true"></i></a>';
+                                    @:action += '<a href="/Participants/Edit/' + full.participantId + '" class="btn btn-link text-gray btn-sm d-print-none btn-action" data-container="body" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Edit"]"><i class="fas fa-pencil-alt fa-sm" aria-hidden="true"></i></a>';
                                 }
 
                         @if (AuthorizationService.AuthorizeAsync(User, "RequireDeleteRole").GetAwaiter().GetResult().Succeeded)
                                 {
-                                    @:action += '<a href="/Participants/Delete/' + full.participantId + '" class="btn btn-link text-gray btn-sm d-print-none btn-action" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Delete"]"><i class="far fa-trash-alt fa-sm" aria-hidden="true"></i></a>';
+                                    @:action += '<a href="/Participants/Delete/' + full.participantId + '" class="btn btn-link text-gray btn-sm d-print-none btn-action" data-container="body" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Delete"]"><i class="far fa-trash-alt fa-sm" aria-hidden="true"></i></a>';
                                 }
                         action += '</td>';
                         action += '</div>';
@@ -349,7 +349,7 @@
         });
 
         //TOOLTIP INIT
-        $('[data-toggle="tooltip"]').tooltip({
+        $('[data-bs-toggle="tooltip"]').tooltip({
             animation: true,
             delay: { "show": 700, "hide": 100 },
             trigger: 'hover'

@@ -9,7 +9,7 @@
     <!--heading start-->
     <div class="card mb-3 heading-panel">
         <div class="card-body">
-            <h2 class="card-title mt-3 font-weight-bold mb-0">@Localizer["Group Enrollments"]</h2>
+            <h2 class="card-title mt-3 fw-bold mb-0">@Localizer["Group Enrollments"]</h2>
             <span class="card-text text-muted">@Localizer["List of"] @Localizer["Group Enrollments"]</span>
         </div>
     </div>
@@ -26,7 +26,7 @@
                 @if (ViewBag.Closed == true)
                 {
                     <!--open button start-->
-                    <div policy="RequireMELRole" class="input-group input-group-sm mb-2 mr-3" role="group" aria-label="closegroup">
+                    <div policy="RequireMELRole" class="input-group input-group-sm mb-2 me-3" role="group" aria-label="closegroup">
                         <div class="input-group-prepend">
                             <span class="input-group-text bg-white" id="basic-addon1">M&E:</span>
                         </div>
@@ -43,7 +43,7 @@
                 <!--button group start-->
                 <!--create button dropdown start-->
                 <div policy="RequireCreateRole" class="btn-group btn-group-sm" role="group">
-                    <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-plus"></i> @Localizer["Create New"]
                     </button>
                     <div class="dropdown-menu" aria-labelledby="btnGroup1Drop1">
@@ -127,14 +127,14 @@
                         <th>
                             @Html.DisplayNameFor(model => model.EnrollmentStatus)
                         </th>
-                        <th class="text-right d-print-none">@Localizer["Actions"]</th>
+                        <th class="text-end d-print-none">@Localizer["Actions"]</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td class="text-uppercase font-weight-bold">
+                            <td class="text-uppercase fw-bold">
                                 @Html.DisplayFor(modelItem => item.Participants.Name)
                             </td>
                             <td>
@@ -152,11 +152,11 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.EnrollmentStatus.EnrollmentStatus)
                             </td>
-                            <td class="text-right d-print-none">
+                            <td class="text-end d-print-none">
                                 <div class="btn-group btn-group-sm" role="group" aria-label="Actions">
                                     <a asp-action="Details" asp-route-id="@item.GroupEnrollmentId"
                                        class="btn btn-link text-gray btn-sm d-print-none btn-action"
-                                       data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Details"]'>
+                                       data-container="body" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Details"]'>
                                         <i class="fas fa-info-circle fa-sm" aria-hidden="true"></i>
                                     </a>
 
@@ -164,19 +164,19 @@
                                     {
                                         <a policy="RequireEditRole" asp-action="Edit" asp-route-id="@item.GroupEnrollmentId"
                                            class="btn btn-link text-gray btn-sm d-print-none btn-action"
-                                           data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Edit"]'>
+                                           data-container="body" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Edit"]'>
                                             <i class="fas fa-pencil-alt fa-sm" aria-hidden="true"></i>
                                         </a>
 
                                         <a policy="RequireEditRole" asp-controller="Participants" asp-action="Edit" asp-route-id="@item.ParticipantId" asp-route-GroupId="@item.GroupId"
                                            class="btn btn-link text-gray btn-sm d-print-none btn-action"
-                                           data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Edit"]'>
+                                           data-container="body" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Edit"]'>
                                             <i class="fas fa-user-edit fa-sm" aria-hidden="true"></i>
                                         </a>
 
                                         <a policy="RequireDeleteRole" asp-action="Delete" asp-route-id="@item.GroupEnrollmentId"
                                            class="btn btn-link text-gray btn-sm d-print-none btn-action"
-                                           data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Delete"]'>
+                                           data-container="body" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Delete"]'>
                                             <i class="far fa-trash-alt fa-sm" aria-hidden="true"></i>
                                         </a>
                                     }
@@ -187,7 +187,7 @@
                                            asp-action="Index"
                                            asp-route-id="@item.GroupEnrollmentId"
                                            class="btn btn-link btn-sm d-print-none btn-action"
-                                           data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Open"]'>
+                                           data-container="body" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title='@Localizer["Open"]'>
                                             <i class="fas fa-chevron-right fa-sm" aria-hidden="true"></i>
                                         </a>
                                     }
@@ -213,7 +213,7 @@
     <div class="row mt-5">
         <div class="col">
         </div>
-        <div class="col text-right"></div>
+        <div class="col text-end"></div>
     </div>
     <!--footer buttons end-->
 </div><!--content end-->

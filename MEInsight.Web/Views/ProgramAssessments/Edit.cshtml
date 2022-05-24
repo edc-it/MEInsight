@@ -18,7 +18,7 @@
             <div class="form-group" asp-enabled="ProgramId">
                 <!--fk select start-->
                 <label asp-for="ProgramId" class="control-label"></label>
-                <select asp-for="ProgramId" class="form-control custom-select" asp-items="ViewBag.ProgramId">
+                <select asp-for="ProgramId" class="form-control form-select" asp-items="ViewBag.ProgramId">
                 </select>
                 <span asp-validation-for="ProgramId" class="text-danger"></span>
                 <!--fk select end-->
@@ -35,7 +35,7 @@
             <div class="form-group" asp-enabled="RefAssessmentTypeId">
                 <!--fk select start-->
                 <label asp-for="RefAssessmentTypeId" class="control-label"></label>
-                <select asp-for="RefAssessmentTypeId" class="form-control custom-select" asp-items="ViewBag.RefAssessmentTypeId">
+                <select asp-for="RefAssessmentTypeId" class="form-control form-select" asp-items="ViewBag.RefAssessmentTypeId">
                 </select>
                 <span asp-validation-for="RefAssessmentTypeId" class="text-danger"></span>
                 <!--fk select end-->
@@ -68,7 +68,7 @@
             <div class="form-group" asp-enabled="RefAttendanceUnitId">
                 <!--fk select start-->
                 <label asp-for="RefAttendanceUnitId" class="control-label"></label>
-                <select asp-for="RefAttendanceUnitId" class="form-control custom-select" asp-items="ViewBag.RefAttendanceUnitId">
+                <select asp-for="RefAttendanceUnitId" class="form-control form-select" asp-items="ViewBag.RefAttendanceUnitId">
                 </select>
                 <span asp-validation-for="RefAttendanceUnitId" class="text-danger"></span>
                 <!--fk select end-->
@@ -101,15 +101,15 @@
             <div class="form-group" asp-enabled="RefEvaluationStatusId">
                 <!--fk select start-->
                 <label asp-for="RefEvaluationStatusId" class="control-label"></label>
-                <select asp-for="RefEvaluationStatusId" class="form-control custom-select" asp-items="ViewBag.RefEvaluationStatusId">
+                <select asp-for="RefEvaluationStatusId" class="form-control form-select" asp-items="ViewBag.RefEvaluationStatusId">
                 </select>
                 <span asp-validation-for="RefEvaluationStatusId" class="text-danger"></span>
                 <!--fk select end-->
             </div>
             
             <!-- button group start -->
-            <div class="form-group text-right mt-5">
-                <a id="cancelbutton" class="btn btn-secondary mr-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
+            <div class="form-group text-end mt-5">
+                <a id="cancelbutton" class="btn btn-secondary me-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
                     <i class="fas fa-times"></i> @Localizer["Cancel"]
                 </a>
                 <button id="submitbutton" type="submit" value="Save" class="btn btn-primary ladda-button" data-style="expand-left" data-spinner-color="white">

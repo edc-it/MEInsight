@@ -9,7 +9,7 @@
     <!--heading start-->
     <div class="card mb-3 heading-panel">
         <div class="card-body">
-            <h2 class="card-title mt-3 font-weight-bold mb-0">@Localizer["Group Evaluations"]</h2>
+            <h2 class="card-title mt-3 fw-bold mb-0">@Localizer["Group Evaluations"]</h2>
             <span class="card-text text-muted">@Localizer["List of"] @Localizer["Group Evaluations"]</span>
         </div>
     </div>
@@ -23,7 +23,7 @@
                 @if (ViewBag.Closed == true)
                 {
                     <!--open button start-->
-                    <div policy="RequireMELRole" class="input-group input-group-sm mb-2 mr-3" role="group" aria-label="closegroup">
+                    <div policy="RequireMELRole" class="input-group input-group-sm mb-2 me-3" role="group" aria-label="closegroup">
                         <div class="input-group-prepend">
                             <span class="input-group-text bg-white" id="basic-addon1">M&E:</span>
                         </div>
@@ -40,7 +40,7 @@
                         <!--button group start-->
                         <!--create button dropdown start-->
                         <div policy="RequireCreateRole" class="btn-group btn-group-sm" role="group">
-                            <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-plus"></i> @Localizer["Create New"]
                             </button>
                             <div class="dropdown-menu" aria-labelledby="btnGroup1Drop1">
@@ -111,7 +111,7 @@
                         </th>
                         @for (int d = 0; d < Model.Select(x => x.ProgramAssessments).Distinct().Count(); d++)
                         {
-                            <th data-priority="1" data-orderable="false" data-width="150px" class="text-right pr-0">
+                            <th data-priority="1" data-orderable="false" data-width="150px" class="text-end pe-0">
                                 <div style="white-space:normal;">
                                     <span style="cursor:default;" title="@Html.Raw(Model[d].ProgramAssessments.AssessmentName)">
                                         @Html.Raw(Model[d].ProgramAssessments.AssessmentName)
@@ -144,7 +144,7 @@
                             @{ var programAssessment = Model.Where(x => x.GroupEnrollments.GroupEnrollmentId == participant[d].GroupEnrollments.GroupEnrollmentId).ToList(); }
                             @for (int i = 0; i < programAssessment.Count; i++)
                             {
-                                <td id="marks" class="text-right">
+                                <td id="marks" class="text-end">
                                     @Html.Raw(programAssessment[i].Score)
                                 </td>
                                 f++;
@@ -169,7 +169,7 @@
     <div class="row mt-5">
         <div class="col">
         </div>
-        <div class="col text-right"></div>
+        <div class="col text-end"></div>
     </div>
     <!--footer buttons end-->
 </div><!--content end-->
