@@ -42,7 +42,7 @@
         // Select2 search dropdown style for selects
         $('.select2')
             .select2({
-                theme: 'bootstrap4',
+                theme: 'bootstrap-5',
                 dropdownAutoWidth: true,
                 width: '100%',
                 allowClear: true,
@@ -62,8 +62,8 @@
                 var form = $('#main-form');
                 if (form.valid()) {
                     // activates ladda-button 'loading..' style and disables submit button after one click
-                    var l = Ladda.create(this);
-                    l.start();
+                    // var l = Ladda.create(this);
+                    // l.start();
 
                     // disable cancel button after submit
                     $('#cancelbutton').addClass('disabled');

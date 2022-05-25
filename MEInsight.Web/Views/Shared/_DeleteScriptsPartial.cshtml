@@ -1,50 +1,35 @@
-﻿<script src="~/lib/sweetalert2/dist/sweetalert2.min.js" asp-append-version="true"></script>
+﻿<script src="~/lib/sweetalert2/dist/sweetalert2.all.min.js" asp-append-version="true"></script>
 
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
 
         // Disables Submit button after one click if form is valid
         // sets "loading..." Ladda-button styles
         // https://stackoverflow.com/questions/10111907/how-to-focus-invalid-fields-with-jquery-validate
         $('#submitbutton')
-            .on('click', function (e) {
+            .on('click', function(e) {
                 // prevents default submit
                 e.preventDefault();
                 // activates ladda-button 'loading..' style and disables submit button after one click
 
-                var l = Ladda.create(this);
+                //var l = Ladda.create(this);
 
-                bootbox.confirm({
+                Swal.fire({
                     title: '@Localizer["Are you sure?"]',
-                    message: "Deleting this record will delete ALL related records. This cannot be undone.",
-                    centerVertical: true,
-                    backdrop: true,
-                    onEscape: false,
-                    size: "large",
-                    buttons: {
-                        confirm: {
-                            label: '<i class="fas fa-check"></i> Delete',
-                            className: 'btn-danger'
-                        },
-                        cancel: {
-                            label: '<i class="fas fa-times"></i> Cancel',
-                            className: 'btn-secondary'
-                        }
-                    },
-                    callback: function (result) {
-                        if (result == true) {
-                            //Ladda initi
-                            l.start();
-
-                            // disable cancel button after submit
-                            $('#cancelbutton').addClass('disabled');
-
-                            // submit form
-                            var form = $('#main-form');
+                    text: "Deleting this record will delete ALL related records. This cannot be undone.",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var form = $('#main-form');
                             form.submit();
-                        }
                     }
                 });
+
+                
             });
     });
 </script>

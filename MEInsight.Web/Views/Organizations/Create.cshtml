@@ -56,13 +56,15 @@
                         <div class="mb-3">
                             <label class="control-label">
                                 @Localizer["Create as Organization Unit?"]
-                                <i data-content="@Localizer["Set to 'Yes' if this organization unit will manage other organizations. Set to 'No' if this organization will store groups of participants."]"
-                               data-placement="top"
+                                <i data-bs-content="@Localizer["Set to 'Yes' if this organization unit will manage other organizations. Set to 'No' if this organization will store groups of participants."]"
+                               data-bs-placement="top"
                                data-bs-toggle="popover"
-                               data-container="body"
+                               data-bs-container="body"
                                style="cursor:pointer;"
-                               class="fa fa-info-circle text-muted"
-                               data-original-title="@Localizer["Organization Unit"]" title="" aria-describedby="popover">
+                               class="fa fa-info-circle text-muted popover-dismiss"
+                               tabindex="0"
+                               data-bs-trigger="focus"
+                               data-bs-original-title="@Localizer["Organization Unit"]" title="" aria-describedby="popover">
                                 </i>
                             </label>
                             <div class="radio" style="margin-top:0;">
@@ -76,7 +78,7 @@
 
                         <div class="mb-3">
                             <label asp-for="ParentOrganizationId" class="form-label"></label>
-                            <select asp-for="ParentOrganizationId" class="form-control form-select select2" asp-items="ViewBag.ParentOrganizationId" required></select>
+                            <select asp-for="ParentOrganizationId" class="form-control form-select" asp-items="ViewBag.ParentOrganizationId" required></select>
                             <span asp-validation-for="ParentOrganizationId" class="text-danger"></span>
                         </div>
                     </div>
@@ -132,15 +134,15 @@
                             @if (item.LocationLevel == 1)
                             {
                                 <div class="mb-3 required">
-                                    <label class="control-label">@item.LocationType</label>
-                                    <select class="form-control" data-locationlevel="@item.LocationLevel" id="RefLocation@{
-                            @item.LocationLevel
-}Id" name="RefLocationId[@i]" data-val="true" asp-items="@ViewBag.RefLocationId" required>
+                                    <label class="form-label">@item.LocationType</label>
+                                    <select class="form-select" data-locationlevel="@item.LocationLevel" id="RefLocation@{
+                                    @item.LocationLevel
+    }Id" name="RefLocationId[@i]" data-val="true" asp-items="@ViewBag.RefLocationId" required>
                                         <option disabled selected></option>
                                     </select>
                                     <span class="text-danger field-validation-valid" data-valmsg-for="RefLocation@{
-                            @item.LocationLevel
-}Id" data-valmsg-replace="true"></span>
+                                    @item.LocationLevel
+    }Id" data-valmsg-replace="true"></span>
                                 </div>
                             }
                             else
@@ -148,10 +150,10 @@
                                 if (item.LocationLevel == (int)ViewData["RefLocationTypesCount"])
                                 {
                                     <div class="mb-3 required">
-                                        <label class="control-label">@item.LocationType</label>
-                                        <select class="form-control" data-locationlevel="@item.LocationLevel" id="RefLocation@{
-                            @item.LocationLevel
-}Id" name="RefLocationId[@i]" data-val="true">
+                                        <label class="form-label">@item.LocationType</label>
+                                        <select class="form-select" data-locationlevel="@item.LocationLevel" id="RefLocation@{
+                                    @item.LocationLevel
+    }Id" name="RefLocationId[@i]" data-val="true">
                                             <option disabled selected></option>
                                         </select>
                                         <span class="text-danger field-validation-valid" data-valmsg-for="RefLocationId" data-valmsg-replace="true"></span>
@@ -162,29 +164,29 @@
                                     if (item.LocationLevel == 2)
                                     {
                                         <div class="mb-3 required">
-                                            <label class="control-label">@item.LocationType</label>
-                                            <select class="form-control" data-locationlevel="@item.LocationLevel" id="RefLocation@{
-                            @item.LocationLevel
-}Id" name="RefLocationId[@i]" data-val="true" required>
+                                            <label class="form-label">@item.LocationType</label>
+                                            <select class="form-select" data-locationlevel="@item.LocationLevel" id="RefLocation@{
+                                    @item.LocationLevel
+    }Id" name="RefLocationId[@i]" data-val="true" required>
                                                 <option disabled selected></option>
                                             </select>
                                             <span class="text-danger field-validation-valid" data-valmsg-for="RefLocation@{
-                            @item.LocationLevel
-}Id" data-valmsg-replace="true"></span>
+                                    @item.LocationLevel
+    }Id" data-valmsg-replace="true"></span>
                                         </div>
                                     }
                                     else
                                     {
                                         <div class="mb-3 required">
-                                            <label class="control-label">@item.LocationType</label>
-                                            <select class="form-control" data-locationlevel="@item.LocationLevel" id="RefLocation@{
-                            @item.LocationLevel
-}Id" name="RefLocationId[@i]" data-val="true">
+                                            <label class="form-label">@item.LocationType</label>
+                                            <select class="form-select" data-locationlevel="@item.LocationLevel" id="RefLocation@{
+                                    @item.LocationLevel
+    }Id" name="RefLocationId[@i]" data-val="true">
                                                 <option disabled selected></option>
                                             </select>
                                             <span class="text-danger field-validation-valid" data-valmsg-for="RefLocation@{
-                            @item.LocationLevel
-}Id" data-valmsg-replace="true"></span>
+                                    @item.LocationLevel
+    }Id" data-valmsg-replace="true"></span>
                                         </div>
                                     }
                                 }
@@ -259,7 +261,7 @@
             // On change or remove event clears select options and
             // requests (Ajax) the new selected location options
             $('[data-locationlevel]').select2({
-                theme: "bootstrap4",
+                theme: "bootstrap-5",
                 placeholder: " ",
                 dropdownAutoWidth: true,
                 width: '100%',
@@ -276,7 +278,7 @@
                     if (locationId) {
                         $('[data-locationlevel="' + (locationLevel + 1) + '"]').select2({
                             placeholder: "@Localizer["Loading..."]",
-                            theme: "bootstrap4",
+                            theme: "bootstrap-5",
                             dropdownAutoWidth: true,
                             width: '100%'
                         })
@@ -301,7 +303,7 @@
                                         selectOnBlur: true,
                                         allowClear: true,
                                         language: 'en',
-                                        theme: "bootstrap4",
+                                        theme: "bootstrap-5",
                                         dropdownAutoWidth: true,
                                         width: '100%'
                                     });
@@ -318,7 +320,7 @@
                                     placeholder: " ",
                                     allowClear: true,
                                     language: 'en',
-                                    theme: "bootstrap4",
+                                    theme: "bootstrap-5",
                                     dropdownAutoWidth: true,
                                     width: '100%'
                                 });

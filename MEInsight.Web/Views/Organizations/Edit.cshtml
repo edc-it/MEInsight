@@ -114,12 +114,12 @@
                     <div class="mb-3 required">
                         <label class="control-label">@item.LocationType</label>
                         <select class="form-control" data-locationlevel="@item.LocationLevel" id="RefLocation@{
-                    @item.LocationLevel
+                        @item.LocationLevel
 }Id" name="RefLocationId[@i]" data-val="true" asp-items="@ViewBag.RefLocationId" required>
                             <option disabled selected></option>
                         </select>
                         <span class="text-danger field-validation-valid" data-valmsg-for="RefLocation@{
-                    @item.LocationLevel
+                        @item.LocationLevel
 }Id" data-valmsg-replace="true"></span>
                     </div>
                 }
@@ -130,7 +130,7 @@
                         <div class="mb-3 required">
                             <label class="control-label">@item.LocationType</label>
                             <select class="form-control" data-locationlevel="@item.LocationLevel" id="RefLocation@{
-                    @item.LocationLevel
+                        @item.LocationLevel
 }Id" name="RefLocationId[@i]" data-val="true">
                                 <option disabled selected></option>
                             </select>
@@ -144,12 +144,12 @@
                             <div class="mb-3 required">
                                 <label class="control-label">@item.LocationType</label>
                                 <select class="form-control" data-locationlevel="@item.LocationLevel" id="RefLocation@{
-                    @item.LocationLevel
+                        @item.LocationLevel
 }Id" name="RefLocationId[@i]" data-val="true">
                                     <option disabled selected></option>
                                 </select>
                                 <span class="text-danger field-validation-valid" data-valmsg-for="RefLocation@{
-                    @item.LocationLevel
+                        @item.LocationLevel
 }Id" data-valmsg-replace="true"></span>
                             </div>
                         }
@@ -158,12 +158,12 @@
                             <div class="mb-3 required">
                                 <label class="control-label">@item.LocationType</label>
                                 <select class="form-control" data-locationlevel="@item.LocationLevel" id="RefLocation@{
-                    @item.LocationLevel
+                        @item.LocationLevel
 }Id" name="RefLocationId[@i]" data-val="true">
                                     <option disabled selected></option>
                                 </select>
                                 <span class="text-danger field-validation-valid" data-valmsg-for="RefLocation@{
-                    @item.LocationLevel
+                        @item.LocationLevel
 }Id" data-valmsg-replace="true"></span>
                             </div>
                         }
@@ -180,13 +180,15 @@
                         <div class="mb-3">
                             <label class="control-label">
                                 @Localizer["Create as Organization Unit?"]
-                                <i data-content="@Localizer["Set to 'Yes' if this organization will manage other organizations."]"
-                               data-placement="top"
+                                <i data-bs-content="@Localizer["Set to 'Yes' if this organization will manage other organizations."]"
+                               data-bs-placement="top"
                                data-bs-toggle="popover"
-                               data-container="body"
+                               data-bs-container="body"
                                style="cursor:pointer;"
                                class="fa fa-info-circle text-muted"
-                               data-original-title="@Localizer["Organization Unit"]" title="" aria-describedby="popover"></i>
+                               tabindex="0"
+                               data-bs-trigger="focus"
+                               data-bs-original-title="@Localizer["Organization Unit"]" title="" aria-describedby="popover"></i>
                             </label>
                             <div class="radio" style="margin-top:0;">
                                 <label>@Html.RadioButton("IsOrganizationUnit", "true") @Localizer["Yes"]</label>
@@ -281,14 +283,14 @@
             }
         }
 
-                // Counts the total number of available Location level inputs
-                var totalLocationLevels = $('[data-locationlevel]').length;
+                        // Counts the total number of available Location level inputs
+                        var totalLocationLevels = $('[data-locationlevel]').length;
 
         // JQuery select2 chained drop-downs by [data-locationlevel]
         // On change or remove event clears select options and
         // requests (Ajax) the new selected location options
         $('[data-locationlevel]').select2({
-            theme: "bootstrap4",
+            theme: "bootstrap-5",
             placeholder: " ",
             dropdownAutoWidth: true,
             width: '100%',
@@ -305,7 +307,7 @@
                 if (locationId) {
                     $('[data-locationlevel="' + (locationLevel + 1) + '"]').select2({
                         placeholder: "@Localizer["Loading..."]",
-                        theme: "bootstrap4",
+                        theme: "bootstrap-5",
                         dropdownAutoWidth: true,
                         width: '100%'
                     })
@@ -330,7 +332,7 @@
                                     selectOnBlur: true,
                                     allowClear: true,
                                     language: 'en',
-                                    theme: "bootstrap4",
+                                    theme: "bootstrap-5",
                                     dropdownAutoWidth: true,
                                     width: '100%'
                                 });
@@ -347,13 +349,13 @@
                                 placeholder: " ",
                                 allowClear: true,
                                 language: 'en',
-                                theme: "bootstrap4",
+                                theme: "bootstrap-5",
                                 dropdownAutoWidth: true,
                                 width: '100%'
                             });
                     }
                 }
             });
-                });
+                        });
     </script>
 }
