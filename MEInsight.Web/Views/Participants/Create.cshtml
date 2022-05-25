@@ -22,15 +22,15 @@
                 </div>
                 <div class="card-body">
 
-                    <div class="form-group required" asp-enabled="RegistrationDate">
+                    <div class="mb-3 required" asp-enabled="RegistrationDate">
                         <!--date start-->
-                        <label asp-for="RegistrationDate" class="control-label"></label>
+                        <label asp-for="RegistrationDate" class="form-label"></label>
                         <span class="text-muted small">(@System.Globalization.CultureInfo.CurrentUICulture)</span>
                         <!-- use class .date to enable datepicker -->
-                        <div class="input-group date">
+                        <div class="input-group mb-3 date">
                             <input asp-for="RegistrationDate" autocomplete="off" type="text" class="form-control" placeholder="@System.Globalization.DateTimeFormatInfo.CurrentInfo.ShortDatePattern" />
-                            <span class="input-group-append">
-                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                            <span class="input-group-text input-group-addon">
+                                <i class="far fa-calendar-alt"></i>
                             </span>
                         </div>
                         <span asp-validation-for="RegistrationDate" class="text-danger"></span>
@@ -62,9 +62,9 @@
                         </div>
                     </div>
 
-                    <div class="form-group" asp-enabled="RefParticipantCohortId">
+                    <div class="mb-3" asp-enabled="RefParticipantCohortId">
                         <!--fk select start-->
-                        <label asp-for="RefParticipantCohortId" class="control-label"></label>
+                        <label asp-for="RefParticipantCohortId" class="form-label"></label>
                         <select asp-for="RefParticipantCohortId" class="form-control form-select" asp-items="ViewBag.RefParticipantCohortId">
                             <option disabled selected></option>
                         </select>
@@ -72,41 +72,41 @@
                         <!--fk select end-->
                     </div>
 
-                    <div class="form-group required" asp-enabled="ParticipantCode">
+                    <div class="mb-3 required" asp-enabled="ParticipantCode">
                         <!--input start-->
-                        <label asp-for="ParticipantCode" class="control-label"></label>
+                        <label asp-for="ParticipantCode" class="form-label"></label>
                         <input asp-for="ParticipantCode" autocomplete="off" class="form-control" />
                         <span asp-validation-for="ParticipantCode" class="text-danger"></span>
                         <!--input end-->
                     </div>
 
-                    <div class="form-group required" asp-enabled="FirstName">
+                    <div class="mb-3 required" asp-enabled="FirstName">
                         <!--input start-->
-                        <label asp-for="FirstName" class="control-label"></label>
+                        <label asp-for="FirstName" class="form-label"></label>
                         <input asp-for="FirstName" autocomplete="off" class="form-control" />
                         <span asp-validation-for="FirstName" class="text-danger"></span>
                         <!--input end-->
                     </div>
 
-                    <div class="form-group" asp-enabled="MiddleName">
+                    <div class="mb-3" asp-enabled="MiddleName">
                         <!--input start-->
-                        <label asp-for="MiddleName" class="control-label"></label>
+                        <label asp-for="MiddleName" class="form-label"></label>
                         <input asp-for="MiddleName" autocomplete="off" class="form-control" />
                         <span asp-validation-for="MiddleName" class="text-danger"></span>
                         <!--input end-->
                     </div>
 
-                    <div class="form-group required" asp-enabled="LastName">
+                    <div class="mb-3 required" asp-enabled="LastName">
                         <!--input start-->
-                        <label asp-for="LastName" class="control-label"></label>
+                        <label asp-for="LastName" class="form-label"></label>
                         <input asp-for="LastName" autocomplete="off" class="form-control" />
                         <span asp-validation-for="LastName" class="text-danger"></span>
                         <!--input end-->
                     </div>
 
-                    <div class="form-group required" asp-enabled="RefSexId">
+                    <div class="mb-3 required" asp-enabled="RefSexId">
                         <!--fk select start-->
-                        <label asp-for="RefSexId" class="control-label"></label>
+                        <label asp-for="RefSexId" class="form-label"></label>
                         <select asp-for="RefSexId" class="form-control form-select" asp-items="ViewBag.RefSexId">
                             <option disabled selected></option>
                         </select>
@@ -114,24 +114,24 @@
                         <!--fk select end-->
                     </div>
 
-                    <div class="form-group" asp-enabled="BirthDate">
+                    <div class="mb-3" asp-enabled="BirthDate">
                         <!--date start-->
-                        <label asp-for="BirthDate" class="control-label"></label>
+                        <label asp-for="BirthDate" class="form-label"></label>
                         <span class="text-muted small">(@System.Globalization.CultureInfo.CurrentUICulture)</span>
                         <!-- use class .date to enable datepicker -->
-                        <div class="input-group date birthdate mb-2">
+                        <div class="input-group mb-2 date birthdate">
                             <input asp-for="BirthDate" autocomplete="off" type="text" class="form-control" placeholder="@System.Globalization.DateTimeFormatInfo.CurrentInfo.ShortDatePattern" />
-                            <span class="input-group-append">
-                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                            <span class="input-group-text input-group-addon">
+                                <i class="far fa-calendar-alt"></i>
                             </span>
                         </div>
                         <span asp-validation-for="BirthDate" class="text-danger"></span>
                         <!--date end-->
                     </div>
 
-                    <div class="form-group" asp-enabled="Age">
+                    <div class="mb-3" asp-enabled="Age">
                         <!--input start-->
-                        <label asp-for="Age" class="control-label"></label>
+                        <label asp-for="Age" class="form-label"></label>
                         <input asp-for="Age" type="number" autocomplete="off" class="form-control" data-val="true" />
                         <span asp-validation-for="Age" class="text-danger"></span>
                         <!--input end-->
@@ -139,8 +139,8 @@
 
                     <div class="card" asp-enabled="DisabilityPanel">
                         <div class="card-body pb-0">
-                            <div class="form-group">
-                                <label asp-for="Disability" class="control-label"></label>
+                            <div class="mb-3">
+                                <label asp-for="Disability" class="form-label"></label>
                                 <div class="radio">
                                     <label>@Html.RadioButton("Disability", "true") @Localizer["Yes"]</label>
                                 </div>
@@ -150,9 +150,9 @@
                                 <span asp-validation-for="Disability" class="text-danger"></span>
                             </div>
 
-                            <div class="form-group disabilityoptions" asp-enabled="RefStudentDisabilityTypeId">
+                            <div class="mb-3 disabilityoptions" asp-enabled="RefStudentDisabilityTypeId">
                                 <!--fk select start-->
-                                <label asp-for="RefDisabilityTypeId" class="control-label"></label>
+                                <label asp-for="RefDisabilityTypeId" class="form-label"></label>
                                 <select asp-for="RefDisabilityTypeId" class="form-control form-select" asp-items="ViewBag.RefDisabilityTypeId">
                                     <option disabled selected></option>
                                 </select>
@@ -163,51 +163,51 @@
                         </div>
                     </div>
 
-                    <div class="form-group" asp-enabled="Phone">
+                    <div class="mb-3" asp-enabled="Phone">
                         <!--input start-->
-                        <label asp-for="Phone" class="control-label"></label>
+                        <label asp-for="Phone" class="form-label"></label>
                         <input asp-for="Phone" autocomplete="off" class="form-control" />
                         <span asp-validation-for="Phone" class="text-danger"></span>
                         <!--input end-->
                     </div>
 
-                    <div class="form-group" asp-enabled="Mobile">
+                    <div class="mb-3" asp-enabled="Mobile">
                         <!--input start-->
-                        <label asp-for="Mobile" class="control-label"></label>
+                        <label asp-for="Mobile" class="form-label"></label>
                         <input asp-for="Mobile" autocomplete="off" class="form-control" />
                         <span asp-validation-for="Mobile" class="text-danger"></span>
                         <!--input end-->
                     </div>
 
-                    <div class="form-group" asp-enabled="Email">
+                    <div class="mb-3" asp-enabled="Email">
                         <!--input start-->
-                        <label asp-for="Email" class="control-label"></label>
+                        <label asp-for="Email" class="form-label"></label>
                         <input asp-for="Email" autocomplete="off" class="form-control" />
                         <span asp-validation-for="Email" class="text-danger"></span>
                         <!--input end-->
                     </div>
 
-                    <div class="form-group" asp-enabled="Facebook">
+                    <div class="mb-3" asp-enabled="Facebook">
                         <!--input start-->
-                        <label asp-for="Facebook" class="control-label"></label>
+                        <label asp-for="Facebook" class="form-label"></label>
                         <input asp-for="Facebook" autocomplete="off" class="form-control" />
                         <span asp-validation-for="Facebook" class="text-danger"></span>
                         <!--input end-->
                     </div>
 
-                    <div class="form-group" asp-enabled="InstantMessenger">
+                    <div class="mb-3" asp-enabled="InstantMessenger">
                         <!--input start-->
-                        <label asp-for="InstantMessenger" class="control-label"></label>
+                        <label asp-for="InstantMessenger" class="form-label"></label>
                         <input asp-for="InstantMessenger" autocomplete="off" class="form-control" />
                         <span asp-validation-for="InstantMessenger" class="text-danger"></span>
                         <!--input end-->
                     </div>
 
                     @*
-        RefLocation is a self-referencing table with hierarchical (geo)locations.
-        This foreach dynamically generates each required location input by location level
-        i.e. Country -> Province -> District or Level1 -> Level2 -> Level 3 (LocationTypes by level)
-        Only the last level RefLocationId is saved on this record.
+                    RefLocation is a self-referencing table with hierarchical (geo)locations.
+                    This foreach dynamically generates each required location input by location level
+                    i.e. Country -> Province -> District or Level1 -> Level2 -> Level 3 (LocationTypes by level)
+                    Only the last level RefLocationId is saved on this record.
                     *@
                     @{
                         // If RefLocationId is enabled
@@ -219,12 +219,16 @@
                             {
                                 @if (item.LocationLevel == 1)
                                 {
-                                    <div class="form-group required">
+                                    <div class="mb-3 required">
                                         <label class="control-label">@item.LocationType</label>
-                                        <select class="form-control required" data-locationlevel="@item.LocationLevel" id="RefLocation@{@item.LocationLevel}Id" name="RefLocationId[@i]" data-val="true" asp-items="@ViewBag.RefLocationId" required>
+                                        <select class="form-control required" data-locationlevel="@item.LocationLevel" id="RefLocation@{
+                                                                        @item.LocationLevel
+                    }Id" name="RefLocationId[@i]" data-val="true" asp-items="@ViewBag.RefLocationId" required>
                                             <option disabled selected></option>
                                         </select>
-                                        <span class="text-danger field-validation-valid" data-valmsg-for="RefLocation@{@item.LocationLevel}Id" data-valmsg-replace="true">
+                                        <span class="text-danger field-validation-valid" data-valmsg-for="RefLocation@{
+                                                                        @item.LocationLevel
+                    }Id" data-valmsg-replace="true">
 
                                         </span>
                                     </div>
@@ -233,9 +237,11 @@
                                 {
                                     if (item.LocationLevel == (int)ViewData["RefLocationTypesCount"])
                                     {
-                                        <div class="form-group required">
+                                        <div class="mb-3 required">
                                             <label class="control-label">@item.LocationType</label>
-                                            <select class="form-control required" data-locationlevel="@item.LocationLevel" id="RefLocation@{@item.LocationLevel}Id" name="RefLocationId[@i]" data-val="true">
+                                            <select class="form-control required" data-locationlevel="@item.LocationLevel" id="RefLocation@{
+                                                                        @item.LocationLevel
+                    }Id" name="RefLocationId[@i]" data-val="true">
                                                 <option disabled selected></option>
                                             </select>
                                             <span class="text-danger field-validation-valid" data-valmsg-for="RefLocationId" data-valmsg-replace="true"></span>
@@ -245,22 +251,30 @@
                                     {
                                         if (item.LocationLevel == 2)
                                         {
-                                            <div class="form-group required">
+                                            <div class="mb-3 required">
                                                 <label class="control-label">@item.LocationType</label>
-                                                <select class="form-control required" data-locationlevel="@item.LocationLevel" id="RefLocation@{@item.LocationLevel}Id" name="RefLocationId[@i]" data-val="true" required>
+                                                <select class="form-control required" data-locationlevel="@item.LocationLevel" id="RefLocation@{
+                                                                        @item.LocationLevel
+                    }Id" name="RefLocationId[@i]" data-val="true" required>
                                                     <option disabled selected></option>
                                                 </select>
-                                                <span class="text-danger field-validation-valid" data-valmsg-for="RefLocation@{@item.LocationLevel}Id" data-valmsg-replace="true"></span>
+                                                <span class="text-danger field-validation-valid" data-valmsg-for="RefLocation@{
+                                                                        @item.LocationLevel
+                    }Id" data-valmsg-replace="true"></span>
                                             </div>
                                         }
                                         else
                                         {
-                                            <div class="form-group required">
+                                            <div class="mb-3 required">
                                                 <label class="control-label">@item.LocationType</label>
-                                                <select class="form-control required" data-locationlevel="@item.LocationLevel" id="RefLocation@{@item.LocationLevel}Id" name="RefLocationId[@i]" data-val="true">
+                                                <select class="form-control required" data-locationlevel="@item.LocationLevel" id="RefLocation@{
+                                                                        @item.LocationLevel
+                    }Id" name="RefLocationId[@i]" data-val="true">
                                                     <option disabled selected></option>
                                                 </select>
-                                                <span class="text-danger field-validation-valid" data-valmsg-for="RefLocation@{@item.LocationLevel}Id" data-valmsg-replace="true"></span>
+                                                <span class="text-danger field-validation-valid" data-valmsg-for="RefLocation@{
+                                                                        @item.LocationLevel
+                    }Id" data-valmsg-replace="true"></span>
                                             </div>
                                         }
                                     }
@@ -271,9 +285,9 @@
                         }
                     }
 
-                    <div class="form-group" asp-enabled="Address">
+                    <div class="mb-3" asp-enabled="Address">
                         <!--textarea start-->
-                        <label asp-for="Address" class="control-label"></label>
+                        <label asp-for="Address" class="form-label"></label>
                         <textarea asp-for="Address" class="form-control"></textarea>
                         <span asp-validation-for="Address" class="text-danger"></span>
                         <!--textarea end-->
@@ -290,17 +304,17 @@
                         @Localizer["Student"]
                     </div>
                     <div class="card-body">
-                        <div class="form-group" asp-enabled="StudentCode">
+                        <div class="mb-3" asp-enabled="StudentCode">
                             <!--input start-->
-                            <label asp-for="StudentCode" class="control-label"></label>
+                            <label asp-for="StudentCode" class="form-label"></label>
                             <input asp-for="StudentCode" autocomplete="off" class="form-control" />
                             <span asp-validation-for="StudentCode" class="text-danger"></span>
                             <!--input end-->
                         </div>
 
-                        <div class="form-group" asp-enabled="RefStudentTypeId">
+                        <div class="mb-3" asp-enabled="RefStudentTypeId">
                             <!--fk select start-->
-                            <label asp-for="RefStudentTypeId" class="control-label"></label>
+                            <label asp-for="RefStudentTypeId" class="form-label"></label>
                             <select asp-for="RefStudentTypeId" class="form-control form-select" asp-items="ViewBag.RefStudentTypeId">
                                 <option disabled selected></option>
                             </select>
@@ -308,9 +322,9 @@
                             <!--fk select end-->
                         </div>
 
-                        <div class="form-group" asp-enabled="RefStudentSpecializationId">
+                        <div class="mb-3" asp-enabled="RefStudentSpecializationId">
                             <!--fk select start-->
-                            <label asp-for="RefStudentSpecializationId" class="control-label"></label>
+                            <label asp-for="RefStudentSpecializationId" class="form-label"></label>
                             <select asp-for="RefStudentSpecializationId" class="form-control form-select" asp-items="ViewBag.RefStudentSpecializationId">
                                 <option disabled selected></option>
                             </select>
@@ -318,9 +332,9 @@
                             <!--fk select end-->
                         </div>
 
-                        <div class="form-group" asp-enabled="RefStudentYearOfStudyId">
+                        <div class="mb-3" asp-enabled="RefStudentYearOfStudyId">
                             <!--fk select start-->
-                            <label asp-for="RefStudentYearOfStudyId" class="control-label"></label>
+                            <label asp-for="RefStudentYearOfStudyId" class="form-label"></label>
                             <select asp-for="RefStudentYearOfStudyId" class="form-control form-select" asp-items="ViewBag.RefStudentYearOfStudyId">
                                 <option disabled selected></option>
                             </select>
@@ -328,9 +342,9 @@
                             <!--fk select end-->
                         </div>
 
-                        <div class="form-group" asp-enabled="ParentGuardian">
+                        <div class="mb-3" asp-enabled="ParentGuardian">
                             <!--input start-->
-                            <label asp-for="ParentGuardian" class="control-label"></label>
+                            <label asp-for="ParentGuardian" class="form-label"></label>
                             <input asp-for="ParentGuardian" autocomplete="off" class="form-control" />
                             <span asp-validation-for="ParentGuardian" class="text-danger"></span>
                             <!--input end-->
@@ -348,9 +362,9 @@
                         @Localizer["Teacher"]
                     </div>
                     <div class="card-body">
-                        <div class="form-group" asp-enabled="RefTeacherTypeId">
+                        <div class="mb-3" asp-enabled="RefTeacherTypeId">
                             <!--fk select start-->
-                            <label asp-for="RefTeacherTypeId" class="control-label"></label>
+                            <label asp-for="RefTeacherTypeId" class="form-label"></label>
                             <select asp-for="RefTeacherTypeId" class="form-control form-select" asp-items="ViewBag.RefTeacherTypeId">
                                 <option disabled selected></option>
                             </select>
@@ -358,9 +372,9 @@
                             <!--fk select end-->
                         </div>
 
-                        <div class="form-group" asp-enabled="RefTeacherPositionId">
+                        <div class="mb-3" asp-enabled="RefTeacherPositionId">
                             <!--fk select start-->
-                            <label asp-for="RefTeacherPositionId" class="control-label"></label>
+                            <label asp-for="RefTeacherPositionId" class="form-label"></label>
                             <select asp-for="RefTeacherPositionId" class="form-control form-select" asp-items="ViewBag.RefTeacherPositionId">
                                 <option disabled selected></option>
                             </select>
@@ -368,9 +382,9 @@
                             <!--fk select end-->
                         </div>
 
-                        <div class="form-group" asp-enabled="RefTeacherEmploymentTypeId">
+                        <div class="mb-3" asp-enabled="RefTeacherEmploymentTypeId">
                             <!--fk select start-->
-                            <label asp-for="RefTeacherEmploymentTypeId" class="control-label"></label>
+                            <label asp-for="RefTeacherEmploymentTypeId" class="form-label"></label>
                             <select asp-for="RefTeacherEmploymentTypeId" class="form-control form-select" asp-items="ViewBag.RefTeacherEmploymentTypeId">
                                 <option disabled selected></option>
                             </select>
@@ -378,9 +392,9 @@
                             <!--fk select end-->
                         </div>
 
-                        <div class="form-group" asp-enabled="GradeLevels">
+                        <div class="mb-3" asp-enabled="GradeLevels">
                             <!--input start-->
-                            <label asp-for="GradeLevels" class="control-label"></label>
+                            <label asp-for="GradeLevels" class="form-label"></label>
                             <input asp-for="GradeLevels" autocomplete="off" class="form-control" />
                             <span asp-validation-for="GradeLevels" class="text-danger"></span>
                             <!--input end-->
@@ -397,9 +411,9 @@
                         @Localizer["Education Administrator"]
                     </div>
                     <div class="card-body">
-                        <div class="form-group" asp-enabled="RefEducationAdministratorTypeId">
+                        <div class="mb-3" asp-enabled="RefEducationAdministratorTypeId">
                             <!--fk select start-->
-                            <label asp-for="RefEducationAdministratorTypeId" class="control-label"></label>
+                            <label asp-for="RefEducationAdministratorTypeId" class="form-label"></label>
                             <select asp-for="RefEducationAdministratorTypeId" class="form-control form-select" asp-items="ViewBag.RefEducationAdministratorTypeId">
                                 <option disabled selected></option>
                             </select>
@@ -407,9 +421,9 @@
                             <!--fk select end-->
                         </div>
 
-                        <div class="form-group" asp-enabled="RefEducationAdministratorPositionId">
+                        <div class="mb-3" asp-enabled="RefEducationAdministratorPositionId">
                             <!--fk select start-->
-                            <label asp-for="RefEducationAdministratorPositionId" class="control-label"></label>
+                            <label asp-for="RefEducationAdministratorPositionId" class="form-label"></label>
                             <select asp-for="RefEducationAdministratorPositionId" class="form-control form-select" asp-items="ViewBag.RefEducationAdministratorPositionId">
                                 <option disabled selected></option>
                             </select>
@@ -417,9 +431,9 @@
                             <!--fk select end-->
                         </div>
 
-                        <div class="form-group" asp-enabled="RefEducationAdministratorOfficeId">
+                        <div class="mb-3" asp-enabled="RefEducationAdministratorOfficeId">
                             <!--fk select start-->
-                            <label asp-for="RefEducationAdministratorOfficeId" class="control-label"></label>
+                            <label asp-for="RefEducationAdministratorOfficeId" class="form-label"></label>
                             <select asp-for="RefEducationAdministratorOfficeId" class="form-control form-select" asp-items="ViewBag.RefEducationAdministratorOfficeId">
                                 <option disabled selected></option>
                             </select>
@@ -431,41 +445,47 @@
             }
 
             <!-- button group start -->
-        <div class="form-group text-end mt-5">
-            @if (ViewBag.GroupId != null)
-            {
-                <a id="cancelbutton" class="btn btn-secondary me-2" 
+            <div class="mb-3 text-end mt-5">
+                @if (ViewBag.GroupId != null)
+                {
+                    <a id="cancelbutton" class="btn btn-secondary me-2"
                    asp-action="Index" asp-route-id="@ViewBag.GroupId" asp-controller="GroupEnrollments">
-                    <i class="fas fa-times"></i> @Localizer["Cancel"]
-                </a>
-            }
-            else
-            {
-                <a id="cancelbutton" class="btn btn-secondary me-2" asp-action="Index" asp-route-id="@ViewBag.GroupId">
-                    <i class="fas fa-times"></i> @Localizer["Cancel"]
-                </a>
-            }
+                        <i class="fas fa-times"></i> @Localizer["Cancel"]
+                    </a>
+                }
+                else
+                {
+                    <a id="cancelbutton" class="btn btn-secondary me-2" asp-action="Index" asp-route-id="@ViewBag.GroupId">
+                        <i class="fas fa-times"></i> @Localizer["Cancel"]
+                    </a>
+                }
 
-            <button id="submitbutton" type="submit" value="Create" class="btn btn-primary ladda-button" data-style="expand-left" data-spinner-color="white">
-                <span class="ladda-label">
-                    <i class="fas fa-check"></i> @Localizer["Create"]
-                </span>
-            </button>
-        </div>
+                <button id="submitbutton" type="submit" value="Create" class="btn btn-primary ladda-button" data-style="expand-left" data-spinner-color="white">
+                    <span class="ladda-label">
+                        <i class="fas fa-check"></i> @Localizer["Create"]
+                    </span>
+                </button>
+            </div>
             <!-- button group end -->
         </form>
     </div>
 </div>
 
 @section Styles {
-    @{await Html.RenderPartialAsync("_CreateStylesPartial");}
-}
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    @{await Html.RenderPartialAsync("_CreateScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_CreateStylesPartial");
+    }
+    }
+    @section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    @{
+        await Html.RenderPartialAsync("_CreateScriptsPartial");
+    }
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             // *** FOR JSTREE ***
             // Allows JQuery Validator to validate input hidden fields.
@@ -499,21 +519,21 @@
 
             // Expands or Collapses the JStree
             var instance = $('#tree').jstree(true);
-            $("#collapse").on("click", function () {
+            $("#collapse").on("click", function() {
                 instance.close_all();
             });
 
-            $("#expand").on("click", function () {
+            $("#expand").on("click", function() {
                 instance.open_all();
             });
 
             // JStree Search on keyup
             var to = false;
-            $('#tree-search').keyup(function () {
+            $('#tree-search').keyup(function() {
                 if (to) {
                     clearTimeout(to);
                 }
-                to = setTimeout(function () {
+                to = setTimeout(function() {
                     var v = $('#tree-search').val();
                     $('#tree').jstree(true).search(v);
                 }, 250);
@@ -521,7 +541,7 @@
 
             // JStree on node select, update hidden input field OrganizationId
             // and display "You selected: " html.
-            $('#tree').on('changed.jstree', function (e, data) {
+            $('#tree').on('changed.jstree', function(e, data) {
                 e.preventDefault();
                 if (data.selected) {
                     $('#OrganizationId').val(data.selected);
@@ -529,24 +549,25 @@
                 }
             });
 
-            // If RefOrganizationTypeId = 2 (School), 
+            // If RefOrganizationTypeId = 2 (School),
             // ViewBag.OrganizationId will no be null.
             // This will pre-select the OrganizationId
-            @if (ViewBag.OrganizationId != null) {
-                <text>
-                // JStree loaded Callback - expand and select node
-                $('#tree').on("ready.jstree", function (e, data) {
-                    data.instance._open_to(['@ViewBag.OrganizationId'], true);
-                    data.instance.select_node(['@ViewBag.OrganizationId'], true);
-                    $('#OrganizationId').val('@ViewBag.OrganizationId');
-                    $('#SelectedOrganizationId').html(data.instance.get_selected(true)[0].text);
-                });
-                </text>
-            }
+        @if (ViewBag.OrganizationId != null)
+        {
+            <text>
+                    // JStree loaded Callback - expand and select node
+                    $('#tree').on("ready.jstree", function(e, data) {
+                        data.instance._open_to(['@ViewBag.OrganizationId'], true);
+                        data.instance.select_node(['@ViewBag.OrganizationId'], true);
+                        $('#OrganizationId').val('@ViewBag.OrganizationId');
+                        $('#SelectedOrganizationId').html(data.instance.get_selected(true)[0].text);
+                    });
+            </text>
+        }
 
-            // *** LOCATIONS ***
-            // Counts the total number of available Location level inputs
-            var totalLocationLevels = $('[data-locationlevel]').length;
+                                                            // *** LOCATIONS ***
+                                                            // Counts the total number of available Location level inputs
+                                                            var totalLocationLevels = $('[data-locationlevel]').length;
 
             // JQuery select2 chained drop-downs by [data-locationlevel]
             // On change or remove event clears select options and
@@ -560,7 +581,7 @@
                 selectOnBlur: true,
                 language: 'en'
             })
-                .bind("change remove", function (e) {
+                .bind("change remove", function(e) {
                     e.preventDefault();
 
                     var locationLevel = $(this).data('locationlevel');
@@ -579,14 +600,14 @@
                             url: "/Requests/GetLocations/" + locationId,
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
-                            success: function (data) {
+                            success: function(data) {
                                 if (data.length) {
                                     for (var i = 1; i < (totalLocationLevels); i++) {
                                         $('[data-locationlevel="' + (locationLevel + i) + '"]').empty().val();
                                     }
 
                                     $('[data-locationlevel="' + (locationLevel + 1) + '"]').append("<option value=''></option>");
-                                    $(data).each(function () {
+                                    $(data).each(function() {
                                         $('[data-locationlevel="' + (locationLevel + 1) + '"]').append("<option value='" + this.refLocationId + "'>" + this.locationName + "</option>");
                                     });
                                     $('[data-locationlevel="' + (locationLevel + 1) + '"]').select2({
@@ -623,7 +644,7 @@
             // Calculate Age from Birth Date
             //https://stackoverflow.com/questions/4060004/calculate-age-given-the-birth-date-in-the-format-yyyymmdd/7091965#7091965
             $('.date.birthdate')
-                .on('change', function (date) {
+                .on('change', function(date) {
                     var today = new Date();
                     var birthDate = $(this).datepicker('getDate');
 
@@ -644,7 +665,7 @@
                 });
 
             // If Disability is true, display Disability Types options, else hide
-            $('input[name="Disability"]').on('click', function () {
+            $('input[name="Disability"]').on('click', function() {
                 if ($(this).val() == 'true') {
                     $('.disabilityoptions').show();
                 }

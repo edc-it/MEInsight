@@ -48,7 +48,7 @@
     <form asp-action="Delete" id="main-form">
         <input type="hidden" asp-for="RefGradeLevelId" />
             <!-- button group start -->
-            <div class="form-group mt-5">
+            <div class="mb-3 mt-5">
                 <a id="cancelbutton" class="btn btn-secondary me-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
                     <i class="fas fa-times"></i> @Localizer["Cancel"]
                 </a>

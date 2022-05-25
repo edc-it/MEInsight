@@ -20,15 +20,15 @@
 
             <input type="hidden" asp-for="IsTenant" />
 
-            <div class="form-group required" asp-enabled="RegistrationDate">
+            <div class="mb-3 required" asp-enabled="RegistrationDate">
                 <!--date start-->
-                <label asp-for="RegistrationDate" class="control-label"></label>
+                <label asp-for="RegistrationDate" class="form-label"></label>
                 <span class="text-muted small">(@System.Globalization.CultureInfo.CurrentUICulture)</span>
                 <!-- use class .date to enable datepicker -->
-                <div class="input-group date">
-                    <input asp-for="RegistrationDate" autocomplete="off" type="text" class="form-control" />
-                    <span class="input-group-append">
-                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                <div class="input-group mb-3 date">
+                    <input asp-for="RegistrationDate" autocomplete="off" type="text" class="form-control" placeholder="@System.Globalization.DateTimeFormatInfo.CurrentInfo.ShortDatePattern" />
+                    <span class="input-group-text input-group-addon">
+                        <i class="far fa-calendar-alt"></i>
                     </span>
                 </div>
                 <span asp-validation-for="RegistrationDate" class="text-danger"></span>
@@ -36,94 +36,102 @@
             </div>
 
 
-            <div class="form-group required" asp-enabled="OrganizationCode">
+            <div class="mb-3 required" asp-enabled="OrganizationCode">
                 <!--input start-->
-                <label asp-for="OrganizationCode" class="control-label"></label>
+                <label asp-for="OrganizationCode" class="form-label"></label>
                 <input asp-for="OrganizationCode" autocomplete="off" class="form-control" />
                 <span asp-validation-for="OrganizationCode" class="text-danger"></span>
                 <!--input end-->
             </div>
 
 
-            <div class="form-group required" asp-enabled="OrganizationName">
+            <div class="mb-3 required" asp-enabled="OrganizationName">
                 <!--input start-->
-                <label asp-for="OrganizationName" class="control-label"></label>
+                <label asp-for="OrganizationName" class="form-label"></label>
                 <input asp-for="OrganizationName" autocomplete="off" class="form-control" />
                 <span asp-validation-for="OrganizationName" class="text-danger"></span>
                 <!--input end-->
             </div>
 
 
-            <div class="form-group required" asp-enabled="RefOrganizationTypeId">
+            <div class="mb-3 required" asp-enabled="RefOrganizationTypeId">
                 <!--fk select start-->
-                <label asp-for="RefOrganizationTypeId" class="control-label"></label>
+                <label asp-for="RefOrganizationTypeId" class="form-label"></label>
                 <select asp-for="RefOrganizationTypeId" class="form-control form-select" asp-items="ViewBag.RefOrganizationTypeId">
                 </select>
                 <span asp-validation-for="RefOrganizationTypeId" class="text-danger"></span>
                 <!--fk select end-->
             </div>
 
-            <div class="form-group" asp-enabled="Contact">
+            <div class="mb-3" asp-enabled="Contact">
                 <!--input start-->
-                <label asp-for="Contact" class="control-label"></label>
+                <label asp-for="Contact" class="form-label"></label>
                 <input asp-for="Contact" autocomplete="off" class="form-control" />
                 <span asp-validation-for="Contact" class="text-danger"></span>
                 <!--input end-->
             </div>
 
-            <div class="form-group" asp-enabled="Phone">
+            <div class="mb-3" asp-enabled="Phone">
                 <!--input start-->
-                <label asp-for="Phone" class="control-label"></label>
+                <label asp-for="Phone" class="form-label"></label>
                 <input asp-for="Phone" autocomplete="off" class="form-control" />
                 <span asp-validation-for="Phone" class="text-danger"></span>
                 <!--input end-->
             </div>
 
-            <div class="form-group" asp-enabled="Address">
+            <div class="mb-3" asp-enabled="Address">
                 <!--textarea start-->
-                <label asp-for="Address" class="control-label"></label>
+                <label asp-for="Address" class="form-label"></label>
                 <textarea asp-for="Address" class="form-control"></textarea>
                 <span asp-validation-for="Address" class="text-danger"></span>
                 <!--textarea end-->
             </div>
 
-            <div class="form-group" asp-enabled="Latitude">
+            <div class="mb-3" asp-enabled="Latitude">
                 <!--input start-->
-                <label asp-for="Latitude" class="control-label"></label>
+                <label asp-for="Latitude" class="form-label"></label>
                 <input asp-for="Latitude" autocomplete="off" class="form-control" />
                 <span asp-validation-for="Latitude" class="text-danger"></span>
                 <!--input end-->
             </div>
 
-            <div class="form-group" asp-enabled="Longitude">
+            <div class="mb-3" asp-enabled="Longitude">
                 <!--input start-->
-                <label asp-for="Longitude" class="control-label"></label>
+                <label asp-for="Longitude" class="form-label"></label>
                 <input asp-for="Longitude" autocomplete="off" class="form-control" />
                 <span asp-validation-for="Longitude" class="text-danger"></span>
                 <!--input end-->
             </div>
 
-            @{var i = 0;}
+            @{
+                var i = 0;
+            }
             @foreach (var item in ViewData["RefLocationTypes"] as IEnumerable<MEInsight.Entities.Reference.RefLocationType>)
             {
 
                 @if (item.LocationLevel == 1)
                 {
-                    <div class="form-group required">
+                    <div class="mb-3 required">
                         <label class="control-label">@item.LocationType</label>
-                        <select class="form-control" data-locationlevel="@item.LocationLevel" id="RefLocation@{@item.LocationLevel}Id" name="RefLocationId[@i]" data-val="true" asp-items="@ViewBag.RefLocationId" required>
+                        <select class="form-control" data-locationlevel="@item.LocationLevel" id="RefLocation@{
+                    @item.LocationLevel
+}Id" name="RefLocationId[@i]" data-val="true" asp-items="@ViewBag.RefLocationId" required>
                             <option disabled selected></option>
                         </select>
-                        <span class="text-danger field-validation-valid" data-valmsg-for="RefLocation@{@item.LocationLevel}Id" data-valmsg-replace="true"></span>
+                        <span class="text-danger field-validation-valid" data-valmsg-for="RefLocation@{
+                    @item.LocationLevel
+}Id" data-valmsg-replace="true"></span>
                     </div>
                 }
                 else
                 {
                     if (item.LocationLevel == (int)ViewData["RefLocationTypesCount"])
                     {
-                        <div class="form-group required">
+                        <div class="mb-3 required">
                             <label class="control-label">@item.LocationType</label>
-                            <select class="form-control" data-locationlevel="@item.LocationLevel" id="RefLocation@{@item.LocationLevel}Id" name="RefLocationId[@i]" data-val="true">
+                            <select class="form-control" data-locationlevel="@item.LocationLevel" id="RefLocation@{
+                    @item.LocationLevel
+}Id" name="RefLocationId[@i]" data-val="true">
                                 <option disabled selected></option>
                             </select>
                             <span class="text-danger field-validation-valid" data-valmsg-for="RefLocationId" data-valmsg-replace="true"></span>
@@ -133,22 +141,30 @@
                     {
                         if (item.LocationLevel == 2)
                         {
-                            <div class="form-group required">
+                            <div class="mb-3 required">
                                 <label class="control-label">@item.LocationType</label>
-                                <select class="form-control" data-locationlevel="@item.LocationLevel" id="RefLocation@{@item.LocationLevel}Id" name="RefLocationId[@i]" data-val="true">
+                                <select class="form-control" data-locationlevel="@item.LocationLevel" id="RefLocation@{
+                    @item.LocationLevel
+}Id" name="RefLocationId[@i]" data-val="true">
                                     <option disabled selected></option>
                                 </select>
-                                <span class="text-danger field-validation-valid" data-valmsg-for="RefLocation@{@item.LocationLevel}Id" data-valmsg-replace="true"></span>
+                                <span class="text-danger field-validation-valid" data-valmsg-for="RefLocation@{
+                    @item.LocationLevel
+}Id" data-valmsg-replace="true"></span>
                             </div>
                         }
                         else
                         {
-                            <div class="form-group required">
+                            <div class="mb-3 required">
                                 <label class="control-label">@item.LocationType</label>
-                                <select class="form-control" data-locationlevel="@item.LocationLevel" id="RefLocation@{@item.LocationLevel}Id" name="RefLocationId[@i]" data-val="true">
+                                <select class="form-control" data-locationlevel="@item.LocationLevel" id="RefLocation@{
+                    @item.LocationLevel
+}Id" name="RefLocationId[@i]" data-val="true">
                                     <option disabled selected></option>
                                 </select>
-                                <span class="text-danger field-validation-valid" data-valmsg-for="RefLocation@{@item.LocationLevel}Id" data-valmsg-replace="true"></span>
+                                <span class="text-danger field-validation-valid" data-valmsg-for="RefLocation@{
+                    @item.LocationLevel
+}Id" data-valmsg-replace="true"></span>
                             </div>
                         }
                     }
@@ -156,21 +172,21 @@
                 i++;
             }
 
-            @if (AuthorizationService.AuthorizeAsync(User, "RequireMELRole").GetAwaiter().GetResult().Succeeded && Model.IsTenant != true )
+            @if (AuthorizationService.AuthorizeAsync(User, "RequireMELRole").GetAwaiter().GetResult().Succeeded && Model.IsTenant != true)
             {
                 <div class="card my-3">
                     <div class="card-header">@Localizer["M&E options:"]</div>
                     <div class="card-body">
-                        <div class="form-group">
+                        <div class="mb-3">
                             <label class="control-label">
                                 @Localizer["Create as Organization Unit?"]
                                 <i data-content="@Localizer["Set to 'Yes' if this organization will manage other organizations."]"
-                                   data-placement="top"
-                                   data-bs-toggle="popover"
-                                   data-container="body"
-                                   style="cursor:pointer;"
-                                   class="fa fa-info-circle text-muted"
-                                   data-original-title="@Localizer["Organization Unit"]" title="" aria-describedby="popover"></i>
+                               data-placement="top"
+                               data-bs-toggle="popover"
+                               data-container="body"
+                               style="cursor:pointer;"
+                               class="fa fa-info-circle text-muted"
+                               data-original-title="@Localizer["Organization Unit"]" title="" aria-describedby="popover"></i>
                             </label>
                             <div class="radio" style="margin-top:0;">
                                 <label>@Html.RadioButton("IsOrganizationUnit", "true") @Localizer["Yes"]</label>
@@ -181,8 +197,8 @@
                             <span asp-validation-for="IsOrganizationUnit" class="text-danger"></span>
                         </div>
 
-                        <div class="form-group">
-                            <label asp-for="ParentOrganizationId" class="control-label"></label>
+                        <div class="mb-3">
+                            <label asp-for="ParentOrganizationId" class="form-label"></label>
                             <select asp-for="ParentOrganizationId" class="form-control select2" asp-items="ViewBag.ParentOrganizationId">
                             </select>
                             <span asp-validation-for="ParentOrganizationId" class="text-danger"></span>
@@ -198,7 +214,7 @@
             }
 
             <!-- button group start -->
-            <div class="form-group text-end mt-5">
+            <div class="mb-3 text-end mt-5">
                 <a id="cancelbutton" class="btn btn-secondary me-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
                     <i class="fas fa-times"></i> @Localizer["Cancel"]
                 </a>
@@ -215,51 +231,58 @@
 </div>
 
 @section Styles {
-    @{await Html.RenderPartialAsync("_EditStylesPartial");}
-}
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    @{await Html.RenderPartialAsync("_EditScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_EditStylesPartial");
+    }
+    }
+    @section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    @{
+        await Html.RenderPartialAsync("_EditScriptsPartial");
+    }
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
 
-            @*  On Edit page load, pre-populate each RefLocation level chained select.
-                This record only saves the lower level RefLocationId, this foreach
-                populates the JS Ajax request required to populate each parent select
-                based on the RefLocationId on this record.
+        @*  On Edit page load, pre-populate each RefLocation level chained select.
+            This record only saves the lower level RefLocationId, this foreach
+            populates the JS Ajax request required to populate each parent select
+            based on the RefLocationId on this record.
             *@
-            @foreach (var item in ViewData["RefLocationParents"] as IEnumerable<MEInsight.Entities.Reference.RefLocation>) {
-                if (item.RefLocationTypeId == 1)
-                {
-                    <text>
+        @foreach (var item in ViewData["RefLocationParents"] as IEnumerable<MEInsight.Entities.Reference.RefLocation>)
+        {
+            if (item.RefLocationTypeId == 1)
+            {
+                <text>
                         $('[data-locationlevel="@(item.RefLocationTypeId)"]').val("@item.RefLocationId");
-                    </text>
-                }
-                else
-                {
-                       @: $.ajax({
-                       @:     type: "Post",
-                       @:     url: "/Requests/GetLocations/@item.ParentLocationId",
-                       @:         contentType: "application/json; charset=utf-8",
-                       @:         dataType: "json",
-                       @:         success: function (data) {
-                       @:             if (data.length) {
-                       @:                 $(data).each(function () {
-                       @:                     if (this.refLocationId == "@item.RefLocationId") {
-                       @:                         $('[data-locationlevel="@(item.RefLocationTypeId)"]').append("<option selected value='" + this.refLocationId + "'>" + this.locationName + "</option>");
-                       @:                     }
-                       @:                     else {
-                       @:                         $('[data-locationlevel="@(item.RefLocationTypeId)"]').append("<option value='" + this.refLocationId + "'>" + this.locationName + "</option>");
-                       @:                     }
-                       @:                 })
-                       @:             }
-                       @:         }
-                       @: });
-                }
+                </text>
             }
+            else
+            {
+                @:$.ajax({
+                @:type: "Post",
+                @:url: "/Requests/GetLocations/@item.ParentLocationId",
+                @:contentType: "application/json; charset=utf-8",
+                @:dataType: "json",
+                @:success: function(data) {
+                @:             if (data.length) {
+                @:$(data).each(function() {
+                @:                     if (this.refLocationId == "@item.RefLocationId") {
+                @:$('[data-locationlevel="@(item.RefLocationTypeId)"]').append("<option selected value='" + this.refLocationId + "'>" + this.locationName + "</option>");
+                @:                     }
+                @:                     else {
+                @:$('[data-locationlevel="@(item.RefLocationTypeId)"]').append("<option value='" + this.refLocationId + "'>" + this.locationName + "</option>");
+                @:                     }
+                @:                 })
+                @:             }
+                @:         }
+                @: });
+            }
+        }
 
-        // Counts the total number of available Location level inputs
-        var totalLocationLevels = $('[data-locationlevel]').length;
+                // Counts the total number of available Location level inputs
+                var totalLocationLevels = $('[data-locationlevel]').length;
 
         // JQuery select2 chained drop-downs by [data-locationlevel]
         // On change or remove event clears select options and
@@ -273,7 +296,7 @@
             selectOnBlur: true,
             language: 'en'
         })
-            .bind("change remove", function (e) {
+            .bind("change remove", function(e) {
                 e.preventDefault();
 
                 var locationLevel = $(this).data('locationlevel');
@@ -292,14 +315,14 @@
                         url: "/Requests/GetLocations/" + locationId,
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
-                        success: function (data) {
+                        success: function(data) {
                             if (data.length) {
                                 for (var i = 1; i < (totalLocationLevels); i++) {
                                     $('[data-locationlevel="' + (locationLevel + i) + '"]').empty().val();
                                 }
 
                                 $('[data-locationlevel="' + (locationLevel + 1) + '"]').append("<option value=''></option>");
-                                $(data).each(function () {
+                                $(data).each(function() {
                                     $('[data-locationlevel="' + (locationLevel + 1) + '"]').append("<option value='" + this.refLocationId + "'>" + this.locationName + "</option>");
                                 });
                                 $('[data-locationlevel="' + (locationLevel + 1) + '"]').select2({
@@ -331,6 +354,6 @@
                     }
                 }
             });
-        });
+                });
     </script>
 }

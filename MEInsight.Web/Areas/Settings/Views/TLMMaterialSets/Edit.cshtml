@@ -16,25 +16,25 @@
             <input type="hidden" name="ParentId" value="@ViewBag.ParentId" />
             <input type="hidden" asp-for="RefTLMMaterialSetId" />
             
-            <div class="form-group" asp-enabled="TLMMaterialSetCode">
+            <div class="mb-3" asp-enabled="TLMMaterialSetCode">
                 <!--input start-->
-                <label asp-for="TLMMaterialSetCode" class="control-label"></label>
+                <label asp-for="TLMMaterialSetCode" class="form-label"></label>
                 <input asp-for="TLMMaterialSetCode" autocomplete="off" class="form-control" />
                 <span asp-validation-for="TLMMaterialSetCode" class="text-danger"></span>
                 <!--input end-->
             </div>
             
             
-            <div class="form-group" asp-enabled="TLMMaterialSet">
+            <div class="mb-3" asp-enabled="TLMMaterialSet">
                 <!--input start-->
-                <label asp-for="TLMMaterialSet" class="control-label"></label>
+                <label asp-for="TLMMaterialSet" class="form-label"></label>
                 <input asp-for="TLMMaterialSet" autocomplete="off" class="form-control" />
                 <span asp-validation-for="TLMMaterialSet" class="text-danger"></span>
                 <!--input end-->
             </div>
             
             <!-- button group start -->
-            <div class="form-group text-end mt-5">
+            <div class="mb-3 text-end mt-5">
                 <a id="cancelbutton" class="btn btn-secondary me-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
                     <i class="fas fa-times"></i> @Localizer["Cancel"]
                 </a>

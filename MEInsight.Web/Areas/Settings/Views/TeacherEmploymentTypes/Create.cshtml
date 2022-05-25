@@ -14,25 +14,25 @@
             <div asp-validation-summary="All" class="text-danger"></div>
             <input type="hidden" name="ParentId" value="@ViewBag.ParentId" />
             
-            <div class="form-group" asp-enabled="TeacherEmploymentTypeCode">
+            <div class="mb-3" asp-enabled="TeacherEmploymentTypeCode">
                 <!--input start-->
-                <label asp-for="TeacherEmploymentTypeCode" class="control-label"></label>
+                <label asp-for="TeacherEmploymentTypeCode" class="form-label"></label>
                 <input asp-for="TeacherEmploymentTypeCode" autocomplete="off" class="form-control" />
                 <span asp-validation-for="TeacherEmploymentTypeCode" class="text-danger"></span>
                 <!--input end-->
             </div>
             
             
-            <div class="form-group" asp-enabled="TeacherEmploymentType">
+            <div class="mb-3" asp-enabled="TeacherEmploymentType">
                 <!--input start-->
-                <label asp-for="TeacherEmploymentType" class="control-label"></label>
+                <label asp-for="TeacherEmploymentType" class="form-label"></label>
                 <input asp-for="TeacherEmploymentType" autocomplete="off" class="form-control" />
                 <span asp-validation-for="TeacherEmploymentType" class="text-danger"></span>
                 <!--input end-->
             </div>
             
             <!-- button group start -->
-            <div class="form-group text-end mt-5">
+            <div class="mb-3 text-end mt-5">
                 <a id="cancelbutton" class="btn btn-secondary me-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
                     <i class="fas fa-times"></i> @Localizer["Cancel"]
                 </a>

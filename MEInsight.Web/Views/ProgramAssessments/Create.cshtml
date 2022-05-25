@@ -13,9 +13,9 @@
         <form asp-action="Create" id="main-form">
             <div asp-validation-summary="All" class="text-danger"></div>
             <input type="hidden" name="ParentId" value="@ViewBag.ParentId" />
-            <div class="form-group" asp-enabled="ProgramId">
+            <div class="mb-3" asp-enabled="ProgramId">
                 <!--fk select start-->
-                <label asp-for="ProgramId" class="control-label"></label>
+                <label asp-for="ProgramId" class="form-label"></label>
                 <select asp-for="ProgramId" class ="form-control form-select" asp-items="ViewBag.ProgramId">
                     <option disabled selected></option>
                 </select>
@@ -23,17 +23,17 @@
                 <!--fk select end-->
             </div>
             
-            <div class="form-group" asp-enabled="AssessmentName">
+            <div class="mb-3" asp-enabled="AssessmentName">
                 <!--input start-->
-                <label asp-for="AssessmentName" class="control-label"></label>
+                <label asp-for="AssessmentName" class="form-label"></label>
                 <input asp-for="AssessmentName" autocomplete="off" class="form-control" />
                 <span asp-validation-for="AssessmentName" class="text-danger"></span>
                 <!--input end-->
             </div>
             
-            <div class="form-group" asp-enabled="RefAssessmentTypeId">
+            <div class="mb-3" asp-enabled="RefAssessmentTypeId">
                 <!--fk select start-->
-                <label asp-for="RefAssessmentTypeId" class="control-label"></label>
+                <label asp-for="RefAssessmentTypeId" class="form-label"></label>
                 <select asp-for="RefAssessmentTypeId" class ="form-control form-select" asp-items="ViewBag.RefAssessmentTypeId">
                     <option disabled selected></option>
                 </select>
@@ -41,33 +41,33 @@
                 <!--fk select end-->
             </div>
             
-            <div class="form-group" asp-enabled="Description">
+            <div class="mb-3" asp-enabled="Description">
                 <!--textarea start-->
-                <label asp-for="Description" class="control-label"></label>
+                <label asp-for="Description" class="form-label"></label>
                 <textarea asp-for="Description" class="form-control"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
                 <!--textarea end-->
             </div>
             
-            <div class="form-group" asp-enabled="Max">
+            <div class="mb-3" asp-enabled="Max">
                 <!--input start-->
-                <label asp-for="Max" class="control-label"></label>
+                <label asp-for="Max" class="form-label"></label>
                 <input asp-for="Max" autocomplete="off" class="form-control" />
                 <span asp-validation-for="Max" class="text-danger"></span>
                 <!--input end-->
             </div>
             
-            <div class="form-group" asp-enabled="Min">
+            <div class="mb-3" asp-enabled="Min">
                 <!--input start-->
-                <label asp-for="Min" class="control-label"></label>
+                <label asp-for="Min" class="form-label"></label>
                 <input asp-for="Min" autocomplete="off" class="form-control" />
                 <span asp-validation-for="Min" class="text-danger"></span>
                 <!--input end-->
             </div>
             
-            <div class="form-group" asp-enabled="RefAttendanceUnitId">
+            <div class="mb-3" asp-enabled="RefAttendanceUnitId">
                 <!--fk select start-->
-                <label asp-for="RefAttendanceUnitId" class="control-label"></label>
+                <label asp-for="RefAttendanceUnitId" class="form-label"></label>
                 <select asp-for="RefAttendanceUnitId" class ="form-control form-select" asp-items="ViewBag.RefAttendanceUnitId">
                     <option disabled selected></option>
                 </select>
@@ -75,33 +75,33 @@
                 <!--fk select end-->
             </div>
             
-            <div class="form-group" asp-enabled="MaximumScore">
+            <div class="mb-3" asp-enabled="MaximumScore">
                 <!--input start-->
-                <label asp-for="MaximumScore" class="control-label"></label>
+                <label asp-for="MaximumScore" class="form-label"></label>
                 <input asp-for="MaximumScore" autocomplete="off" class="form-control" />
                 <span asp-validation-for="MaximumScore" class="text-danger"></span>
                 <!--input end-->
             </div>
             
-            <div class="form-group" asp-enabled="MinimumScore">
+            <div class="mb-3" asp-enabled="MinimumScore">
                 <!--input start-->
-                <label asp-for="MinimumScore" class="control-label"></label>
+                <label asp-for="MinimumScore" class="form-label"></label>
                 <input asp-for="MinimumScore" autocomplete="off" class="form-control" />
                 <span asp-validation-for="MinimumScore" class="text-danger"></span>
                 <!--input end-->
             </div>
             
-            <div class="form-group" asp-enabled="CompletionScore">
+            <div class="mb-3" asp-enabled="CompletionScore">
                 <!--input start-->
-                <label asp-for="CompletionScore" class="control-label"></label>
+                <label asp-for="CompletionScore" class="form-label"></label>
                 <input asp-for="CompletionScore" autocomplete="off" class="form-control" />
                 <span asp-validation-for="CompletionScore" class="text-danger"></span>
                 <!--input end-->
             </div>
             
-            <div class="form-group" asp-enabled="RefEvaluationStatusId">
+            <div class="mb-3" asp-enabled="RefEvaluationStatusId">
                 <!--fk select start-->
-                <label asp-for="RefEvaluationStatusId" class="control-label"></label>
+                <label asp-for="RefEvaluationStatusId" class="form-label"></label>
                 <select asp-for="RefEvaluationStatusId" class ="form-control form-select" asp-items="ViewBag.RefEvaluationStatusId">
                     <option disabled selected></option>
                 </select>
@@ -110,7 +110,7 @@
             </div>
             
             <!-- button group start -->
-            <div class="form-group text-end mt-5">
+            <div class="mb-3 text-end mt-5">
                 <a id="cancelbutton" class="btn btn-secondary me-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
                     <i class="fas fa-times"></i> @Localizer["Cancel"]
                 </a>

@@ -14,27 +14,27 @@
             <div asp-validation-summary="All" class="text-danger"></div>
             <input type="hidden" name="ParentId" value="@ViewBag.ParentId" />
             
-            <div class="form-group" asp-enabled="SchoolClusterCode">
+            <div class="mb-3" asp-enabled="SchoolClusterCode">
                 <!--input start-->
-                <label asp-for="SchoolClusterCode" class="control-label"></label>
+                <label asp-for="SchoolClusterCode" class="form-label"></label>
                 <input asp-for="SchoolClusterCode" autocomplete="off" class="form-control" />
                 <span asp-validation-for="SchoolClusterCode" class="text-danger"></span>
                 <!--input end-->
             </div>
             
             
-            <div class="form-group" asp-enabled="SchoolCluster">
+            <div class="mb-3" asp-enabled="SchoolCluster">
                 <!--input start-->
-                <label asp-for="SchoolCluster" class="control-label"></label>
+                <label asp-for="SchoolCluster" class="form-label"></label>
                 <input asp-for="SchoolCluster" autocomplete="off" class="form-control" />
                 <span asp-validation-for="SchoolCluster" class="text-danger"></span>
                 <!--input end-->
             </div>
             
             
-            <div class="form-group" asp-enabled="RefLocationId">
+            <div class="mb-3" asp-enabled="RefLocationId">
                 <!--fk select start-->
-                <label asp-for="RefLocationId" class="control-label"></label>
+                <label asp-for="RefLocationId" class="form-label"></label>
                 <select asp-for="RefLocationId" class ="form-control form-select" asp-items="ViewBag.RefLocationId">
                     <option disabled selected></option>
                 </select>
@@ -43,7 +43,7 @@
             </div>
             
             <!-- button group start -->
-            <div class="form-group text-end mt-5">
+            <div class="mb-3 text-end mt-5">
                 <a id="cancelbutton" class="btn btn-secondary me-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
                     <i class="fas fa-times"></i> @Localizer["Cancel"]
                 </a>

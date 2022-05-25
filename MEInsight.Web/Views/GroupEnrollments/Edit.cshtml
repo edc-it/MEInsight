@@ -20,18 +20,18 @@
             <input type="hidden" asp-for="ParticipantId" value="@Model.Attendance" />
 
             <input type="hidden" asp-for="GroupEnrollmentId" />
-            <div class="form-group" asp-enabled="GroupId">
+            <div class="mb-3" asp-enabled="GroupId">
                 <!--fk select start-->
-                <label asp-for="GroupId" class="control-label"></label>
+                <label asp-for="GroupId" class="form-label"></label>
                 <select asp-for="GroupId" class="form-control form-select" asp-items="ViewBag.GroupId">
                 </select>
                 <span asp-validation-for="GroupId" class="text-danger"></span>
                 <!--fk select end-->
             </div>
 
-            <div class="form-group" asp-enabled="EnrollmentDate">
+            <div class="mb-3" asp-enabled="EnrollmentDate">
                 <!--date start-->
-                <label asp-for="EnrollmentDate" class="control-label"></label>
+                <label asp-for="EnrollmentDate" class="form-label"></label>
                 <span class="text-muted small">(@System.Globalization.CultureInfo.CurrentUICulture)</span>
                 <!-- use class .date to enable datepicker -->
                 <div class="input-group date">
@@ -45,7 +45,7 @@
             </div>
 
             <!-- button group start -->
-            <div class="form-group text-end mt-5">
+            <div class="mb-3 text-end mt-5">
                 <a id="cancelbutton" class="btn btn-secondary me-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
                     <i class="fas fa-times"></i> @Localizer["Cancel"]
                 </a>

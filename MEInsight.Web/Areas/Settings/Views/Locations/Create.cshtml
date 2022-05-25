@@ -17,34 +17,34 @@
 
             @if (ViewBag.ParentId != null)
             {
-                <div class="form-group">
+                <div class="mb-3">
                     <label class="control-label">@Localizer["Parent Location"]</label>
                     <div class="form-control">@ViewBag.ParentLocationName</div>
                 </div>
             }
 
 
-            <div class="form-group" asp-enabled="RefLocationId">
+            <div class="mb-3" asp-enabled="RefLocationId">
                 <!--input start-->
-                <label asp-for="RefLocationId" class="control-label"></label>
+                <label asp-for="RefLocationId" class="form-label"></label>
                 <input asp-for="RefLocationId" autocomplete="off" class="form-control" />
                 <span asp-validation-for="RefLocationId" class="text-danger"></span>
                 <!--input end-->
             </div>
 
 
-            <div class="form-group" asp-enabled="LocationName">
+            <div class="mb-3" asp-enabled="LocationName">
                 <!--input start-->
-                <label asp-for="LocationName" class="control-label"></label>
+                <label asp-for="LocationName" class="form-label"></label>
                 <input asp-for="LocationName" autocomplete="off" class="form-control" />
                 <span asp-validation-for="LocationName" class="text-danger"></span>
                 <!--input end-->
             </div>
 
 
-            <div class="form-group" asp-enabled="RefLocationTypeId">
+            <div class="mb-3" asp-enabled="RefLocationTypeId">
                 <!--fk select start-->
-                <label asp-for="RefLocationTypeId" class="control-label"></label>
+                <label asp-for="RefLocationTypeId" class="form-label"></label>
                 <select asp-for="RefLocationTypeId" class="form-control form-select" asp-items="ViewBag.RefLocationTypeId">
                     <option disabled selected></option>
                 </select>
@@ -52,25 +52,25 @@
                 <!--fk select end-->
             </div>
 
-            <div class="form-group" asp-enabled="Latitude">
+            <div class="mb-3" asp-enabled="Latitude">
                 <!--input start-->
-                <label asp-for="Latitude" class="control-label"></label>
+                <label asp-for="Latitude" class="form-label"></label>
                 <input asp-for="Latitude" autocomplete="off" class="form-control" />
                 <span asp-validation-for="Latitude" class="text-danger"></span>
                 <!--input end-->
             </div>
 
 
-            <div class="form-group" asp-enabled="Longitude">
+            <div class="mb-3" asp-enabled="Longitude">
                 <!--input start-->
-                <label asp-for="Longitude" class="control-label"></label>
+                <label asp-for="Longitude" class="form-label"></label>
                 <input asp-for="Longitude" autocomplete="off" class="form-control" />
                 <span asp-validation-for="Longitude" class="text-danger"></span>
                 <!--input end-->
             </div>
 
             <!-- button group start -->
-            <div class="form-group text-end mt-5">
+            <div class="mb-3 text-end mt-5">
                 <a id="cancelbutton" class="btn btn-secondary me-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
                     <i class="fas fa-times"></i> @Localizer["Cancel"]
                 </a>

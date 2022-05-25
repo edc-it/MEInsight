@@ -13,17 +13,17 @@
                 <h4>@Localizer["Use your application account to log in"].</h4>
                 <hr />
                 <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="form-group">
+                <div class="mb-3">
                     <label asp-for="Input.Email"></label>
                     <input asp-for="Input.Email" class="form-control" />
                     <span asp-validation-for="Input.Email" class="text-danger"></span>
                 </div>
-                <div class="form-group">
+                <div class="mb-3">
                     <label asp-for="Input.Password"></label>
                     <input asp-for="Input.Password" class="form-control" />
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
-                <div class="form-group">
+                <div class="mb-3">
                     <div class="checkbox">
                         <label asp-for="Input.RememberMe">
                             <input asp-for="Input.RememberMe" />
@@ -31,10 +31,10 @@
                         </label>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="mb-3">
                     <button type="submit" class="btn btn-primary">@Localizer["Log in"]</button>
                 </div>
-                @*<div class="form-group">
+                @*<div class="mb-3">
                     <p>
                         <a id="forgot-password" asp-page="./ForgotPassword">@Localizer["Forgot your password?"]</a>
                     </p>

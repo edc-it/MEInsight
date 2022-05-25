@@ -13,9 +13,9 @@
         <form asp-action="Create" id="main-form">
             <div asp-validation-summary="All" class="text-danger"></div>
             <input type="hidden" name="ParentId" value="@ViewBag.ParentId" />
-            <div class="form-group" asp-enabled="GroupEnrollmentId">
+            <div class="mb-3" asp-enabled="GroupEnrollmentId">
                 <!--fk select start-->
-                <label asp-for="GroupEnrollmentId" class="control-label"></label>
+                <label asp-for="GroupEnrollmentId" class="form-label"></label>
                 <select asp-for="GroupEnrollmentId" class ="form-control form-select" asp-items="ViewBag.GroupEnrollmentId">
                     <option disabled selected></option>
                 </select>
@@ -23,17 +23,17 @@
                 <!--fk select end-->
             </div>
             
-            <div class="form-group" asp-enabled="EvaluationDate">
+            <div class="mb-3" asp-enabled="EvaluationDate">
                 <!--input start-->
-                <label asp-for="EvaluationDate" class="control-label"></label>
+                <label asp-for="EvaluationDate" class="form-label"></label>
                 <input asp-for="EvaluationDate" autocomplete="off" class="form-control" />
                 <span asp-validation-for="EvaluationDate" class="text-danger"></span>
                 <!--input end-->
             </div>
             
-            <div class="form-group" asp-enabled="ProgramAssessmentId">
+            <div class="mb-3" asp-enabled="ProgramAssessmentId">
                 <!--fk select start-->
-                <label asp-for="ProgramAssessmentId" class="control-label"></label>
+                <label asp-for="ProgramAssessmentId" class="form-label"></label>
                 <select asp-for="ProgramAssessmentId" class ="form-control form-select" asp-items="ViewBag.ProgramAssessmentId">
                     <option disabled selected></option>
                 </select>
@@ -41,25 +41,25 @@
                 <!--fk select end-->
             </div>
             
-            <div class="form-group" asp-enabled="Score">
+            <div class="mb-3" asp-enabled="Score">
                 <!--input start-->
-                <label asp-for="Score" class="control-label"></label>
+                <label asp-for="Score" class="form-label"></label>
                 <input asp-for="Score" autocomplete="off" class="form-control" />
                 <span asp-validation-for="Score" class="text-danger"></span>
                 <!--input end-->
             </div>
             
-            <div class="form-group" asp-enabled="StatusDate">
+            <div class="mb-3" asp-enabled="StatusDate">
                 <!--input start-->
-                <label asp-for="StatusDate" class="control-label"></label>
+                <label asp-for="StatusDate" class="form-label"></label>
                 <input asp-for="StatusDate" autocomplete="off" class="form-control" />
                 <span asp-validation-for="StatusDate" class="text-danger"></span>
                 <!--input end-->
             </div>
             
-            <div class="form-group" asp-enabled="RefEvaluationStatusId">
+            <div class="mb-3" asp-enabled="RefEvaluationStatusId">
                 <!--fk select start-->
-                <label asp-for="RefEvaluationStatusId" class="control-label"></label>
+                <label asp-for="RefEvaluationStatusId" class="form-label"></label>
                 <select asp-for="RefEvaluationStatusId" class ="form-control form-select" asp-items="ViewBag.RefEvaluationStatusId">
                     <option disabled selected></option>
                 </select>
@@ -68,7 +68,7 @@
             </div>
             
             <!-- button group start -->
-            <div class="form-group text-end mt-5">
+            <div class="mb-3 text-end mt-5">
                 <a id="cancelbutton" class="btn btn-secondary me-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
                     <i class="fas fa-times"></i> @Localizer["Cancel"]
                 </a>

@@ -30,9 +30,9 @@
                         @Localizer["M&E Admin Option:"] @Localizer["Change/move Group to a different Organization"]
                     </div>
                     <div class="card-body">
-                        <div class="form-group" asp-enabled="OrganizationId">
+                        <div class="mb-3" asp-enabled="OrganizationId">
                             <!--fk select start-->
-                            <label asp-for="OrganizationId" class="control-label"></label>
+                            <label asp-for="OrganizationId" class="form-label"></label>
                             <select asp-for="OrganizationId" class="form-control form-select select2" asp-items="ViewBag.OrganizationId">
                             </select>
                             <span asp-validation-for="OrganizationId" class="text-danger"></span>
@@ -46,9 +46,9 @@
                 <input type="hidden" asp-for="OrganizationId" />
             }
 
-            <div class="form-group required" asp-enabled="GroupCode">
+            <div class="mb-3 required" asp-enabled="GroupCode">
                 <!--input start-->
-                <label asp-for="GroupCode" class="control-label"></label>
+                <label asp-for="GroupCode" class="form-label"></label>
                 <i data-content="@Localizer["Recommended: Year-OrganizationCode-LocationCode-Group-Month-Day"]"
                    data-placement="top"
                    data-bs-toggle="popover"
@@ -62,35 +62,35 @@
                 <!--input end-->
             </div>
 
-            <div class="form-group" asp-enabled="GroupName">
+            <div class="mb-3" asp-enabled="GroupName">
                 <!--input start-->
-                <label asp-for="GroupName" class="control-label"></label>
+                <label asp-for="GroupName" class="form-label"></label>
                 <input asp-for="GroupName" autocomplete="off" class="form-control" />
                 <span asp-validation-for="GroupName" class="text-danger"></span>
                 <!--input end-->
             </div>
 
-            <div class="form-group" asp-enabled="ProgramId">
+            <div class="mb-3" asp-enabled="ProgramId">
                 <!--fk select start-->
-                <label asp-for="ProgramId" class="control-label"></label>
+                <label asp-for="ProgramId" class="form-label"></label>
                 <select asp-for="ProgramId" class="form-control form-select" asp-items="ViewBag.ProgramId">
                 </select>
                 <span asp-validation-for="ProgramId" class="text-danger"></span>
                 <!--fk select end-->
             </div>
 
-            <div class="form-group" asp-enabled="RefGradeLevelId">
+            <div class="mb-3" asp-enabled="RefGradeLevelId">
                 <!--fk select start-->
-                <label asp-for="RefGradeLevelId" class="control-label"></label>
+                <label asp-for="RefGradeLevelId" class="form-label"></label>
                 <select asp-for="RefGradeLevelId" class="form-control form-select" asp-items="ViewBag.RefGradeLevelId">
                 </select>
                 <span asp-validation-for="RefGradeLevelId" class="text-danger"></span>
                 <!--fk select end-->
             </div>
 
-            <div class="form-group" asp-enabled="StartDate">
+            <div class="mb-3" asp-enabled="StartDate">
                 <!--date start-->
-                <label asp-for="StartDate" class="control-label"></label>
+                <label asp-for="StartDate" class="form-label"></label>
                 <i data-content="@Localizer["For School Enrollment - set this date to the academic year start date, for Training events - set to start of training"]"
                    data-placement="top"
                    data-bs-toggle="popover"
@@ -112,9 +112,9 @@
                 <!--date end-->
             </div>
 
-            <div class="form-group" asp-enabled="EndDate">
+            <div class="mb-3" asp-enabled="EndDate">
                 <!--date start-->
-                <label asp-for="EndDate" class="control-label"></label>
+                <label asp-for="EndDate" class="form-label"></label>
                 <i data-content="@Localizer["For School Enrollment - set this date to the academic year end date, for Training events - set to end of training"]"
                    data-placement="top"
                    data-bs-toggle="popover"
@@ -137,9 +137,9 @@
             </div>
 
 
-            <div class="form-group" asp-enabled="ParticipantId">
+            <div class="mb-3" asp-enabled="ParticipantId">
                 <!--fk select start-->
-                <label asp-for="ParticipantId" class="control-label"></label>
+                <label asp-for="ParticipantId" class="form-label"></label>
                 <select asp-for="ParticipantId" class="form-control form-select select2" asp-items="ViewBag.ParticipantId">
                 </select>
                 <span asp-validation-for="ParticipantId" class="text-danger"></span>
@@ -147,7 +147,7 @@
             </div>
 
             <!-- button group start -->
-            <div class="form-group text-end mt-5">
+            <div class="mb-3 text-end mt-5">
                 <a id="cancelbutton" class="btn btn-secondary me-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
                     <i class="fas fa-times"></i> @Localizer["Cancel"]
                 </a>

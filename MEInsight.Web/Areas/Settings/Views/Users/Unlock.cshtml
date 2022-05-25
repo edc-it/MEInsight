@@ -87,7 +87,7 @@
             <form asp-action="Unlock">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Email" />
-                <div class="form-group">
+                <div class="mb-3">
                     <i class="fas fa-lock-open"></i><input type="submit" value="@Localizer["Unlock"]" class="btn btn-primary" />
                 </div>
             </form>

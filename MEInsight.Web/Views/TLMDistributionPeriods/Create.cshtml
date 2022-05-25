@@ -13,17 +13,17 @@
         <form asp-action="Create" id="main-form">
             <div asp-validation-summary="All" class="text-danger"></div>
             <input type="hidden" name="ParentId" value="@ViewBag.ParentId" />
-            <div class="form-group" asp-enabled="PeriodName">
+            <div class="mb-3" asp-enabled="PeriodName">
                 <!--input start-->
-                <label asp-for="PeriodName" class="control-label"></label>
+                <label asp-for="PeriodName" class="form-label"></label>
                 <input asp-for="PeriodName" autocomplete="off" class="form-control" />
                 <span asp-validation-for="PeriodName" class="text-danger"></span>
                 <!--input end-->
             </div>
 
-            <div class="form-group" asp-enabled="StartDate">
+            <div class="mb-3" asp-enabled="StartDate">
                 <!--date start-->
-                <label asp-for="StartDate" class="control-label"></label>
+                <label asp-for="StartDate" class="form-label"></label>
                 <span class="text-muted small">(@System.Globalization.CultureInfo.CurrentUICulture)</span>
                 <!-- use class .date to enable datepicker -->
                 <!-- use class .startdate to enable start/end date validation -->
@@ -37,9 +37,9 @@
                 <!--date end-->
             </div>
 
-            <div class="form-group" asp-enabled="EndDate">
+            <div class="mb-3" asp-enabled="EndDate">
                 <!--date start-->
-                <label asp-for="EndDate" class="control-label"></label>
+                <label asp-for="EndDate" class="form-label"></label>
                 <span class="text-muted small">(@System.Globalization.CultureInfo.CurrentUICulture)</span>
                 <!-- use class .date to enable datepicker -->
                 <!-- use class .enddate to enable start/end date validation -->
@@ -54,7 +54,7 @@
             </div>
 
             <!-- button group start -->
-            <div class="form-group text-end mt-5">
+            <div class="mb-3 text-end mt-5">
                 <a id="cancelbutton" class="btn btn-secondary me-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
                     <i class="fas fa-times"></i> @Localizer["Cancel"]
                 </a>

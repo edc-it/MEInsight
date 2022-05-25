@@ -14,25 +14,25 @@
             <div asp-validation-summary="All" class="text-danger"></div>
             <input type="hidden" name="ParentId" value="@ViewBag.ParentId" />
             
-            <div class="form-group" asp-enabled="SchoolLanguageCode">
+            <div class="mb-3" asp-enabled="SchoolLanguageCode">
                 <!--input start-->
-                <label asp-for="SchoolLanguageCode" class="control-label"></label>
+                <label asp-for="SchoolLanguageCode" class="form-label"></label>
                 <input asp-for="SchoolLanguageCode" autocomplete="off" class="form-control" />
                 <span asp-validation-for="SchoolLanguageCode" class="text-danger"></span>
                 <!--input end-->
             </div>
             
             
-            <div class="form-group" asp-enabled="SchoolLanguage">
+            <div class="mb-3" asp-enabled="SchoolLanguage">
                 <!--input start-->
-                <label asp-for="SchoolLanguage" class="control-label"></label>
+                <label asp-for="SchoolLanguage" class="form-label"></label>
                 <input asp-for="SchoolLanguage" autocomplete="off" class="form-control" />
                 <span asp-validation-for="SchoolLanguage" class="text-danger"></span>
                 <!--input end-->
             </div>
             
             <!-- button group start -->
-            <div class="form-group text-end mt-5">
+            <div class="mb-3 text-end mt-5">
                 <a id="cancelbutton" class="btn btn-secondary me-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
                     <i class="fas fa-times"></i> @Localizer["Cancel"]
                 </a>

@@ -50,7 +50,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
+                            <div class="mb-3">
                                 <label for="GroupId">@Localizer["Group"]</label>
                                 <select class="form-control" name="GroupId" id="GroupId"></select>
                             </div>
@@ -262,11 +262,11 @@
                 <form id="mainform" asp-action="Create">
                     <div asp-validation-summary="All" class="text-danger"></div>
                     <input type="hidden" name="GroupId" value="@ViewBag.ParentId" />
-                    <div class="form-group required" asp-enabled="RegistrationDate">
+                    <div class="mb-3 required" asp-enabled="RegistrationDate">
                         <span class="small">@Localizer["Start Date"]: @ViewBag.GroupStartDate</span><br />
                         <span class="small">@Localizer["End Date"]: @ViewBag.GroupEndDate</span><br />
                         <!--date start-->
-                        <label asp-for="EnrollmentDate" class="control-label"></label>
+                        <label asp-for="EnrollmentDate" class="form-label"></label>
                         <span class="text-muted small">(@System.Globalization.CultureInfo.CurrentUICulture)</span>
                         <!-- use class .date to enable datepicker -->
                         <div class="input-group date">
@@ -278,7 +278,7 @@
                         <span asp-validation-for="EnrollmentDate" class="text-danger"></span>
                         <!--date end-->
                     </div>
-                    <div class="form-group">
+                    <div class="mb-3">
                         <a class="btn btn-secondary" asp-action="Index" asp-route-id="@ViewBag.ParentId"><i class="fa fa-times" aria-hidden="true"></i> @Localizer["Cancel"]</a>
                         <button id="submitFormbutton" type="submit" value="Create" class="btn btn-secondary ladda-button" data-style="expand-left" data-spinner-color="black">
                             <span class="ladda-label">
