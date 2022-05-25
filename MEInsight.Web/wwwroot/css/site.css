@@ -245,7 +245,7 @@ body {
         background-image: none;
     }
 
-div.input-group.date span.input-group-append {
+div.input-group.date span.input-group-addon {
     cursor: pointer;
 }
 

@@ -186,6 +186,7 @@
         "dist/js/bootstrap-datepicker.js",
         "dist/locales/bootstrap-datepicker.fr.min.js",
         "dist/locales/bootstrap-datepicker.es.min.js",
+        "dist/locales/bootstrap-datepicker.en-ZA.min.js",
         "LICENSE"
       ]
     },
