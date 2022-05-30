@@ -71,7 +71,9 @@ namespace MEL.Web.Controllers
             // OrganizationId for "Create New - Participants" buttons route parameter
             ViewData["OrganizationId"] = group.OrganizationId;
 
-            return View(await applicationDbContext.OrderBy(g => g.Participants.NameId).ToListAsync());
+            //TODO Order by correct EF Core 6 translation
+            //return View(await applicationDbContext.OrderBy(g => g.Participants.NameId).ToListAsync());
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Attendance
@@ -101,8 +103,23 @@ namespace MEL.Web.Controllers
                 .FirstOrDefaultAsync();
 
             //ViewData["EnableDuration"] = group.Programs.EnableDuration;
-            ViewData["Min"] = group.Programs.Min;
-            ViewData["Max"] = group.Programs.Max;
+            if (group?.Programs?.Min == null)
+            {
+                ViewData["Min"] = 0;
+            }
+            else
+            {
+                ViewData["Min"] = group.Programs.Min;
+            }
+            if (group?.Programs?.Max == null)
+            {
+                ViewData["Max"] = 0;
+            }
+            else
+            {
+                ViewData["Max"] = group.Programs.Max;
+            }
+            
             ViewData["AttendanceUnit"] = group.Programs.AttendanceUnits.AttendanceUnit;
             ViewData["TrainingProgramId"] = group.ProgramId;
             ViewData["RefEnrollmentStatusId"] = new SelectList(_context.EnrollmentStatus, "RefEnrollmentStatusId", "EnrollmentStatus");

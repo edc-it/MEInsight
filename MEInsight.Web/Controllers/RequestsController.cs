@@ -371,7 +371,6 @@ namespace MEL.Web.Controllers
             int recordsTotal = 0;
 
             // CUSTOM FILTERS:
-
             var groupId = Request.Form["groupId"].FirstOrDefault();
             if (!string.IsNullOrEmpty(groupId))
             {

@@ -9,6 +9,7 @@ using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using MEInsight.Entities.Reference;
 using MEInsight.Entities.Programs;
+using System.Text.Json.Serialization;
 
 namespace MEInsight.Entities.Core
 {
@@ -49,7 +50,7 @@ namespace MEInsight.Entities.Core
         [Column(Order = 3)]
         public int RefParticipantTypeId { get; set; }
 
-        [Display(Name = "Participant Type")]
+        [Display(Name = "Participant Cohort")]
         [Column(Order = 4)]
         public int? RefParticipantCohortId { get; set; }
 
@@ -58,13 +59,15 @@ namespace MEInsight.Entities.Core
         [Display(Name = "Participant Code")]
         [Column(Order = 5)]
         [Remote(action: "VerifyParticipantCode", controller: "RemoteValidations", HttpMethod = "POST", ErrorMessage = "This Code already exists.", AdditionalFields = "ParticipantCodeInitialValue")]
-        public string ParticipantCode { get; set; } = null!;
+        public string? ParticipantCode { get; set; } = null!;
 
         [Required(ErrorMessage = "The {0} field is required.")]
         [MaxLength(35)]
         [Display(Name = "First name")]
+        [JsonPropertyName("First name")]
+        [System.Runtime.Serialization.DataMember(Name = "First name")]
         [Column(Order = 6)]
-        public string FirstName { get; set; } = null!;
+        public string? FirstName { get; set; } = null!;
 
         [MaxLength(35)]
         [Display(Name = "Middle name")]
@@ -75,11 +78,11 @@ namespace MEInsight.Entities.Core
         [MaxLength(35)]
         [Display(Name = "Surname/Last name")]
         [Column(Order = 8)]
-        public string LastName { get; set; } = null!;
+        public string? LastName { get; set; } = null!;
 
         [NotMapped]
         [Display(Name = "Name")]
-        public string NameFirst
+        public string? NameFirst
         {
             get
             {
@@ -89,7 +92,7 @@ namespace MEInsight.Entities.Core
 
         [NotMapped]
         [Display(Name = "Name")]
-        public string Name
+        public string? Name
         {
             get
             {
@@ -99,7 +102,7 @@ namespace MEInsight.Entities.Core
 
         [NotMapped]
         [Display(Name = "Name")]
-        public string NameId
+        public string? NameId
         {
             get
             {
@@ -110,7 +113,7 @@ namespace MEInsight.Entities.Core
         [Required(ErrorMessage = "The {0} field is required.")]
         [Display(Name = "Sex")]
         [Column(Order = 9)]
-        public int RefSexId { get; set; }
+        public int? RefSexId { get; set; }
 
         [DataType(DataType.Date)]
         [Display(Name = "Birth Date")]

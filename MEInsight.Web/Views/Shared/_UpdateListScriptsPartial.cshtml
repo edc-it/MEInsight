@@ -1,5 +1,5 @@
 ﻿<script type="text/javascript" src="~/lib/datatables/datatables.min.js" asp-append-version="true"></script>
-<script src="~/lib/inputmask/dist/jquery.inputmask.min.js" asp-append-version="true"></script>
+<script type="text/javascript" src="~/lib/inputmask/dist/jquery.inputmask.min.js" asp-append-version="true"></script>
 
 <script>
     $(document).ready(function () {
@@ -16,8 +16,8 @@
                 var form = $('#main-form');
                 if (form.valid()) {
                     // activates ladda-button 'loading..' style and disables submit button after one click
-                    var l = Ladda.create(this);
-                    l.start();
+                    //var l = Ladda.create(this);
+                    //l.start();
 
                     // disable cancel button after submit
                     $('#cancelbutton').addClass('disabled');

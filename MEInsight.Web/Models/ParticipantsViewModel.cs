@@ -42,25 +42,25 @@ namespace MEInsight.Web.Models
         [MaxLength(25)]
         [Display(Name = "Participant Code")]
         [Remote(action: "VerifyParticipantCode", controller: "RemoteValidations", HttpMethod = "POST", ErrorMessage = "This Code already exists.", AdditionalFields = "ParticipantCodeInitialValue")]
-        public string ParticipantCode { get; set; }
+        public string? ParticipantCode { get; set; }
 
         [Required(ErrorMessage = "The {0} field is required.")]
         [MaxLength(35)]
         [Display(Name = "First name")]
-        public string FirstName { get; set; }
+        public string? FirstName { get; set; }
 
         [MaxLength(35)]
         [Display(Name = "Middle name")]
-        public string MiddleName { get; set; }
+        public string? MiddleName { get; set; }
 
         [Required(ErrorMessage = "The {0} field is required.")]
         [MaxLength(35)]
         [Display(Name = "Surname/Last name")]
-        public string LastName { get; set; }
+        public string? LastName { get; set; }
 
         [NotMapped]
         [Display(Name = "Name")]
-        public string NameFirst
+        public string? NameFirst
         {
             get
             {
@@ -70,7 +70,7 @@ namespace MEInsight.Web.Models
 
         [NotMapped]
         [Display(Name = "Name")]
-        public string Name
+        public string? Name
         {
             get
             {
@@ -80,7 +80,7 @@ namespace MEInsight.Web.Models
 
         [NotMapped]
         [Display(Name = "Name")]
-        public string NameId
+        public string? NameId
         {
             get
             {
@@ -91,7 +91,7 @@ namespace MEInsight.Web.Models
 
         [Required(ErrorMessage = "The {0} field is required.")]
         [Display(Name = "Sex")]
-        public int RefSexId { get; set; }
+        public int? RefSexId { get; set; }
 
         [DataType(DataType.Date)]
         [Display(Name = "Birth Date")]
@@ -108,23 +108,23 @@ namespace MEInsight.Web.Models
 
         [MaxLength(20)]
         [Display(Name = "Phone")]
-        public string Phone { get; set; }
+        public string? Phone { get; set; }
 
         [MaxLength(20)]
         [Display(Name = "Mobile")]
-        public string Mobile { get; set; }
+        public string? Mobile { get; set; }
 
         [MaxLength(320)]
         [Display(Name = "Email")]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         [MaxLength(200)]
         [Display(Name = "Facebook")]
-        public string Facebook { get; set; }
+        public string? Facebook { get; set; }
 
         [MaxLength(200)]
         [Display(Name = "Instant Messenger")]
-        public string InstantMessenger { get; set; }
+        public string? InstantMessenger { get; set; }
 
         [Display(Name = "Location")]
         public string RefLocationId { get; set; }
@@ -132,14 +132,14 @@ namespace MEInsight.Web.Models
         [MaxLength(384)]
         [DataType(DataType.MultilineText)]
         [Display(Name = "Address")]
-        public string Address { get; set; }
+        public string? Address { get; set; }
 
 
         // Student properties
         [MaxLength(100)]
         [Display(Name = "Student Code")]
         [Remote(action: "VerifyStudentCode", controller: "RemoteValidations", HttpMethod = "POST", ErrorMessage = "This Code already exists.", AdditionalFields = "StudentCodeInitialValue")]
-        public string StudentCode { get; set; }
+        public string? StudentCode { get; set; }
 
         [Display(Name = "Student Type")]
         public int? RefStudentTypeId { get; set; }
@@ -152,7 +152,7 @@ namespace MEInsight.Web.Models
 
         [MaxLength(255)]
         [Display(Name = "Parent/Guardian")]
-        public string ParentGuardian { get; set; }
+        public string? ParentGuardian { get; set; }
 
 
         // Teacher
@@ -167,7 +167,7 @@ namespace MEInsight.Web.Models
 
         [MaxLength(50)]
         [Display(Name = "Grades taught?")]
-        public string GradeLevels { get; set; }
+        public string? GradeLevels { get; set; }
 
         //Education Administrator
         [Display(Name = "Administrator Type")]
@@ -183,7 +183,7 @@ namespace MEInsight.Web.Models
         [ScaffoldColumn(false)]
         [MaxLength(50)]
         [Display(Name = "Created By")]
-        public string CreatedBy { get; set; }
+        public string? CreatedBy { get; set; }
 
         [ScaffoldColumn(false)]
         [Display(Name = "Created Date")]
@@ -192,7 +192,7 @@ namespace MEInsight.Web.Models
         [ScaffoldColumn(false)]
         [MaxLength(50)]
         [Display(Name = "Modified By")]
-        public string ModifiedBy { get; set; }
+        public string? ModifiedBy { get; set; }
 
         [ScaffoldColumn(false)]
         [Display(Name = "Modified Date")]
@@ -201,7 +201,7 @@ namespace MEInsight.Web.Models
         [ScaffoldColumn(false)]
         [MaxLength(50)]
         [Display(Name = "Deleted By")]
-        public string DeletedBy { get; set; }
+        public string? DeletedBy { get; set; }
 
         [ScaffoldColumn(false)]
         [Display(Name = "Deleted Date")]
@@ -214,70 +214,70 @@ namespace MEInsight.Web.Models
         // Navigation properties
         [ForeignKey("OrganizationId")]
         [Display(Name = "Organization")]
-        public virtual Organization Organizations { get; set; }
+        public virtual Organization? Organizations { get; set; }
 
         // Participant
         [ForeignKey("ParticipantId")]
-        public virtual Participant Participants { get; set; }
+        public virtual Participant? Participants { get; set; }
 
         [ForeignKey("RefParticipantTypeId")]
         [Display(Name = "Participant Type")]
-        public virtual RefParticipantType ParticipantTypes { get; set; }
+        public virtual RefParticipantType? ParticipantTypes { get; set; }
 
         [ForeignKey("RefParticipantCohortId")]
         [Display(Name = "Participant Cohort")]
-        public virtual RefParticipantCohort ParticipantCohorts { get; set; }
+        public virtual RefParticipantCohort? ParticipantCohorts { get; set; }
 
         [ForeignKey("RefSexId")]
         [Display(Name = "Sex")]
-        public virtual RefSex Sex { get; set; }
+        public virtual RefSex? Sex { get; set; }
 
         [ForeignKey("RefDisabilityTypeId")]
         [Display(Name = "Disability Type")]
-        public virtual RefDisabilityType DisabilityTypes { get; set; }
+        public virtual RefDisabilityType? DisabilityTypes { get; set; }
 
         [ForeignKey("RefLocationId")]
         [Display(Name = "Location")]
-        public virtual RefLocation Locations { get; set; }
+        public virtual RefLocation? Locations { get; set; }
 
         // Student
         [ForeignKey("RefStudentTypeId")]
         [Display(Name = "Student Type")]
-        public virtual RefStudentType StudentTypes { get; set; }
+        public virtual RefStudentType? StudentTypes { get; set; }
 
         [ForeignKey("RefStudentSpecializationId")]
         [Display(Name = "Student Specialization")]
-        public virtual RefStudentSpecialization StudentSpecializations { get; set; }
+        public virtual RefStudentSpecialization? StudentSpecializations { get; set; }
 
         [ForeignKey("RefStudentYearOfStudyId")]
         [Display(Name = "Student Year of Study")]
-        public virtual RefStudentYearOfStudy StudentYearOfStudies { get; set; }
+        public virtual RefStudentYearOfStudy? StudentYearOfStudies { get; set; }
 
         // Teacher
         [ForeignKey("RefTeacherTypeId")]
         [Display(Name = "Teacher Type")]
-        public virtual RefTeacherType TeacherTypes { get; set; }
+        public virtual RefTeacherType? TeacherTypes { get; set; }
 
         [ForeignKey("RefTeacherPositionId")]
         [Display(Name = "Position")]
-        public virtual RefTeacherPosition TeacherPositions { get; set; }
+        public virtual RefTeacherPosition? TeacherPositions { get; set; }
 
         [ForeignKey("RefTeacherEmploymentTypeId")]
         [Display(Name = "Employment Type")]
-        public virtual RefTeacherEmploymentType TeacherEmploymentTypes { get; set; }
+        public virtual RefTeacherEmploymentType? TeacherEmploymentTypes { get; set; }
 
         // Education Administrator
         [ForeignKey("RefEducationAdministratorTypeId")]
         [Display(Name = "Administrator Type")]
-        public virtual RefEducationAdministratorType EducationAdministratorTypes { get; set; }
+        public virtual RefEducationAdministratorType? EducationAdministratorTypes { get; set; }
 
         [ForeignKey("RefEducationAdministratorPositionId")]
         [Display(Name = "Position")]
-        public virtual RefEducationAdministratorPosition EducationAdministratorPositions { get; set; }
+        public virtual RefEducationAdministratorPosition? EducationAdministratorPositions { get; set; }
 
         [ForeignKey("RefEducationAdministratorOfficeId")]
         [Display(Name = "Office")]
-        public virtual RefEducationAdministratorOffice EducationAdministratorOffices { get; set; }
+        public virtual RefEducationAdministratorOffice? EducationAdministratorOffices { get; set; }
 
         // Navigation Properties
         // Participant

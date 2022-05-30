@@ -78,9 +78,7 @@
                 <!-- use class .startdate to enable start/end date validation -->
                 <div class="input-group date startdate">
                     <input asp-for="StartDate" autocomplete="off" type="text" class="form-control" placeholder="@System.Globalization.DateTimeFormatInfo.CurrentInfo.ShortDatePattern" />
-                    <span class="input-group-append">
-                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                    </span>
+                    <span class="input-group-text input-group-addon"><i class="far fa-calendar-alt"></i></span>
                 </div>
                 <span asp-validation-for="StartDate" class="text-danger"></span>
                 <!--date end-->
@@ -104,9 +102,7 @@
                 <!-- use class .enddate to enable start/end date validation -->
                 <div class="input-group date enddate">
                     <input asp-for="EndDate" autocomplete="off" type="text" class="form-control" placeholder="@System.Globalization.DateTimeFormatInfo.CurrentInfo.ShortDatePattern" />
-                    <span class="input-group-append">
-                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                    </span>
+                    <span class="input-group-text input-group-addon"><i class="far fa-calendar-alt"></i></span>
                 </div>
                 <span asp-validation-for="EndDate" class="text-danger"></span>
                 <!--date end-->

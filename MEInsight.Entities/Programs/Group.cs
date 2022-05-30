@@ -101,11 +101,11 @@ namespace MEInsight.Entities.Programs
 
         [ForeignKey("OrganizationId")]
         [Display(Name = "Organization")]
-        public virtual Organization Organizations { get; set; } = null!;
+        public virtual Organization? Organizations { get; set; } = null!;
 
         [ForeignKey("ProgramId")]
         [Display(Name = "Program")]
-        public virtual Program Programs { get; set; } = null!;
+        public virtual Program? Programs { get; set; } = null!;
 
         [ForeignKey("ParticipantId")]
         [Display(Name = "Teacher/Facilitator")]

@@ -247,28 +247,6 @@ namespace MEL.Web.Controllers
             ViewData["RefParticipantTypeId"] = RefParticipantTypeId;
             ViewData["RefParticipantCohortId"] = new SelectList(_context.ParticipantCohorts, "RefParticipantCohortId", "ParticipantCohort");
 
-            // Students
-            if (RefParticipantTypeId == 1)
-            {
-                ViewData["RefStudentTypeId"] = new SelectList(_context.StudentTypes, "RefStudentTypeId", "StudentType");
-                ViewData["RefStudentSpecializationId"] = new SelectList(_context.StudentSpecializations, "RefStudentSpecializationId", "StudentSpecialization");
-                ViewData["RefStudentYearOfStudyId"] = new SelectList(_context.StudentYearOfStudies, "RefStudentYearOfStudyId", "StudentYearOfStudy");
-            }
-            // Teachers
-            else if (RefParticipantTypeId == 2)
-            {
-                ViewData["RefTeacherTypeId"] = new SelectList(_context.TeacherTypes, "RefTeacherTypeId", "TeacherType");
-                ViewData["RefTeacherPositionId"] = new SelectList(_context.TeacherPositions, "RefTeacherPositionId", "TeacherPosition");
-                ViewData["RefTeacherEmploymentTypeId"] = new SelectList(_context.TeacherEmploymentTypes, "RefTeacherEmploymentTypeId", "TeacherEmploymentType");
-            }
-            // Education Administrators
-            else if (RefParticipantTypeId == 3)
-            {
-                ViewData["RefEducationAdministratorTypeId"] = new SelectList(_context.EducationAdministratorTypes, "RefEducationAdministratorTypeId", "EducationAdministratorType");
-                ViewData["RefEducationAdministratorOfficeId"] = new SelectList(_context.EducationAdministratorOffices, "RefEducationAdministratorOfficeId", "EducationAdministratorOffice");
-                ViewData["RefEducationAdministratorPositionId"] = new SelectList(_context.EducationAdministratorPositions, "RefEducationAdministratorPositionId", "EducationAdministratorPosition");
-            }
-
             return View();
         }
 
@@ -276,17 +254,11 @@ namespace MEL.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
-            [Bind("ParticipantId,RegistrationDate,OrganizationId,RefParticipantTypeId,RefParticipantCohortId,ParticipantCode,FirstName,MiddleName,LastName,RefSexId,BirthDate,Age,Disability,RefStudentDisabilityTypeId,Phone,Mobile,Email,Facebook,InstantMessenger,RefLocationId,Address")] Participant participant,
-            [Bind("ParticipantId,StudentCode,RefStudentTypeId,RefStudentSpecializationId,RefStudentYearOfStudyId,ParentGuardian")] Student student,
-            [Bind("ParticipantId,RefTeacherTypeId,RefTeacherPositionId,RefTeacherEmploymentTypeId,GradeLevels")] Teacher teacher,
-            [Bind("ParticipantId,RefEducationAdministratorTypeId,RefEducationAdministratorPositionId,RefEducationAdministratorOfficeId")] EducationAdministrator educationAdministrator,
+            [Bind("ParticipantId,RegistrationDate,OrganizationId,RefParticipantTypeId,RefParticipantCohortId,ParticipantCode,FirstName,MiddleName,LastName,RefSexId,BirthDate,Age,Disability,RefDisabilityTypeId,Phone,Mobile,Email,Facebook,InstantMessenger,RefLocationId,Address,AdditionalData")] Participant participant,
             string[] RefLocationId,
             Guid? GroupId
             )
         {
-
-            // Model Bindings for Student, Teacher, and Education Administrator are null if not included in POST.
-            // Recommended to set to null before Model Validation if any property on these entities are required.
             if (ModelState.IsValid)
             {
 
@@ -306,25 +278,6 @@ namespace MEL.Web.Controllers
                 // Participant
                 participant.ParticipantId = Guid.NewGuid();
                 _context.Add(participant);
-
-                // Students
-                if (participant.RefParticipantTypeId == 1)
-                {
-                    student.ParticipantId = participant.ParticipantId;
-                    _context.Add(student);
-                }
-                // Teachers
-                else if (participant.RefParticipantTypeId == 2)
-                {
-                    teacher.ParticipantId = participant.ParticipantId;
-                    _context.Add(teacher);
-                }
-                // Education Administrators
-                else if (participant.RefParticipantTypeId == 3)
-                {
-                    educationAdministrator.ParticipantId = participant.ParticipantId;
-                    _context.Add(educationAdministrator);
-                }
 
                 // *** Create Group Enrollment and/or Group Evaluations ***
                 // If Create action route includes GroupId parameter (from GroupEnrollment) 
@@ -462,32 +415,10 @@ namespace MEL.Web.Controllers
 
             // Participants - All
             ViewData["ParentId"] = participant.OrganizationId;
-            ViewData["RefSexId"] = new SelectList(_context.Sex, "RefSexId", "Sex");
-            ViewData["RefDisabilityTypeId"] = new SelectList(_context.DisabilityTypes, "RefDisabilityTypeId", "DisabilityType");
+            ViewData["RefSexId"] = new SelectList(_context.Sex, "RefSexId", "Sex", participant.RefSexId);
+            ViewData["RefDisabilityTypeId"] = new SelectList(_context.DisabilityTypes, "RefDisabilityTypeId", "DisabilityType", participant.RefDisabilityTypeId);
             ViewData["RefParticipantTypeId"] = participant.RefParticipantTypeId;
-            ViewData["RefParticipantCohortId"] = new SelectList(_context.ParticipantCohorts, "RefParticipantCohortId", "ParticipantCohort");
-
-            // Students
-            if (participant.RefParticipantTypeId == 1)
-            {
-                ViewData["RefStudentTypeId"] = new SelectList(_context.StudentTypes, "RefStudentTypeId", "StudentType", student.RefStudentTypeId);
-                ViewData["RefStudentSpecializationId"] = new SelectList(_context.StudentSpecializations, "RefStudentSpecializationId", "StudentSpecialization", student.RefStudentSpecializationId);
-                ViewData["RefStudentYearOfStudyId"] = new SelectList(_context.StudentYearOfStudies, "RefStudentYearOfStudyId", "StudentYearOfStudy");
-            }
-            // Teachers
-            else if (participant.RefParticipantTypeId == 2)
-            {
-                ViewData["RefTeacherTypeId"] = new SelectList(_context.TeacherTypes, "RefTeacherTypeId", "TeacherType", teacher.RefTeacherTypeId);
-                ViewData["RefTeacherPositionId"] = new SelectList(_context.TeacherPositions, "RefTeacherPositionId", "TeacherPosition", teacher.RefTeacherPositionId);
-                ViewData["RefTeacherEmploymentTypeId"] = new SelectList(_context.TeacherEmploymentTypes, "RefTeacherEmploymentTypeId", "TeacherEmploymentType");
-            }
-            // Education Administrators
-            else if (participant.RefParticipantTypeId == 3)
-            {
-                ViewData["RefEducationAdministratorTypeId"] = new SelectList(_context.EducationAdministratorTypes, "RefEducationAdministratorTypeId", "EducationAdministratorType", educationAdministrator.RefEducationAdministratorTypeId);
-                ViewData["RefEducationAdministratorOfficeId"] = new SelectList(_context.EducationAdministratorOffices, "RefEducationAdministratorOfficeId", "EducationAdministratorOffice", educationAdministrator.RefEducationAdministratorPositionId);
-                ViewData["RefEducationAdministratorPositionId"] = new SelectList(_context.EducationAdministratorPositions, "RefEducationAdministratorPositionId", "EducationAdministratorPosition", educationAdministrator.RefEducationAdministratorPositionId);
-            }
+            ViewData["RefParticipantCohortId"] = new SelectList(_context.ParticipantCohorts, "RefParticipantCohortId", "ParticipantCohort", participant.RefParticipantCohortId);
 
             return RedirectToAction(nameof(Create), "Participants", new { participant.OrganizationId, GroupId, participant.RefParticipantTypeId });
         }
@@ -522,76 +453,9 @@ namespace MEL.Web.Controllers
             //Returns the top hiearchy organization for JSTree
             ViewData["ParentOrganizationId"] = organization.OrganizationId;
 
-            // *** ViewModel query ***
-            var participants = await (from participant in _context.Participants
-                               .Include(p => p.GroupEnrollments)
-                                      join student in _context.Students on participant.ParticipantId equals student.ParticipantId into ps
-                                      from participantStudent in ps.DefaultIfEmpty()
-                                      join teacher in _context.Teachers on participant.ParticipantId equals teacher.ParticipantId into pt
-                                      from participantTeacher in pt.DefaultIfEmpty()
-                                      join educationAdministrator in _context.EducationAdministrators on participant.ParticipantId equals educationAdministrator.ParticipantId into pea
-                                      from participantEducationAdministrator in pea.DefaultIfEmpty()
-                                      select new ParticipantsViewModel
-                                      {
-                                          // Participant
-                                          ParticipantId = participant.ParticipantId,
-                                          RegistrationDate = participant.RegistrationDate,
-                                          OrganizationId = participant.OrganizationId,
-                                          RefParticipantTypeId = participant.RefParticipantTypeId,
-                                          ParticipantTypes = participant.ParticipantTypes, //
-                                          ParticipantCohorts = participant.ParticipantCohorts,
-                                          ParticipantCode = participant.ParticipantCode,
-                                          FirstName = participant.FirstName,
-                                          MiddleName = participant.MiddleName,
-                                          LastName = participant.LastName,
-                                          RefSexId = participant.RefSexId,
-                                          Sex = participant.Sex, //
-                                          BirthDate = participant.BirthDate,
-                                          Age = participant.Age,
-                                          Disability = participant.Disability,
-                                          RefDisabilityTypeId = participant.RefDisabilityTypeId,
-                                          DisabilityTypes = participant.DisabilityTypes, //
-                                          Phone = participant.Phone,
-                                          Mobile = participant.Mobile,
-                                          Email = participant.Email,
-                                          Facebook = participant.Facebook,
-                                          InstantMessenger = participant.InstantMessenger,
-                                          RefLocationId = participant.RefLocationId,
-                                          Address = participant.Address,
-                                          //Student
-                                          StudentCode = participantStudent.StudentCode,
-                                          RefStudentTypeId = participantStudent.RefStudentTypeId,
-                                          StudentTypes = participantStudent.StudentTypes, //
-                                          RefStudentSpecializationId = participantStudent.RefStudentSpecializationId,
-                                          StudentSpecializations = participantStudent.StudentSpecializations, //
-                                          RefStudentYearOfStudyId = participantStudent.RefStudentYearOfStudyId,
-                                          StudentYearOfStudies = participantStudent.StudentYearOfStudies,
-                                          ParentGuardian = participantStudent.ParentGuardian,
-                                          //Teacher
-                                          RefTeacherTypeId = participantTeacher.RefTeacherTypeId,
-                                          TeacherTypes = participantTeacher.TeacherTypes,
-                                          RefTeacherPositionId = participantTeacher.RefTeacherPositionId,
-                                          TeacherPositions = participantTeacher.TeacherPositions,
-                                          RefTeacherEmploymentTypeId = participantTeacher.RefTeacherEmploymentTypeId,
-                                          TeacherEmploymentTypes = participantTeacher.TeacherEmploymentTypes,
-                                          GradeLevels = participantTeacher.GradeLevels,
-                                          //Education Administrator
-                                          RefEducationAdministratorTypeId = participantEducationAdministrator.RefEducationAdministratorTypeId,
-                                          EducationAdministratorTypes = participantEducationAdministrator.EducationAdministratorTypes,
-                                          RefEducationAdministratorPositionId = participantEducationAdministrator.RefEducationAdministratorPositionId,
-                                          EducationAdministratorPositions = participantEducationAdministrator.EducationAdministratorPositions,
-                                          RefEducationAdministratorOfficeId = participantEducationAdministrator.RefEducationAdministratorOfficeId,
-                                          EducationAdministratorOffices = participantEducationAdministrator.EducationAdministratorOffices,
-                                          //Base Entity
-                                          CreatedBy = participant.CreatedBy,
-                                          CreatedDate = participant.CreatedDate,
-                                          ModifiedBy = participant.ModifiedBy,
-                                          ModifiedDate = participant.ModifiedDate
+            var participant = await _context.Participants.FindAsync(id);
 
-                                      }).SingleOrDefaultAsync(p => p.ParticipantId == id);
-
-
-            if (participants == null)
+            if (participant == null)
             {
                 return NotFound();
             }
@@ -616,41 +480,19 @@ namespace MEL.Web.Controllers
             //Get Location Parents (only the lower level RefLocationId is saved, 
             //this gets the location parents for the saved location
             var allLocations = _context.Locations;
-            var locations = EnumerableExtensions.ListLocations(allLocations, participants.RefLocationId);
+            var locations = EnumerableExtensions.ListLocations(allLocations, participant.RefLocationId);
             ViewData["RefLocationParents"] = locations.OrderBy(x => x.RefLocationTypeId);
 
             // Participants - All
             // ViewData["ParentId"] = id;
-            ViewData["RefSexId"] = new SelectList(_context.Sex, "RefSexId", "Sex", participants.RefSexId);
-            ViewData["RefDisabilityTypeId"] = new SelectList(_context.DisabilityTypes, "RefDisabilityTypeId", "DisabilityType");
-            ViewData["RefParticipantTypeId"] = participants.RefParticipantTypeId;
-            ViewData["RefParticipantCohortId"] = new SelectList(_context.ParticipantCohorts, "RefParticipantCohortId", "ParticipantCohort", participants.RefParticipantCohortId);
+            ViewData["RefSexId"] = new SelectList(_context.Sex, "RefSexId", "Sex", participant.RefSexId);
+            ViewData["RefDisabilityTypeId"] = new SelectList(_context.DisabilityTypes, "RefDisabilityTypeId", "DisabilityType", participant.RefDisabilityTypeId);
+            ViewData["RefParticipantTypeId"] = participant.RefParticipantTypeId;
+            ViewData["RefParticipantCohortId"] = new SelectList(_context.ParticipantCohorts, "RefParticipantCohortId", "ParticipantCohort", participant.RefParticipantCohortId);
 
             ViewData["GroupId"] = GroupId;
 
-            // Students
-            if (participants.RefParticipantTypeId == 1)
-            {
-                ViewData["RefStudentTypeId"] = new SelectList(_context.StudentTypes, "RefStudentTypeId", "StudentType", participants.RefStudentTypeId);
-                ViewData["RefStudentSpecializationId"] = new SelectList(_context.StudentSpecializations, "RefStudentSpecializationId", "StudentSpecialization", participants.RefStudentSpecializationId);
-                ViewData["RefStudentYearOfStudyId"] = new SelectList(_context.StudentYearOfStudies, "RefStudentYearOfStudyId", "StudentYearOfStudy");
-            }
-            // Teachers
-            else if (participants.RefParticipantTypeId == 2)
-            {
-                ViewData["RefTeacherTypeId"] = new SelectList(_context.TeacherTypes, "RefTeacherTypeId", "TeacherType", participants.RefTeacherTypeId);
-                ViewData["RefTeacherPositionId"] = new SelectList(_context.TeacherPositions, "RefTeacherPositionId", "TeacherPosition", participants.RefTeacherPositionId);
-                ViewData["RefTeacherEmploymentTypeId"] = new SelectList(_context.TeacherEmploymentTypes, "RefTeacherEmploymentTypeId", "TeacherEmploymentType");
-            }
-            // Education Administrators
-            else if (participants.RefParticipantTypeId == 3)
-            {
-                ViewData["RefEducationAdministratorTypeId"] = new SelectList(_context.EducationAdministratorTypes, "RefEducationAdministratorTypeId", "EducationAdministratorType", participants.RefEducationAdministratorTypeId);
-                ViewData["RefEducationAdministratorOfficeId"] = new SelectList(_context.EducationAdministratorOffices, "RefEducationAdministratorOfficeId", "EducationAdministratorOffice", participants.RefEducationAdministratorOfficeId);
-                ViewData["RefEducationAdministratorPositionId"] = new SelectList(_context.EducationAdministratorPositions, "RefEducationAdministratorPositionId", "EducationAdministratorPosition", participants.RefEducationAdministratorPositionId);
-            }
-
-            return View(participants);
+            return View(participant);
         }
 
         // POST: Participants/Edit/5
@@ -658,10 +500,7 @@ namespace MEL.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(
             Guid id,
-            [Bind("ParticipantId,RegistrationDate,OrganizationId,RefParticipantTypeId,RefParticipantCohortId,ParticipantCode,FirstName,MiddleName,LastName,RefSexId,BirthDate,Age,Disability,RefDisabilityTypeId,Phone,Mobile,Email,Facebook,InstantMessenger,RefLocationId,Address")] Participant participant,
-            [Bind("ParticipantId,StudentCode,RefStudentTypeId,RefStudentSpecializationId,RefStudentYearOfStudyId,ParentGuardian")] Student student,
-            [Bind("ParticipantId,RefTeacherTypeId,RefTeacherPositionId,RefTeacherEmploymentTypeId,GradeLevels")] Teacher teacher,
-            [Bind("ParticipantId,RefEducationAdministratorTypeId,RefEducationAdministratorPositionId,RefEducationAdministratorOfficeId")] EducationAdministrator educationAdministrator,
+            [Bind("ParticipantId,RegistrationDate,OrganizationId,RefParticipantTypeId,RefParticipantCohortId,ParticipantCode,FirstName,MiddleName,LastName,RefSexId,BirthDate,Age,Disability,RefDisabilityTypeId,Phone,Mobile,Email,Facebook,InstantMessenger,RefLocationId,Address,AdditionalData")] Participant participant,
             string[] RefLocationId,
             Guid? GroupId
             )
@@ -671,8 +510,6 @@ namespace MEL.Web.Controllers
                 return NotFound();
             }
 
-            // Model Bindings for Student, Teacher, and Education Administrator are null if not included in POST Method.
-            // Recommended to set to null before Model Validation if any property on these entities are required.
             if (ModelState.IsValid)
             {
                 try
@@ -692,26 +529,6 @@ namespace MEL.Web.Controllers
                     }
 
                     _context.Update(participant);
-
-                    // Students
-                    if (participant.RefParticipantTypeId == 1)
-                    {
-                        student.ParticipantId = participant.ParticipantId;
-                        _context.Update(student);
-                    }
-                    // Teachers
-                    else if (participant.RefParticipantTypeId == 2)
-                    {
-                        teacher.ParticipantId = participant.ParticipantId;
-                        _context.Update(teacher);
-                    }
-                    // Education Administrators
-                    else if (participant.RefParticipantTypeId == 3)
-                    {
-                        educationAdministrator.ParticipantId = participant.ParticipantId;
-                        _context.Update(educationAdministrator);
-                    }
-
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -741,17 +558,81 @@ namespace MEL.Web.Controllers
                     return RedirectToAction(nameof(Index));
                 }
             }
-            ViewData["RefLocationId"] = new SelectList(_context.Locations, "RefLocationId", "RefLocationId", participant.RefLocationId);
-            ViewData["OrganizationId"] = new SelectList(_context.Organizations, "OrganizationId", "OrganizationCode", participant.OrganizationId);
 
+            // If Model NotValid return to Create View (Get)
+            // If groupId is not null, Create a new participant and enroll to Group Enrollments
+            if (GroupId != null)
+            {
+
+                var refOrganizationTypeId = await _context.Groups
+                    .Where(g => g.GroupId == GroupId)
+                    .Select(g => g.Organizations.RefOrganizationTypeId)
+                    .FirstOrDefaultAsync();
+
+                // if School return OrganizationId for JSTree to pre-select Organization
+                if (refOrganizationTypeId == 1)
+                {
+                    ViewData["OrganizationId"] = participant.OrganizationId;
+                }
+
+                ViewData["GroupId"] = GroupId;
+            }
+            // If groupId is null, Create new Participant only
+            else
+            {
+                // return related organization Ids
+            }
+
+            // *** For JSTree ***
+            //Logged User OrganizationId
+            Guid? userOrganizacionId = (await _userManager.GetUserAsync(HttpContext.User))?.OrganizationId;
+
+            if (userOrganizacionId == null)
+            {
+                return NotFound();
+            }
+
+            //Get Logged User Organization
+            var organization = await _context.Organizations
+                    .SingleOrDefaultAsync(o => o.OrganizationId == userOrganizacionId);
+
+            if (organization == null)
+            {
+                return NotFound();
+            }
+
+            //Returns the top hiearchy organization for JSTree
+            ViewData["ParentOrganizationId"] = organization.OrganizationId;
+
+            // *** Select Lists ***
+            // RefLocation
+            var locationTypes = _context.LocationTypes;
+            ViewData["RefLocationTypes"] = locationTypes;
+            ViewData["RefLocationTypesCount"] = locationTypes.Count();
+
+            ViewData["RefLocationId"] = new SelectList(_context.Locations
+                .Include(x => x.LocationTypes)
+                .Where(x =>
+                    x.LocationTypes.LocationLevel == 1 &&
+                    x.ParentLocationId == null)
+                .Select(x => new
+                {
+                    x.RefLocationId,
+                    x.LocationName
+                }), "RefLocationId", "LocationName");
+
+            // Participants - All
+            ViewData["ParentId"] = participant.OrganizationId;
+            ViewData["RefDisabilityTypeId"] = new SelectList(_context.DisabilityTypes, "RefDisabilityTypeId", "DisabilityType", participant.RefDisabilityTypeId);
             // List of Participant Types - excluding Student, Teacher, and Education Administrators
             int[] excludedParticipantTypesIds = { 1, 2, 3 };
             ViewData["RefParticipantTypeId"] = new SelectList(_context.ParticipantTypes
                 .Where(p => !excludedParticipantTypesIds.Contains(p.RefParticipantTypeId)), "RefParticipantTypeId", "ParticipantType", participant.RefParticipantTypeId);
             ViewData["RefParticipantCohortId"] = new SelectList(_context.ParticipantCohorts, "RefParticipantCohortId", "ParticipantCohort", participant.RefParticipantCohortId);
             ViewData["RefSexId"] = new SelectList(_context.Sex, "RefSexId", "Sex", participant.RefSexId);
-            //ViewData["ParentId"] = participant.ParentId;
+            
             return View(participant);
+
         }
 
         // GET: Participants/Delete/5

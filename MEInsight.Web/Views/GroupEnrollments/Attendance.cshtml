@@ -102,6 +102,7 @@
                                             </select>
                                         </div>
                                         <span style="display:block;" data-valmsg-for="attendance[@(i + 10)].Attendance" class="text-danger field-validation-valid" data-valmsg-replace="true"></span>
+                                        <span style="display:block;" data-valmsg-for="attendance[@(i + 10)].RefEnrollmentStatusId" class="text-danger field-validation-valid" data-valmsg-replace="true"></span>
                                     </td>
                                 </tr>
                             }
@@ -196,7 +197,7 @@
                     if (approved > max) {
                         $(this).val("");
                         var index = this.name.split('[').pop().split(']').shift();
-                        $('[name="attendance[' + index + '].RefCourseStatusId"]').val("1");
+                        //$('[name="attendance[' + index + '].RefCourseStatusId"]').val("1");
                         console.log('cannot register more than')
                         $.toast({
                             title: '<i class="fas fa-check-circle"> @Localizer["Alert"]</i> ',

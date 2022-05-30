@@ -51,6 +51,9 @@ builder.Services.AddControllersWithViews()
     })
     // Add TempData provider
     .AddSessionStateTempDataProvider();
+//.AddJsonOptions(opts => opts.JsonSerializerOptions.PropertyNamingPolicy = null);
+
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 // Session State - for storage of user data while the user browses the app
 // Setup for in-memory session provider

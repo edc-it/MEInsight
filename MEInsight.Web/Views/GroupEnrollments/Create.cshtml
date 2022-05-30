@@ -350,7 +350,7 @@
             function getDataTablesLanguage() {
             var cultureInfo = '@System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName';
             if (cultureInfo) {
-                var path = '/lib/datatables.net/i18n/' + cultureInfo + '.json';
+                var path = '/lib/datatables/i18n/' + cultureInfo + '.json';
                 }
                 return path;
             }
@@ -415,15 +415,15 @@
                 e.preventDefault();
 
                 // Init Ladda button
-                var l = Ladda.create(document.querySelector('#filterbutton'));
-                l.start();
+                //var l = Ladda.create(document.querySelector('#filterbutton'));
+                //l.start();
 
                 //Get tree selected
                 checked_ids = $('#tree').jstree("get_selected");
 
                 //Get table data and stop Ladda loader
                 table1.ajax.reload(function () {
-                    l.stop();
+                    //l.stop();
                 });
             });
 
@@ -494,8 +494,8 @@
                 });
 
                 if (form.valid()) {
-                    var l = Ladda.create(document.querySelector('#submitFormbutton'));
-                    l.start();
+                    //var l = Ladda.create(document.querySelector('#submitFormbutton'));
+                    //l.start();
                     form.submit();
                 }
                 return false;

@@ -40,13 +40,9 @@
         <div class="col-sm-12 col-md-6 d-flex align-items-center justify-content-end">
             <!--datatable search start-->
             <div class="input-group input-group-sm d-print-none mb-2">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fa fa-search" aria-hidden="true"></i></span>
-                </div>
+                <span class="input-group-text"><i class="fa fa-search" aria-hidden="true"></i></span>
                 <input id="searchbox" type="text" class="form-control" placeholder='@Localizer["Search"]' aria-describedby="searchbox">
-                <div class="input-group-append">
-                    <button id="search-button" class="btn btn-sm btn-secondary" type="button">@Localizer["Search"]</button>
-                </div>
+                <button id="search-button" class="btn btn-sm btn-secondary" type="button">@Localizer["Search"]</button>
             </div>
             <!--datatable search end-->
         </div>
@@ -122,245 +118,219 @@
     </div>
     <!--footer buttons end-->
 </div><!--content end-->
-
 @section Styles {
-    @{await Html.RenderPartialAsync("_ListStylesPartial");}
-}
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ServerListScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ListStylesPartial");
+    }
+    }
+    @section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ServerListScriptsPartial");
+    }
     <script>
-    $(document).ready(function () {
-        // Use Datatables.net Internationalization i18n
-        function getDataTablesLanguage() {
-            var cultureInfo = '@System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName';
-            if (cultureInfo) {
-                var path = '/lib/datatables.net/i18n/' + cultureInfo + '.json';
+        $(document).ready(function() {
+            // Use Datatables.net Internationalization i18n
+            function getDataTablesLanguage() {
+                var cultureInfo = '@System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName';
+                if (cultureInfo) {
+                    var path = '/lib/datatables/i18n/' + cultureInfo + '.json';
+                }
+                return path;
             }
-            return path;
-        }
 
-        var dataTableOptions = {
-            // Initial order (sort) to apply to the table
-            order: [],
-            // Allows changing the paging display length of the table
-            lengthChange: true,
-            lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-            // Enables the display of a 'processing' indicator when the table is being processed (e.g. a sort).
-            processing: true,
-            // Server side processing
-            serverSide: true,
-            filter: true,
-            orderMulti: false,
-
-            // ?
-            searchHighlight: true,
-            // Highlight the columns being ordered in the table's body
-            orderClasses: true,
-            // Pagination button display options
-            pagingType: "full_numbers",
-            // Change the initial page length (number of rows per page)
-            pageLength: 25,
-            dom:
-                "<'row'"
-                + "<'col-sm-12 col-md-6 justify-content-start'>" // f
-                + "<'col-sm-12 col-md-6 justify-content-end'>" // B
-                + ">"
-                + "<'row'<'col-sm-12 d-flex align-items-center'tr>>"
-                + "<'row'"
-                + "<'col-sm-12 col-md-6 col-form-label 'l>"
-                + "<'col-sm-12 col-md-6 justify-content-end'p>"
-                + ">"
-                + "<'row'<'col-sm-12'i>"
-                + ">"
-            ,
-            responsive: true,
-            autoWidth: true,
-            ajax: {
-                    url: "/Requests/GetParticipants",
+            var dataTableOptions = {
+                ajax: {
+                    url: "/api/Participants/Paginated",
+                    type: "POST",
+                    datatype: "json",
+                    contentType: "application/x-www-form-urlencoded",
                     data:
-                        function (d) {
+                        function(d) {
                             //d.refParticipantTypeId = $('#RefParticipantTypeId option:selected').text();
                             //d.selectedOrganizations = checked_ids;
                         },
-                        type: "POST",
-                        datatype: "json"
+                    type: "POST",
+                    datatype: "json"
                 },
-            columnDefs: [
-                {
-                    targets: [-1],
-                    data: null,
-                    width: '70px',
-                    className: 'text-end',
-                    render: function (data, type, full, meta) {
-                        var action = '<div class="btn-group btn-group-sm" role="group" aria-label="Actions">';
-                        action += '<td>';
-                        action += '<a href="/Participants/Details/' + full.participantId + '" class="btn btn-link text-gray btn-sm d-print-none btn-action" data-container="body" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Details"]"><i class="fas fa-info-circle fa-sm" aria-hidden="true"></i></a>';
-                        @if (AuthorizationService.AuthorizeAsync(User, "RequireEditRole").GetAwaiter().GetResult().Succeeded)
-                                {
-                                    @:action += '<a href="/Participants/Edit/' + full.participantId + '" class="btn btn-link text-gray btn-sm d-print-none btn-action" data-container="body" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Edit"]"><i class="fas fa-pencil-alt fa-sm" aria-hidden="true"></i></a>';
-                                }
+                // Initial order (sort) to apply to the table
+                order: [],
+                // Allows changing the paging display length of the table
+                lengthChange: true,
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                // Enables the display of a 'processing' indicator when the table is being processed (e.g. a sort).
+                processing: true,
+                // Server side processing
+                serverSide: true,
+                filter: true,
+                orderMulti: false,
 
-                        @if (AuthorizationService.AuthorizeAsync(User, "RequireDeleteRole").GetAwaiter().GetResult().Succeeded)
-                                {
-                                    @:action += '<a href="/Participants/Delete/' + full.participantId + '" class="btn btn-link text-gray btn-sm d-print-none btn-action" data-container="body" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Delete"]"><i class="far fa-trash-alt fa-sm" aria-hidden="true"></i></a>';
-                                }
-                        action += '</td>';
-                        action += '</div>';
-                        return action;
-                            }
-                }],
-            buttons: {
-                dom: {
-                    button: {
-                        className: 'btn btn-secondary btn-sm mb-2'
-                    }
-                },
-                buttons: [
+                // ?
+                searchHighlight: true,
+                // Highlight the columns being ordered in the table's body
+                orderClasses: false,
+                // Pagination button display options
+                pagingType: "full_numbers",
+                // Change the initial page length (number of rows per page)
+                pageLength: 25,
+                dom:
+                    "<'row'"
+                    + "<'col-sm-12 col-md-6 justify-content-start'>" // f
+                    + "<'col-sm-12 col-md-6 justify-content-end'>" // B
+                    + ">"
+                    + "<'row'<'col-sm-12 d-flex align-items-center'tr>>"
+                    + "<'row'"
+                    + "<'col-sm-12 col-md-6 col-form-label 'l>"
+                    + "<'col-sm-12 col-md-6 justify-content-end'p>"
+                    + ">"
+                    + "<'row'<'col-sm-12'i>"
+                    + ">"
+                ,
+                responsive: true,
+                autoWidth: true,
+                columnDefs: [
                     {
-                        extend: 'copy',
-                    },
-                    {
-                        extend: 'excelHtml5',
-                        charset: 'UTF-16LE',
-                        bom: true,
-                        fieldSeparator: ',',
-                        fieldBoundary: '"',
-                        exportOptions: {
-                            columns: ':not(:last-child)'
-                        },
-                        filename: function () {
-                            var date = new Date();
-                            var year = date.getFullYear();
-                            var month = date.getMonth() + 1;
-                            var day = date.getDate();
-                            var hour = date.getHours();
-                            var minutes = date.getMinutes();
-                            var datepart = ((year * 100 + month + 1) * 100 + day) + "_" + (hour * 100 + minutes);
-                            return document.title + "_" + datepart;
-                        }
-                    },
-                    {
-                        extend: 'colvis',
-                    },
-                    {
-                        extend: 'print',
-                        title: '',
-                        autoPrint: true,
-                        exportOptions: {
-                            columns: ':not(:last-child)',
-                            stripHtml: true,
-                            stripNewlines: true
-                        },
-                        customize: function (win) {
-                            $(win.document.body)
-                                .css({
-                                    'font-size': '10pt',
-                                    'padding-top': '0px'
-                                });
-
-                            $(win.document.body).find('table')
-                                .addClass('compact table-bordered')
-                                .css('font-size', 'inherit');
-
-                            //TODO: assign id
-                            var heading = $('.heading-panel').html();
-                            //TODO: assign id
-                            var panel = $('.info-panel').html();
-
-                            // PREPEND PRINT
-                            if (panel) {
-                                $(win.document.body).prepend(
-                                    heading
-                                    + '<br>' +
-                                    panel
-                                );
-                            }
-                            else {
-                                $(win.document.body).prepend(
-                                    heading
-                                );
-                            }
-
-                            // APPEND PRINT
-                            $(win.document.body).append(
-                                $('.dataTables_info').text()
-                                + '<br>'
-                                + '@User?.Identity?.Name - @DateTime.Now.ToShortDateString()'
-                            );
-                        }
-                    }
-
-                ]
-            },
-            language: {
-                url: getDataTablesLanguage()
-            },
-            initComplete: function (settings, json) {
-
-                // init buttons
-                table.buttons(0, null)
-                    .container().appendTo('#toolbar');
-            },
-            footerCallback: function (row, data, start, end, display) {
-                var api = this.api(), data;
-
-                // Remove the formatting to get integer data for summation
-                var intVal = function (i) {
-                    return typeof i === 'string' ?
-                        i.replace(/[\$,]/g, '') * 1 :
-                        typeof i === 'number' ?
-                            i : 0;
-                };
-
-                // Total over all pages
-                total = api
-                    .column(1)
-                    .data()
-                    .reduce(function (a, b) {
-                        return intVal(a) + intVal(b);
-                    }, 0);
-
-                // Total over this page
-                pageTotal = api
-                    .column(1, { page: 'current' })
-                    .data()
-                    .reduce(function (a, b) {
-                        return intVal(a) + intVal(b);
-                    }, 0);
-
-                // UNCOMMENT TO SHOW FOOTER Update footer
-                //$(api.column(1).footer()).html(
-                //    '' + pageTotal + ' ( ' + total + ' total)'
-                //);
-            }
+                        targets: [-1],
+                        data: null,
+                        width: '70px',
+                        className: 'text-end',
+                        render: function(data, type, row, meta) {
+                            var action = '<div class="btn-group btn-group-sm" role="group" aria-label="Actions">';
+                            action += '<td>';
+                            action += '<a href="/Participants/Details/' + row.participantId + '" class="btn btn-link text-gray btn-sm d-print-none btn-action" data-container="body" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Details"]"><i class="fas fa-info-circle fa-sm" aria-hidden="true"></i></a>';
+        @if (AuthorizationService.AuthorizeAsync(User, "RequireEditRole").GetAwaiter().GetResult().Succeeded)
+        {
+            @:action += '<a href="/Participants/Edit/' + row.participantId + '" class="btn btn-link text-gray btn-sm d-print-none btn-action" data-container="body" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Edit"]"><i class="fas fa-pencil-alt fa-sm" aria-hidden="true"></i></a>';
         }
 
-        //DATATABLE INIT AND OPTIONS
-        $.fn.dataTable.ext.classes.sPageButton = 'page-item btn-light'; // Change Pagination Button Class
-        $.fn.DataTable.ext.pager.numbers_length = 5;
-        $.fn.dataTable.ext.classes.sPaging = 'dataTables_paginate paging_ pagination-sm flex-wrap mt-2 mt-sm-auto';
+        @if (AuthorizationService.AuthorizeAsync(User, "RequireDeleteRole").GetAwaiter().GetResult().Succeeded)
+        {
+            @:action += '<a href="/Participants/Delete/' + row.participantId + '" class="btn btn-link text-gray btn-sm d-print-none btn-action" data-container="body" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Delete"]"><i class="far fa-trash-alt fa-sm" aria-hidden="true"></i></a>';
+        }
+                                action += '</td>';
+                            action += '</div>';
+                            return action;
+                        }
+                    }],
+                buttons: {
+                    dom: {
+                        button: {
+                            className: 'btn btn-secondary btn-sm mb-2'
+                        }
+                    },
+                    buttons: [
+                        {
+                            extend: 'copy',
+                        },
+                        {
+                            extend: 'excelHtml5',
+                            charset: 'UTF-16LE',
+                            bom: true,
+                            fieldSeparator: ',',
+                            fieldBoundary: '"',
+                            exportOptions: {
+                                columns: ':not(:last-child)'
+                            },
+                            filename: function() {
+                                var date = new Date();
+                                var year = date.getFullYear();
+                                var month = date.getMonth() + 1;
+                                var day = date.getDate();
+                                var hour = date.getHours();
+                                var minutes = date.getMinutes();
+                                var datepart = ((year * 100 + month + 1) * 100 + day) + "_" + (hour * 100 + minutes);
+                                return document.title + "_" + datepart;
+                            }
+                        },
+                        {
+                            extend: 'colvis',
+                        },
+                        {
+                            extend: 'print',
+                            title: '',
+                            autoPrint: true,
+                            exportOptions: {
+                                columns: ':not(:last-child)',
+                                stripHtml: true,
+                                stripNewlines: true
+                            },
+                            customize: function(win) {
+                                $(win.document.body)
+                                    .css({
+                                        'font-size': '10pt',
+                                        'padding-top': '0px'
+                                    });
 
-        var table = $('#datatable').DataTable(dataTableOptions);
+                                $(win.document.body).find('table')
+                                    .addClass('compact table-bordered')
+                                    .css('font-size', 'inherit');
 
-        // filter table
-        $("#search-button").on('click', function () {
-            var searchString = $('#searchbox').val();
-            table.search(searchString).draw();
+                                //TODO: assign id
+                                var heading = $('.heading-panel').html();
+                                //TODO: assign id
+                                var panel = $('.info-panel').html();
+
+                                // PREPEND PRINT
+                                if (panel) {
+                                    $(win.document.body).prepend(
+                                        heading
+                                        + '<br>' +
+                                        panel
+                                    );
+                                }
+                                else {
+                                    $(win.document.body).prepend(
+                                        heading
+                                    );
+                                }
+
+                                // APPEND PRINT
+                                $(win.document.body).append(
+                                    $('.dataTables_info').text()
+                                    + '<br>'
+                                    + '@User?.Identity?.Name - @DateTime.Now.ToShortDateString()'
+                                );
+                            }
+                        }
+
+                    ]
+                },
+                language: {
+                    url: getDataTablesLanguage()
+                },
+                initComplete: function(settings, json) {
+                    // init buttons
+                    table.buttons(0, null)
+                        .container().appendTo('#toolbar');
+                }
+            }
+
+            //DATATABLE INIT AND OPTIONS
+            $.fn.dataTable.ext.classes.sPageButton = 'page-item btn-light'; // Change Pagination Button Class
+            $.fn.DataTable.ext.pager.numbers_length = 5;
+            $.fn.dataTable.ext.classes.sPaging = 'dataTables_paginate paging_ pagination-sm flex-wrap mt-2 mt-sm-auto';
+
+            var table = $('#datatable').DataTable(dataTableOptions);
+
+
+            // filter table
+            $("#search-button").on('click', function() {
+                var searchString = $('#searchbox').val();
+                table.search(searchString).draw();
+            });
+
+            //TOOLTIP INIT
+            $('[data-bs-toggle="tooltip"]').tooltip({
+                animation: true,
+                delay: { "show": 700, "hide": 100 },
+                trigger: 'hover'
+            });
+
+            $('.buttons-html5').tooltip({
+                animation: false,
+                delay: { "show": 700, "hide": 100 },
+                trigger: 'hover'
+            });
+
         });
-
-        //TOOLTIP INIT
-        $('[data-bs-toggle="tooltip"]').tooltip({
-            animation: true,
-            delay: { "show": 700, "hide": 100 },
-            trigger: 'hover'
-        });
-
-        $('.buttons-html5').tooltip({
-            animation: false,
-            delay: { "show": 700, "hide": 100 },
-            trigger: 'hover'
-        });
-
-    });
     </script>
 }

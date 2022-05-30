@@ -56,7 +56,7 @@ namespace MEInsight.Entities.Programs
         
         [ForeignKey("ParticipantId")]
         [Display(Name = "Participant")]
-        public virtual Participant Participants { get; set; } = null!;
+        public virtual Participant? Participants { get; set; } = null!;
 
         [ForeignKey("GroupId")]
         [Display(Name = "Group")]
