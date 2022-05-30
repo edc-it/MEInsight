@@ -240,43 +240,48 @@
         "dist/js/i18n/fr.min.js",
         "LICENSE.md"
       ]
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "jstree@3.3.12",
+      "destination": "wwwroot/lib/jstree/",
+      "files": [
+        "LICENSE-MIT",
+        "dist/jstree.min.js",
+        "dist/themes/default/32px.png",
+        "dist/themes/default/40px.png",
+        "dist/themes/default/style.css",
+        "dist/themes/default/style.min.css",
+        "dist/themes/default/throbber.gif"
+      ]
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "inputmask@5.0.7",
+      "destination": "wwwroot/lib/inputmask/",
+      "files": [
+        "LICENSE.txt",
+        "dist/jquery.inputmask.min.js"
+      ]
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "sweetalert2@11.4.14",
+      "destination": "wwwroot/lib/sweetalert2/",
+      "files": [
+        "LICENSE",
+        "dist/sweetalert2.all.min.js",
+        "dist/sweetalert2.min.css",
+        "dist/sweetalert2.min.js"
+      ]
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "@sweetalert2/theme-bootstrap-4@5.0.11",
+      "destination": "wwwroot/lib/sweetalert2/dist/",
+      "files": [
+        "bootstrap-4.min.css"
+      ]
     }
-  ,
-{
-  "provider": "jsdelivr",
-  "library": "jstree@3.3.12",
-  "destination": "wwwroot/lib/jstree/",
-  "files": [
-    "LICENSE-MIT",
-    "dist/jstree.min.js",
-    "dist/themes/default/32px.png",
-    "dist/themes/default/40px.png",
-    "dist/themes/default/style.css",
-    "dist/themes/default/style.min.css",
-    "dist/themes/default/throbber.gif"
   ]
-}
-,
-{
-  "provider": "jsdelivr",
-  "library": "inputmask@5.0.7",
-  "destination": "wwwroot/lib/inputmask/",
-  "files": [
-    "LICENSE.txt",
-    "dist/jquery.inputmask.min.js"
-  ]
-}
-,
-{
-  "provider": "jsdelivr",
-  "library": "sweetalert2@11.4.14",
-  "destination": "wwwroot/lib/sweetalert2/",
-  "files": [
-    "LICENSE",
-    "dist/sweetalert2.all.min.js",
-    "dist/sweetalert2.min.css",
-    "dist/sweetalert2.min.js"
-  ]
-}
-]
 }
