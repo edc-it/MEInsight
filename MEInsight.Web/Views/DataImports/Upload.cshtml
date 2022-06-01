@@ -2,30 +2,90 @@
 @model DataTable
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Review Data";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+<div>
+    <h1 class="display-4">Review data</h1>
 </div>
 
-<table class="table table-striped" cellpadding="0" cellspacing="0">
-        <tr>
-            <th>Test</th>
-            <th>Test2</th>
-            <th>Test2</th>
-            <th>Test2</th>
+<div class="row mb-3">
+    <div class="col-sm-12">
+        <form id="main-form" asp-action="Upload" asp-controller="Participants">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mb-3 col-sm-4">
+                <!--fk select start-->
+                <label for="GroupId" class="form-label"></label>
+                <select required name="GroupId" id="GroupId" class="form-control form-select" asp-items="ViewBag.GroupId">
+                    <option disabled selected>Select Group</option>
+                </select>
+                <!--fk select end-->
+            </div>
+            <table class="table table-sm table-hover table-striped responsive no-wrap w-100 compact" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        @foreach (DataColumn column in Model.Columns)
+                        {
+                            <th>
+                                @column.ColumnName
+                            </th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (DataRow row in Model.Rows)
+                    {
+                        <tr>
+                            <input class="form-control" type="hidden" id="upload_Index" name="upload.Index" value="@(@Model.Rows.IndexOf(row) + 10)" />
+                            @foreach (DataColumn column in Model.Columns)
+                            {
+                                <td>
+                                    @*@column.DataType*@
+                                    @row[column]
+                                    <input class="form-control" type="hidden" name="upload[@(@Model.Rows.IndexOf(row) + 10)].@column.ColumnName" id="upload[@(@Model.Rows.IndexOf(row) + 10)].@column.ColumnName" value="@row[column]" />
+                                </td>
+                            }
 
-        </tr>
-        @foreach (DataRow row in Model.Rows)
-        {
-            <tr>
-                <td>@row["OrganizationId"]</td>
-                <td>@row["FirstName"]</td>
-                <td>@row["Middle Name"]</td>
-                <td>@row["Last name"]</td>
-            </tr>
-        }
-    </table>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+
+            <!-- button group start -->
+            <div class="mb-3 text-end mt-5">
+                <a id="cancelbutton" class="btn btn-secondary me-2" asp-action="Index">
+                    <i class="fas fa-times"></i> @Localizer["Cancel"]
+                </a>
+                <button id="submitbutton" type="submit" value="Create" class="btn btn-primary ladda-button" data-style="expand-left" data-spinner-color="white">
+                    <span class="ladda-label">
+                        <i class="fas fa-check"></i> @Localizer["Import"]
+                    </span>
+                </button>
+            </div>
+            <!-- button group end -->
+        </form>
+    </div>
+</div>
+
+@section Styles {
+    <link href="~/lib/datatables/datatables.min.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/css/dataTables.min.css" rel="stylesheet" asp-append-version="true" />
+}
+    @section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script type="text/javascript" src="~/lib/datatables/datatables.min.js" asp-append-version="true"></script>
+    <script>
+        $('.table').DataTable({
+            responsive: true,
+            autoWidth: true
+        });
+    </script>
+}
+
+
+
 
 

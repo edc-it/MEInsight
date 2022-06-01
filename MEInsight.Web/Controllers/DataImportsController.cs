@@ -85,6 +85,8 @@ namespace MEInsight.Web.Controllers
                     return RedirectToAction("Index", "DataImports", new { /*id*/});
                 }
 
+                ViewData["GroupId"] = new SelectList(_context.Groups, "GroupId", "GroupName");
+
                 // Read Excel file
                 var excelResult = HelperExtensions.ReadExcelSheet(file, true);
 

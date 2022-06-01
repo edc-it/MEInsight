@@ -423,6 +423,80 @@ namespace MEL.Web.Controllers
             return RedirectToAction(nameof(Create), "Participants", new { participant.OrganizationId, GroupId, participant.RefParticipantTypeId });
         }
 
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Upload(List<ParticipantsViewModel> upload, Guid? GroupId)
+        {
+
+            if (ModelState.IsValid)
+            {
+                foreach (ParticipantsViewModel item in upload)
+                {
+                    Participant participant = new()
+                    {
+                        ParticipantId = Guid.NewGuid(),
+                        OrganizationId = item.OrganizationId,
+                        RegistrationDate = item.RegistrationDate,
+                        ParticipantCode = item.ParticipantCode,
+                        FirstName = item.FirstName,
+                        LastName = item.LastName,
+                        MiddleName = item.MiddleName,
+                        RefParticipantTypeId = item.RefParticipantTypeId,
+                        RefParticipantCohortId = item.RefParticipantCohortId,
+                        RefSexId = item.RefSexId,
+                        BirthDate = item.BirthDate,
+                        Age = item.Age,
+                        Disability = item.Disability,
+                        RefDisabilityTypeId = item.RefDisabilityTypeId,
+                        Phone = item.Phone,
+                        Mobile = item.Mobile,
+                        Email = item.Email,
+                        Facebook = item.Facebook,
+                        InstantMessenger = item.InstantMessenger,
+                        RefLocationId = item.RefLocationId,
+                        Address = item.Address
+
+                    };
+                    _context.Add(participant);
+                    Console.WriteLine(participant);
+
+                    GroupEnrollment groupEnrollment = new()
+                    {
+                        GroupEnrollmentId = Guid.NewGuid(),
+                        GroupId = GroupId,
+                        ParticipantId = participant.ParticipantId,
+                        EnrollmentDate = item.EnrollmentDate,
+                        Attendance = item.Attendance,
+                        RefEnrollmentStatusId = item.RefEnrollmentStatusId
+                    };
+                    _context.Add(groupEnrollment);
+                    Console.WriteLine(groupEnrollment);
+                    
+                }
+                
+                await _context.SaveChangesAsync();
+
+
+                TempData["messageType"] = "success";
+                TempData["messageTitle"] = "RECORD CREATED";
+                TempData["message"] = "New record successfully created";
+
+                // If Action route includes GroupId redirect to GroupEnrollment
+                if (GroupId != null)
+                {
+                    return RedirectToAction(nameof(Index), "GroupEnrollments", new { id = GroupId });
+                }
+                // Else redirect to Participants
+                else
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+
+            }
+
+            return View();
+        }
+
         // GET: Participants/Edit/5
         [Authorize(Policy = "RequireEditRole")]
         public async Task<IActionResult> Edit(Guid? id, Guid? GroupId, int? participantTypeId)

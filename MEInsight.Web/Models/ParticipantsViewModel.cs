@@ -286,5 +286,10 @@ namespace MEInsight.Web.Models
         // Teacher
         public virtual ICollection<Group> Groups { get; set; }
 
+        //
+        public DateTime EnrollmentDate { get; set; }
+        public int Attendance { get; set; }
+        public int RefEnrollmentStatusId { get; set; }
+
     }
 }
