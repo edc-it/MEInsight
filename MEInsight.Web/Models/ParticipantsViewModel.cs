@@ -127,7 +127,7 @@ namespace MEInsight.Web.Models
         public string? InstantMessenger { get; set; }
 
         [Display(Name = "Location")]
-        public string RefLocationId { get; set; }
+        public string? RefLocationId { get; set; }
 
         [MaxLength(384)]
         [DataType(DataType.MultilineText)]
