@@ -88,7 +88,7 @@ namespace MEInsight.Web.Controllers
                 ViewData["GroupId"] = new SelectList(_context.Groups, "GroupId", "GroupName");
 
                 // Read Excel file
-                var excelResult = HelperExtensions.ReadExcelSheet(file, true);
+                var excelResult = HelperExtensions.ReadExcelSheet(file);
 
                 return View(excelResult);
             }
