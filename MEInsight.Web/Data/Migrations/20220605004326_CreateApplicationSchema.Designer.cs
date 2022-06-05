@@ -12,14 +12,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MEInsight.Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220521022034_CreateApplicationSchema")]
+    [Migration("20220605004326_CreateApplicationSchema")]
     partial class CreateApplicationSchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.1")
+                .HasAnnotation("ProductVersion", "6.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -123,6 +123,21 @@ namespace MEInsight.Web.Data.Migrations
                     b.HasIndex(new[] { "RefOrganizationTypeId" }, "IX_Organization_RefOrganizationTypeId");
 
                     b.ToTable("Organization", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            OrganizationId = new Guid("40f20749-d522-4f16-9766-813269a38066"),
+                            CreatedBy = "admin@meinsight.org",
+                            CreatedDate = new DateTimeOffset(new DateTime(2022, 6, 5, 0, 43, 25, 507, DateTimeKind.Unspecified).AddTicks(7792), new TimeSpan(0, 0, 0, 0, 0)),
+                            IsDeleted = false,
+                            IsOrganizationUnit = true,
+                            IsTenant = true,
+                            OrganizationCode = "MO01",
+                            OrganizationName = "Management Organization",
+                            RefOrganizationTypeId = 1,
+                            RegistrationDate = new DateTime(2022, 6, 5, 0, 43, 25, 507, DateTimeKind.Utc).AddTicks(7822)
+                        });
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Core.Participant", b =>
@@ -245,7 +260,8 @@ namespace MEInsight.Web.Data.Migrations
                         .HasColumnType("int")
                         .HasColumnOrder(3);
 
-                    b.Property<int>("RefSexId")
+                    b.Property<int?>("RefSexId")
+                        .IsRequired()
                         .HasColumnType("int")
                         .HasColumnOrder(9);
 
@@ -492,6 +508,57 @@ namespace MEInsight.Web.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("2134cd98-ef01-4398-9996-bb50e06d19ed"),
+                            ConcurrencyStamp = "e11175a6-bb0a-46a4-a6af-59988c64a5ec",
+                            Description = "Administrator Role",
+                            Name = "Administrator"
+                        },
+                        new
+                        {
+                            Id = new Guid("f5eff4c2-b7c9-4457-82a4-5b22a24f7c78"),
+                            ConcurrencyStamp = "f2cd02a3-a403-468e-8a5b-6d4b52ee747b",
+                            Description = "Read only Role",
+                            Name = "Read"
+                        },
+                        new
+                        {
+                            Id = new Guid("458901ac-a64b-4b33-ba23-8836d6a1ff95"),
+                            ConcurrencyStamp = "e53a0986-0b77-446f-92ad-b8d8801235f4",
+                            Description = "Create only Role",
+                            Name = "Create"
+                        },
+                        new
+                        {
+                            Id = new Guid("5486457a-36e8-45d8-968c-f36ddf0193f3"),
+                            ConcurrencyStamp = "65474817-9483-430e-832b-38e92b3057a1",
+                            Description = "Create and Edit Role",
+                            Name = "Edit"
+                        },
+                        new
+                        {
+                            Id = new Guid("f029c83e-f029-4837-b4c5-efeb8c590417"),
+                            ConcurrencyStamp = "1f962b35-abd3-4774-89ac-bca23d931fae",
+                            Description = "Create, Edit, and Delete Role",
+                            Name = "Delete"
+                        },
+                        new
+                        {
+                            Id = new Guid("f425181e-617d-4cc7-996f-28bbb0969ffc"),
+                            ConcurrencyStamp = "a7a44b9c-a3c4-41d2-af47-00434932b985",
+                            Description = "Monitoring, Evaluation and Learning Officer Role",
+                            Name = "MELOfficer"
+                        },
+                        new
+                        {
+                            Id = new Guid("0f231d33-07db-4341-b0da-8f24c0ab409d"),
+                            ConcurrencyStamp = "3e4b02b7-a2bd-4d8b-b3be-dbd4a734e696",
+                            Description = "Monitoring, Evaluation and Learning Role",
+                            Name = "MEL"
+                        });
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Identity.ApplicationUser", b =>
@@ -595,6 +662,25 @@ namespace MEInsight.Web.Data.Migrations
                     b.HasIndex("OrganizationId");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("10872246-493b-4115-b640-99843cb0286f"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "7aaa5098-d4ca-4da1-8426-99b5f9a29fa5",
+                            Email = "admin@meinsight.org",
+                            EmailConfirmed = true,
+                            IsDeleted = false,
+                            LockoutEnabled = false,
+                            NormalizedUserName = "ADMIN@MEINSIGHT.ORG",
+                            OrganizationId = new Guid("40f20749-d522-4f16-9766-813269a38066"),
+                            PasswordHash = "AQAAAAEAACcQAAAAECozhAn2wqVALp0wwC/YDCnrg0rsJunMfwlG1Cs9cNgoblcPwZp1TU+qFzssS8XrAA==",
+                            PhoneNumberConfirmed = true,
+                            SecurityStamp = "b53de2ca-98c7-4b2d-8964-6d0cb76618ad",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@meinsight.org"
+                        });
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Programs.Group", b =>
@@ -926,6 +1012,18 @@ namespace MEInsight.Web.Data.Migrations
                     b.HasIndex(new[] { "RefProgramTypeId" }, "IX_Program_RefProgramTypeId");
 
                     b.ToTable("Program", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            ProgramId = 1,
+                            DisplayMarks = false,
+                            HasAssessment = false,
+                            IsDeleted = false,
+                            ProgramName = "Default Program",
+                            RefAttendanceUnitId = 1,
+                            RefProgramTypeId = 1
+                        });
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Programs.ProgramAssessment", b =>
@@ -1082,6 +1180,22 @@ namespace MEInsight.Web.Data.Migrations
                     b.HasKey("RefAttendanceUnitId");
 
                     b.ToTable("RefAttendanceUnit", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            RefAttendanceUnitId = 1,
+                            AttendanceUnit = "Hours",
+                            AttendanceUnitCode = "Hour",
+                            AttendanceUnitId = "h"
+                        },
+                        new
+                        {
+                            RefAttendanceUnitId = 2,
+                            AttendanceUnit = "Days",
+                            AttendanceUnitCode = "Day",
+                            AttendanceUnitId = "d"
+                        });
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefDisabilityType", b =>
@@ -1212,6 +1326,26 @@ namespace MEInsight.Web.Data.Migrations
                     b.HasKey("RefEnrollmentStatusId");
 
                     b.ToTable("RefEnrollmentStatus", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            RefEnrollmentStatusId = 1,
+                            EnrollmentStatus = "Enrolled",
+                            EnrollmentStatusCode = "E"
+                        },
+                        new
+                        {
+                            RefEnrollmentStatusId = 2,
+                            EnrollmentStatus = "Completed",
+                            EnrollmentStatusCode = "C"
+                        },
+                        new
+                        {
+                            RefEnrollmentStatusId = 3,
+                            EnrollmentStatus = "Dropped out",
+                            EnrollmentStatusCode = "D"
+                        });
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefEvaluationStatus", b =>
@@ -1238,6 +1372,20 @@ namespace MEInsight.Web.Data.Migrations
                     b.HasKey("RefEvaluationStatusId");
 
                     b.ToTable("RefEvaluationStatus", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            RefEvaluationStatusId = 1,
+                            EvaluationStatus = "Enrolled",
+                            EvaluationStatusCode = "E"
+                        },
+                        new
+                        {
+                            RefEvaluationStatusId = 2,
+                            EvaluationStatus = "Completed",
+                            EvaluationStatusCode = "C"
+                        });
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefGradeLevel", b =>
@@ -1363,6 +1511,20 @@ namespace MEInsight.Web.Data.Migrations
                     b.HasKey("RefOrganizationTypeId");
 
                     b.ToTable("RefOrganizationType", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            RefOrganizationTypeId = 1,
+                            OrganizationType = "Organization Unit",
+                            OrganizationTypeCode = "OU"
+                        },
+                        new
+                        {
+                            RefOrganizationTypeId = 2,
+                            OrganizationType = "School",
+                            OrganizationTypeCode = "School"
+                        });
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefParticipantCohort", b =>
@@ -1415,6 +1577,26 @@ namespace MEInsight.Web.Data.Migrations
                     b.HasKey("RefParticipantTypeId");
 
                     b.ToTable("RefParticipantType", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            RefParticipantTypeId = 1,
+                            ParticipantType = "Student",
+                            ParticipantTypeCode = "ST"
+                        },
+                        new
+                        {
+                            RefParticipantTypeId = 2,
+                            ParticipantType = "Teacher",
+                            ParticipantTypeCode = "TE"
+                        },
+                        new
+                        {
+                            RefParticipantTypeId = 3,
+                            ParticipantType = "Education Administrator",
+                            ParticipantTypeCode = "EA"
+                        });
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefPartnerSector", b =>
@@ -1513,6 +1695,14 @@ namespace MEInsight.Web.Data.Migrations
                     b.HasKey("RefProgramTypeId");
 
                     b.ToTable("RefProgramType", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            RefProgramTypeId = 1,
+                            ProgramType = "Default Program Type",
+                            ProgramTypeCode = "D01"
+                        });
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefSchoolAdministrationType", b =>
@@ -1697,6 +1887,20 @@ namespace MEInsight.Web.Data.Migrations
                     b.HasKey("RefSexId");
 
                     b.ToTable("RefSex", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            RefSexId = 1,
+                            Sex = "Male",
+                            SexId = "M"
+                        },
+                        new
+                        {
+                            RefSexId = 2,
+                            Sex = "Female",
+                            SexId = "F"
+                        });
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefStudentSpecialization", b =>
@@ -2423,17 +2627,24 @@ namespace MEInsight.Web.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("RoleId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("UserId", "RoleId");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.HasIndex("RoleId");
+                    b.HasKey("RoleId", "UserId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            RoleId = new Guid("2134cd98-ef01-4398-9996-bb50e06d19ed"),
+                            UserId = new Guid("10872246-493b-4115-b640-99843cb0286f")
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>

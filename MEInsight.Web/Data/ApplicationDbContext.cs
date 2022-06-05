@@ -4,6 +4,7 @@ using MEInsight.Entities.Identity;
 using MEInsight.Entities.Programs;
 using MEInsight.Entities.Reference;
 using MEInsight.Entities.TLM;
+using MEInsight.Web.Extensions;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -193,6 +194,7 @@ namespace MEInsight.Web.Data
             builder.Entity<GroupEvaluation>().HasQueryFilter(p => !p.IsDeleted).ToTable("GroupEvaluation");
             builder.Entity<GroupEvaluation>().HasIndex(t => t.GroupEnrollmentId);
 
+            builder.Seed();
         }
         //Override SaveChanges - enables Soft-Delete
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

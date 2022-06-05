@@ -1090,7 +1090,7 @@ namespace MEInsight.Web.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
+                    table.PrimaryKey("PK_AspNetUserRoles", x => new { x.RoleId, x.UserId });
                     table.ForeignKey(
                         name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
                         column: x => x.RoleId,
@@ -1545,6 +1545,101 @@ namespace MEInsight.Web.Data.Migrations
                         principalColumn: "RefEvaluationStatusId");
                 });
 
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { new Guid("0f231d33-07db-4341-b0da-8f24c0ab409d"), "3e4b02b7-a2bd-4d8b-b3be-dbd4a734e696", "Monitoring, Evaluation and Learning Role", "MEL", null },
+                    { new Guid("2134cd98-ef01-4398-9996-bb50e06d19ed"), "e11175a6-bb0a-46a4-a6af-59988c64a5ec", "Administrator Role", "Administrator", null },
+                    { new Guid("458901ac-a64b-4b33-ba23-8836d6a1ff95"), "e53a0986-0b77-446f-92ad-b8d8801235f4", "Create only Role", "Create", null },
+                    { new Guid("5486457a-36e8-45d8-968c-f36ddf0193f3"), "65474817-9483-430e-832b-38e92b3057a1", "Create and Edit Role", "Edit", null },
+                    { new Guid("f029c83e-f029-4837-b4c5-efeb8c590417"), "1f962b35-abd3-4774-89ac-bca23d931fae", "Create, Edit, and Delete Role", "Delete", null },
+                    { new Guid("f425181e-617d-4cc7-996f-28bbb0969ffc"), "a7a44b9c-a3c4-41d2-af47-00434932b985", "Monitoring, Evaluation and Learning Officer Role", "MELOfficer", null },
+                    { new Guid("f5eff4c2-b7c9-4457-82a4-5b22a24f7c78"), "f2cd02a3-a403-468e-8a5b-6d4b52ee747b", "Read only Role", "Read", null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "RefAttendanceUnit",
+                columns: new[] { "RefAttendanceUnitId", "AttendanceUnit", "AttendanceUnitCode", "AttendanceUnitId" },
+                values: new object[,]
+                {
+                    { 1, "Hours", "Hour", "h" },
+                    { 2, "Days", "Day", "d" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "RefEnrollmentStatus",
+                columns: new[] { "RefEnrollmentStatusId", "EnrollmentStatus", "EnrollmentStatusCode" },
+                values: new object[,]
+                {
+                    { 1, "Enrolled", "E" },
+                    { 2, "Completed", "C" },
+                    { 3, "Dropped out", "D" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "RefEvaluationStatus",
+                columns: new[] { "RefEvaluationStatusId", "EvaluationStatus", "EvaluationStatusCode" },
+                values: new object[,]
+                {
+                    { 1, "Enrolled", "E" },
+                    { 2, "Completed", "C" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "RefOrganizationType",
+                columns: new[] { "RefOrganizationTypeId", "OrganizationType", "OrganizationTypeCode" },
+                values: new object[,]
+                {
+                    { 1, "Organization Unit", "OU" },
+                    { 2, "School", "School" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "RefParticipantType",
+                columns: new[] { "RefParticipantTypeId", "ParticipantType", "ParticipantTypeCode" },
+                values: new object[,]
+                {
+                    { 1, "Student", "ST" },
+                    { 2, "Teacher", "TE" },
+                    { 3, "Education Administrator", "EA" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "RefProgramType",
+                columns: new[] { "RefProgramTypeId", "ProgramType", "ProgramTypeCode" },
+                values: new object[] { 1, "Default Program Type", "D01" });
+
+            migrationBuilder.InsertData(
+                table: "RefSex",
+                columns: new[] { "RefSexId", "Sex", "SexId" },
+                values: new object[,]
+                {
+                    { 1, "Male", "M" },
+                    { 2, "Female", "F" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Organization",
+                columns: new[] { "OrganizationId", "Address", "Contact", "CreatedBy", "CreatedDate", "DeletedBy", "DeletedDate", "IsDeleted", "IsOrganizationUnit", "IsTenant", "Latitude", "Longitude", "ModifiedBy", "ModifiedDate", "OrganizationCode", "OrganizationName", "ParentOrganizationId", "Phone", "RefLocationId", "RefOrganizationTypeId", "RegistrationDate" },
+                values: new object[] { new Guid("40f20749-d522-4f16-9766-813269a38066"), null, null, "admin@meinsight.org", new DateTimeOffset(new DateTime(2022, 6, 5, 0, 43, 25, 507, DateTimeKind.Unspecified).AddTicks(7792), new TimeSpan(0, 0, 0, 0, 0)), null, null, false, true, true, null, null, null, null, "MO01", "Management Organization", null, null, null, 1, new DateTime(2022, 6, 5, 0, 43, 25, 507, DateTimeKind.Utc).AddTicks(7822) });
+
+            migrationBuilder.InsertData(
+                table: "Program",
+                columns: new[] { "ProgramId", "CreatedBy", "CreatedDate", "DeletedBy", "DeletedDate", "Description", "DisplayMarks", "HasAssessment", "IsDeleted", "Max", "Min", "ModifiedBy", "ModifiedDate", "ProgramName", "RefAttendanceUnitId", "RefOrganizationTypeId", "RefProgramDeliveryTypeId", "RefProgramTypeId" },
+                values: new object[] { 1, null, null, null, null, null, false, false, false, null, null, null, null, "Default Program", 1, null, null, 1 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedBy", "CreatedDate", "DeletedBy", "DeletedDate", "Email", "EmailConfirmed", "FirstName", "IsDeleted", "LastName", "LockoutEnabled", "LockoutEnd", "ModifiedBy", "ModifiedDate", "NormalizedEmail", "NormalizedUserName", "OrganizationId", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { new Guid("10872246-493b-4115-b640-99843cb0286f"), 0, "7aaa5098-d4ca-4da1-8426-99b5f9a29fa5", null, null, null, null, "admin@meinsight.org", true, null, false, null, false, null, null, null, null, "ADMIN@MEINSIGHT.ORG", new Guid("40f20749-d522-4f16-9766-813269a38066"), "AQAAAAEAACcQAAAAECozhAn2wqVALp0wwC/YDCnrg0rsJunMfwlG1Cs9cNgoblcPwZp1TU+qFzssS8XrAA==", null, true, "b53de2ca-98c7-4b2d-8964-6d0cb76618ad", false, "admin@meinsight.org" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { new Guid("2134cd98-ef01-4398-9996-bb50e06d19ed"), new Guid("10872246-493b-4115-b640-99843cb0286f") });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -1568,9 +1663,9 @@ namespace MEInsight.Web.Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserRoles_RoleId",
+                name: "IX_AspNetUserRoles_UserId",
                 table: "AspNetUserRoles",
-                column: "RoleId");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",
