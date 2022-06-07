@@ -62,7 +62,7 @@ namespace MEInsight.Web.ViewComponents
         public Guid? ParentOrganizationId { get; set; }
 
         [Display(Name = "Parent Organization")]
-        public string ParentOrganization { get; set; }
+        public string ParentOrganizations { get; set; }
 
         [Display(Name = "Organization")]
         public Guid? OrganizationId { get; set; }

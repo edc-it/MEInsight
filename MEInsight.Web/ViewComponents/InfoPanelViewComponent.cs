@@ -162,7 +162,7 @@ namespace MEInsight.Web.ViewComponents
             // Get Organization Hierarchy
             // List ALL Administrator Organizations and include current OrganizationId
             var adminOrganizations = await _context.Organizations
-                .Include(x => x.ParentOrganization)
+                .Include(x => x.ParentOrganizations)
                 .Where(x =>
                     x.IsOrganizationUnit == true ||
                     x.OrganizationId == modelGuidId
@@ -173,7 +173,7 @@ namespace MEInsight.Web.ViewComponents
                     OrganizationId = x.OrganizationId,
                     OrganizationName = x.OrganizationName,
                     ParentOrganizationId = x.ParentOrganizationId,
-                    Parent = x.ParentOrganization.OrganizationName,
+                    Parent = x.ParentOrganizations.OrganizationName,
                     IsOrganizationUnit = x.IsOrganizationUnit
                 })
                 .ToListAsync();

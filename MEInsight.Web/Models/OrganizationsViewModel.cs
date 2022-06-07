@@ -191,7 +191,7 @@ namespace MEInsight.Web.Models
 
         [ForeignKey("ParentOrganizationId")]
         [Display(Name = "Parent Organization")]
-        public virtual Organization ParentOrganization { get; set; }
+        public virtual Organization ParentOrganizations { get; set; }
 
         [ForeignKey("RefOrganizationTypeId")]
         [Display(Name = "Organization Type")]

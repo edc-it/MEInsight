@@ -64,7 +64,7 @@ namespace MEInsight.Web.Controllers
                     var applicationDbContext = _context.Organizations
                         .Include(o => o.Locations)
                         .Include(o => o.OrganizationTypes)
-                        .Include(o => o.ParentOrganization)
+                        .Include(o => o.ParentOrganizations)
                         .Where(o => o.ParentOrganizationId == organization.OrganizationId);
 
                     ViewData["ParentId"] = organization.OrganizationId;
@@ -93,7 +93,7 @@ namespace MEInsight.Web.Controllers
                     var applicationDbContext = _context.Organizations
                         .Include(o => o.Locations).ThenInclude(o => o.ParentLocations)
                         .Include(o => o.OrganizationTypes)
-                        .Include(o => o.ParentOrganization)
+                        .Include(o => o.ParentOrganizations)
                         .Where(o => o.ParentOrganizationId == id);
 
                     return View(await applicationDbContext.OrderBy(o => o.OrganizationName).ToListAsync());
@@ -113,7 +113,7 @@ namespace MEInsight.Web.Controllers
             var organization = await _context.Organizations
                 .Include(o => o.Locations).ThenInclude(o => o.ParentLocations)
                 .Include(o => o.OrganizationTypes)
-                .Include(o => o.ParentOrganization)
+                .Include(o => o.ParentOrganizations)
                 .FirstOrDefaultAsync(m => m.OrganizationId == id);
 
             if (organization == null)
@@ -370,7 +370,7 @@ namespace MEInsight.Web.Controllers
             var organization = await _context.Organizations
                 .Include(o => o.Organizations)
                 .Include(o => o.OrganizationTypes)
-                .Include(o => o.ParentOrganization)
+                .Include(o => o.ParentOrganizations)
                 ////.Include(o => o.Schools)
                 .Include(o => o.Locations)
                 .Include(o => o.Participants)
