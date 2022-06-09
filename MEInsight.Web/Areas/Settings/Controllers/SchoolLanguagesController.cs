@@ -174,7 +174,11 @@ namespace MEInsight.Web.Areas.Settings.Controllers
         {
             var refSchoolLanguage = await _context.SchoolLanguages.FindAsync(id);
 
-            _context.SchoolLanguages.Remove(refSchoolLanguage);
+            if (refSchoolLanguage != null)
+            {
+                _context.SchoolLanguages.Remove(refSchoolLanguage);
+            }
+            
             await _context.SaveChangesAsync();
         
             TempData["messageType"] = "success";

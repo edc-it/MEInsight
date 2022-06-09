@@ -76,10 +76,12 @@ namespace MEInsight.Entities.Programs
 
         // Navigation properties
         [ForeignKey("RefProgramTypeId")]
+        [InverseProperty("Programs")]
         [Display(Name = "Program Type")]
         public virtual RefProgramType? ProgramTypes { get; set; }
 
         [ForeignKey("RefProgramDeliveryTypeId")]
+        [InverseProperty("Programs")]
         [Display(Name = "Program Delivery Type")]
         public virtual RefProgramDeliveryType? ProgramDeliveryTypes { get; set; }
 
@@ -88,10 +90,14 @@ namespace MEInsight.Entities.Programs
         public virtual RefAttendanceUnit? AttendanceUnits { get; set; }
 
         [ForeignKey("RefOrganizationTypeId")]
+        [InverseProperty("Programs")]
         [Display(Name = "Organization Type")]
         public virtual RefOrganizationType? OrganizationTypes { get; set; }
 
+        [InverseProperty("Programs")]
         public virtual ICollection<Group> Groups { get; set; }
+        
+        [InverseProperty("Programs")]
         public virtual ICollection<ProgramAssessment> ProgramAssessments { get; set; }
     }
 }

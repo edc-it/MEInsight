@@ -196,7 +196,11 @@ namespace MEL.Web.Controllers
         {
             var tLMDistributionPeriod = await _context.TLMDistributionPeriods.FindAsync(id);
 
-            _context.TLMDistributionPeriods.Remove(tLMDistributionPeriod);
+            if (tLMDistributionPeriod != null)
+            {
+                _context.TLMDistributionPeriods.Remove(tLMDistributionPeriod);
+            }
+
             await _context.SaveChangesAsync();
         
             TempData["messageType"] = "success";

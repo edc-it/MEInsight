@@ -35,7 +35,7 @@ namespace MEInsight.Entities.Reference
         [MaxLength(255)]
         [Display(Name = "Location")]
         [Column(Order = 1)]
-        public string LocationName { get; set; } = null!;
+        public string? LocationName { get; set; } = null!;
 
         [Required(ErrorMessage = "The {0} field is required.")]
         [Display(Name = "Location Type")]

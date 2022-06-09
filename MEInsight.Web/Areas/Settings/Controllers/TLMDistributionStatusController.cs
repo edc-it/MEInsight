@@ -174,7 +174,11 @@ namespace MEInsight.Web.Areas.Settings.Controllers
         {
             var refTLMDistributionStatus = await _context.TLMDistributionStatus.FindAsync(id);
 
-            _context.TLMDistributionStatus.Remove(refTLMDistributionStatus);
+            if (refTLMDistributionStatus != null)
+            {
+                _context.TLMDistributionStatus.Remove(refTLMDistributionStatus);
+            }
+            
             await _context.SaveChangesAsync();
         
             TempData["messageType"] = "success";

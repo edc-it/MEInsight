@@ -140,7 +140,7 @@
                                 @Html.DisplayFor(modelItem => item.Participants.ParticipantCode)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Participants.Sex.SexId)
+                                @Html.DisplayFor(modelItem => item.Participants.Sex!.SexId)
                             </td>
                             <td>
                                 @if (item.Attendance != null)
@@ -151,7 +151,7 @@
                                 }
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.EnrollmentStatus.EnrollmentStatus)
+                                @Html.DisplayFor(modelItem => item.EnrollmentStatus!.EnrollmentStatus)
                             </td>
                             <td class="text-end d-print-none">
                                 <div class="btn-group btn-group-sm" role="group" aria-label="Actions">

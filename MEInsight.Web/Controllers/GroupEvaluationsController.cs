@@ -40,18 +40,21 @@ namespace MEL.Web.Controllers
             // GroupEvaluations List
             var applicationDbContext = _context.GroupEvaluations
                 .Include(g => g.EvaluationStatus)
-                .Include(g => g.GroupEnrollments).ThenInclude(g => g.Participants).ThenInclude(g => g.Sex)
-                .Include(g => g.GroupEnrollments).ThenInclude(g => g.Participants).ThenInclude(g => g.ParticipantTypes)
+                .Include(g => g.GroupEnrollments!).ThenInclude(g => g.Participants).ThenInclude(g => g.Sex)
+                .Include(g => g.GroupEnrollments!).ThenInclude(g => g.Participants).ThenInclude(g => g.ParticipantTypes)
                 .Include(g => g.ProgramAssessments)
                     .Where(g => g.GroupEnrollments.GroupId == id);
 
             // Group Details
             var group = await _context.Groups
-                .Include(g => g.Programs).ThenInclude(g => g.ProgramAssessments)
-                .Include(g => g.Programs).ThenInclude(g => g.AttendanceUnits)
+                .Include(g => g.Programs!).ThenInclude(g => g.ProgramAssessments)
+                .Include(g => g.Programs!).ThenInclude(g => g.AttendanceUnits)
                 .Where(x => x.GroupId == id).FirstOrDefaultAsync();
 
-            ViewData["Closed"] = group.Closed;
+            if (group != null)
+            {
+                ViewData["Closed"] = group.Closed;
+            }
 
             return View(await applicationDbContext.ToListAsync());
         }
@@ -78,15 +81,22 @@ namespace MEL.Web.Controllers
 
             // Query Group to return Min, Max, and Attendance unit to view
             var group = await _context.Groups
-                .Include(t => t.Programs).ThenInclude(t =>t.AttendanceUnits)
+                .Include(t => t.Programs!).ThenInclude(t =>t.AttendanceUnits)
                 .Where(t => t.GroupId == id)
                 .FirstOrDefaultAsync();
 
             //ViewData["EnableDuration"] = group.Programs.EnableDuration;
-            ViewData["Min"] = group.Programs.Min;
-            ViewData["Max"] = group.Programs.Max;
-            ViewData["AttendanceUnit"] = group.Programs.AttendanceUnits.AttendanceUnit;
-            ViewData["TrainingProgramId"] = group.ProgramId;
+            if (group != null)
+            {
+                if (group.Programs != null)
+                {
+                    ViewData["Min"] = group.Programs.Min;
+                    ViewData["Max"] = group.Programs.Max;
+                    ViewData["AttendanceUnit"] = group.Programs!.AttendanceUnits!.AttendanceUnit;
+                    ViewData["TrainingProgramId"] = group.ProgramId;
+                }
+            }
+                        
             ViewData["RefEnrollmentStatusId"] = new SelectList(_context.EnrollmentStatus, "RefEnrollmentStatusId", "EnrollmentStatus");
 
             return View(await applicationDbContext.OrderBy(x => x.GroupEnrollments.Participants.LastName).ToListAsync());
@@ -102,11 +112,14 @@ namespace MEL.Web.Controllers
             {
                 foreach (GroupEnrollment item in attendance)
                 {
-                    GroupEnrollment Exists_GroupEnrollment = await _context.GroupEnrollments.FindAsync(item.GroupEnrollmentId);
+                    GroupEnrollment? Exists_GroupEnrollment = await _context.GroupEnrollments.FindAsync(item.GroupEnrollmentId);
 
-                    Exists_GroupEnrollment.Attendance = item.Attendance;
-                    Exists_GroupEnrollment.RefEnrollmentStatusId = item.RefEnrollmentStatusId;
-                    Exists_GroupEnrollment.StatusDate = DateTime.Now;
+                    if (Exists_GroupEnrollment != null)
+                    {
+                        Exists_GroupEnrollment.Attendance = item.Attendance;
+                        Exists_GroupEnrollment.RefEnrollmentStatusId = item.RefEnrollmentStatusId;
+                        Exists_GroupEnrollment.StatusDate = DateTime.Now;
+                    }
                 }
 
                 await _context.SaveChangesAsync();
@@ -131,7 +144,7 @@ namespace MEL.Web.Controllers
                 .Include(g => g.GroupEnrollments).ThenInclude(g => g.Participants).ThenInclude(g => g.Sex)
                 .Include(g => g.GroupEnrollments).ThenInclude(g => g.Participants).ThenInclude(g => g.ParticipantTypes)
                 .Include(g => g.GroupEnrollments).ThenInclude(g => g.Groups)
-                .Include(g => g.ProgramAssessments).ThenInclude(g => g.AssessmentTypes)
+                .Include(g => g.ProgramAssessments!).ThenInclude(g => g.AssessmentTypes)
                 .Include(g => g.EvaluationStatus)
                 .Where(g => g.GroupEnrollments.GroupId == id);
 
@@ -144,16 +157,19 @@ namespace MEL.Web.Controllers
 
             // Query Group to return Min, Max, and Attendance unit to view
             var group = await _context.Groups
-                .Include(t => t.Programs).ThenInclude(t => t.ProgramAssessments)
-                .Include(t => t.Programs).ThenInclude(t => t.AttendanceUnits)
+                .Include(t => t.Programs!).ThenInclude(t => t.ProgramAssessments)
+                .Include(t => t.Programs!).ThenInclude(t => t.AttendanceUnits)
                 .Where(t => t.GroupId == id)
                 .FirstOrDefaultAsync();
 
-            //ViewData["EnableDuration"] = group.Programs.EnableDuration;
-            ViewData["Min"] = group.Programs.Min;
-            ViewData["Max"] = group.Programs.Max;
-            ViewData["AttendanceUnit"] = group.Programs.AttendanceUnits.AttendanceUnit;
-            ViewData["ProgramId"] = group.ProgramId;
+            if (group != null)
+            {
+                ViewData["Min"] = group.Programs!.Min;
+                ViewData["Max"] = group.Programs!.Max;
+                ViewData["AttendanceUnit"] = group.Programs!.AttendanceUnits!.AttendanceUnit;
+                ViewData["ProgramId"] = group.ProgramId;
+            }
+            
             ViewData["RefEvaluationStatusId"] = new SelectList(_context.EvaluationStatus, "RefEvaluationStatusId", "EvaluationStatus");
 
             return View(await applicationDbContext.OrderBy(x => x.GroupEnrollments.Participants.LastName).ToListAsync());
@@ -169,11 +185,14 @@ namespace MEL.Web.Controllers
             {
                 foreach (GroupEvaluation item in score)
                 {
-                    GroupEvaluation Exists_GroupEvaluation = await _context.GroupEvaluations.FindAsync(item.GroupEvaluationId);
+                    GroupEvaluation? Exists_GroupEvaluation = await _context.GroupEvaluations.FindAsync(item.GroupEvaluationId);
 
-                    Exists_GroupEvaluation.Score = item.Score;
-                    Exists_GroupEvaluation.RefEvaluationStatusId = item.RefEvaluationStatusId;
-                    Exists_GroupEvaluation.StatusDate = DateTime.Now;
+                    if (Exists_GroupEvaluation != null)
+                    {
+                        Exists_GroupEvaluation.Score = item.Score;
+                        Exists_GroupEvaluation.RefEvaluationStatusId = item.RefEvaluationStatusId;
+                        Exists_GroupEvaluation.StatusDate = DateTime.Now;
+                    }
                 }
 
                 await _context.SaveChangesAsync();
@@ -365,15 +384,23 @@ namespace MEL.Web.Controllers
         {
             var groupEvaluation = await _context.GroupEvaluations.FindAsync(id);
 
-            _context.GroupEvaluations.Remove(groupEvaluation);
-            await _context.SaveChangesAsync();
-        
-            TempData["messageType"] = "success";
-            TempData["messageTitle"] = "RECORD DELETED";
-            TempData["message"] = "Record successfully deleted";
+            if (groupEvaluation != null)
+            {
+                _context.GroupEvaluations.Remove(groupEvaluation);
+                await _context.SaveChangesAsync();
 
-            //return RedirectToAction(nameof(Index));        
-            return RedirectToAction(nameof(Index), new { id = groupEvaluation.GroupEnrollments.GroupId });
+                TempData["messageType"] = "success";
+                TempData["messageTitle"] = "RECORD DELETED";
+                TempData["message"] = "Record successfully deleted";
+
+                return RedirectToAction(nameof(Index), new { id = groupEvaluation.GroupEnrollments.GroupId });
+            }
+            else
+            {
+                return NotFound();
+            }
+
+            
         }
 
         private bool GroupEvaluationExists(Guid id)

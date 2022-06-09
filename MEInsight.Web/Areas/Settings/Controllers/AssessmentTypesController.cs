@@ -150,7 +150,7 @@ namespace MEInsight.Web.Areas.Settings.Controllers
 
             int relatedCount = 0;
                 
-            relatedCount += refAssessmentType.ProgramAssessments.Count();
+            relatedCount += refAssessmentType.ProgramAssessments.Count;
 
             if(relatedCount > 0)
             {
@@ -171,9 +171,14 @@ namespace MEInsight.Web.Areas.Settings.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+
             var refAssessmentType = await _context.AssessmentTypes.FindAsync(id);
 
-            _context.AssessmentTypes.Remove(refAssessmentType);
+            if (refAssessmentType != null)
+            {
+                _context.AssessmentTypes.Remove(refAssessmentType);
+            }
+            
             await _context.SaveChangesAsync();
         
             TempData["messageType"] = "success";

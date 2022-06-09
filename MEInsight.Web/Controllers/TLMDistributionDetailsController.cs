@@ -50,10 +50,13 @@ namespace MEL.Web.Controllers
                 .Where(t => t.TLMDistributionId == id)
                 .FirstOrDefaultAsync();
 
-            // Returns distributionPeriod object
-            ViewData["Distribution"] = distribution;
+            if (distribution != null)
+            {
+                // Returns distributionPeriod object
+                ViewData["Distribution"] = distribution;
 
-            ViewData["Closed"] = distribution.TLMDistributionPeriods.Closed;
+                ViewData["Closed"] = distribution.TLMDistributionPeriods.Closed;
+            }
 
             return View(await applicationDbContext.ToListAsync());
         }
@@ -82,10 +85,13 @@ namespace MEL.Web.Controllers
                 .Select(t => t.TLMDistributionPeriods)
                 .FirstOrDefaultAsync();
 
-            // Returns distributionPeriod object
-            ViewData["DistributionPeriod"] = distributionPeriod;
+            if (distributionPeriod != null)
+            {
+                // Returns distributionPeriod object
+                ViewData["DistributionPeriod"] = distributionPeriod;
 
-            ViewData["Closed"] = distributionPeriod.Closed;
+                ViewData["Closed"] = distributionPeriod.Closed;
+            }
 
             ViewData["ParentId"] = tLMDistributionDetail.TLMDistributionId;
 
@@ -252,15 +258,18 @@ namespace MEL.Web.Controllers
         {
             var tLMDistributionDetail = await _context.TLMDistributionDetails.FindAsync(id);
 
-            _context.TLMDistributionDetails.Remove(tLMDistributionDetail);
+            if (tLMDistributionDetail != null)
+            {
+                _context.TLMDistributionDetails.Remove(tLMDistributionDetail);
+            }
+            
             await _context.SaveChangesAsync();
         
             TempData["messageType"] = "success";
             TempData["messageTitle"] = "RECORD DELETED";
             TempData["message"] = "Record successfully deleted";
 
-            //return RedirectToAction(nameof(Index));        
-            return RedirectToAction(nameof(Index), new { id = tLMDistributionDetail.TLMDistributionId });
+            return RedirectToAction(nameof(Index), new { id = tLMDistributionDetail!.TLMDistributionId });
         }
 
         private bool TLMDistributionDetailExists(Guid id)

@@ -182,7 +182,11 @@ namespace MEInsight.Web.Areas.Settings.Controllers
         {
             var refSchoolCluster = await _context.SchoolClusters.FindAsync(id);
 
-            _context.SchoolClusters.Remove(refSchoolCluster);
+            if (refSchoolCluster != null)
+            {
+                _context.SchoolClusters.Remove(refSchoolCluster);
+            }
+            
             await _context.SaveChangesAsync();
         
             TempData["messageType"] = "success";

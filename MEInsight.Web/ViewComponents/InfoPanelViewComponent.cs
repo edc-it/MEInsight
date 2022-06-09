@@ -20,7 +20,7 @@ namespace MEInsight.Web.ViewComponents
             return View(items);
         }
 
-        private async Task<InfoPanelViewModel> GetItemsAsync(dynamic id, string controller, string view)
+        private async Task<InfoPanelViewModel?> GetItemsAsync(dynamic id, string? controller, string view)
         {
 
             if (id == null)
@@ -28,7 +28,7 @@ namespace MEInsight.Web.ViewComponents
                 return null;
             }
 
-            InfoPanelViewModel model = new InfoPanelViewModel();
+            InfoPanelViewModel model = new();
             //int modelIntId;
             Guid modelGuidId;
 
@@ -48,7 +48,7 @@ namespace MEInsight.Web.ViewComponents
                     var organizationParents = await GetParentHierarchyAsync(modelGuidId);
 
                     //Get Parent Location hierarchy
-                    var organizationLocations = await GetLocationHierarchyAsync(organization.RefLocationId);
+                    var organizationLocations = await GetLocationHierarchyAsync(organization!.RefLocationId!);
 
                     model = new InfoPanelViewModel
                     {
@@ -79,7 +79,7 @@ namespace MEInsight.Web.ViewComponents
                     var groupParents = await GetParentHierarchyAsync(modelGuidId);
 
                     //Get Parent Location hierarchy
-                    var groupLocations = await GetLocationHierarchyAsync(group.RefLocationId);
+                    var groupLocations = await GetLocationHierarchyAsync(group!.RefLocationId!);
 
                     model = new InfoPanelViewModel
                     {
@@ -103,47 +103,50 @@ namespace MEInsight.Web.ViewComponents
                     //Return model query
                     var groupEnrollment = await _context.Groups
                         .Include(x => x.Organizations)
-                        .Include(x => x.Programs).ThenInclude(x => x.AttendanceUnits)
-                        .Include(x => x.Teachers)
+                        .Include(x => x.Programs!).ThenInclude(x => x.AttendanceUnits)
+                        .Include(x => x.Teachers!)
                         ////TODO ////.ThenInclude(x => x.Participants)
                         .ThenInclude(x => x.ParticipantTypes)
                         .Include(x => x.GradeLevels)
                         .Where(x => x.GroupId == modelGuidId)
                         .FirstOrDefaultAsync();
 
-                    //Get Parent Organization hierarchy
-                    var groupEnrollmentParents = await GetParentHierarchyAsync(groupEnrollment.Organizations.OrganizationId);
-
-                    //Get Parent Location hierarchy
-                    var groupEnrollmentLocations = await GetLocationHierarchyAsync(groupEnrollment.Organizations.RefLocationId);
-
-                    model = new InfoPanelViewModel
+                    if (groupEnrollment != null)
                     {
-                        CurrentLevel = 2,
-                        CurrentController = "GroupEnrollments",
-                        OrganizationId = groupEnrollment.Organizations.OrganizationId,
-                        Organization = groupEnrollment.Organizations.OrganizationName,
-                        OrganizationCode = groupEnrollment.Organizations.OrganizationCode,
-                        IsOrganizationUnit = groupEnrollment.Organizations.IsOrganizationUnit,
-                        OrganizationParent = (IEnumerable<OrganizationParent>)groupEnrollmentParents,
-                        LocationParent = (IEnumerable<LocationParent>)groupEnrollmentLocations,
-                        GroupFileName = groupEnrollment.FileName,
-                        ProgramId = groupEnrollment.ProgramId,
-                        Program = groupEnrollment.Programs.ProgramName,
-                        GroupId = groupEnrollment.GroupId,
-                        Group = groupEnrollment.GroupName,
-                        GroupClosed = groupEnrollment.Closed,
-                        GroupClosedDate = groupEnrollment.ClosedDate,
-                        GroupStartDate = groupEnrollment.StartDate,
-                        GroupEndDate = groupEnrollment.EndDate,
-                        Max = groupEnrollment.Programs.Max,
-                        Min = groupEnrollment.Programs.Min,
-                        AttendanceUnit = groupEnrollment.Programs.AttendanceUnits.AttendanceUnit,
-                        ////TODO ////GroupTeacher = groupEnrollment.Teachers?.Participants?.NameId ?? null,
-                        ////TODO ////GroupTeacherType = groupEnrollment.Teachers?.Participants?.ParticipantTypes?.ParticipantType ?? null,
-                        GradeLevel = groupEnrollment.GradeLevels?.GradeLevel ?? null
-                    };
+                        //Get Parent Organization hierarchy
+                        var groupEnrollmentParents = await GetParentHierarchyAsync(groupEnrollment.Organizations!.OrganizationId);
 
+                        //Get Parent Location hierarchy
+                        var groupEnrollmentLocations = await GetLocationHierarchyAsync(groupEnrollment.Organizations!.RefLocationId!);
+
+                        model = new InfoPanelViewModel
+                        {
+                            CurrentLevel = 2,
+                            CurrentController = "GroupEnrollments",
+                            OrganizationId = groupEnrollment.Organizations.OrganizationId,
+                            Organization = groupEnrollment.Organizations.OrganizationName,
+                            OrganizationCode = groupEnrollment.Organizations.OrganizationCode,
+                            IsOrganizationUnit = groupEnrollment.Organizations.IsOrganizationUnit,
+                            OrganizationParent = (IEnumerable<OrganizationParent>)groupEnrollmentParents,
+                            LocationParent = (IEnumerable<LocationParent>)groupEnrollmentLocations,
+                            GroupFileName = groupEnrollment.FileName,
+                            ProgramId = groupEnrollment.ProgramId,
+                            Program = groupEnrollment.Programs!.ProgramName,
+                            GroupId = groupEnrollment.GroupId,
+                            Group = groupEnrollment.GroupName,
+                            GroupClosed = groupEnrollment.Closed,
+                            GroupClosedDate = groupEnrollment.ClosedDate,
+                            GroupStartDate = groupEnrollment.StartDate,
+                            GroupEndDate = groupEnrollment.EndDate,
+                            Max = groupEnrollment.Programs.Max,
+                            Min = groupEnrollment.Programs.Min,
+                            AttendanceUnit = groupEnrollment.Programs.AttendanceUnits!.AttendanceUnit,
+                            ////TODO ////GroupTeacher = groupEnrollment.Teachers?.Participants?.NameId ?? null,
+                            ////TODO ////GroupTeacherType = groupEnrollment.Teachers?.Participants?.ParticipantTypes?.ParticipantType ?? null,
+                            GradeLevel = groupEnrollment.GradeLevels?.GradeLevel ?? null
+                        };
+                        
+                    }
                     break;
 
                 default:
@@ -173,7 +176,7 @@ namespace MEInsight.Web.ViewComponents
                     OrganizationId = x.OrganizationId,
                     OrganizationName = x.OrganizationName,
                     ParentOrganizationId = x.ParentOrganizationId,
-                    Parent = x.ParentOrganizations.OrganizationName,
+                    Parent = x.ParentOrganizations!.OrganizationName,
                     IsOrganizationUnit = x.IsOrganizationUnit
                 })
                 .ToListAsync();
@@ -221,7 +224,7 @@ namespace MEInsight.Web.ViewComponents
                     RefLocationId = x.RefLocationId,
                     LocationName = x.LocationName,
                     ParentLocationId = x.ParentLocationId,
-                    ParentName = x.ParentLocations.LocationName,
+                    ParentName = x.ParentLocations!.LocationName,
                     RefLocationTypeId = x.RefLocationTypeId,
                     LocationType = x.LocationTypes.LocationType,
                     LocationLevel = x.LocationTypes.LocationLevel
@@ -252,11 +255,12 @@ namespace MEInsight.Web.ViewComponents
 
         }
 
-        public static IEnumerable<LocationParent> ListLocations(IEnumerable<LocationParent> list, string id)
+        public static IEnumerable<LocationParent> ListLocations(IEnumerable<LocationParent> list, string? id)
         {
             var current = list.Where(n => n.RefLocationId == id).FirstOrDefault();
-            if (current == null)
-                return Enumerable.Empty<LocationParent>();
+
+            if (current == null) return Enumerable.Empty<LocationParent>();
+
             return Enumerable.Concat(new[] { current }, ListLocations(list, current.ParentLocationId));
         }
 

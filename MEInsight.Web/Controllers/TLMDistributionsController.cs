@@ -21,7 +21,7 @@ namespace MEL.Web.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
-        private IWebHostEnvironment _environment;
+        private readonly IWebHostEnvironment _environment;
 
         public TLMDistributionsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, IWebHostEnvironment environment)
         {
@@ -51,10 +51,13 @@ namespace MEL.Web.Controllers
             var distributionPeriod = await _context.TLMDistributionPeriods
                 .Where(t => t.TLMDistributionPeriodId == id).FirstOrDefaultAsync();
 
-            // Returns distributionPeriod object
-            ViewData["DistributionPeriod"] = distributionPeriod;
+            if (distributionPeriod != null)
+            {
+                // Returns distributionPeriod object
+                ViewData["DistributionPeriod"] = distributionPeriod;
 
-            ViewData["Closed"] = distributionPeriod.Closed;
+                ViewData["Closed"] = distributionPeriod.Closed;
+            }
 
             return View(await applicationDbContext.ToListAsync());
         }
@@ -270,7 +273,7 @@ namespace MEL.Web.Controllers
             }
 
             int relatedCount = 0;
-            relatedCount += tLMDistribution.TLMDistributionDetails.Count();
+            relatedCount += tLMDistribution.TLMDistributionDetails.Count;
 
             if(relatedCount > 0)
             {
@@ -294,7 +297,11 @@ namespace MEL.Web.Controllers
         {
             var tLMDistribution = await _context.TLMDistributions.FindAsync(id);
 
-            _context.TLMDistributions.Remove(tLMDistribution);
+            if (tLMDistribution != null)
+            {
+                _context.TLMDistributions.Remove(tLMDistribution);
+            }
+            
             await _context.SaveChangesAsync();
         
             TempData["messageType"] = "success";
@@ -302,7 +309,7 @@ namespace MEL.Web.Controllers
             TempData["message"] = "Record successfully deleted";
 
             //return RedirectToAction(nameof(Index));        
-            return RedirectToAction(nameof(Index), new { id = tLMDistribution.TLMDistributionPeriodId });
+            return RedirectToAction(nameof(Index), new { id = tLMDistribution!.TLMDistributionPeriodId });
         }
 
         /// <summary>
@@ -325,7 +332,7 @@ namespace MEL.Web.Controllers
                 return NotFound();
             }
 
-            TLMDistribution tLMDistribution = await _context.TLMDistributions.FindAsync(id);
+            var tLMDistribution = await _context.TLMDistributions.FindAsync(id);
 
             if (tLMDistribution == null)
             {
@@ -423,26 +430,19 @@ namespace MEL.Web.Controllers
 
         #region Helpers
         //Allowed file upload types
-        bool CheckFileType(string fileName)
+        static bool CheckFileType(string fileName)
         {
             string ext = Path.GetExtension(fileName);
-            switch (ext.ToLower())
+            return ext.ToLower() switch
             {
-                case ".jpg":
-                    return true;
-                case ".jpeg":
-                    return true;
-                case ".png":
-                    return true;
-                case ".doc":
-                    return true;
-                case ".docx":
-                    return true;
-                case ".pdf":
-                    return true;
-                default:
-                    return false;
-            }
+                ".jpg" => true,
+                ".jpeg" => true,
+                ".png" => true,
+                ".doc" => true,
+                ".docx" => true,
+                ".pdf" => true,
+                _ => false,
+            };
         }
         #endregion
     }

@@ -163,12 +163,12 @@ namespace MEInsight.Web.APIControllers
                     {
                         Name = p.Name,
                         ParticipantCode = p.ParticipantCode,
-                        ParticipantType = p.ParticipantTypes.ParticipantType,
+                        ParticipantType = p.ParticipantTypes!.ParticipantType,
                         Position = "",
-                        Sex = p.Sex.Sex,
-                        OrganizationName = p.Organizations.OrganizationName,
+                        Sex = p.Sex!.Sex,
+                        OrganizationName = p.Organizations!.OrganizationName,
                         RegistrationDate = p.RegistrationDate.ToShortDateString(),
-                        Location = p.Locations.LocationName,
+                        Location = p.Locations!.LocationName,
                         ParticipantId = p.ParticipantId
                     });
 

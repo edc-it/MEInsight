@@ -91,10 +91,12 @@ namespace MEInsight.Web.Controllers
 
                     //Return selected Organization ID Child organizations
                     var applicationDbContext = _context.Organizations
-                        .Include(o => o.Locations).ThenInclude(o => o.ParentLocations)
+                        .Include(o => o.Locations!).ThenInclude(o => o.ParentLocations)
                         .Include(o => o.OrganizationTypes)
                         .Include(o => o.ParentOrganizations)
                         .Where(o => o.ParentOrganizationId == id);
+
+                    //TODO .IgnoreQueryFilters()
 
                     return View(await applicationDbContext.OrderBy(o => o.OrganizationName).ToListAsync());
 
@@ -111,7 +113,7 @@ namespace MEInsight.Web.Controllers
             }
 
             var organization = await _context.Organizations
-                .Include(o => o.Locations).ThenInclude(o => o.ParentLocations)
+                .Include(o => o.Locations!).ThenInclude(o => o.ParentLocations)
                 .Include(o => o.OrganizationTypes)
                 .Include(o => o.ParentOrganizations)
                 .FirstOrDefaultAsync(m => m.OrganizationId == id);
@@ -188,7 +190,7 @@ namespace MEInsight.Web.Controllers
                 //TODO: 1 Create a separate view model for schools
                 if (organization.RefOrganizationTypeId == 20)
                 {
-                    School school = new School
+                    School school = new()
                     {
                         OrganizationId = organization.OrganizationId,
                     };
@@ -271,7 +273,8 @@ namespace MEInsight.Web.Controllers
             //Get Location Parents (only the lower level RefLocationId is saved, 
             //this gets the location parents for the saved location
             var allLocations = _context.Locations;
-            var locations = EnumerableExtensions.ListLocations(allLocations, organization.RefLocationId);
+
+            var locations = EnumerableExtensions.ListLocations(allLocations, organization.RefLocationId!);
             ViewData["RefLocationParents"] = locations.OrderBy(x => x.RefLocationTypeId);
 
             ViewData["ParentOrganizationId"] = new SelectList(_context.Organizations.Where(x => x.IsOrganizationUnit == true), "OrganizationId", "OrganizationName", organization.ParentOrganizationId);
@@ -349,8 +352,12 @@ namespace MEInsight.Web.Controllers
 
             //parents for location h
             var allLocations = _context.Locations;
-            var locations = EnumerableExtensions.ListLocations(allLocations, organization.RefLocationId);
-            ViewData["RefLocationParents"] = locations.OrderBy(x => x.RefLocationTypeId);
+
+            if (allLocations != null)
+            {
+                var locations = EnumerableExtensions.ListLocations(allLocations, organization.RefLocationId!);
+                ViewData["RefLocationParents"] = locations.OrderBy(x => x.RefLocationTypeId);
+            }
 
             ViewData["ParentOrganizationId"] = new SelectList(_context.Organizations.Where(x => x.IsOrganizationUnit == true), "OrganizationId", "OrganizationName", organization.ParentOrganizationId);
             ViewData["RefOrganizationTypeId"] = new SelectList(_context.OrganizationTypes, "RefOrganizationTypeId", "OrganizationType", organization.RefOrganizationTypeId);
@@ -386,13 +393,13 @@ namespace MEInsight.Web.Controllers
             }
 
             int relatedCount = 0;
-            relatedCount += organization.Participants.Count();
+            relatedCount += organization.Participants.Count;
             ////relatedCount += organization.Schools.Count();
-            relatedCount += organization.Organizations.Count();
-            relatedCount += organization.Groups.Count();
-            relatedCount += organization.TLMDistributionsFrom.Count();
-            relatedCount += organization.TLMDistributionsTo.Count();
-            relatedCount += organization.Users.Count();
+            relatedCount += organization.Organizations.Count;
+            relatedCount += organization.Groups.Count;
+            relatedCount += organization.TLMDistributionsFrom.Count;
+            relatedCount += organization.TLMDistributionsTo.Count;
+            relatedCount += organization.Users.Count;
 
             if (relatedCount > 0)
             {
@@ -416,16 +423,30 @@ namespace MEInsight.Web.Controllers
         {
             //TODO: Remove 1:1 School Record
             var organization = await _context.Organizations.FindAsync(id);
-
-            _context.Organizations.Remove(organization);
-            await _context.SaveChangesAsync();
+            if (organization != null)
+            {
+                await RemoveChildren(organization.OrganizationId);
+                _context.Organizations.Remove(organization);
+                await _context.SaveChangesAsync();
+            }
+            
 
             TempData["messageType"] = "success";
             TempData["messageTitle"] = "RECORD DELETED";
             TempData["message"] = "Record successfully deleted";
 
             //return RedirectToAction(nameof(Index));        
-            return RedirectToAction(nameof(Index), new { id = organization.ParentOrganizationId });
+            return RedirectToAction(nameof(Index), new { id = organization!.ParentOrganizationId });
+        }
+
+        async Task RemoveChildren(Guid id)
+        {
+            var children = await _context.Organizations.Where(x => x.ParentOrganizationId == id).ToListAsync();
+            foreach (var child in children)
+            {
+                await RemoveChildren(child.OrganizationId);
+                _context.Organizations.Remove(child);
+            }
         }
 
         private bool OrganizationExists(Guid id)

@@ -14,14 +14,14 @@ namespace MEInsight.Web.TagHelpers
         public PolicyTagHelper(IAuthorizationService authService, IHttpContextAccessor httpContextAccessor)
         {
             _authService = authService;
-            _principal = httpContextAccessor.HttpContext.User;
+            _principal = httpContextAccessor.HttpContext!.User;
         }
 
-        public string Policy { get; set; }
+        public string? Policy { get; set; }
 
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
-            if (!(await _authService.AuthorizeAsync(_principal, Policy)).Succeeded)
+            if (!(await _authService.AuthorizeAsync(_principal, Policy!)).Succeeded)
                 output.SuppressOutput();
         }
     }

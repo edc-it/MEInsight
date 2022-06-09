@@ -174,7 +174,11 @@ namespace MEInsight.Web.Areas.Settings.Controllers
         {
             var refSex = await _context.Sex.FindAsync(id);
 
-            _context.Sex.Remove(refSex);
+            if (refSex != null)
+            {
+                _context.Sex.Remove(refSex);
+            }
+            
             await _context.SaveChangesAsync();
         
             TempData["messageType"] = "success";

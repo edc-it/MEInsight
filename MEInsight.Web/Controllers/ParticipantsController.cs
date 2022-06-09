@@ -187,14 +187,18 @@ namespace MEL.Web.Controllers
                     .Include(g => g.Organizations)
                     .Where(g => g.GroupId == GroupId)
                     .FirstOrDefaultAsync();
-                
-                // if School return OrganizationId for JSTree to pre-select Organization
-                if (group.Organizations.RefOrganizationTypeId == 2)
-                {
-                    ViewData["OrganizationId"] = group.OrganizationId;
-                }
 
-                ViewData["GroupId"] = GroupId;
+                if (group != null)
+                {
+                    // if School return OrganizationId for JSTree to pre-select Organization
+                    if (group.Organizations!.RefOrganizationTypeId == 2)
+                    {
+                        ViewData["OrganizationId"] = group.OrganizationId;
+                    }
+
+                    ViewData["GroupId"] = GroupId;
+                }
+                
             }
             // If groupId is null, Create new Participant only
             else
@@ -290,43 +294,46 @@ namespace MEL.Web.Controllers
                     .Where(x => x.GroupId == GroupId)
                     .FirstOrDefaultAsync();
 
-                    // Create GroupEnrollment for this Participant
-                    GroupEnrollment groupEnrollment = new GroupEnrollment
+                    if (group != null)
                     {
-                        GroupEnrollmentId = Guid.NewGuid(),
-                        GroupId = group.GroupId,
-                        ParticipantId = participant.ParticipantId,
-                        RefEnrollmentStatusId = 1, //Status Enrolled
-                        EnrollmentDate = participant.RegistrationDate
-                    };
-
-                    _context.Add(groupEnrollment);
-
-                    // If the Program selected for this Group has related ProgramAssessments
-                    // Creates the GroupEvaluation records for each ProgramAssessment for this Participant
-                    if (group.Programs.HasAssessment == true)
-                    {
-
-                        List<ProgramAssessment> programAssessments = new List<ProgramAssessment>();
-
-                        // Get ProgramAssessments list related to this Group/Program 
-                        programAssessments = await _context.ProgramAssessments
-                            .Where(x => x.ProgramId == group.ProgramId)
-                            .ToListAsync();
-
-                        if (programAssessments != null)
+                        // Create GroupEnrollment for this Participant
+                        GroupEnrollment? groupEnrollment = new()
                         {
-                            foreach (var assessment in programAssessments)
-                            {
-                                GroupEvaluation groupEvaluation = new GroupEvaluation
-                                {
-                                    GroupEvaluationId = Guid.NewGuid(),
-                                    GroupEnrollmentId = groupEnrollment.GroupEnrollmentId,
-                                    RefEvaluationStatusId = 1, // Status Enrolled
-                                    ProgramAssessmentId = assessment.ProgramAssessmentId,
-                                };
+                            GroupEnrollmentId = Guid.NewGuid(),
+                            GroupId = group.GroupId,
+                            ParticipantId = participant.ParticipantId,
+                            RefEnrollmentStatusId = 1, //Status Enrolled
+                            EnrollmentDate = participant.RegistrationDate
+                        };
 
-                                _context.GroupEvaluations.Add(groupEvaluation);
+                        _context.Add(groupEnrollment);
+
+                        // If the Program selected for this Group has related ProgramAssessments
+                        // Creates the GroupEvaluation records for each ProgramAssessment for this Participant
+                        if (group.Programs!.HasAssessment == true)
+                        {
+
+                            List<ProgramAssessment> programAssessments = new();
+
+                            // Get ProgramAssessments list related to this Group/Program 
+                            programAssessments = await _context.ProgramAssessments
+                                .Where(x => x.ProgramId == group.ProgramId)
+                                .ToListAsync();
+
+                            if (programAssessments != null)
+                            {
+                                foreach (var assessment in programAssessments)
+                                {
+                                    GroupEvaluation groupEvaluation = new()
+                                    {
+                                        GroupEvaluationId = Guid.NewGuid(),
+                                        GroupEnrollmentId = groupEnrollment.GroupEnrollmentId,
+                                        RefEvaluationStatusId = 1, // Status Enrolled
+                                        ProgramAssessmentId = assessment.ProgramAssessmentId,
+                                    };
+
+                                    _context.GroupEvaluations.Add(groupEvaluation);
+                                }
                             }
                         }
                     }
@@ -358,7 +365,7 @@ namespace MEL.Web.Controllers
 
                 var refOrganizationTypeId = await _context.Groups
                     .Where(g => g.GroupId == GroupId)
-                    .Select(g => g.Organizations.RefOrganizationTypeId)
+                    .Select(g => g.Organizations!.RefOrganizationTypeId)
                     .FirstOrDefaultAsync();
 
                 // if School return OrganizationId for JSTree to pre-select Organization
@@ -499,7 +506,7 @@ namespace MEL.Web.Controllers
 
         // GET: Participants/Edit/5
         [Authorize(Policy = "RequireEditRole")]
-        public async Task<IActionResult> Edit(Guid? id, Guid? GroupId, int? participantTypeId)
+        public async Task<IActionResult> Edit(Guid? id, Guid? GroupId)
         {
             if (id == null)
             {
@@ -554,11 +561,14 @@ namespace MEL.Web.Controllers
             //Get Location Parents (only the lower level RefLocationId is saved, 
             //this gets the location parents for the saved location
             var allLocations = _context.Locations;
-            var locations = EnumerableExtensions.ListLocations(allLocations, participant.RefLocationId);
-            ViewData["RefLocationParents"] = locations.OrderBy(x => x.RefLocationTypeId);
+
+            if (participant.RefLocationId != null)
+            {
+                var locations = EnumerableExtensions.ListLocations(allLocations, participant.RefLocationId);
+                ViewData["RefLocationParents"] = locations.OrderBy(x => x.RefLocationTypeId);
+            }
 
             // Participants - All
-            // ViewData["ParentId"] = id;
             ViewData["RefSexId"] = new SelectList(_context.Sex, "RefSexId", "Sex", participant.RefSexId);
             ViewData["RefDisabilityTypeId"] = new SelectList(_context.DisabilityTypes, "RefDisabilityTypeId", "DisabilityType", participant.RefDisabilityTypeId);
             ViewData["RefParticipantTypeId"] = participant.RefParticipantTypeId;
@@ -640,7 +650,7 @@ namespace MEL.Web.Controllers
 
                 var refOrganizationTypeId = await _context.Groups
                     .Where(g => g.GroupId == GroupId)
-                    .Select(g => g.Organizations.RefOrganizationTypeId)
+                    .Select(g => g.Organizations!.RefOrganizationTypeId)
                     .FirstOrDefaultAsync();
 
                 // if School return OrganizationId for JSTree to pre-select Organization
@@ -736,7 +746,7 @@ namespace MEL.Web.Controllers
             }
 
             int relatedCount = 0;
-            relatedCount += participant.GroupEnrollments.Count();
+            relatedCount += participant.GroupEnrollments.Count;
 
             if (relatedCount > 0)
             {
@@ -759,23 +769,40 @@ namespace MEL.Web.Controllers
         {
             var participant = await _context.Participants.FindAsync(id);
 
+            if (participant == null)
+            {
+                return NotFound();
+            }
+
             // Students
             if (participant.RefParticipantTypeId == 1)
             {
                 var student = await _context.Students.FindAsync(id);
-                _context.Students.Remove(student);
+
+                if (student != null)
+                {
+                    _context.Students.Remove(student);
+                }
             }
             // Teachers
             else if (participant.RefParticipantTypeId == 2)
             {
                 var teacher = await _context.Teachers.FindAsync(id);
-                _context.Teachers.Remove(teacher);
+
+                if (teacher != null)
+                {
+                    _context.Teachers.Remove(teacher);
+                }
             }
             // Education Administrators
             else if (participant.RefParticipantTypeId == 3)
             {
                 var educationAdministrator = await _context.EducationAdministrators.FindAsync(id);
-                _context.EducationAdministrators.Remove(educationAdministrator);
+
+                if (educationAdministrator != null)
+                {
+                    _context.EducationAdministrators.Remove(educationAdministrator);
+                }
             }
 
             _context.Participants.Remove(participant);

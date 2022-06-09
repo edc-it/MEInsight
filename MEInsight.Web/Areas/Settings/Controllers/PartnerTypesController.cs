@@ -173,8 +173,12 @@ namespace MEInsight.Web.Areas.Settings.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var refPartnerType = await _context.PartnerTypes.FindAsync(id);
+            
+            if (refPartnerType != null)
+            {
+                _context.PartnerTypes.Remove(refPartnerType);
+            }
 
-            _context.PartnerTypes.Remove(refPartnerType);
             await _context.SaveChangesAsync();
         
             TempData["messageType"] = "success";

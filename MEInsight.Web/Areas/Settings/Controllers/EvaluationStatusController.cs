@@ -176,7 +176,11 @@ namespace MEInsight.Web.Areas.Settings.Controllers
         {
             var refEvaluationStatus = await _context.EvaluationStatus.FindAsync(id);
 
-            _context.EvaluationStatus.Remove(refEvaluationStatus);
+            if (refEvaluationStatus != null)
+            {
+                _context.EvaluationStatus.Remove(refEvaluationStatus);
+            }
+            
             await _context.SaveChangesAsync();
         
             TempData["messageType"] = "success";

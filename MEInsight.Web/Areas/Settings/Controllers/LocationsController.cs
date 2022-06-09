@@ -36,19 +36,19 @@ namespace MEInsight.Web.Areas.Settings.Controllers
                 .Select(x => new LocationsViewModel {
                     RefLocationId = x.RefLocationId,
                     ParentLocationId = x.ParentLocationId,
-                    ParentLocation = x.ParentLocations.LocationName,
+                    ParentLocation = x.ParentLocations == null ? null : x.ParentLocations.LocationName,
                     LocationName = x.LocationName,
                     RefLocationTypeId = x.RefLocationTypeId,
                     LocationType = x.LocationTypes.LocationType,
                     LocationLevel = x.LocationTypes.LocationLevel,
-                    Count = x.Locations.Count()
+                    Count = x.Locations.Count
                 });
 
             ViewData["ParentId"] = id;
             
             ViewData["BackParentId"] = await _context.Locations
                 .Where(x => x.ParentLocationId == id)
-                .Select(x => x.ParentLocations.ParentLocationId)
+                .Select(x => x.ParentLocations!.ParentLocationId)
                 .FirstOrDefaultAsync();
 
             if (_context.LocationTypes.Any())
@@ -97,6 +97,8 @@ namespace MEInsight.Web.Areas.Settings.Controllers
                 .Where(x => x.RefLocationId == id)
                 .FirstOrDefaultAsync();
                 
+                if (parent == null) { return NotFound(); }
+
                 ViewData["RefLocationTypeId"] = new SelectList(_context.LocationTypes
                 .Where(x => x.LocationLevel > parent.LocationTypes.LocationLevel), "RefLocationTypeId", "LocationType");
                 
@@ -133,6 +135,8 @@ namespace MEInsight.Web.Areas.Settings.Controllers
                 .Include(x => x.LocationTypes)
                 .Where(x => x.RefLocationId == refLocation.RefLocationId)
                 .FirstOrDefaultAsync();
+
+            if (parent == null) { return NotFound(); }
 
             ViewData["RefLocationTypeId"] = new SelectList(_context.LocationTypes
                 .Where(x => x.LocationLevel > parent.LocationTypes.LocationLevel), "RefLocationTypeId", "LocationType");
@@ -222,19 +226,19 @@ namespace MEInsight.Web.Areas.Settings.Controllers
 					.Include(m => m.Locations)
 					.FirstOrDefaultAsync(m => m.RefLocationId == id);
 
-            ViewData["ParentId"] = refLocation.ParentLocationId;
-
             if (refLocation == null)
             {
                 return NotFound();
             }
 
+            ViewData["ParentId"] = refLocation.ParentLocationId;
+
             int relatedCount = 0;
 
-			relatedCount += refLocation.Organizations.Count();    
-            relatedCount += refLocation.Participants.Count();
-			relatedCount += refLocation.SchoolClusters.Count();
-			relatedCount += refLocation.Locations.Count();
+			relatedCount += refLocation.Organizations.Count;    
+            relatedCount += refLocation.Participants.Count;
+			relatedCount += refLocation.SchoolClusters.Count;
+			relatedCount += refLocation.Locations.Count;
 
 			if (relatedCount > 0)
             {
@@ -257,14 +261,18 @@ namespace MEInsight.Web.Areas.Settings.Controllers
         {
             var refLocation = await _context.Locations.FindAsync(id);
 
-            _context.Locations.Remove(refLocation);
+            if (refLocation != null)
+            {
+                _context.Locations.Remove(refLocation);
+            }
+            
             await _context.SaveChangesAsync();
         
             TempData["messageType"] = "success";
             TempData["messageTitle"] = "RECORD DELETED";
             TempData["message"] = "Record successfully deleted";
         
-            return RedirectToAction(nameof(Index), new { id = refLocation.ParentLocationId });
+            return RedirectToAction(nameof(Index), new { id = refLocation!.ParentLocationId });
         }
 
         private bool RefLocationExists(string id)

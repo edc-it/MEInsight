@@ -21,7 +21,7 @@ namespace MEL.Web.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
-        private IWebHostEnvironment _environment;
+        private readonly IWebHostEnvironment _environment;
 
         public TLMMaterialsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, IWebHostEnvironment environment)
         {
@@ -211,7 +211,7 @@ namespace MEL.Web.Controllers
             }
 
             int relatedCount = 0;
-                    relatedCount += tLMMaterial.TLMDistributionDetails.Count();
+                    relatedCount += tLMMaterial.TLMDistributionDetails.Count;
 
             if (relatedCount > 0)
             {
@@ -235,7 +235,11 @@ namespace MEL.Web.Controllers
         {
             var tLMMaterial = await _context.TLMMaterials.FindAsync(id);
 
-            _context.TLMMaterials.Remove(tLMMaterial);
+            if (tLMMaterial != null)
+            {
+                _context.TLMMaterials.Remove(tLMMaterial);
+            }
+
             await _context.SaveChangesAsync();
         
             TempData["messageType"] = "success";
@@ -266,7 +270,7 @@ namespace MEL.Web.Controllers
                 return NotFound();
             }
 
-            TLMMaterial tLMMaterial = await _context.TLMMaterials.FindAsync(id);
+            var tLMMaterial = await _context.TLMMaterials.FindAsync(id);
 
             if (tLMMaterial == null)
             {
@@ -364,26 +368,19 @@ namespace MEL.Web.Controllers
 
         #region Helpers
         //Allowed file upload types
-        bool CheckFileType(string fileName)
+        static bool CheckFileType(string fileName)
         {
             string ext = Path.GetExtension(fileName);
-            switch (ext.ToLower())
+            return ext.ToLower() switch
             {
-                case ".jpg":
-                    return true;
-                case ".jpeg":
-                    return true;
-                case ".png":
-                    return true;
-                case ".doc":
-                    return true;
-                case ".docx":
-                    return true;
-                case ".pdf":
-                    return true;
-                default:
-                    return false;
-            }
+                ".jpg" => true,
+                ".jpeg" => true,
+                ".png" => true,
+                ".doc" => true,
+                ".docx" => true,
+                ".pdf" => true,
+                _ => false,
+            };
         }
         #endregion
     }

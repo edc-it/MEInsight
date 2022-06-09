@@ -55,17 +55,20 @@ namespace MEInsight.Entities.Programs
         public int? RefEnrollmentStatusId { get; set; }
         
         [ForeignKey("ParticipantId")]
+        [InverseProperty("GroupEnrollments")]
         [Display(Name = "Participant")]
         public virtual Participant? Participants { get; set; } = null!;
 
         [ForeignKey("GroupId")]
+        [InverseProperty("GroupEnrollments")]
         [Display(Name = "Group")]
         public virtual Group? Groups { get; set; }
 
         [ForeignKey("RefEnrollmentStatusId")]
         [Display(Name = "Enrollment Status")]
         public virtual RefEnrollmentStatus? EnrollmentStatus { get; set; }
-
+        
+        [InverseProperty("GroupEnrollments")]
         public virtual ICollection<GroupEvaluation> GroupEvaluations { get; set; }
     }
 }

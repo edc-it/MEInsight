@@ -50,14 +50,17 @@ namespace MEInsight.Entities.Programs
 
         // Navigation properties
         [ForeignKey("GroupEnrollmentId")]
+        [InverseProperty("GroupEvaluations")]
         [Display(Name = "Enrollment")]
         public virtual GroupEnrollment GroupEnrollments { get; set; } = null!;
 
         [ForeignKey("ProgramAssessmentId")]
+        [InverseProperty("GroupEvaluations")]
         [Display(Name = "Program Assessment")]
         public virtual ProgramAssessment? ProgramAssessments { get; set; }
 
         [ForeignKey("RefEvaluationStatusId")]
+        [InverseProperty("GroupEvaluations")]
         [Display(Name = "Evaluation Status")]
         public virtual RefEvaluationStatus? EvaluationStatus { get; set; }
     }

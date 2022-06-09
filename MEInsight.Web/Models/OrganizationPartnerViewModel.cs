@@ -42,13 +42,13 @@ namespace MEInsight.Web.Models
         [Display(Name = "Organization Code")]
         [Remote(action: "VerifyOrganizationCode", controller: "RemoteValidations", HttpMethod = "POST", ErrorMessage = "This Code already exists.", AdditionalFields = "InitialValue")]
         [Column(Order = 2)]
-        public string OrganizationCode { get; set; }
+        public string? OrganizationCode { get; set; }
 
         [Required(ErrorMessage = "The {0} field is required.")]
         [MaxLength(255)]
         [Display(Name = "Organization")]
         [Column(Order = 3)]
-        public string OrganizationName { get; set; }
+        public string? OrganizationName { get; set; }
 
         // Foreign Key
         [Required(ErrorMessage = "The {0} field is required.")]
@@ -64,22 +64,22 @@ namespace MEInsight.Web.Models
         [MaxLength(150)]
         [Column(Order = 6)]
         [Display(Name = "Contact")]
-        public string Contact { get; set; }
+        public string? Contact { get; set; }
 
         [MaxLength(20)]
         [Column(Order = 7)]
         [Display(Name = "Phone")]
-        public string Phone { get; set; }
+        public string? Phone { get; set; }
 
         [Display(Name = "Location")]
         [Column(Order = 8)]
-        public string RefLocationId { get; set; }
+        public string? RefLocationId { get; set; }
 
         [MaxLength(384)]
         [DataType(DataType.MultilineText)]
         [Display(Name = "Address")]
         [Column(Order = 9)]
-        public string Address { get; set; }
+        public string? Address { get; set; }
 
         [Display(Name = "Latitude")]
         [Column(Order = 10)]
@@ -101,15 +101,15 @@ namespace MEInsight.Web.Models
         // Navigation properties
         [ForeignKey("ParentOrganizationId")]
         [Display(Name = "Parent Organization")]
-        public virtual Organization ParentOrganizations { get; set; }
+        public virtual Organization? ParentOrganizations { get; set; }
 
         [ForeignKey("RefOrganizationTypeId")]
         [Display(Name = "Organization Type")]
-        public virtual RefOrganizationType OrganizationTypes { get; set; }
+        public virtual RefOrganizationType? OrganizationTypes { get; set; }
 
         [ForeignKey("RefLocationId")]
         [Display(Name = "Location")]
-        public virtual RefLocation Locations { get; set; }
+        public virtual RefLocation? Locations { get; set; }
 
         //Partner
         [Required(ErrorMessage = "The {0} field is required.")]
@@ -117,7 +117,7 @@ namespace MEInsight.Web.Models
         [Display(Name = "Partner Code")]
         [Column(Order = 1)]
         [Remote(action: "VerifyPartnerCode", controller: "RemoteValidations", HttpMethod = "POST", ErrorMessage = "This Code already exists.", AdditionalFields = "InitialValue")]
-        public string PartnerCode { get; set; }
+        public string? PartnerCode { get; set; }
 
         [Display(Name = "Partner Type")]
         [Column(Order = 2)]
@@ -131,21 +131,21 @@ namespace MEInsight.Web.Models
         [MaxLength(150)]
         [Display(Name = "Contact")]
         [Column(Order = 4)]
-        public string PartnerContact { get; set; }
+        public string? PartnerContact { get; set; }
 
         // Navigation properties
         [ForeignKey("RefPartnerTypeId")]
         [Display(Name = "Partner Type")]
-        public virtual RefPartnerType PartnerTypes { get; set; }
+        public virtual RefPartnerType? PartnerTypes { get; set; }
 
         [ForeignKey("RefPartnerSectorId")]
         [Display(Name = "Partner Sector")]
-        public virtual RefPartnerSector PartnerSectors { get; set; }
-        public virtual ICollection<School> Schools { get; set; }
-        public virtual ICollection<Participant> Participants { get; set; }
-        public virtual ICollection<Group> Groups { get; set; }
-        public virtual ICollection<Organization> Organizations { get; set; }
-        public virtual ICollection<ApplicationUser> Users { get; set; }
+        public virtual RefPartnerSector? PartnerSectors { get; set; }
+        public virtual ICollection<School>? Schools { get; set; }
+        public virtual ICollection<Participant>? Participants { get; set; }
+        public virtual ICollection<Group>? Groups { get; set; }
+        public virtual ICollection<Organization>? Organizations { get; set; }
+        public virtual ICollection<ApplicationUser>? Users { get; set; }
         
     }
 }

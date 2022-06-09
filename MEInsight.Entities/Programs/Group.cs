@@ -40,14 +40,14 @@ namespace MEInsight.Entities.Programs
         public int ProgramId { get; set; }
 
         [Required(ErrorMessage = "The {0} field is required.")]
-        [MaxLength(100)]
+        [StringLength(100)]
         [Display(Name = "Group Code")]
         [Remote(action: "VerifyGroupCode", controller: "RemoteValidations", HttpMethod = "POST", ErrorMessage = "This Code already exists.", AdditionalFields = "GroupCodeInitialValue")]
         [Column(Order = 3)]
         public string GroupCode { get; set; } = null!;
 
         [Required(ErrorMessage = "The {0} field is required.")]
-        [MaxLength(255)]
+        [StringLength(255)]
         [Display(Name = "Group")]
         [Column(Order = 4)]
         public string GroupName { get; set; } = null!;
@@ -81,7 +81,7 @@ namespace MEInsight.Entities.Programs
         [Column(Order = 10)]
         public bool? Closed { get; set; }
 
-        [MaxLength(50)]
+        [StringLength(50)]
         [Display(Name = "Closed By")]
         [Column(Order = 11)]
         public string? ClosedBy { get; set; }
@@ -101,11 +101,13 @@ namespace MEInsight.Entities.Programs
 
         [ForeignKey("OrganizationId")]
         [Display(Name = "Organization")]
-        public virtual Organization? Organizations { get; set; } = null!;
+        [InverseProperty("Groups")]
+        public virtual Organization? Organizations { get; set; }
 
         [ForeignKey("ProgramId")]
         [Display(Name = "Program")]
-        public virtual Program? Programs { get; set; } = null!;
+        [InverseProperty("Groups")]
+        public virtual Program? Programs { get; set; }
 
         [ForeignKey("ParticipantId")]
         [Display(Name = "Teacher/Facilitator")]

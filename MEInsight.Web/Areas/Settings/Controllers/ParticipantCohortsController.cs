@@ -173,8 +173,12 @@ namespace MEInsight.Web.Areas.Settings.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var refParticipantCohort = await _context.ParticipantCohorts.FindAsync(id);
-
-            _context.ParticipantCohorts.Remove(refParticipantCohort);
+            
+            if (refParticipantCohort != null)
+            {
+                _context.ParticipantCohorts.Remove(refParticipantCohort);
+            }
+            
             await _context.SaveChangesAsync();
         
             TempData["messageType"] = "success";

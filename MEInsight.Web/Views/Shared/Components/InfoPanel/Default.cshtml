@@ -4,14 +4,16 @@
         _userManager.GetUserAsync(User).Result?.OrganizationId;
 
     int? organizationIndex =
-         Model.OrganizationParent
-         .Where(x => x.OrganizationId == userOrganizacionId)
-         .FirstOrDefault().Index;
+        Model.OrganizationParent!
+        .Where(x => x.OrganizationId == userOrganizacionId)
+        .Select(x => x.Index)
+        .FirstOrDefault();
+
 }
 @* Info Panel Heading *@
 <div class="card mb-3">
     <div class="card-header">
-        @foreach (var item in Model.OrganizationParent)
+        @foreach (var item in Model.OrganizationParent!)
         {
             if (item.Index == organizationIndex)
             {

@@ -152,7 +152,7 @@ namespace MEInsight.Web.Areas.Settings.Controllers
             int relatedCount = 0;
                 
 
-            relatedCount += refLocationType.Locations.Count();
+            relatedCount += refLocationType.Locations.Count;
 
             if(relatedCount > 0)
             {
@@ -175,7 +175,11 @@ namespace MEInsight.Web.Areas.Settings.Controllers
         {
             var refLocationType = await _context.LocationTypes.FindAsync(id);
 
-            _context.LocationTypes.Remove(refLocationType);
+            if (refLocationType != null)
+            {
+                _context.LocationTypes.Remove(refLocationType);
+            }
+
             await _context.SaveChangesAsync();
         
             TempData["messageType"] = "success";

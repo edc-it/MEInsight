@@ -178,7 +178,11 @@ namespace MEInsight.Web.Areas.Settings.Controllers
         {
             var refGradeLevel = await _context.GradeLevels.FindAsync(id);
 
-            _context.GradeLevels.Remove(refGradeLevel);
+            if (refGradeLevel != null)
+            {
+                _context.GradeLevels.Remove(refGradeLevel);
+            }
+            
             await _context.SaveChangesAsync();
         
             TempData["messageType"] = "success";

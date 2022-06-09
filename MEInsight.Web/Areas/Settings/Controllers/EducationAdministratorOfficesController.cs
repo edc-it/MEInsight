@@ -151,7 +151,7 @@ namespace MEInsight.Web.Areas.Settings.Controllers
 
             int relatedCount = 0;
 
-			relatedCount += refEducationAdministratorOffice.EducationAdministrators.Count();
+			relatedCount += refEducationAdministratorOffice.EducationAdministrators.Count;
 
 			if (relatedCount > 0)
             {
@@ -174,7 +174,11 @@ namespace MEInsight.Web.Areas.Settings.Controllers
         {
             var refEducationAdministratorOffice = await _context.EducationAdministratorOffices.FindAsync(id);
 
-            _context.EducationAdministratorOffices.Remove(refEducationAdministratorOffice);
+            if (refEducationAdministratorOffice != null)
+            {
+                _context.EducationAdministratorOffices.Remove(refEducationAdministratorOffice);
+            }
+
             await _context.SaveChangesAsync();
         
             TempData["messageType"] = "success";

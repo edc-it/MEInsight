@@ -174,7 +174,11 @@ namespace MEInsight.Web.Areas.Settings.Controllers
         {
             var refTeacherEmploymentType = await _context.TeacherEmploymentTypes.FindAsync(id);
 
-            _context.TeacherEmploymentTypes.Remove(refTeacherEmploymentType);
+            if (refTeacherEmploymentType != null)
+            {
+                _context.TeacherEmploymentTypes.Remove(refTeacherEmploymentType);
+            }
+            
             await _context.SaveChangesAsync();
         
             TempData["messageType"] = "success";

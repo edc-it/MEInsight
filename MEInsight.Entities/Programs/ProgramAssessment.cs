@@ -97,7 +97,7 @@ namespace MEInsight.Entities.Programs
         [ForeignKey("RefEvaluationStatusId")]
         [Display(Name = "Completion Status")]
         public virtual RefEvaluationStatus? EvaluationStatus { get; set; }
-
+        
         public virtual ICollection<GroupEvaluation> GroupEvaluations { get; set; }
 
     }

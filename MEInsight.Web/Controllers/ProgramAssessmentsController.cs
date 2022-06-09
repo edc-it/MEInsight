@@ -202,7 +202,7 @@ namespace MEL.Web.Controllers
             }
 
             int relatedCount = 0;
-                    relatedCount += programAssessment.GroupEvaluations.Count();
+                    relatedCount += programAssessment.GroupEvaluations.Count;
 
             if(relatedCount > 0)
             {
@@ -226,7 +226,11 @@ namespace MEL.Web.Controllers
         {
             var programAssessment = await _context.ProgramAssessments.FindAsync(id);
 
-            _context.ProgramAssessments.Remove(programAssessment);
+            if (programAssessment != null)
+            {
+                _context.ProgramAssessments.Remove(programAssessment);
+            }
+            
             await _context.SaveChangesAsync();
         
             TempData["messageType"] = "success";
@@ -234,7 +238,7 @@ namespace MEL.Web.Controllers
             TempData["message"] = "Record successfully deleted";
 
             //return RedirectToAction(nameof(Index));        
-            return RedirectToAction(nameof(Index), new { id = programAssessment.ProgramId });
+            return RedirectToAction(nameof(Index), new { id = programAssessment!.ProgramId });
         }
 
         private bool ProgramAssessmentExists(int id)

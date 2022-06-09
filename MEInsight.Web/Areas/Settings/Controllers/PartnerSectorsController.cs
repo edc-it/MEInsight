@@ -174,7 +174,11 @@ namespace MEInsight.Web.Areas.Settings.Controllers
         {
             var refPartnerSector = await _context.PartnerSectors.FindAsync(id);
 
-            _context.PartnerSectors.Remove(refPartnerSector);
+            if (refPartnerSector != null)
+            {
+                _context.PartnerSectors.Remove(refPartnerSector);
+            }
+            
             await _context.SaveChangesAsync();
         
             TempData["messageType"] = "success";

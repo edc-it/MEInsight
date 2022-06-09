@@ -50,7 +50,7 @@ namespace MEInsight.Web.Extensions
             if (current == null)
                 return Enumerable.Empty<RefLocation>();
 
-            return Enumerable.Concat(new[] { current }, ListLocations(locations, current.ParentLocationId));
+            return Enumerable.Concat(new[] { current }, ListLocations(locations, current.ParentLocationId!));
         }
 
     }

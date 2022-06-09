@@ -23,17 +23,19 @@ namespace MEInsight.Entities.Reference
         public int RefAssessmentTypeId { get; set; }
 
         [Required(ErrorMessage = "The {0} field is required.")]
-        [MaxLength(25)]
+        [StringLength(25)]
         [Display(Name = "Assessment Type Code")]
         [Column(Order = 1)]
         public string AssessmentTypeCode { get; set; } = null!;
 
         [Required(ErrorMessage = "The {0} field is required.")]
-        [MaxLength(150)]
+        [StringLength(150)]
+
         [Display(Name = "Assessment Type")]
         [Column(Order = 2)]
         public string AssessmentType { get; set; } = null!;
 
+        [InverseProperty("AssessmentTypes")]
         public virtual ICollection<ProgramAssessment> ProgramAssessments { get; set; }
     }
 }

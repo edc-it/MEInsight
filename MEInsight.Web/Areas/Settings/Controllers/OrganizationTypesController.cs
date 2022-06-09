@@ -153,8 +153,8 @@ namespace MEInsight.Web.Areas.Settings.Controllers
             int relatedCount = 0;
                 
 
-            relatedCount += refOrganizationType.Organizations.Count();
-            relatedCount += refOrganizationType.Programs.Count();
+            relatedCount += refOrganizationType.Organizations.Count;
+            relatedCount += refOrganizationType.Programs.Count;
 
             if (relatedCount > 0)
             {
@@ -177,7 +177,11 @@ namespace MEInsight.Web.Areas.Settings.Controllers
         {
             var refOrganizationType = await _context.OrganizationTypes.FindAsync(id);
 
-            _context.OrganizationTypes.Remove(refOrganizationType);
+            if (refOrganizationType != null)
+            {
+                _context.OrganizationTypes.Remove(refOrganizationType);
+            }
+            
             await _context.SaveChangesAsync();
         
             TempData["messageType"] = "success";

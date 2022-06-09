@@ -152,8 +152,8 @@ namespace MEInsight.Web.Areas.Settings.Controllers
 
             int relatedCount = 0;
 
-			relatedCount += refAttendanceUnit.ProgramAssessments.Count();
-			relatedCount += refAttendanceUnit.Programs.Count();
+			relatedCount += refAttendanceUnit.ProgramAssessments.Count;
+			relatedCount += refAttendanceUnit.Programs.Count;
 
 			if (relatedCount > 0)
             {
@@ -176,7 +176,11 @@ namespace MEInsight.Web.Areas.Settings.Controllers
         {
             var refAttendanceUnit = await _context.AttendanceUnits.FindAsync(id);
 
-            _context.AttendanceUnits.Remove(refAttendanceUnit);
+            if (refAttendanceUnit != null)
+            {
+                _context.AttendanceUnits.Remove(refAttendanceUnit);
+            }
+            
             await _context.SaveChangesAsync();
         
             TempData["messageType"] = "success";

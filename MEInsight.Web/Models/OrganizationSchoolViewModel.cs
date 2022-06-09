@@ -41,13 +41,13 @@ namespace MEInsight.Web.Models
         [Display(Name = "Organization Code")]
         [Remote(action: "VerifyOrganizationCode", controller: "RemoteValidations", HttpMethod = "POST", ErrorMessage = "This Code already exists.", AdditionalFields = "InitialValue")]
         [Column(Order = 2)]
-        public string OrganizationCode { get; set; }
+        public string? OrganizationCode { get; set; }
 
         [Required(ErrorMessage = "The {0} field is required.")]
         [MaxLength(255)]
         [Display(Name = "Organization")]
         [Column(Order = 3)]
-        public string OrganizationName { get; set; }
+        public string? OrganizationName { get; set; }
 
         // Foreign Key
         [Required(ErrorMessage = "The {0} field is required.")]
@@ -63,22 +63,22 @@ namespace MEInsight.Web.Models
         [MaxLength(150)]
         [Column(Order = 6)]
         [Display(Name = "Contact")]
-        public string Contact { get; set; }
+        public string? Contact { get; set; }
 
         [MaxLength(20)]
         [Column(Order = 7)]
         [Display(Name = "Phone")]
-        public string Phone { get; set; }
+        public string? Phone { get; set; }
 
         [Display(Name = "Location")]
         [Column(Order = 8)]
-        public string RefLocationId { get; set; }
+        public string? RefLocationId { get; set; }
 
         [MaxLength(384)]
         [DataType(DataType.MultilineText)]
         [Display(Name = "Address")]
         [Column(Order = 9)]
-        public string Address { get; set; }
+        public string? Address { get; set; }
 
         [Display(Name = "Latitude")]
         [Column(Order = 10)]
@@ -100,29 +100,28 @@ namespace MEInsight.Web.Models
         // Navigation properties
         [ForeignKey("ParentOrganizationId")]
         [Display(Name = "Parent Organization")]
-        public virtual Organization ParentOrganizations { get; set; }
+        public virtual Organization? ParentOrganizations { get; set; }
 
         [ForeignKey("RefOrganizationTypeId")]
         [Display(Name = "Organization Type")]
-        public virtual RefOrganizationType OrganizationTypes { get; set; }
+        public virtual RefOrganizationType? OrganizationTypes { get; set; }
 
         [ForeignKey("RefLocationId")]
         [Display(Name = "Location")]
-        public virtual RefLocation Locations { get; set; }
+        public virtual RefLocation? Locations { get; set; }
 
-        public virtual ICollection<Participant> Participants { get; set; }
-        public virtual ICollection<School> Schools { get; set; }
-        public virtual ICollection<Group> Groups { get; set; }
-        public virtual ICollection<Organization> Organizations { get; set; }
-        public virtual ICollection<ApplicationUser> Users { get; set; }
-
+        public virtual ICollection<Participant>? Participants { get; set; }
+        public virtual ICollection<School>? Schools { get; set; }
+        public virtual ICollection<Group>? Groups { get; set; }
+        public virtual ICollection<Organization>? Organizations { get; set; }
+        public virtual ICollection<ApplicationUser>? Users { get; set; }
 
         //School
         [MaxLength(50)]
         [Display(Name = "School Code")]
         [Column(Order = 1)]
         [Remote(action: "VerifySchoolCode", controller: "RemoteValidations", HttpMethod = "POST", ErrorMessage = "This Code already exists.", AdditionalFields = "InitialValue")]
-        public string SchoolCode { get; set; }
+        public string? SchoolCode { get; set; }
 
         [Display(Name = "School Type")]
         [Column(Order = 2)]
@@ -155,35 +154,30 @@ namespace MEInsight.Web.Models
         [MaxLength(150)]
         [Display(Name = "HeadTeacher")]
         [Column(Order = 9)]
-        public string HeadTeacher { get; set; }
-
-        // Navigation properties
-        //[ForeignKey("OrganizationId")]
-        //[Display(Name = "Organization")]
-        //public virtual Organization Organizations { get; set; }
+        public string? HeadTeacher { get; set; }
 
         [ForeignKey("RefSchoolTypeId")]
         [Display(Name = "School Type")]
-        public virtual RefSchoolType SchoolTypes { get; set; }
+        public virtual RefSchoolType? SchoolTypes { get; set; }
 
         [ForeignKey("RefSchoolLocationId")]
         [Display(Name = "School Location")]
-        public virtual RefSchoolLocation SchoolLocations { get; set; }
+        public virtual RefSchoolLocation? SchoolLocations { get; set; }
 
         [ForeignKey("RefSchoolAdministrationTypeId")]
         [Display(Name = "School Administration Type")]
-        public virtual RefSchoolAdministrationType SchoolAdministrationTypes { get; set; }
+        public virtual RefSchoolAdministrationType? SchoolAdministrationTypes { get; set; }
 
         [ForeignKey("RefSchoolClusterId")]
         [Display(Name = "School Cluster")]
-        public virtual RefSchoolCluster SchoolClusters { get; set; }
+        public virtual RefSchoolCluster? SchoolClusters { get; set; }
 
         [ForeignKey("PartnerId")]
         [Display(Name = "Partner")]
-        public virtual Partner Partners { get; set; }
+        public virtual Partner? Partners { get; set; }
 
         [ForeignKey("RefSchoolStatusId")]
         [Display(Name = "Status")]
-        public virtual RefSchoolStatus SchoolStatus { get; set; }
+        public virtual RefSchoolStatus? SchoolStatus { get; set; }
     }
 }

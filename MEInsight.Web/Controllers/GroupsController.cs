@@ -21,7 +21,7 @@ namespace MEL.Web.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
-        private IWebHostEnvironment _environment;
+        private readonly IWebHostEnvironment _environment;
 
         public GroupsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, IWebHostEnvironment environment)
         {
@@ -319,7 +319,7 @@ namespace MEL.Web.Controllers
             }
 
             int relatedCount = 0;
-            relatedCount += group.GroupEnrollments.Count();
+            relatedCount += group.GroupEnrollments.Count;
 
             if (relatedCount > 0)
             {
@@ -343,7 +343,11 @@ namespace MEL.Web.Controllers
         {
             var group = await _context.Groups.FindAsync(id);
 
-            _context.Groups.Remove(group);
+            if (group != null)
+            {
+                _context.Groups.Remove(group);
+            }
+            
             await _context.SaveChangesAsync();
 
             TempData["messageType"] = "success";
@@ -351,7 +355,7 @@ namespace MEL.Web.Controllers
             TempData["message"] = "Record successfully deleted";
 
             //return RedirectToAction(nameof(Index));        
-            return RedirectToAction(nameof(Index), new { id = group.OrganizationId });
+            return RedirectToAction(nameof(Index), new { id = group!.OrganizationId });
         }
 
         /// <summary>
@@ -374,7 +378,7 @@ namespace MEL.Web.Controllers
                 return NotFound();
             }
 
-            Group group = await _context.Groups.FindAsync(id);
+            var group = await _context.Groups.FindAsync(id);
 
             if (group == null)
             {
@@ -472,26 +476,19 @@ namespace MEL.Web.Controllers
 
         #region Helpers
         //Allowed file upload types
-        bool CheckFileType(string fileName)
+        static bool CheckFileType(string fileName)
         {
             string ext = Path.GetExtension(fileName);
-            switch (ext.ToLower())
+            return ext.ToLower() switch
             {
-                case ".jpg":
-                    return true;
-                case ".jpeg":
-                    return true;
-                case ".png":
-                    return true;
-                case ".doc":
-                    return true;
-                case ".docx":
-                    return true;
-                case ".pdf":
-                    return true;
-                default:
-                    return false;
-            }
+                ".jpg" => true,
+                ".jpeg" => true,
+                ".png" => true,
+                ".doc" => true,
+                ".docx" => true,
+                ".pdf" => true,
+                _ => false,
+            };
         }
         #endregion
     }

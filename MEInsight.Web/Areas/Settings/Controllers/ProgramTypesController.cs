@@ -174,7 +174,11 @@ namespace MEInsight.Web.Areas.Settings.Controllers
         {
             var refProgramType = await _context.ProgramTypes.FindAsync(id);
 
-            _context.ProgramTypes.Remove(refProgramType);
+            if (refProgramType != null)
+            {
+                _context.ProgramTypes.Remove(refProgramType);
+            }
+            
             await _context.SaveChangesAsync();
         
             TempData["messageType"] = "success";

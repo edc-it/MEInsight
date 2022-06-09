@@ -151,7 +151,7 @@ namespace MEInsight.Web.Areas.Settings.Controllers
 
             int relatedCount = 0;
 
-			relatedCount += refEducationAdministratorPosition.EducationAdministrators.Count();
+			relatedCount += refEducationAdministratorPosition.EducationAdministrators.Count;
 
 			if (relatedCount > 0)
             {
@@ -174,7 +174,11 @@ namespace MEInsight.Web.Areas.Settings.Controllers
         {
             var refEducationAdministratorPosition = await _context.EducationAdministratorPositions.FindAsync(id);
 
-            _context.EducationAdministratorPositions.Remove(refEducationAdministratorPosition);
+            if (refEducationAdministratorPosition != null)
+            {
+                _context.EducationAdministratorPositions.Remove(refEducationAdministratorPosition);
+            }
+            
             await _context.SaveChangesAsync();
         
             TempData["messageType"] = "success";

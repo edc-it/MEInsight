@@ -174,7 +174,11 @@ namespace MEInsight.Web.Areas.Settings.Controllers
         {
             var refStudentType = await _context.StudentTypes.FindAsync(id);
 
-            _context.StudentTypes.Remove(refStudentType);
+            if (refStudentType != null)
+            {
+                _context.StudentTypes.Remove(refStudentType);
+            }
+            
             await _context.SaveChangesAsync();
         
             TempData["messageType"] = "success";

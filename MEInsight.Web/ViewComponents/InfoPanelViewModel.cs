@@ -6,10 +6,10 @@ namespace MEInsight.Web.ViewComponents
     {
         public int? CurrentLevel { get; set; }
 
-        public string CurrentController { get; set; }
+        public string? CurrentController { get; set; }
 
         [Display(Name = "Program")]
-        public string Program { get; set; }
+        public string? Program { get; set; }
 
         [Display(Name = "Program Id")]
         public int? ProgramId { get; set; }
@@ -24,21 +24,21 @@ namespace MEInsight.Web.ViewComponents
         public int? Min { get; set; }
 
         [Display(Name = "Attendance Unit")]
-        public string AttendanceUnit { get; set; }
+        public string? AttendanceUnit { get; set; }
 
         [Display(Name = "Filename")]
-        public string GroupFileName { get; set; }
+        public string? GroupFileName { get; set; }
 
         [Display(Name = "Teacher/Facilitator")]
-        public string GroupTeacher { get; set; }
+        public string? GroupTeacher { get; set; }
 
-        public string GroupTeacherType { get; set; }
+        public string? GroupTeacherType { get; set; }
 
         [Display(Name = "Closed")]
         public bool? GroupClosed { get; set; }
 
         [Display(Name = "Grade Level")]
-        public string GradeLevel { get; set; }
+        public string? GradeLevel { get; set; }
 
         [DataType(DataType.Date)]
         [Display(Name = "Closed Date")]
@@ -56,22 +56,22 @@ namespace MEInsight.Web.ViewComponents
         public Guid? GroupId { get; set; }
 
         [Display(Name = "Group")]
-        public string Group { get; set; }
+        public string? Group { get; set; }
 
         [Display(Name = "Parent Organization")]
         public Guid? ParentOrganizationId { get; set; }
 
         [Display(Name = "Parent Organization")]
-        public string ParentOrganizations { get; set; }
+        public string? ParentOrganizations { get; set; }
 
         [Display(Name = "Organization")]
         public Guid? OrganizationId { get; set; }
 
         [Display(Name = "Organization")]
-        public string Organization { get; set; }
+        public string? Organization { get; set; }
 
         [Display(Name = "Organization Code")]
-        public string OrganizationCode { get; set; }
+        public string? OrganizationCode { get; set; }
 
         [Display(Name = "Is Administrator?")]
         public bool? IsOrganizationUnit { get; set; }
@@ -80,8 +80,8 @@ namespace MEInsight.Web.ViewComponents
         public bool? IsTenant { get; set; }
 
 
-        public IEnumerable<OrganizationParent> OrganizationParent { get; set; }
-        public IEnumerable<LocationParent> LocationParent { get; set; }
+        public IEnumerable<OrganizationParent>? OrganizationParent { get; set; }
+        public IEnumerable<LocationParent>? LocationParent { get; set; }
     }
     // ViewModel for GetParentHierarchyAsync
     public class OrganizationParent
@@ -93,13 +93,13 @@ namespace MEInsight.Web.ViewComponents
         public Guid? OrganizationId { get; set; }
 
         [Display(Name = "Organization")]
-        public string OrganizationName { get; set; }
+        public string? OrganizationName { get; set; }
 
         [Display(Name = "Parent Organization")]
         public Guid? ParentOrganizationId { get; set; }
 
         [Display(Name = "Parent")]
-        public string Parent { get; set; }
+        public string? Parent { get; set; }
 
         [Display(Name = "Is Administrator?")]
         public bool? IsOrganizationUnit { get; set; }
@@ -112,22 +112,22 @@ namespace MEInsight.Web.ViewComponents
         public int? Index { get; set; }
 
         [Display(Name = "Location")]
-        public string RefLocationId { get; set; }
+        public string? RefLocationId { get; set; }
 
         [Display(Name = "Location")]
-        public string LocationName { get; set; }
+        public string? LocationName { get; set; }
 
         [Display(Name = "Parent Location")]
-        public string ParentLocationId { get; set; }
+        public string? ParentLocationId { get; set; }
 
         [Display(Name = "Parent")]
-        public string ParentName { get; set; }
+        public string? ParentName { get; set; }
 
         [Display(Name = "Location Type")]
         public int? RefLocationTypeId { get; set; }
 
         [Display(Name = "Location Type")]
-        public string LocationType { get; set; }
+        public string? LocationType { get; set; }
 
         [Display(Name = "Location Level")]
         public int LocationLevel { get; set; }

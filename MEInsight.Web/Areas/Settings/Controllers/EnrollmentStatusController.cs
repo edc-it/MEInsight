@@ -151,7 +151,7 @@ namespace MEInsight.Web.Areas.Settings.Controllers
 
             int relatedCount = 0;
 
-			relatedCount += refEnrollmentStatus.GroupEnrollments.Count();
+			relatedCount += refEnrollmentStatus.GroupEnrollments.Count;
 
 			if (relatedCount > 0)
             {
@@ -174,7 +174,11 @@ namespace MEInsight.Web.Areas.Settings.Controllers
         {
             var refEnrollmentStatus = await _context.EnrollmentStatus.FindAsync(id);
 
-            _context.EnrollmentStatus.Remove(refEnrollmentStatus);
+            if (refEnrollmentStatus != null)
+            {
+                _context.EnrollmentStatus.Remove(refEnrollmentStatus);
+            }
+            
             await _context.SaveChangesAsync();
         
             TempData["messageType"] = "success";

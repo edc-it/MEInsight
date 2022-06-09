@@ -14,18 +14,18 @@ namespace MEInsight.Web.Areas.Settings.Models.ViewModels
 
         [Key]
         [Required(ErrorMessage = "The {0} field is required.")]
-        [MaxLength(25)]
+        [StringLength(25)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Display(Name = "Location Id")]
         [Remote(action: "VerifyLocationCode", controller: "RemoteValidations", HttpMethod = "POST", ErrorMessage = "This Code already exists.", AdditionalFields = "LocationCodeInitialValue")]
         [Column(Order = 0)]
-        public string RefLocationId { get; set; }
+        public string? RefLocationId { get; set; }
 
         [Required(ErrorMessage = "The {0} field is required.")]
         [MaxLength(255)]
         [Display(Name = "Location")]
         [Column(Order = 1)]
-        public string LocationName { get; set; }
+        public string? LocationName { get; set; }
 
         [Required(ErrorMessage = "The {0} field is required.")]
         [Display(Name = "Location Type")]
@@ -34,7 +34,7 @@ namespace MEInsight.Web.Areas.Settings.Models.ViewModels
 
         [Display(Name = "Parent Location")]
         [Column(Order = 3)]
-        public string ParentLocationId { get; set; }
+        public string? ParentLocationId { get; set; }
 
         [Display(Name = "Latitude")]
         [Column(Order = 4)]
@@ -45,10 +45,10 @@ namespace MEInsight.Web.Areas.Settings.Models.ViewModels
         public double? Longitude { get; set; }
 
         [Display(Name = "Parent Location")]
-        public string ParentLocation { get; set; }
+        public string? ParentLocation { get; set; }
 
         [Display(Name = "Location Type")]
-        public string LocationType { get; set; }
+        public string? LocationType { get; set; }
 
         [Display(Name = "Location Level")]
         public int LocationLevel { get; set; }
@@ -58,13 +58,13 @@ namespace MEInsight.Web.Areas.Settings.Models.ViewModels
         // Navigation properties
         [ForeignKey("RefLocationTypeId")]
         [Display(Name = "Location Type")]
-        public virtual RefLocationType LocationTypes { get; set; }
+        public virtual RefLocationType? LocationTypes { get; set; }
 
         [ForeignKey("ParentLocationId")]
         [Display(Name = "Parent Location")]
-        public virtual RefLocation ParentLocations { get; set; }
+        public virtual RefLocation? ParentLocations { get; set; }
 
-        public virtual ICollection<RefLocation> Locations { get; set; }
+        public virtual ICollection<RefLocation>? Locations { get; set; }
 
     }
 }

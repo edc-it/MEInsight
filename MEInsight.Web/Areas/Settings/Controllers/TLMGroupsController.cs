@@ -174,7 +174,11 @@ namespace MEInsight.Web.Areas.Settings.Controllers
         {
             var refTLMGroup = await _context.TLMGroups.FindAsync(id);
 
-            _context.TLMGroups.Remove(refTLMGroup);
+            if (refTLMGroup != null)
+            {
+                _context.TLMGroups.Remove(refTLMGroup);
+            }
+            
             await _context.SaveChangesAsync();
         
             TempData["messageType"] = "success";

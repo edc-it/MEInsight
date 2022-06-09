@@ -174,7 +174,11 @@ namespace MEInsight.Web.Areas.Settings.Controllers
         {
             var refTLMLanguage = await _context.TLMLanguages.FindAsync(id);
 
-            _context.TLMLanguages.Remove(refTLMLanguage);
+            if (refTLMLanguage != null)
+            {
+                _context.TLMLanguages.Remove(refTLMLanguage);
+            }
+
             await _context.SaveChangesAsync();
         
             TempData["messageType"] = "success";

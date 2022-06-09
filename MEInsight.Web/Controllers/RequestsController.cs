@@ -77,11 +77,16 @@ namespace MEL.Web.Controllers
                 completionDate = DateTime.Parse(CompletionDate);
             }
 
-            Group group = await _context.Groups.FindAsync(id);
+            Group? group = await _context.Groups.FindAsync(id);
+
+            if (group == null)
+            {
+                return Json(new { Status = false });
+            }
 
             group.Closed = true;
             group.ClosedDate = DateTime.Now;
-            group.ClosedBy = User.Identity.Name;
+            group.ClosedBy = User?.Identity?.Name;
             group.CompletionDate = completionDate;
 
             _context.Update(group);
@@ -100,7 +105,12 @@ namespace MEL.Web.Controllers
                 return Json(new { Status = false });
             }
 
-            Group group = await _context.Groups.FindAsync(id);
+            Group? group = await _context.Groups.FindAsync(id);
+
+            if (group == null)
+            {
+                return Json(new { Status = false });
+            }
 
             group.Closed = false;
             group.ClosedDate = null;
@@ -128,11 +138,16 @@ namespace MEL.Web.Controllers
                 return Json(new { Status = false });
             }
 
-            TLMDistributionPeriod distributionPeriod = await _context.TLMDistributionPeriods.FindAsync(id);
+            TLMDistributionPeriod? distributionPeriod = await _context.TLMDistributionPeriods.FindAsync(id);
+
+            if (distributionPeriod == null)
+            {
+                return Json(new { Status = false });
+            }
 
             distributionPeriod.Closed = true;
             distributionPeriod.ClosedDate = DateTime.Now;
-            distributionPeriod.ClosedBy = User.Identity.Name;
+            distributionPeriod.ClosedBy = User?.Identity?.Name;
 
             _context.Update(distributionPeriod);
             await _context.SaveChangesAsync();
@@ -155,7 +170,12 @@ namespace MEL.Web.Controllers
                 return Json(new { Status = false });
             }
 
-            TLMDistributionPeriod distributionPeriod = await _context.TLMDistributionPeriods.FindAsync(id);
+            TLMDistributionPeriod? distributionPeriod = await _context.TLMDistributionPeriods.FindAsync(id);
+
+            if (distributionPeriod == null)
+            {
+                return Json(new { Status = false });
+            }
 
             distributionPeriod.Closed = false;
             distributionPeriod.ClosedDate = null;
@@ -190,7 +210,7 @@ namespace MEL.Web.Controllers
                     Id = x.OrganizationId,
                     Text = x.OrganizationName + " (" + x.OrganizationCode + ")",
                     Parent = x.ParentOrganizationId,
-                    Icon = x.OrganizationTypes.OrganizationType == "School" ? "far fa-building" : "fas fa-building"
+                    Icon = x.OrganizationTypes!.OrganizationType == "School" ? "far fa-building" : "fas fa-building"
 
                 }).ToList();
 
@@ -221,8 +241,13 @@ namespace MEL.Web.Controllers
                 })
                 .ToList();
 
+            if (top == null)
+            {
+                return NotFound();
+            }
+
             //Add parent organization object to model
-            model.AddRange(top);
+            model.AddRange(top!);
 
             if (model == null)
             {
@@ -272,35 +297,35 @@ namespace MEL.Web.Controllers
                                    ParticipantId = participant.ParticipantId,
                                    RegistrationDate = participant.RegistrationDate.ToShortDateString(),
                                    OrganizationId = participant.OrganizationId,
-                                   OrganizationName = participant.Organizations.OrganizationName,
-                                   ParticipantType = participant.ParticipantTypes.ParticipantType, //
+                                   OrganizationName = participant.Organizations!.OrganizationName,
+                                   ParticipantType = participant.ParticipantTypes!.ParticipantType,
                                    ParticipantCode = participant.ParticipantCode,
                                    Name = participant.Name,
-                                   Sex = participant.Sex.Sex, //
+                                   Sex = participant.Sex!.Sex,
                                    BirthDate = participant.BirthDate ?? null,
                                    Age = participant.Age ?? null,
                                    Disability = participant.Disability ?? null,
-                                   DisabilityType = participant.DisabilityTypes.DisabilityType ?? null, //
+                                   DisabilityType = participant.DisabilityTypes!.DisabilityType ?? null,
                                    RefLocationId = participant.RefLocationId,
-                                   Location = participant.Organizations.Locations.LocationTypes.LocationLevel == 4 ? participant.Organizations.Locations.ParentLocations.LocationName + ", " + participant.Organizations.Locations.ParentLocations.ParentLocations.LocationName
-                                                : participant.Organizations.Locations.LocationTypes.LocationLevel == 3 ? participant.Organizations.Locations.LocationName + ", " + participant.Organizations.Locations.ParentLocations.LocationName
-                                                      : participant.Organizations.Locations.LocationTypes.LocationLevel == 2 ? participant.Organizations.Locations.LocationName
+                                   Location = participant.Organizations!.Locations!.LocationTypes.LocationLevel == 4 ? participant.Organizations!.Locations!.ParentLocations!.LocationName + ", " + participant.Organizations!.Locations!.ParentLocations!.ParentLocations!.LocationName
+                                                : participant.Organizations!.Locations!.LocationTypes.LocationLevel == 3 ? participant.Organizations!.Locations!.LocationName + ", " + participant.Organizations!.Locations!.ParentLocations!.LocationName
+                                                      : participant.Organizations!.Locations!.LocationTypes.LocationLevel == 2 ? participant.Organizations!.Locations!.LocationName
                                                         : "",
                                    //Student
                                    StudentCode = participantStudent.StudentCode ?? null,
-                                   StudentType = participantStudent.StudentTypes.StudentType ?? null, //
-                                   StudentSpecialization = participantStudent.StudentSpecializations.StudentSpecialization ?? null, //
-                                   StudentYearOfStudy = participantStudent.StudentYearOfStudies.StudentYearOfStudy ?? null,
+                                   StudentType = participantStudent.StudentTypes!.StudentType ?? null, //
+                                   StudentSpecialization = participantStudent.StudentSpecializations!.StudentSpecialization ?? null, //
+                                   StudentYearOfStudy = participantStudent.StudentYearOfStudies!.StudentYearOfStudy ?? null,
 
-                                   TeacherType = participantTeacher.TeacherTypes.TeacherType ?? null,
-                                   TeacherPosition = participantTeacher.TeacherPositions.TeacherPosition ?? null,
-                                   TeacherEmploymentType = participantTeacher.TeacherEmploymentTypes.TeacherEmploymentType ?? null,
+                                   TeacherType = participantTeacher.TeacherTypes!.TeacherType ?? null,
+                                   TeacherPosition = participantTeacher.TeacherPositions!.TeacherPosition ?? null,
+                                   TeacherEmploymentType = participantTeacher.TeacherEmploymentTypes!.TeacherEmploymentType ?? null,
 
                                    GradeLevels = participantTeacher.GradeLevels ?? null,
                                    //Education Administrator
-                                   EducationAdministratorType = participantEducationAdministrator.EducationAdministratorTypes.EducationAdministratorType ?? null,
-                                   EducationAdministratorPosition = participantEducationAdministrator.EducationAdministratorPositions.EducationAdministratorPosition ?? null,
-                                   EducationAdministratorOffice = participantEducationAdministrator.EducationAdministratorOffices.EducationAdministratorOffice ?? null,
+                                   EducationAdministratorType = participantEducationAdministrator.EducationAdministratorTypes!.EducationAdministratorType ?? null,
+                                   EducationAdministratorPosition = participantEducationAdministrator.EducationAdministratorPositions!.EducationAdministratorPosition ?? null,
+                                   EducationAdministratorOffice = participantEducationAdministrator.EducationAdministratorOffices!.EducationAdministratorOffice ?? null,
 
                                    //Combined
                                    Position = participant.RefParticipantTypeId == 2 ? participantTeacher.TeacherPositions.TeacherPosition
@@ -342,7 +367,7 @@ namespace MEL.Web.Controllers
 
                 participants = participants
                     .Where(p => organizationIds
-                    .Contains((Guid)p.OrganizationId));
+                    .Contains((Guid)p.OrganizationId!));
             }
 
             // DATATABLES POST REQUEST
@@ -379,7 +404,7 @@ namespace MEL.Web.Controllers
                     .Select(x => x.ParticipantId).ToList();
 
                 participants = participants
-                    .Where(p => enrolledIds.Contains((Guid)p.ParticipantId));
+                    .Where(p => enrolledIds.Contains((Guid)p.ParticipantId!));
             }
             else
             {
@@ -389,7 +414,7 @@ namespace MEL.Web.Controllers
                 {
                     participants = participants
                         .Where(p => selectedOrganizations.Select(Guid.Parse)
-                        .Contains((Guid)p.OrganizationId));
+                        .Contains((Guid)p.OrganizationId!));
                 }
             }
 
@@ -405,11 +430,11 @@ namespace MEL.Web.Controllers
             {
                 participants = participants
                     .Where(m =>
-                        m.ParticipantCode.ToLower().Contains(searchValue.ToLower()) ||
-                        m.Name.ToLower().Contains(searchValue.ToLower()) ||
-                        m.Sex.ToLower().Contains(searchValue.ToLower()) ||
-                        m.ParticipantType.ToLower().Contains(searchValue.ToLower()) ||
-                        m.OrganizationName.ToLower().Contains(searchValue.ToLower())
+                        m.ParticipantCode!.ToLower().Contains(searchValue.ToLower()) ||
+                        m.Name!.ToLower().Contains(searchValue.ToLower()) ||
+                        m.Sex!.ToLower().Contains(searchValue.ToLower()) ||
+                        m.ParticipantType!.ToLower().Contains(searchValue.ToLower()) ||
+                        m.OrganizationName!.ToLower().Contains(searchValue.ToLower())
                     );
             }
 
@@ -454,7 +479,7 @@ namespace MEL.Web.Controllers
                 .Select(g => new Group
                 {
                     GroupId = g.GroupId,
-                    GroupName = g.Organizations.OrganizationName + " - " + g.GroupName,
+                    GroupName = g.Organizations!.OrganizationName + " - " + g.GroupName,
                     OrganizationId = g.OrganizationId
                 });
 
@@ -539,11 +564,11 @@ namespace MEL.Web.Controllers
                 {
                     t.TLMDistributionId,
                     t.TrackingCode,
-                    OrganizationFrom = t.OrganizationsFrom.OrganizationName,
-                    OrganizationTo = t.OrganizationsTo.OrganizationName,
+                    OrganizationFrom = t.OrganizationsFrom!.OrganizationName,
+                    OrganizationTo = t.OrganizationsTo!.OrganizationName,
                     ShippedDate = t.ShippedDate.HasValue ? t.ShippedDate.Value.ToShortDateString() : null,
                     ReceivedDate = t.ReceivedDate.HasValue ? t.ReceivedDate.Value.ToShortDateString() : null,
-                    t.TLMDistributionStatus.DistributionStatus,
+                    t.TLMDistributionStatus!.DistributionStatus,
                     t.Url
                 });
 
@@ -623,7 +648,7 @@ namespace MEL.Web.Controllers
                     .Where(m =>
                         m.OrganizationFrom.ToLower().Contains(searchValue.ToLower()) ||
                         m.OrganizationTo.ToLower().Contains(searchValue.ToLower()) ||
-                        m.TrackingCode.ToLower().Contains(searchValue.ToLower())
+                        m.TrackingCode!.ToLower().Contains(searchValue.ToLower())
                     );
             }
 

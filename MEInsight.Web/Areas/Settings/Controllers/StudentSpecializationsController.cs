@@ -174,7 +174,11 @@ namespace MEInsight.Web.Areas.Settings.Controllers
         {
             var refStudentSpecialization = await _context.StudentSpecializations.FindAsync(id);
 
-            _context.StudentSpecializations.Remove(refStudentSpecialization);
+            if (refStudentSpecialization != null)
+            {
+                _context.StudentSpecializations.Remove(refStudentSpecialization);
+            }
+            
             await _context.SaveChangesAsync();
         
             TempData["messageType"] = "success";

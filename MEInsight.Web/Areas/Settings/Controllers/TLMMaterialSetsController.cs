@@ -174,7 +174,11 @@ namespace MEInsight.Web.Areas.Settings.Controllers
         {
             var refTLMMaterialSet = await _context.TLMMaterialSets.FindAsync(id);
 
-            _context.TLMMaterialSets.Remove(refTLMMaterialSet);
+            if (refTLMMaterialSet != null)
+            {
+                _context.TLMMaterialSets.Remove(refTLMMaterialSet);
+            }
+            
             await _context.SaveChangesAsync();
         
             TempData["messageType"] = "success";

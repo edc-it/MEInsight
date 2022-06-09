@@ -151,7 +151,7 @@ namespace MEInsight.Web.Areas.Settings.Controllers
 
             int relatedCount = 0;
 
-			relatedCount += refDisabilityType.Participants.Count();
+			relatedCount += refDisabilityType.Participants.Count;
 
 			if (relatedCount > 0)
             {
@@ -174,7 +174,11 @@ namespace MEInsight.Web.Areas.Settings.Controllers
         {
             var refDisabilityType = await _context.DisabilityTypes.FindAsync(id);
 
-            _context.DisabilityTypes.Remove(refDisabilityType);
+            if (refDisabilityType != null)
+            {
+                _context.DisabilityTypes.Remove(refDisabilityType);
+            }
+            
             await _context.SaveChangesAsync();
         
             TempData["messageType"] = "success";

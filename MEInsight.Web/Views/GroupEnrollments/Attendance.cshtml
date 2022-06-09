@@ -71,13 +71,13 @@
                                         @Html.Hidden("attendance[" + (@i + 10) + "].GroupEnrollmentId", Model[i].GroupEnrollmentId)
                                         @Html.Hidden("attendance[" + (@i + 10) + "].GroupId", Model[i].GroupId)
 
-                                        @Html.Raw(Model[i].Participants.Name)
+                                        @Html.Raw(Model[i].Participants?.Name)
                                     </td>
                                     <td>
-                                        @Html.Raw(Model[i].Participants.ParticipantCode)
+                                        @Html.Raw(Model[i].Participants?.ParticipantCode)
                                     </td>
                                     <td>
-                                        @Html.Raw(Model[i].Participants.Sex.SexId)
+                                        @Html.Raw(Model[i].Participants?.Sex?.SexId)
                                     </td>
                                     <td class="text-end">
                                         <div class="input-group input-group-sm d-flex justify-content-end">
