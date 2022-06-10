@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="~/lib/fontawesome-free/css/all.min.css" asp-append-version="true" />
     <!-- Waves v0.7.6 -->
     <link rel="stylesheet" href="~/lib/node-waves/dist/waves.min.css" asp-append-version="true" />
+    <link href="~/lib/sweetalert2/dist/bootstrap-4.min.css" rel="stylesheet" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
 
     <!-- View Styles -->
@@ -80,20 +81,34 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
     <!-- Waves v0.7.6 -->
     <script src="~/lib/node-waves/dist/waves.min.js" asp-append-version="true"></script>
+    <!-- SweetAlert2-->
+    <script src="~/lib/sweetalert2/dist/sweetalert2.all.min.js" asp-append-version="true"></script>
     <!-- Application JS v1.0 -->
     <script src="~/js/site.min.js" asp-append-version="true"></script>
     
+
     @if (TempData["message"] != null)
     {
-        string? messageTitle = TempData["messageTitle"]?.ToString();
-        string? message = TempData["message"]?.ToString();
-        string? messageType = TempData["messageType"]?.ToString();
+        string messageTitle = TempData["messageTitle"]?.ToString() ?? "";
+        string message = TempData["message"]?.ToString() ?? "";
+        string messageType = TempData["messageType"]?.ToString() ?? "";
         <script>
-            $(document).bsToast({
-                header: {
-                    text: '<i class="fas fa-check-circle"></i> @(Localizer[messageTitle])'
-                },
-                body: '@Localizer[message]'
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            });
+
+            Toast.fire({
+                icon: '@Localizer[messageType]',
+                title: '@Localizer[messageTitle]',
+                text: '@Localizer[message]'
             });
         </script>
     }
