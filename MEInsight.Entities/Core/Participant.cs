@@ -9,7 +9,6 @@ using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using MEInsight.Entities.Reference;
 using MEInsight.Entities.Programs;
-using System.Text.Json.Serialization;
 
 namespace MEInsight.Entities.Core
 {
