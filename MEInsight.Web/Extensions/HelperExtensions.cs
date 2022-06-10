@@ -1,4 +1,6 @@
 ﻿using System.Data;
+using System.Reflection;
+using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 
@@ -41,7 +43,7 @@ namespace MEInsight.Web.Extensions
 						//Format Cells
 						if (cell?.StyleIndex?.Value == null)
 						{
-							tempRow[actualCellIndex] = GetCellValue(spreadSheetDocument, cell);
+							tempRow[actualCellIndex] = GetCellValue(spreadSheetDocument, cell!);
 						}
 						else
 						{
@@ -154,7 +156,7 @@ namespace MEInsight.Web.Extensions
 			return index;
 		}
 
-		// TODO
+		// TODO +++++
 		public static void CreateExcelFile(DataTable table, string destination)
         {
             var ds = new DataSet();
@@ -165,6 +167,7 @@ namespace MEInsight.Web.Extensions
 		// TODO
         public static void ExportDSToExcel(DataSet ds, string destination)
         {
+            // https://stackoverflow.com/questions/11811143/export-datatable-to-excel-with-open-xml-sdk-in-c-sharp
             using var workbook = SpreadsheetDocument.Create(destination, DocumentFormat.OpenXml.SpreadsheetDocumentType.Workbook);
             var workbookPart = workbook.AddWorkbookPart();
             workbook.WorkbookPart.Workbook = new Workbook
@@ -226,5 +229,38 @@ namespace MEInsight.Web.Extensions
                 }
             }
         }
-    }
+
+		public class ListtoDataTableConverter
+		{
+			public DataTable ToDataTable<T>(List<T> items)
+			{
+				DataTable dataTable = new(typeof(T).Name);
+				//Get all the properties
+				PropertyInfo[] Props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+				foreach (PropertyInfo prop in Props)
+				{
+					//Setting column names as Property names
+					dataTable.Columns.Add(prop.Name);
+				}
+				foreach (T item in items)
+				{
+					var values = new object[Props.Length];
+
+                    if (values != null)
+                    {
+						for (int i = 0; i < Props.Length; i++)
+						{
+							//inserting property values to datatable rows
+							values[i] = Props[i].GetValue(item, null);
+						}
+						dataTable.Rows.Add(values);
+					}
+					
+				}
+				//put a breakpoint here and check datatable
+				return dataTable;
+			}
+		}
+
+	}
 }
