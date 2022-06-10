@@ -16,11 +16,19 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
+// Using Microsoft SQL Server
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
-// Replace for using PostgreSQL instead of Microsoft SQL
+// Using PostgreSQL
+// Install-Package Npgsql.EntityFrameworkCore.PostgreSQL
+// builder.Services.AddDbContext<ApplicationDbContext>(options =>
 //   options.UseNpgsql(connectionString));
+
+// Using MySQL
+// Install-Package Pomelo.EntityFrameworkCore.MySql
+//builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//   options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 

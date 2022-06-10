@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MEInsight.Web", "MEInsight.Web\MEInsight.Web.csproj", "{F3C31A21-62C1-47EA-B3EB-3851683C948B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MEInsight.Web", "MEInsight.Web\MEInsight.Web.csproj", "{F3C31A21-62C1-47EA-B3EB-3851683C948B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MEInsight.Entities", "MEInsight.Entities\MEInsight.Entities.csproj", "{137F3FBC-85B1-4A9A-A567-979D436A734E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MEInsight.Entities", "MEInsight.Entities\MEInsight.Entities.csproj", "{137F3FBC-85B1-4A9A-A567-979D436A734E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
