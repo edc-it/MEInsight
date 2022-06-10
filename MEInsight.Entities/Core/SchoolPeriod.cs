@@ -37,7 +37,6 @@ namespace MEInsight.Entities.Core
         [Column(Order = 3)]
         public DateTime? EndDate { get; set; }
 
-        // Navigation properties
         public virtual ICollection<SchoolEnrollment> SchoolEnrollments { get; set; }
 
     }

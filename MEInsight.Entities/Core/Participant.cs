@@ -55,27 +55,27 @@ namespace MEInsight.Entities.Core
         public int? RefParticipantCohortId { get; set; }
 
         [Required(ErrorMessage = "The {0} field is required.")]
-        [MaxLength(100)]
+        [StringLength(100)]
         [Display(Name = "Participant Code")]
         [Column(Order = 5)]
         [Remote(action: "VerifyParticipantCode", controller: "RemoteValidations", HttpMethod = "POST", ErrorMessage = "This Code already exists.", AdditionalFields = "ParticipantCodeInitialValue")]
         public string? ParticipantCode { get; set; } = null!;
 
         [Required(ErrorMessage = "The {0} field is required.")]
-        [MaxLength(35)]
+        [StringLength(35)]
         [Display(Name = "First name")]
         [JsonPropertyName("First name")]
         [System.Runtime.Serialization.DataMember(Name = "First name")]
         [Column(Order = 6)]
         public string? FirstName { get; set; } = null!;
 
-        [MaxLength(35)]
+        [StringLength(35)]
         [Display(Name = "Middle name")]
         [Column(Order = 7)]
         public string? MiddleName { get; set; }
 
         [Required(ErrorMessage = "The {0} field is required.")]
-        [MaxLength(35)]
+        [StringLength(35)]
         [Display(Name = "Surname/Last name")]
         [Column(Order = 8)]
         public string? LastName { get; set; } = null!;
@@ -132,27 +132,27 @@ namespace MEInsight.Entities.Core
         [Column(Order = 13)]
         public int? RefDisabilityTypeId { get; set; }
 
-        [MaxLength(20)]
+        [StringLength(20)]
         [Display(Name = "Phone")]
         [Column(Order = 14)]
         public string? Phone { get; set; }
 
-        [MaxLength(20)]
+        [StringLength(20)]
         [Display(Name = "Mobile")]
         [Column(Order = 15)]
         public string? Mobile { get; set; }
 
-        [MaxLength(320)]
+        [StringLength(320)]
         [Display(Name = "Email")]
         [Column(Order = 16)]
         public string? Email { get; set; }
 
-        [MaxLength(200)]
+        [StringLength(200)]
         [Display(Name = "Facebook")]
         [Column(Order = 17)]
         public string? Facebook { get; set; }
 
-        [MaxLength(200)]
+        [StringLength(200)]
         [Display(Name = "Instant Messenger")]
         [Column(Order = 18)]
         public string? InstantMessenger { get; set; }
@@ -161,7 +161,7 @@ namespace MEInsight.Entities.Core
         [Column(Order = 19)]
         public string? RefLocationId { get; set; }
 
-        [MaxLength(384)]
+        [StringLength(384)]
         [DataType(DataType.MultilineText)]
         [Display(Name = "Address")]
         [Column(Order = 20)]
@@ -192,6 +192,7 @@ namespace MEInsight.Entities.Core
         [Display(Name = "Location")]
         public virtual RefLocation? Locations { get; set; }
 
+        [InverseProperty("Participants")]
         public virtual ICollection<GroupEnrollment> GroupEnrollments { get; set; }
 
         [IgnoreDataMember]

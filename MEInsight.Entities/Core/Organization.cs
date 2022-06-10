@@ -31,7 +31,8 @@ namespace MEInsight.Entities.Core
         [Key]
         [Required(ErrorMessage = "The {0} field is required.")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Display(Name = "Organization")]
+        [Display(Name = "Organization", Description = "An organization can be a school, community", Prompt = "Enter an organization")]
+        
         [Column(Order = 0)]
         public Guid OrganizationId { get; set; }
 
@@ -42,14 +43,14 @@ namespace MEInsight.Entities.Core
         public DateTime RegistrationDate { get; set; }
 
         [Required(ErrorMessage = "The {0} field is required.")]
-        [MaxLength(100)]
+        [StringLength(100)]
         [Display(Name = "Organization Code")]
         [Remote(action: "VerifyOrganizationCode", controller: "RemoteValidations", HttpMethod = "POST", ErrorMessage = "This Code already exists.", AdditionalFields = "OrganizationCodeInitialValue")]
         [Column(Order = 2)]
         public string OrganizationCode { get; set; } = null!;
 
         [Required(ErrorMessage = "The {0} field is required.")]
-        [MaxLength(255)]
+        [StringLength(255)]
         [Display(Name = "Organization")]
         [Column(Order = 3)]
         public string OrganizationName { get; set; } = null!;
@@ -63,12 +64,12 @@ namespace MEInsight.Entities.Core
         [Column(Order = 5)]
         public Guid? ParentOrganizationId { get; set; }
 
-        [MaxLength(150)]
+        [StringLength(150)]
         [Column(Order = 6)]
         [Display(Name = "Contact")]
         public string? Contact { get; set; }
 
-        [MaxLength(25)]
+        [StringLength(25)]
         [Column(Order = 7)]
         [Display(Name = "Phone")]
         public string? Phone { get; set; }
@@ -77,7 +78,7 @@ namespace MEInsight.Entities.Core
         [Column(Order = 8)]
         public string? RefLocationId { get; set; }
 
-        [MaxLength(384)]
+        [StringLength(384)]
         [DataType(DataType.MultilineText)]
         [Display(Name = "Address")]
         [Column(Order = 9)]
@@ -111,10 +112,13 @@ namespace MEInsight.Entities.Core
         [ForeignKey("RefLocationId")]
         [Display(Name = "Location")]
         public virtual RefLocation? Locations { get; set; }
+
         public virtual ICollection<Participant> Participants { get; set; }
+
         public virtual ICollection<Group> Groups { get; set; }
-        public virtual ICollection<Organization> Organizations { get; set; }
+
         public virtual ICollection<ApplicationUser> Users { get; set; }
+        public virtual ICollection<Organization> Organizations { get; set; }
 
         [InverseProperty("OrganizationsFrom")]
         public virtual ICollection<TLMDistribution> TLMDistributionsFrom { get; set; }

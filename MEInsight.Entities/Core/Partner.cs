@@ -16,7 +16,7 @@ namespace MEInsight.Entities.Core
     {
 
         [Required(ErrorMessage = "The {0} field is required.")]
-        [MaxLength(100)]
+        [StringLength(100)]
         [Display(Name = "Partner Code")]
         [Column(Order = 1)]
         [Remote(action: "VerifyPartnerCode", controller: "RemoteValidations", HttpMethod = "POST", ErrorMessage = "This Code already exists.", AdditionalFields = "PartnerCodeInitialValue")]

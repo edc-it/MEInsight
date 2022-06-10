@@ -20,12 +20,6 @@ namespace MEInsight.Entities.Core
             Groups = new HashSet<Group>();
         }
 
-        //[Key]
-        //[Required(ErrorMessage = "The {0} field is required.")]
-        //[Display(Name = "Participant")]
-        //[Column(Order = 0)]
-        //public Guid ParticipantId { get; set; }
-
         [Display(Name = "Teacher Type")]
         [Column(Order = 1)]
         public int? RefTeacherTypeId { get; set; }
@@ -42,10 +36,6 @@ namespace MEInsight.Entities.Core
         [Display(Name = "Grades taught?")]
         [Column(Order = 4)]
         public string? GradeLevels { get; set; }
-
-        ////Navigation properties
-        //[ForeignKey("ParticipantId")]
-        //public virtual Participant Participants { get; set; } = null!;
 
         [ForeignKey("RefTeacherTypeId")]
         [Display(Name = "Teacher Type")]

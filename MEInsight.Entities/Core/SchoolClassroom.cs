@@ -42,7 +42,6 @@ namespace MEInsight.Entities.Core
         [Column(Order = 5)]
         public int? Classes { get; set; }
         
-        //FOREIGN KEYS
         [ForeignKey("OrganizationId")]
         [Display(Name = "School")]
         public virtual School Schools { get; set; } = null!;

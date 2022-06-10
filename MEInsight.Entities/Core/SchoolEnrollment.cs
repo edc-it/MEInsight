@@ -60,7 +60,6 @@ namespace MEInsight.Entities.Core
         [Column(Order = 9)]
         public int? DisabledFemale { get; set; }
 
-        //FOREIGN KEYS
         [ForeignKey("OrganizationId")]
         [Display(Name = "School")]
         public virtual School? Schools { get; set; }

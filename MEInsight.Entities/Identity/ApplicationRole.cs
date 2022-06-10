@@ -10,7 +10,7 @@ namespace MEInsight.Entities.Identity
 {
     public class ApplicationRole : IdentityRole<Guid>
     {
-        [MaxLength(250)]
+        [StringLength(250)]
         [Display(Name = "Description")]
         public string? Description { get; set; }
     }

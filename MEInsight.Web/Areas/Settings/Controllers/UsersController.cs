@@ -82,10 +82,10 @@ namespace MEInsight.Web.Areas.Settings.Controllers
                 LastName = user.LastName,
                 Organization = user.OrganizationId == null ? null : _context.Organizations.Single(o => o.OrganizationId == user.OrganizationId).OrganizationName,
                 Role = _roleManager.Roles.Single(r => r.Name == _userManager.GetRolesAsync(user).Result.Single()).Name ?? null,
-                ModifiedBy = user.ModifiedBy,
-                ModifiedDate = user.ModifiedDate,
-                CreatedBy = user.CreatedBy,
-                CreatedDate = user.CreatedDate,
+                //ModifiedBy = user.ModifiedBy,
+                //ModifiedDate = user.ModifiedDate,
+                //CreatedBy = user.CreatedBy,
+                //CreatedDate = user.CreatedDate,
                 AccessFailedCount = user.AccessFailedCount,
                 LockoutEnabled = user.LockoutEnabled,
                 LockoutEnd = user.LockoutEnd
@@ -147,8 +147,8 @@ namespace MEInsight.Web.Areas.Settings.Controllers
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     OrganizationId = model.OrganizationId,
-                    CreatedBy = User.Identity.Name,
-                    CreatedDate = DateTime.Now
+                    //CreatedBy = User.Identity.Name,
+                    //CreatedDate = DateTime.Now
                 };
 
                 var createUser = await _userManager.CreateAsync(user, model.Password);
@@ -269,8 +269,8 @@ namespace MEInsight.Web.Areas.Settings.Controllers
                 user.FirstName = model.FirstName;
                 user.LastName = model.LastName;
                 user.OrganizationId = model.OrganizationId;
-                user.ModifiedBy = User.Identity.Name;
-                user.ModifiedDate = DateTime.Now;
+                //user.ModifiedBy = User.Identity.Name;
+                //user.ModifiedDate = DateTime.Now;
 
                 string existingRole = _userManager.GetRolesAsync(user).Result.Single();
                 Guid existingRoleId = _roleManager.Roles.Single(r => r.Name == existingRole).Id;
@@ -494,10 +494,10 @@ namespace MEInsight.Web.Areas.Settings.Controllers
                 LastName = user.LastName,
                 Organization = user.OrganizationId == null ? null : _context.Organizations.Single(o => o.OrganizationId == user.OrganizationId).OrganizationName,
                 Role = _roleManager.Roles.Single(r => r.Name == _userManager.GetRolesAsync(user).Result.Single()).Name ?? null,
-                ModifiedBy = user.ModifiedBy,
-                ModifiedDate = user.ModifiedDate,
-                CreatedBy = user.CreatedBy,
-                CreatedDate = user.CreatedDate
+                //ModifiedBy = user.ModifiedBy,
+                //ModifiedDate = user.ModifiedDate,
+                //CreatedBy = user.CreatedBy,
+                //CreatedDate = user.CreatedDate
             });
 
         }
@@ -537,10 +537,10 @@ namespace MEInsight.Web.Areas.Settings.Controllers
                 LastName = user.LastName,
                 Organization = user.OrganizationId == null ? null : _context.Organizations.Single(o => o.OrganizationId == user.OrganizationId).OrganizationName,
                 Role = _roleManager.Roles.Single(r => r.Name == _userManager.GetRolesAsync(user).Result.Single()).Name ?? null,
-                ModifiedBy = user.ModifiedBy,
-                ModifiedDate = user.ModifiedDate,
-                CreatedBy = user.CreatedBy,
-                CreatedDate = user.CreatedDate
+                //ModifiedBy = user.ModifiedBy,
+                //ModifiedDate = user.ModifiedDate,
+                //CreatedBy = user.CreatedBy,
+                //CreatedDate = user.CreatedDate
             });
         }
 

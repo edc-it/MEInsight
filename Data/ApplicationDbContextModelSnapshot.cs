@@ -125,16 +125,16 @@ namespace MEInsight.Web.Data.Migrations
                     b.HasData(
                         new
                         {
-                            OrganizationId = new Guid("d28cdcc2-211b-47f2-984b-82a01bf6c9e5"),
+                            OrganizationId = new Guid("40f20749-d522-4f16-9766-813269a38066"),
                             CreatedBy = "admin@meinsight.org",
-                            CreatedDate = new DateTimeOffset(new DateTime(2022, 6, 10, 0, 41, 14, 309, DateTimeKind.Unspecified).AddTicks(7220), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedDate = new DateTimeOffset(new DateTime(2022, 6, 5, 0, 43, 25, 507, DateTimeKind.Unspecified).AddTicks(7792), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             IsOrganizationUnit = true,
                             IsTenant = true,
                             OrganizationCode = "MO01",
                             OrganizationName = "Management Organization",
                             RefOrganizationTypeId = 1,
-                            RegistrationDate = new DateTime(2022, 6, 10, 0, 41, 14, 309, DateTimeKind.Utc).AddTicks(7245)
+                            RegistrationDate = new DateTime(2022, 6, 5, 0, 43, 25, 507, DateTimeKind.Utc).AddTicks(7822)
                         });
                 });
 
@@ -510,50 +510,50 @@ namespace MEInsight.Web.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a6ffbcf8-8aa5-4427-bd56-d6e226e1fbf7"),
-                            ConcurrencyStamp = "2bb78266-f596-476f-9702-732d0c06a739",
+                            Id = new Guid("2134cd98-ef01-4398-9996-bb50e06d19ed"),
+                            ConcurrencyStamp = "e11175a6-bb0a-46a4-a6af-59988c64a5ec",
                             Description = "Administrator Role",
                             Name = "Administrator"
                         },
                         new
                         {
-                            Id = new Guid("7dd268bd-e3c2-48f7-b143-7785509e2bd7"),
-                            ConcurrencyStamp = "be50ac5e-d70c-430f-aac7-c732b0afe29a",
+                            Id = new Guid("f5eff4c2-b7c9-4457-82a4-5b22a24f7c78"),
+                            ConcurrencyStamp = "f2cd02a3-a403-468e-8a5b-6d4b52ee747b",
                             Description = "Read only Role",
                             Name = "Read"
                         },
                         new
                         {
-                            Id = new Guid("c814d6a8-08f8-4f14-bcbb-fa65569bec51"),
-                            ConcurrencyStamp = "82f7e5ce-005c-4ff9-81bf-b6c7df287292",
+                            Id = new Guid("458901ac-a64b-4b33-ba23-8836d6a1ff95"),
+                            ConcurrencyStamp = "e53a0986-0b77-446f-92ad-b8d8801235f4",
                             Description = "Create only Role",
                             Name = "Create"
                         },
                         new
                         {
-                            Id = new Guid("bf2adec9-5b5b-4251-bce1-a8a5cc619f3b"),
-                            ConcurrencyStamp = "96bcaa7a-b87e-4dae-82c9-04de0180632a",
+                            Id = new Guid("5486457a-36e8-45d8-968c-f36ddf0193f3"),
+                            ConcurrencyStamp = "65474817-9483-430e-832b-38e92b3057a1",
                             Description = "Create and Edit Role",
                             Name = "Edit"
                         },
                         new
                         {
-                            Id = new Guid("4ceca73e-b85c-424d-981a-78f11ace7c9d"),
-                            ConcurrencyStamp = "decdd185-8cb0-41d2-a186-3f11205ae135",
+                            Id = new Guid("f029c83e-f029-4837-b4c5-efeb8c590417"),
+                            ConcurrencyStamp = "1f962b35-abd3-4774-89ac-bca23d931fae",
                             Description = "Create, Edit, and Delete Role",
                             Name = "Delete"
                         },
                         new
                         {
-                            Id = new Guid("9318cd39-3636-4752-a7b4-339692a10ea6"),
-                            ConcurrencyStamp = "f41e83a4-32c7-4af0-a41a-e5fe59269709",
+                            Id = new Guid("f425181e-617d-4cc7-996f-28bbb0969ffc"),
+                            ConcurrencyStamp = "a7a44b9c-a3c4-41d2-af47-00434932b985",
                             Description = "Monitoring, Evaluation and Learning Officer Role",
                             Name = "MELOfficer"
                         },
                         new
                         {
-                            Id = new Guid("93655472-90eb-44f5-9408-d6d62b008c59"),
-                            ConcurrencyStamp = "b15576c7-b355-434a-97b0-931879902aa2",
+                            Id = new Guid("0f231d33-07db-4341-b0da-8f24c0ab409d"),
+                            ConcurrencyStamp = "3e4b02b7-a2bd-4d8b-b3be-dbd4a734e696",
                             Description = "Monitoring, Evaluation and Learning Role",
                             Name = "MEL"
                         });
@@ -572,6 +572,20 @@ namespace MEInsight.Web.Data.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -583,6 +597,9 @@ namespace MEInsight.Web.Data.Migrations
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("LastName")
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
@@ -592,6 +609,13 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -640,17 +664,18 @@ namespace MEInsight.Web.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("170dc8a3-945c-42f5-9a00-360e138fdeab"),
+                            Id = new Guid("10872246-493b-4115-b640-99843cb0286f"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f67f78de-4d5d-40e2-9a25-7d8212f974de",
+                            ConcurrencyStamp = "7aaa5098-d4ca-4da1-8426-99b5f9a29fa5",
                             Email = "admin@meinsight.org",
                             EmailConfirmed = true,
+                            IsDeleted = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN@MEINSIGHT.ORG",
-                            OrganizationId = new Guid("d28cdcc2-211b-47f2-984b-82a01bf6c9e5"),
-                            PasswordHash = "AQAAAAEAACcQAAAAEE1oOiWvhl82d2ZcEcKVd/dHUgZv9La9ImkjdgKMNfcn7LGqK6n1IhwmNwtDZNoHBA==",
+                            OrganizationId = new Guid("40f20749-d522-4f16-9766-813269a38066"),
+                            PasswordHash = "AQAAAAEAACcQAAAAECozhAn2wqVALp0wwC/YDCnrg0rsJunMfwlG1Cs9cNgoblcPwZp1TU+qFzssS8XrAA==",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "2ae5991f-47ad-432c-90c7-855b03dbb2cc",
+                            SecurityStamp = "b53de2ca-98c7-4b2d-8964-6d0cb76618ad",
                             TwoFactorEnabled = false,
                             UserName = "admin@meinsight.org"
                         });
@@ -2615,8 +2640,8 @@ namespace MEInsight.Web.Data.Migrations
                     b.HasData(
                         new
                         {
-                            RoleId = new Guid("a6ffbcf8-8aa5-4427-bd56-d6e226e1fbf7"),
-                            UserId = new Guid("170dc8a3-945c-42f5-9a00-360e138fdeab")
+                            RoleId = new Guid("2134cd98-ef01-4398-9996-bb50e06d19ed"),
+                            UserId = new Guid("10872246-493b-4115-b640-99843cb0286f")
                         });
                 });
 
@@ -2737,6 +2762,8 @@ namespace MEInsight.Web.Data.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasColumnOrder(1);
 
+                    b.HasIndex(new[] { "PartnerId" }, "IX_School_PartnerId");
+
                     b.HasIndex(new[] { "RefSchoolAdministrationTypeId" }, "IX_School_RefSchoolAdministrationTypeId");
 
                     b.HasIndex(new[] { "RefSchoolClusterId" }, "IX_School_RefSchoolClusterId");
@@ -2819,7 +2846,7 @@ namespace MEInsight.Web.Data.Migrations
 
             modelBuilder.Entity("MEInsight.Entities.Core.Organization", b =>
                 {
-                    b.HasOne("MEInsight.Entities.Core.Organization", "ParentOrganizations")
+                    b.HasOne("MEInsight.Entities.Core.Organization", "ParentOrganization")
                         .WithMany("Organizations")
                         .HasForeignKey("ParentOrganizationId");
 
@@ -2837,7 +2864,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.Navigation("OrganizationTypes");
 
-                    b.Navigation("ParentOrganizations");
+                    b.Navigation("ParentOrganization");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Core.Participant", b =>
@@ -3305,6 +3332,10 @@ namespace MEInsight.Web.Data.Migrations
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
+                    b.HasOne("MEInsight.Entities.Core.Partner", "Partners")
+                        .WithMany()
+                        .HasForeignKey("PartnerId");
+
                     b.HasOne("MEInsight.Entities.Reference.RefSchoolAdministrationType", "SchoolAdministrationTypes")
                         .WithMany("Schools")
                         .HasForeignKey("RefSchoolAdministrationTypeId");
@@ -3328,6 +3359,8 @@ namespace MEInsight.Web.Data.Migrations
                     b.HasOne("MEInsight.Entities.Reference.RefSchoolType", "SchoolTypes")
                         .WithMany("Schools")
                         .HasForeignKey("RefSchoolTypeId");
+
+                    b.Navigation("Partners");
 
                     b.Navigation("SchoolAdministrationTypes");
 

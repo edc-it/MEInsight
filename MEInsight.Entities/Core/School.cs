@@ -10,7 +10,6 @@ using Microsoft.EntityFrameworkCore;
 namespace MEInsight.Entities.Core
 {
     [Table("School")]
-    [Index("PartnerId", Name = "IX_School_PartnerId")]
     [Index("RefSchoolAdministrationTypeId", Name = "IX_School_RefSchoolAdministrationTypeId")]
     [Index("RefSchoolClusterId", Name = "IX_School_RefSchoolClusterId")]
     [Index("RefSchoolLanguageId", Name = "IX_School_RefSchoolLanguageId")]
@@ -25,13 +24,7 @@ namespace MEInsight.Entities.Core
             SchoolClassrooms = new HashSet<SchoolClassroom>();
         }
 
-        //[Key]
-        //[Required(ErrorMessage = "The {0} field is required.")]
-        //[Display(Name = "Organization")]
-        //[Column(Order = 0)]
-        //public Guid OrganizationId { get; set; }
-
-        [MaxLength(100)]
+        [StringLength(100)]
         [Display(Name = "School Code")]
         [Column(Order = 1)]
         [Remote(action: "VerifySchoolCode", controller: "RemoteValidations", HttpMethod = "POST", ErrorMessage = "This Code already exists.", AdditionalFields = "SchoolCodeInitialValue")]
@@ -69,15 +62,10 @@ namespace MEInsight.Entities.Core
         [Column(Order = 9)]
         public int? RefSchoolStatusId { get; set; }
 
-        [MaxLength(150)]
+        [StringLength(150)]
         [Display(Name = "HeadTeacher")]
         [Column(Order = 10)]
         public string? HeadTeacher { get; set; }
-
-        // Navigation properties
-        //[ForeignKey("OrganizationId")]
-        //[Display(Name = "Organization")]
-        //public virtual Organization Organizations { get; set; } = null!;
 
         [ForeignKey("RefSchoolTypeId")]
         [Display(Name = "School Type")]
@@ -99,15 +87,17 @@ namespace MEInsight.Entities.Core
         [Display(Name = "School Cluster")]
         public virtual RefSchoolCluster? SchoolClusters { get; set; }
 
-        [ForeignKey("PartnerId")]
-        [Display(Name = "Partner")]
-        public virtual Partner? Partners { get; set; }
+        //[ForeignKey("PartnerId")]
+        //[InverseProperty("Schools")]
+        //[Display(Name = "Partner")]
+        //public virtual Partner? Partners { get; set; }
 
         [ForeignKey("RefSchoolStatusId")]
         [Display(Name = "Status")]
         public virtual RefSchoolStatus? SchoolStatus { get; set; }
 
         public virtual ICollection<SchoolEnrollment> SchoolEnrollments { get; set; }
+        
         public virtual ICollection<SchoolClassroom> SchoolClassrooms { get; set; }
 
     }
