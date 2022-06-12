@@ -9,7 +9,6 @@ using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using MEInsight.Entities.Reference;
 using MEInsight.Entities.Programs;
-using System.Text.Json.Serialization;
 
 namespace MEInsight.Entities.Core
 {
@@ -64,8 +63,6 @@ namespace MEInsight.Entities.Core
         [Required(ErrorMessage = "The {0} field is required.")]
         [StringLength(35)]
         [Display(Name = "First name")]
-        [JsonPropertyName("First name")]
-        [System.Runtime.Serialization.DataMember(Name = "First name")]
         [Column(Order = 6)]
         public string? FirstName { get; set; } = null!;
 
