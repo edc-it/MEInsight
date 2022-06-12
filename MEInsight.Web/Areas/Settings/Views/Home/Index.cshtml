@@ -3,158 +3,152 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Settings</h2>
+<h2 class="text-gray mt-1">Settings</h2>
 
-<div class="row">
-    <div class="col-sm-6 col-md-4 col-lg-3 mb-3 d-flex align-items-stretch">
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Organizations Settings</h5>
-                <ul>
-                    <li><a class='text-decoration-none' asp-action='Index' asp-controller='OrganizationTypes' asp-area='Settings'>Organization Types</a></li>
-                </ul>
-            </div>
+<div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+    <div class="col d-flex align-items-start p-2">
+        <div class="icon-square text-primary flex-shrink-0 me-3">
+            <i class="fa-solid fa-sitemap fa-2xl"></i>
+        </div>
+        <div>
+            <h4 class="text-primary">
+                Organizations Settings
+            </h4>
+
+            <p>Organization Types  <a class='text-decoration-none' asp-action='Index' asp-controller='OrganizationTypes' asp-area='Settings'><i class="fa-solid fa-up-right-from-square"></i></a></p>
+
         </div>
     </div>
-
-    <div class="col-sm-6 col-md-4 col-lg-3 mb-3 d-flex align-items-stretch">
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Schools Settings</h5>
-                <ul>
-                    <li><a class='' asp-action='Index' asp-controller='SchoolTypes' asp-area='Settings'>School Types</a></li>
-                    <li><a class='' asp-action='Index' asp-controller='SchoolLocations' asp-area='Settings'>School Locations</a></li>
-                    <li><a class='' asp-action='Index' asp-controller='SchoolLanguages' asp-area='Settings'>School Languages</a></li>
-                    <li><a class='' asp-action='Index' asp-controller='SchoolAdministrationTypes' asp-area='Settings'>School Administration Types</a></li>
-                    <li><a class='' asp-action='Index' asp-controller='SchoolStatus' asp-area='Settings'>School Status</a></li>
-                    <li><a class='' asp-action='Index' asp-controller='SchoolClusters' asp-area='Settings'>School Clusters</a></li>
-                    <li><a class='' asp-action='Index' asp-controller='GradeLevels' asp-area='Settings'>Grade Levels</a></li>
-                </ul>
-            </div>
+    <div class="col d-flex align-items-start p-2">
+        <div class="icon-square  text-primary flex-shrink-0 me-3">
+            <i class="fa-solid fa-school fa-2xl"></i>
+        </div>
+        <div>
+            <h4 class="text-primary">
+                Schools Settings
+            </h4>
+            <p>School Types  <a class='' asp-action='Index' asp-controller='SchoolTypes' asp-area='Settings'><i class="fa-solid fa-up-right-from-square"></i></a></p>
+            <p>School Locations  <a class='' asp-action='Index' asp-controller='SchoolLocations' asp-area='Settings'><i class="fa-solid fa-up-right-from-square"></i></a></p>
+            <p>School Languages  <a class='' asp-action='Index' asp-controller='SchoolLanguages' asp-area='Settings'><i class="fa-solid fa-up-right-from-square"></i></a></p>
+            <p>School Administration Types  <a class='' asp-action='Index' asp-controller='SchoolAdministrationTypes' asp-area='Settings'><i class="fa-solid fa-up-right-from-square"></i></a></p>
+            <p>School Status  <a class='' asp-action='Index' asp-controller='SchoolStatus' asp-area='Settings'><i class="fa-solid fa-up-right-from-square"></i></a></p>
+            <p>School Clusters  <a class='' asp-action='Index' asp-controller='SchoolClusters' asp-area='Settings'><i class="fa-solid fa-up-right-from-square"></i></a></p>
+            <p>Grade Levels  <a class='' asp-action='Index' asp-controller='GradeLevels' asp-area='Settings'><i class="fa-solid fa-up-right-from-square"></i></a></p>
         </div>
     </div>
+    <div class="col d-flex align-items-start p-2">
+        <div class="icon-square text-primary flex-shrink-0 me-3">
+            <i class="fa-solid fa-handshake fa-2xl"></i>
+        </div>
+        <div>
+            <h4 class="text-primary">
+                Partners Settings
+            </h4>
+            <p>Partner Types  <a class='' asp-action='Index' asp-controller='PartnerTypes' asp-area='Settings'><i class="fa-solid fa-up-right-from-square"></i></a></p>
+            <p>Partner Sectors  <a class='' asp-action='Index' asp-controller='PartnerSectors' asp-area='Settings'><i class="fa-solid fa-up-right-from-square"></i></a></p>
 
-    <div class="col-sm-6 col-md-4 col-lg-3 mb-3 d-flex align-items-stretch">
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Partners Settings</h5>
-                <ul>
-                    <li><a class='' asp-action='Index' asp-controller='PartnerTypes' asp-area='Settings'>Partner Types</a></li>
-                    <li><a class='' asp-action='Index' asp-controller='PartnerSectors' asp-area='Settings'>Partner Sectors</a></li>
-                </ul>
-            </div>
         </div>
     </div>
+    <div class="col d-flex align-items-start p-2">
+        <div class="icon-square  text-primary flex-shrink-0 me-3">
+            <i class="fa-solid fa-users-gear fa-2xl"></i>
+        </div>
+        <div>
+            <h4 class="text-primary">
+                Participants Settings
+            </h4>
+            <p>Participant Types  <a class='' asp-action='Index' asp-controller='ParticipantTypes' asp-area='Settings'><i class="fa-solid fa-up-right-from-square"></i></a></p>
+            <p>Participant Cohorts  <a class='' asp-action='Index' asp-controller='ParticipantCohorts' asp-area='Settings'><i class="fa-solid fa-up-right-from-square"></i></a></p>
+            <p>Sex  <a class='' asp-action='Index' asp-controller='Sex' asp-area='Settings'><i class="fa-solid fa-up-right-from-square"></i></a></p>
+            <p>Disability Types  <a class='' asp-action='Index' asp-controller='DisabilityTypes' asp-area='Settings'><i class="fa-solid fa-up-right-from-square"></i></a></p>
 
-    <div class="col-sm-6 col-md-4 col-lg-3 mb-3 d-flex align-items-stretch">
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Geographic Locations Setttings</h5>
-                <ul>
-                    <li><a class='' asp-action='Index' asp-controller='Locations' asp-area='Settings'>Locations</a></li>
-                    <li><a class='' asp-action='Index' asp-controller='LocationTypes' asp-area='Settings'>Location Types</a></li>
-                </ul>
-            </div>
         </div>
     </div>
+    <div class="col d-flex align-items-start p-2">
+        <div class="icon-square  text-primary flex-shrink-0 me-3">
+            <i class="fa-solid fa-users-rectangle fa-2xl"></i>
+        </div>
+        <div>
+            <h4 class="text-primary">Students Settings</h4>
+            <p>Student Types  <a class='' asp-action='Index' asp-controller='StudentTypes' asp-area='Settings'><i class="fa-solid fa-up-right-from-square"></i></a></p>
+            <p>Student Specializations  <a class='' asp-action='Index' asp-controller='StudentSpecializations' asp-area='Settings'><i class="fa-solid fa-up-right-from-square"></i></a></p>
+            <p>Student Year of Studies  <a class='' asp-action='Index' asp-controller='StudentYearOfStudies' asp-area='Settings'><i class="fa-solid fa-up-right-from-square"></i></a></p>
 
-    <div class="col-sm-6 col-md-4 col-lg-3 mb-3 d-flex align-items-stretch">
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Participants Settings</h5>
-                <ul>
-                    <li><a class='' asp-action='Index' asp-controller='ParticipantTypes' asp-area='Settings'>Participant Types</a></li>
-                    <li><a class='' asp-action='Index' asp-controller='ParticipantCohorts' asp-area='Settings'>Participant Cohorts</a></li>
-                    <li><a class='' asp-action='Index' asp-controller='Sex' asp-area='Settings'>Sex</a></li>
-                    <li><a class='' asp-action='Index' asp-controller='DisabilityTypes' asp-area='Settings'>Disability Types</a></li>
-                </ul>
-            </div>
         </div>
     </div>
+    <div class="col d-flex align-items-start p-2">
+        <div class="icon-square  text-primary flex-shrink-0 me-3">
+            <i class="fa-solid fa-chalkboard-user fa-2xl"></i>
+        </div>
+        <div>
+            <h4 class="text-primary">Teachers Settings</h4>
+            <p>Teacher Types  <a class='' asp-action='Index' asp-controller='TeacherTypes' asp-area='Settings'><i class="fa-solid fa-up-right-from-square"></i></a></p>
+            <p>Teacher Positions  <a class='' asp-action='Index' asp-controller='TeacherPositions' asp-area='Settings'><i class="fa-solid fa-up-right-from-square"></i></a></p>
+            <p>Teacher Employment Types  <a class='' asp-action='Index' asp-controller='TeacherEmploymentTypes' asp-area='Settings'><i class="fa-solid fa-up-right-from-square"></i></a></p>
 
-    <div class="col-sm-6 col-md-4 col-lg-3 mb-3 d-flex align-items-stretch">
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Students Settings</h5>
-                <ul>
-                    <li><a class='' asp-action='Index' asp-controller='StudentTypes' asp-area='Settings'>Student Types</a></li>
-                    <li><a class='' asp-action='Index' asp-controller='StudentSpecializations' asp-area='Settings'>Student Specializations</a></li>
-                    <li><a class='' asp-action='Index' asp-controller='StudentYearOfStudies' asp-area='Settings'>Student Year of Studies</a></li>
-                </ul>
-            </div>
         </div>
     </div>
+    <div class="col d-flex align-items-start p-2">
+        <div class="icon-square  text-primary flex-shrink-0 me-3">
+            <i class="fa-solid fa-laptop-file fa-2xl"></i>
+        </div>
+        <div>
+            <h4 class="text-primary">
+                Education Administrator Settings
+            </h4>
+            <p>Education Administrator Types  <a class='' asp-action='Index' asp-controller='EducationAdministratorTypes' asp-area='Settings'><i class="fa-solid fa-up-right-from-square"></i></a></p>
+            <p>Education Administrator Positions  <a class='' asp-action='Index' asp-controller='EducationAdministratorPositions' asp-area='Settings'><i class="fa-solid fa-up-right-from-square"></i></a></p>
+            <p>Education Administrator Offices  <a class='' asp-action='Index' asp-controller='EducationAdministratorOffices' asp-area='Settings'><i class="fa-solid fa-up-right-from-square"></i></a></p>
 
-    <div class="col-sm-6 col-md-4 col-lg-3 mb-3 d-flex align-items-stretch">
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Teachers Settings</h5>
-                <ul>
-                    <li><a class='' asp-action='Index' asp-controller='TeacherTypes' asp-area='Settings'>Teacher Types</a></li>
-                    <li><a class='' asp-action='Index' asp-controller='TeacherPositions' asp-area='Settings'>Teacher Positions</a></li>
-                    <li><a class='' asp-action='Index' asp-controller='TeacherEmploymentTypes' asp-area='Settings'>Teacher Employment Types</a></li>
-                </ul>
-            </div>
         </div>
     </div>
+    <div class="col d-flex align-items-start p-2">
+        <div class="icon-square  text-primary flex-shrink-0 me-3">
+            <i class="fa-solid fa-list-check fa-2xl"></i>
+        </div>
+        <div>
+            <h4 class="text-primary">
+                Programs Settings
+            </h4>
+            <p>Programs  <a class='' asp-action='Index' asp-controller='Programs' asp-area=''><i class="fa-solid fa-up-right-from-square"></i></a></p>
+            <p>Program Assessments  <a class='' asp-action='Index' asp-controller='ProgramAssessments'><i class="fa-solid fa-up-right-from-square"></i></a></p>
+            <p>Program Types  <a class='' asp-action='Index' asp-controller='ProgramTypes' asp-area='Settings'><i class="fa-solid fa-up-right-from-square"></i></a></p>
+            <p>Program Delivery Types  <a class='' asp-action='Index' asp-controller='ProgramDeliveryTypes' asp-area='Settings'><i class="fa-solid fa-up-right-from-square"></i></a></p>
+            <p>Assessment Types  <a class='' asp-action='Index' asp-controller='AssessmentTypes' asp-area='Settings'><i class="fa-solid fa-up-right-from-square"></i></a></p>
+            <p>Evaluation Types  <a class='' asp-action='Index' asp-controller='EvaluationTypes' asp-area='Settings'><i class="fa-solid fa-up-right-from-square"></i></a></p>
 
-    <div class="col-sm-6 col-md-4 col-lg-3 mb-3 d-flex align-items-stretch">
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Education Administrator Settings</h5>
-                <ul>
-                    <li><a class='' asp-action='Index' asp-controller='EducationAdministratorTypes' asp-area='Settings'>Education Administrator Types</a></li>
-                    <li><a class='' asp-action='Index' asp-controller='EducationAdministratorPositions' asp-area='Settings'>Education Administrator Positions</a></li>
-                    <li><a class='' asp-action='Index' asp-controller='EducationAdministratorOffices' asp-area='Settings'>Education Administrator Offices</a></li>
-                </ul>
-            </div>
         </div>
     </div>
+    <div class="col d-flex align-items-start p-2">
+        <div class="icon-square  text-primary flex-shrink-0 me-3">
+            <i class="fa-solid fa-marker fa-2xl"></i>
+        </div>
+        <div>
+            <h4 class="text-primary">
+                Enrollment, Evaluations, and Attendance Settings
+            </h4>
+            <p>Enrollment Status  <a class='' asp-action='Index' asp-controller='EnrollmentStatus' asp-area='Settings'><i class="fa-solid fa-up-right-from-square"></i></a></p>
+            <p>Evaluation Status  <a class='' asp-action='Index' asp-controller='EvaluationStatus' asp-area='Settings'><i class="fa-solid fa-up-right-from-square"></i></a></p>
+            <p>Attendance Units  <a class='' asp-action='Index' asp-controller='AttendanceUnits' asp-area='Settings'><i class="fa-solid fa-up-right-from-square"></i></a></p>
 
-    <div class="col-sm-6 col-md-4 col-lg-3 mb-3 d-flex align-items-stretch">
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Programs Settings</h5>
-                <ul>
-                    <li><a class='' asp-action='Index' asp-controller='Programs' asp-area=''>Programs</a></li>
-                    <li><a class='' asp-action='Index' asp-controller='ProgramAssessments'>Program Assessments</a></li>
-                    <li><a class='' asp-action='Index' asp-controller='ProgramTypes' asp-area='Settings'>Program Types</a></li>
-                    <li><a class='' asp-action='Index' asp-controller='ProgramDeliveryTypes' asp-area='Settings'>Program Delivery Types</a></li>
-                    <li><a class='' asp-action='Index' asp-controller='AssessmentTypes' asp-area='Settings'>Assessment Types</a></li>
-                    <li><a class='' asp-action='Index' asp-controller='EvaluationTypes' asp-area='Settings'>Evaluation Types</a></li>
-                </ul>
-            </div>
         </div>
     </div>
+    <div class="col d-flex align-items-start p-2">
+        <div class="icon-square  text-primary flex-shrink-0 me-3">
+            <i class="fa-solid fa-lines-leaning fa-2xl"></i>
+        </div>
+        <div>
+            <h4 class="text-primary">
+                Teaching and Learning Materials Settings (TLM)
+            </h4>
+            <p>TLM Distribution Status  <a class='' asp-action='Index' asp-controller='TLMDistributionStatus' asp-area='Settings'><i class="fa-solid fa-up-right-from-square"></i></a></p>
+            <p>TLM Materials  <a class='' asp-action='Index' asp-controller='TLMMaterials' asp-area=''><i class="fa-solid fa-up-right-from-square"></i></a></p>
+            <p>TLM Material Types  <a class='' asp-action='Index' asp-controller='TLMMaterialTypes' asp-area='Settings'><i class="fa-solid fa-up-right-from-square"></i></a></p>
+            <p>TLM Subjects  <a class='' asp-action='Index' asp-controller='TLMSubjects' asp-area='Settings'><i class="fa-solid fa-up-right-from-square"></i></a></p>
+            <p>TLM Languages  <a class='' asp-action='Index' asp-controller='TLMLanguages' asp-area='Settings'><i class="fa-solid fa-up-right-from-square"></i></a></p>
+            <p>TLM Groups  <a class='' asp-action='Index' asp-controller='TLMGroups' asp-area='Settings'><i class="fa-solid fa-up-right-from-square"></i></a></p>
+            <p>TLM Material Sets  <a class='' asp-action='Index' asp-controller='TLMMaterialSets' asp-area='Settings'><i class="fa-solid fa-up-right-from-square"></i></a></p>
 
-    <div class="col-sm-6 col-md-4 col-lg-3 mb-3 d-flex align-items-stretch">
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Enrollment, Evaluations, and Attendance Settings</h5>
-                <ul>
-                    <li><a class='' asp-action='Index' asp-controller='EnrollmentStatus' asp-area='Settings'>Enrollment Status</a></li>
-                    <li><a class='' asp-action='Index' asp-controller='EvaluationStatus' asp-area='Settings'>Evaluation Status</a></li>
-                    <li><a class='' asp-action='Index' asp-controller='AttendanceUnits' asp-area='Settings'>Attendance Units</a></li>
-                </ul>
-            </div>
         </div>
     </div>
-
-    <div class="col-sm-6 col-md-4 col-lg-3 mb-3 d-flex align-items-stretch">
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Teaching and Learning Materials Settings (TLM)</h5>
-                <ul>
-                    <li><a class='' asp-action='Index' asp-controller='TLMDistributionStatus' asp-area='Settings'>TLM Distribution Status</a></li>
-                    <li><a class='' asp-action='Index' asp-controller='TLMMaterials' asp-area=''>TLM Materials</a></li>
-                    <li><a class='' asp-action='Index' asp-controller='TLMMaterialTypes' asp-area='Settings'>TLM Material Types</a></li>
-                    <li><a class='' asp-action='Index' asp-controller='TLMSubjects' asp-area='Settings'>TLM Subjects</a></li>
-                    <li><a class='' asp-action='Index' asp-controller='TLMLanguages' asp-area='Settings'>TLM Languages</a></li>
-                    <li><a class='' asp-action='Index' asp-controller='TLMGroups' asp-area='Settings'>TLM Groups</a></li>
-                    <li><a class='' asp-action='Index' asp-controller='TLMMaterialSets' asp-area='Settings'>TLM Material Sets</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
 </div>
