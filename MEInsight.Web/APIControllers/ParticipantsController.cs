@@ -231,7 +231,6 @@ namespace MEInsight.Web.APIControllers
                     data = await query.ToListAsync()
                 };
 
-                //return Ok(new { draw, recordsFiltered = recordsTotal, recordsTotal, data });
                 return Ok(jsonData);
             }
             catch (Exception)

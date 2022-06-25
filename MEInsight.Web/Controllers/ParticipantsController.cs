@@ -30,42 +30,13 @@ namespace MEL.Web.Controllers
         }
 
         // GET: Participants
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            
-            ViewData["NextController"] = "";
-            ViewData["ParentController"] = "";
-            ViewData["ParentId"] = "";
-
-            //Logged User OrganizationId
-            Guid? userOrganizacionId = (await _userManager.GetUserAsync(HttpContext.User))?.OrganizationId;
-
-            if (userOrganizacionId == null)
-            {
-                return NotFound();
-            }
-
-            //Get Logged User Organization
-            var organization = await _context.Organizations
-                    .SingleOrDefaultAsync(o => o.OrganizationId == userOrganizacionId);
-
-            if (organization == null)
-            {
-                return NotFound();
-            }
-
-            //Returns the top hiearchy organization for JSTree
-            ViewData["ParentOrganizationId"] = organization.OrganizationId;
 
             // SelectList for "Create New" (ParticipantType) button
             ViewData["ParticipantTypeId"] = new SelectList(_context.ParticipantTypes, "RefParticipantTypeId", "ParticipantType");
 
-            var participant = _context.Participants
-            .Include(p => p.Locations)
-            .Include(p => p.Organizations)
-            .Include(p => p.ParticipantTypes)
-            .Include(p => p.Sex);
-            return View(await participant.ToListAsync());
+            return View();
 
         }
 
@@ -432,7 +403,7 @@ namespace MEL.Web.Controllers
 
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> Upload(List<ParticipantsViewModel> upload, Guid? GroupId)
+        public async Task<IActionResult> Upload(List<ParticipantsViewModel> upload, Guid GroupId)
         {
 
             if (ModelState.IsValid)
@@ -566,6 +537,10 @@ namespace MEL.Web.Controllers
             {
                 var locations = EnumerableExtensions.ListLocations(allLocations, participant.RefLocationId);
                 ViewData["RefLocationParents"] = locations.OrderBy(x => x.RefLocationTypeId);
+            }
+            else
+            {
+                ViewData["RefLocationParents"] = null;
             }
 
             // Participants - All

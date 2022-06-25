@@ -221,15 +221,10 @@
                                 {
                                     <div class="mb-3 required">
                                         <label class="control-label">@item.LocationType</label>
-                                        <select class="form-control required" data-locationlevel="@item.LocationLevel" id="RefLocation@{
-                                        @item.LocationLevel
-    }Id" name="RefLocationId[@i]" data-val="true" asp-items="@ViewBag.RefLocationId" required>
+                                        <select class="form-control required" data-locationlevel="@item.LocationLevel" id="RefLocation@{ @item.LocationLevel }Id" name="RefLocationId[@i]" data-val="true" asp-items="@ViewBag.RefLocationId" required>
                                             <option disabled selected></option>
                                         </select>
-                                        <span class="text-danger field-validation-valid" data-valmsg-for="RefLocation@{
-                                        @item.LocationLevel
-    }Id" data-valmsg-replace="true">
-
+                                        <span class="text-danger field-validation-valid" data-valmsg-for="RefLocation@{ @item.LocationLevel }Id" data-valmsg-replace="true">
                                         </span>
                                     </div>
                                 }
@@ -239,9 +234,7 @@
                                     {
                                         <div class="mb-3 required">
                                             <label class="control-label">@item.LocationType</label>
-                                            <select class="form-control required" data-locationlevel="@item.LocationLevel" id="RefLocation@{
-                                        @item.LocationLevel
-    }Id" name="RefLocationId[@i]" data-val="true">
+                                            <select class="form-control required" data-locationlevel="@item.LocationLevel" id="RefLocation@{ @item.LocationLevel }Id" name="RefLocationId[@i]" data-val="true">
                                                 <option disabled selected></option>
                                             </select>
                                             <span class="text-danger field-validation-valid" data-valmsg-for="RefLocationId" data-valmsg-replace="true"></span>
@@ -253,28 +246,20 @@
                                         {
                                             <div class="mb-3 required">
                                                 <label class="control-label">@item.LocationType</label>
-                                                <select class="form-control required" data-locationlevel="@item.LocationLevel" id="RefLocation@{
-                                        @item.LocationLevel
-    }Id" name="RefLocationId[@i]" data-val="true" required>
+                                                <select class="form-control required" data-locationlevel="@item.LocationLevel" id="RefLocation@{ @item.LocationLevel }Id" name="RefLocationId[@i]" data-val="true" required>
                                                     <option disabled selected></option>
                                                 </select>
-                                                <span class="text-danger field-validation-valid" data-valmsg-for="RefLocation@{
-                                        @item.LocationLevel
-    }Id" data-valmsg-replace="true"></span>
+                                                <span class="text-danger field-validation-valid" data-valmsg-for="RefLocation@{ @item.LocationLevel }Id" data-valmsg-replace="true"></span>
                                             </div>
                                         }
                                         else
                                         {
                                             <div class="mb-3 required">
                                                 <label class="control-label">@item.LocationType</label>
-                                                <select class="form-control required" data-locationlevel="@item.LocationLevel" id="RefLocation@{
-                                        @item.LocationLevel
-    }Id" name="RefLocationId[@i]" data-val="true">
+                                                <select class="form-control required" data-locationlevel="@item.LocationLevel" id="RefLocation@{ @item.LocationLevel }Id" name="RefLocationId[@i]" data-val="true">
                                                     <option disabled selected></option>
                                                 </select>
-                                                <span class="text-danger field-validation-valid" data-valmsg-for="RefLocation@{
-                                        @item.LocationLevel
-    }Id" data-valmsg-replace="true"></span>
+                                                <span class="text-danger field-validation-valid" data-valmsg-for="RefLocation@{ @item.LocationLevel }Id" data-valmsg-replace="true"></span>
                                             </div>
                                         }
                                     }
@@ -414,39 +399,43 @@
             populates the JS Ajax request required to populate each parent select
             based on the RefLocationId on this record.
             *@
-        @foreach (var item in ViewData["RefLocationParents"] as IEnumerable<MEInsight.Entities.Reference.RefLocation>)
+        @if (ViewData["RefLocationParents"] != null)
         {
-            if (item.RefLocationTypeId == 1)
+            @foreach (var item in ViewData["RefLocationParents"] as IEnumerable<MEInsight.Entities.Reference.RefLocation>)
             {
-                <text>
-                        $('[data-locationlevel="@(item.RefLocationTypeId)"]').val("@item.RefLocationId");
-                </text>
-            }
-            else
-            {
-                @:$.ajax({
-                @:type: "Post",
-                @:url: "/Requests/GetLocations/@item.ParentLocationId",
-                @:contentType: "application/json; charset=utf-8",
-                @:dataType: "json",
-                @:success: function(data) {
-                @:             if (data.length) {
-                @:$(data).each(function() {
-                @:                     if (this.refLocationId == "@item.RefLocationId") {
-                @:$('[data-locationlevel="@(item.RefLocationTypeId)"]').append("<option selected value='" + this.refLocationId + "'>" + this.locationName + "</option>");
-                @:                     }
-                @:                     else {
-                @:$('[data-locationlevel="@(item.RefLocationTypeId)"]').append("<option value='" + this.refLocationId + "'>" + this.locationName + "</option>");
-                @:                     }
-                @:                 })
-                @:             }
-                @:         }
-                @: });
+                if (item.RefLocationTypeId == 1)
+                {
+                    <text>
+                            $('[data-locationlevel="@(item.RefLocationTypeId)"]').val("@item.RefLocationId");
+                    </text>
+                }
+                else
+                {
+                    @:$.ajax({
+                    @:type: "Post",
+                    @:url: "/Requests/GetLocations/@item.ParentLocationId",
+                    @:contentType: "application/json; charset=utf-8",
+                    @:dataType: "json",
+                    @:success: function(data) {
+                    @:             if (data.length) {
+                    @:$(data).each(function() {
+                    @:                     if (this.refLocationId == "@item.RefLocationId") {
+                    @:$('[data-locationlevel="@(item.RefLocationTypeId)"]').append("<option selected value='" + this.refLocationId + "'>" + this.locationName + "</option>");
+                    @:                     }
+                    @:                     else {
+                    @:$('[data-locationlevel="@(item.RefLocationTypeId)"]').append("<option value='" + this.refLocationId + "'>" + this.locationName + "</option>");
+                    @:                     }
+                    @:                 })
+                    @:             }
+                    @:         }
+                    @: });
+                }
             }
         }
 
-                            // Counts the total number of available Location level inputs
-                            var totalLocationLevels = $('[data-locationlevel]').length;
+
+        // Counts the total number of available Location level inputs
+        var totalLocationLevels = $('[data-locationlevel]').length;
 
         // JQuery select2 chained drop-downs by [data-locationlevel]
         // On change or remove event clears select options and
@@ -564,7 +553,7 @@
             }
         });
 
-                        });
+                                });
 
     </script>
 

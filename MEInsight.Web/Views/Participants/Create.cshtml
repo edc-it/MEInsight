@@ -213,67 +213,51 @@
                         {
 
                             var i = 0;
-                                @foreach (var item in ViewData["RefLocationTypes"] as IEnumerable<MEInsight.Entities.Reference.RefLocationType>)
+                            @foreach (var item in ViewData["RefLocationTypes"] as IEnumerable<MEInsight.Entities.Reference.RefLocationType>)
                             {
-                                    @if (item.LocationLevel == 1)
+                                @if (item.LocationLevel == 1)
                                 {
-                                        <div class="mb-3 required">
-                                            <label class="control-label">@item.LocationType</label>
-                                            <select class="form-control required" data-locationlevel="@item.LocationLevel" id="RefLocation@{
-                                                                                                                @item.LocationLevel
-                                        }Id" name="RefLocationId[@i]" data-val="true" asp-items="@ViewBag.RefLocationId" required>
-                                                <option disabled selected></option>
-                                            </select>
-                                            <span class="text-danger field-validation-valid" data-valmsg-for="RefLocation@{
-                                                                                                                @item.LocationLevel
-                                        }Id" data-valmsg-replace="true">
-
-                                            </span>
-                                        </div>
+                                    <div class="mb-3 required">
+                                        <label class="control-label">@item.LocationType</label>
+                                        <select class="form-control required" data-locationlevel="@item.LocationLevel" id="RefLocation@{ @item.LocationLevel }Id" name="RefLocationId[@i]" data-val="true" asp-items="@ViewBag.RefLocationId" required>
+                                            <option disabled selected></option>
+                                        </select>
+                                        <span class="text-danger field-validation-valid" data-valmsg-for="RefLocation@{ @item.LocationLevel }Id" data-valmsg-replace="true"></span>
+                                    </div>
                                 }
                                 else
                                 {
                                     if (item.LocationLevel == (int)ViewData["RefLocationTypesCount"])
                                     {
-                                            <div class="mb-3 required">
-                                                <label class="control-label">@item.LocationType</label>
-                                                <select class="form-control required" data-locationlevel="@item.LocationLevel" id="RefLocation@{
-                                                                                                                @item.LocationLevel
-                                        }Id" name="RefLocationId[@i]" data-val="true">
-                                                    <option disabled selected></option>
-                                                </select>
-                                                <span class="text-danger field-validation-valid" data-valmsg-for="RefLocationId" data-valmsg-replace="true"></span>
-                                            </div>
+                                        <div class="mb-3 required">
+                                            <label class="control-label">@item.LocationType</label>
+                                            <select class="form-control required" data-locationlevel="@item.LocationLevel" id="RefLocation@{ @item.LocationLevel }Id" name="RefLocationId[@i]" data-val="true">
+                                                <option disabled selected></option>
+                                            </select>
+                                            <span class="text-danger field-validation-valid" data-valmsg-for="RefLocationId" data-valmsg-replace="true"></span>
+                                        </div>
                                     }
                                     else
                                     {
                                         if (item.LocationLevel == 2)
                                         {
-                                                <div class="mb-3 required">
-                                                    <label class="control-label">@item.LocationType</label>
-                                                    <select class="form-control required" data-locationlevel="@item.LocationLevel" id="RefLocation@{
-                                                                                                                @item.LocationLevel
-                                        }Id" name="RefLocationId[@i]" data-val="true" required>
-                                                        <option disabled selected></option>
-                                                    </select>
-                                                    <span class="text-danger field-validation-valid" data-valmsg-for="RefLocation@{
-                                                                                                                @item.LocationLevel
-                                        }Id" data-valmsg-replace="true"></span>
-                                                </div>
+                                            <div class="mb-3 required">
+                                                <label class="control-label">@item.LocationType</label>
+                                                <select class="form-control required" data-locationlevel="@item.LocationLevel" id="RefLocation@{ @item.LocationLevel }Id" name="RefLocationId[@i]" data-val="true" required>
+                                                    <option disabled selected></option>
+                                                </select>
+                                                <span class="text-danger field-validation-valid" data-valmsg-for="RefLocation@{ @item.LocationLevel }Id" data-valmsg-replace="true"></span>
+                                            </div>
                                         }
                                         else
                                         {
-                                                <div class="mb-3 required">
-                                                    <label class="control-label">@item.LocationType</label>
-                                                    <select class="form-control required" data-locationlevel="@item.LocationLevel" id="RefLocation@{
-                                                                                                                @item.LocationLevel
-                                        }Id" name="RefLocationId[@i]" data-val="true">
-                                                        <option disabled selected></option>
-                                                    </select>
-                                                    <span class="text-danger field-validation-valid" data-valmsg-for="RefLocation@{
-                                                                                                                @item.LocationLevel
-                                        }Id" data-valmsg-replace="true"></span>
-                                                </div>
+                                            <div class="mb-3 required">
+                                                <label class="control-label">@item.LocationType</label>
+                                                <select class="form-control required" data-locationlevel="@item.LocationLevel" id="RefLocation@{ @item.LocationLevel }Id" name="RefLocationId[@i]" data-val="true">
+                                                    <option disabled selected></option>
+                                                </select>
+                                                <span class="text-danger field-validation-valid" data-valmsg-for="RefLocation@{ @item.LocationLevel }Id" data-valmsg-replace="true"></span>
+                                            </div>
                                         }
                                     }
                                 }
@@ -420,9 +404,9 @@
             </text>
         }
 
-            // *** LOCATIONS ***
-            // Counts the total number of available Location level inputs
-            var totalLocationLevels = $('[data-locationlevel]').length;
+                                            // *** LOCATIONS ***
+                                            // Counts the total number of available Location level inputs
+                                            var totalLocationLevels = $('[data-locationlevel]').length;
 
             // JQuery select2 chained drop-downs by [data-locationlevel]
             // On change or remove event clears select options and
@@ -500,22 +484,50 @@
             //https://stackoverflow.com/questions/4060004/calculate-age-given-the-birth-date-in-the-format-yyyymmdd/7091965#7091965
             $('.date.birthdate')
                 .on('change', function(date) {
-                    var today = new Date();
-                    var birthDate = $(this).datepicker('getDate');
+                    if (date != null) {
+                        var today = new Date();
+                        var birthDate = $(this).datepicker('getDate');
+                        if (birthDate) {
+                            var age = today.getFullYear() - birthDate.getFullYear();
+                            var m = today.getMonth() - birthDate.getMonth();
+                            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                                age--;
+                            }
+                            if (age <= 0) {
 
-                    var age = today.getFullYear() - birthDate.getFullYear();
-                    var m = today.getMonth() - birthDate.getMonth();
-                    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-                        age--;
-                    }
-                    if (age <= 0) {
+                                const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'top-end',
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    timerProgressBar: true,
+                                    didOpen: (toast) => {
+                                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                    }
+                                });
 
-                        bootbox.alert("@Localizer["Incorrect date"] " + age + " @Localizer["years old"], (" + birthDate.toDateString() + "). @Localizer["Please verify."]");
-                        $('#Age').val("");
-                        $(this).val("");
-                    }
-                    else {
-                        $('#Age').val(age);
+                                const options = {
+                                    day: '2-digit',
+                                    month: '2-digit',
+                                    year: 'numeric',
+                                }
+
+                                formatedBirthDate = new Intl.DateTimeFormat('@System.Globalization.CultureInfo.CurrentUICulture', options).format(birthDate)
+
+                                Toast.fire({
+                                    icon: 'error',
+                                    title: '@Localizer["Incorrect date"]',
+                                    html: '@Localizer["Incorrect date"], ' + age + ' @Localizer["years old"], <br />' + formatedBirthDate + '<br /> @Localizer["Please verify."]'
+                                });
+                                $('#Age').val("");
+                                $(this).datepicker('clearDates');
+
+                            }
+                            else {
+                                $('#Age').val(age);
+                            }
+                        }
                     }
                 });
 
