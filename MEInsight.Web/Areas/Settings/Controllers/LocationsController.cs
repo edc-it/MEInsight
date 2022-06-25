@@ -39,7 +39,7 @@ namespace MEInsight.Web.Areas.Settings.Controllers
                     ParentLocation = x.ParentLocations == null ? null : x.ParentLocations.LocationName,
                     LocationName = x.LocationName,
                     RefLocationTypeId = x.RefLocationTypeId,
-                    LocationType = x.LocationTypes.LocationType,
+                    LocationType = x.LocationTypes!.LocationType,
                     LocationLevel = x.LocationTypes.LocationLevel,
                     Count = x.Locations.Count
                 });
@@ -88,7 +88,7 @@ namespace MEInsight.Web.Areas.Settings.Controllers
 
         // GET: Settings/Locations/Create
         [Authorize(Policy = "RequireMELRole")]
-        public async Task<IActionResult> Create(string id)
+        public async Task<IActionResult> Create(string? id)
         {
             if (id != null)
             {
@@ -100,7 +100,7 @@ namespace MEInsight.Web.Areas.Settings.Controllers
                 if (parent == null) { return NotFound(); }
 
                 ViewData["RefLocationTypeId"] = new SelectList(_context.LocationTypes
-                .Where(x => x.LocationLevel > parent.LocationTypes.LocationLevel), "RefLocationTypeId", "LocationType");
+                .Where(x => x.LocationLevel > parent.LocationTypes!.LocationLevel), "RefLocationTypeId", "LocationType");
                 
                 ViewData["ParentLocationName"] = parent.LocationName;
                 
