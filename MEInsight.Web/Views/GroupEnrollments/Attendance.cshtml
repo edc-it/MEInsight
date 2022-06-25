@@ -70,6 +70,7 @@
                                         @Html.Hidden("attendance.Index", (@i + 10))
                                         @Html.Hidden("attendance[" + (@i + 10) + "].GroupEnrollmentId", Model[i].GroupEnrollmentId)
                                         @Html.Hidden("attendance[" + (@i + 10) + "].GroupId", Model[i].GroupId)
+                                        @Html.Hidden("attendance[" + (@i + 10) + "].ParticipantId", Model[i].ParticipantId)
 
                                         @Html.Raw(Model[i].Participants?.Name)
                                     </td>
@@ -94,11 +95,17 @@
                                                     {
                                                         <option value="@(item.Value)" selected="selected">@item.Text</option>
                                                     }
-                                                    else
+                                                    else if (item.Value != Model[i].RefEnrollmentStatusId.ToString())
                                                     {
                                                         <option value="@(item.Value)">@item.Text</option>
+                                                        
                                                     }
+                                                    else
+                                                {
+                                                    <option disabled selected></option>
                                                 }
+                                                }
+                                                
                                             </select>
                                         </div>
                                         <span style="display:block;" data-valmsg-for="attendance[@(i + 10)].Attendance" class="text-danger field-validation-valid" data-valmsg-replace="true"></span>
