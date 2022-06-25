@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using MEInsight.Entities.Reference;
 using MEInsight.Entities.Programs;
 using MEInsight.Entities.TLM;
 using MEInsight.Entities.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace MEInsight.Entities.Core
 {
     [Table("Organization")]
-    [Index("ParentOrganizationId", Name = "IX_Organization_ParentOrganizationId")]
-    [Index("RefLocationId", Name = "IX_Organization_RefLocationId")]
-    [Index("RefOrganizationTypeId", Name = "IX_Organization_RefOrganizationTypeId")]
     public class Organization : BaseEntity
     {
 

@@ -9,8 +9,6 @@ using System.Text;
 namespace MEInsight.Entities.Core
 {
     [Table("SchoolClassroom")]
-    [Index("OrganizationId", Name = "IX_SchoolClassroom_OrganizationId")]
-    [Index("RefGradeLevelId", Name = "IX_SchoolClassroom_RefGradeLevelId")]
     public class SchoolClassroom : BaseEntity
     {
         [Key]
@@ -19,6 +17,8 @@ namespace MEInsight.Entities.Core
         [Display(Name = "School Classroom")]
         [Column(Order = 0)]
         public Guid SchoolClassroomId { get; set; }
+
+        // TODO Add Period
 
         [Required(ErrorMessage = "The {0} field is required.")]
         [DataType(DataType.Date)]

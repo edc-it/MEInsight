@@ -10,12 +10,6 @@ using System.Text;
 namespace MEInsight.Entities.TLM
 {
     [Table("TLMMaterial")]
-    //[Index("RefGradeLevelId", Name = "IX_TLMMaterial_RefGradeLevelId")]
-    //[Index("RefTlmgroupId", Name = "IX_TLMMaterial_RefTLMGroupId")]
-    //[Index("RefTlmlanguageId", Name = "IX_TLMMaterial_RefTLMLanguageId")]
-    //[Index("RefTlmmaterialSetId", Name = "IX_TLMMaterial_RefTLMMaterialSetId")]
-    //[Index("RefTlmmaterialTypeId", Name = "IX_TLMMaterial_RefTLMMaterialTypeId")]
-    //[Index("RefTlmsubjectId", Name = "IX_TLMMaterial_RefTLMSubjectId")]
     public class TLMMaterial : BaseEntity
     {
         public TLMMaterial()

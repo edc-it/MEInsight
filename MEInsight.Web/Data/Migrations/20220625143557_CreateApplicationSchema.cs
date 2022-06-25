@@ -196,6 +196,20 @@ namespace MEInsight.Web.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "RefParticipantDataSource",
+                columns: table => new
+                {
+                    RefParticipantDataSourceId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ParticipantDataSourceCode = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
+                    ParticipantDataSource = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RefParticipantDataSource", x => x.RefParticipantDataSourceId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "RefParticipantType",
                 columns: table => new
                 {
@@ -851,6 +865,13 @@ namespace MEInsight.Web.Data.Migrations
                     OrganizationId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     FirstName = table.Column<string>(type: "nvarchar(70)", maxLength: 70, nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(70)", maxLength: 70, nullable: true),
+                    CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    CreatedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    ModifiedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    ModifiedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    DeletedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    DeletedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -1209,6 +1230,39 @@ namespace MEInsight.Web.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ParticipantData",
+                columns: table => new
+                {
+                    ParticipantDataId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RegistrationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ParticipantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ParticipantCode = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    RefParticipantDataSourceId = table.Column<int>(type: "int", nullable: true),
+                    Data = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    CreatedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    ModifiedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    ModifiedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    DeletedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    DeletedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ParticipantData", x => x.ParticipantDataId);
+                    table.ForeignKey(
+                        name: "FK_ParticipantData_Participant_ParticipantId",
+                        column: x => x.ParticipantId,
+                        principalTable: "Participant",
+                        principalColumn: "ParticipantId");
+                    table.ForeignKey(
+                        name: "FK_ParticipantData_RefParticipantDataSource_RefParticipantDataSourceId",
+                        column: x => x.RefParticipantDataSourceId,
+                        principalTable: "RefParticipantDataSource",
+                        principalColumn: "RefParticipantDataSourceId");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Student",
                 columns: table => new
                 {
@@ -1458,7 +1512,7 @@ namespace MEInsight.Web.Data.Migrations
                 columns: table => new
                 {
                     GroupEnrollmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    GroupId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    GroupId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ParticipantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     EnrollmentDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Attendance = table.Column<int>(type: "int", nullable: true),
@@ -1538,13 +1592,13 @@ namespace MEInsight.Web.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("4ceca73e-b85c-424d-981a-78f11ace7c9d"), "decdd185-8cb0-41d2-a186-3f11205ae135", "Create, Edit, and Delete Role", "Delete", null },
-                    { new Guid("7dd268bd-e3c2-48f7-b143-7785509e2bd7"), "be50ac5e-d70c-430f-aac7-c732b0afe29a", "Read only Role", "Read", null },
-                    { new Guid("9318cd39-3636-4752-a7b4-339692a10ea6"), "f41e83a4-32c7-4af0-a41a-e5fe59269709", "Monitoring, Evaluation and Learning Officer Role", "MELOfficer", null },
-                    { new Guid("93655472-90eb-44f5-9408-d6d62b008c59"), "b15576c7-b355-434a-97b0-931879902aa2", "Monitoring, Evaluation and Learning Role", "MEL", null },
-                    { new Guid("a6ffbcf8-8aa5-4427-bd56-d6e226e1fbf7"), "2bb78266-f596-476f-9702-732d0c06a739", "Administrator Role", "Administrator", null },
-                    { new Guid("bf2adec9-5b5b-4251-bce1-a8a5cc619f3b"), "96bcaa7a-b87e-4dae-82c9-04de0180632a", "Create and Edit Role", "Edit", null },
-                    { new Guid("c814d6a8-08f8-4f14-bcbb-fa65569bec51"), "82f7e5ce-005c-4ff9-81bf-b6c7df287292", "Create only Role", "Create", null }
+                    { new Guid("16522b51-3d81-446e-ac98-a7a49cc93b12"), "d5cc9d02-e25f-4b6e-8628-bc6e067edf97", "Monitoring, Evaluation and Learning Role", "MEL", null },
+                    { new Guid("1d8a40e6-c44c-4b32-9271-6d5c248abc33"), "cce59a0a-7c4c-422f-bf34-5387670e3f86", "Create, Edit, and Delete Role", "Delete", null },
+                    { new Guid("460dd3ac-42f4-417d-9ed5-58eb2659601d"), "c2e3be34-efa7-4a61-b639-8b16d7819291", "Administrator Role", "Administrator", null },
+                    { new Guid("73c1fe42-1822-4674-aaeb-50acc84a1dfb"), "42f64a95-e2d7-42c2-972f-0b76847a726e", "Monitoring, Evaluation and Learning Officer Role", "MELOfficer", null },
+                    { new Guid("7a22b248-da2b-44ce-8e10-30aa2b43fae1"), "4d596934-a01c-4d18-bce9-8ba1692d78c9", "Create and Edit Role", "Edit", null },
+                    { new Guid("7f398148-6a9c-4ccf-9e34-7a45499b952c"), "e535f752-3328-4ca8-b447-713032f3cb61", "Read only Role", "Read", null },
+                    { new Guid("f6c162a2-378d-4953-b099-e8e07bf362e8"), "0553c867-2216-40fd-8bfb-ff9a655b1280", "Create only Role", "Create", null }
                 });
 
             migrationBuilder.InsertData(
@@ -1611,7 +1665,7 @@ namespace MEInsight.Web.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Organization",
                 columns: new[] { "OrganizationId", "Address", "Contact", "CreatedBy", "CreatedDate", "DeletedBy", "DeletedDate", "IsDeleted", "IsOrganizationUnit", "IsTenant", "Latitude", "Longitude", "ModifiedBy", "ModifiedDate", "OrganizationCode", "OrganizationName", "ParentOrganizationId", "Phone", "RefLocationId", "RefOrganizationTypeId", "RegistrationDate" },
-                values: new object[] { new Guid("d28cdcc2-211b-47f2-984b-82a01bf6c9e5"), null, null, "admin@meinsight.org", new DateTimeOffset(new DateTime(2022, 6, 10, 0, 41, 14, 309, DateTimeKind.Unspecified).AddTicks(7220), new TimeSpan(0, 0, 0, 0, 0)), null, null, false, true, true, null, null, null, null, "MO01", "Management Organization", null, null, null, 1, new DateTime(2022, 6, 10, 0, 41, 14, 309, DateTimeKind.Utc).AddTicks(7245) });
+                values: new object[] { new Guid("ac69be75-b9bd-44cf-a6a4-fb5b5e328079"), null, null, "admin@meinsight.org", new DateTimeOffset(new DateTime(2022, 6, 25, 14, 35, 57, 11, DateTimeKind.Unspecified).AddTicks(677), new TimeSpan(0, 0, 0, 0, 0)), null, null, false, true, true, null, null, null, null, "MO01", "Management Organization", null, null, null, 1, new DateTime(2022, 6, 25, 14, 35, 57, 11, DateTimeKind.Utc).AddTicks(706) });
 
             migrationBuilder.InsertData(
                 table: "Program",
@@ -1620,13 +1674,13 @@ namespace MEInsight.Web.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "OrganizationId", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("170dc8a3-945c-42f5-9a00-360e138fdeab"), 0, "f67f78de-4d5d-40e2-9a25-7d8212f974de", "admin@meinsight.org", true, null, null, false, null, null, "ADMIN@MEINSIGHT.ORG", new Guid("d28cdcc2-211b-47f2-984b-82a01bf6c9e5"), "AQAAAAEAACcQAAAAEE1oOiWvhl82d2ZcEcKVd/dHUgZv9La9ImkjdgKMNfcn7LGqK6n1IhwmNwtDZNoHBA==", null, true, "2ae5991f-47ad-432c-90c7-855b03dbb2cc", false, "admin@meinsight.org" });
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedBy", "CreatedDate", "DeletedBy", "DeletedDate", "Email", "EmailConfirmed", "FirstName", "IsDeleted", "LastName", "LockoutEnabled", "LockoutEnd", "ModifiedBy", "ModifiedDate", "NormalizedEmail", "NormalizedUserName", "OrganizationId", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { new Guid("b6b0c340-9964-4ac8-a3ba-401a71544e78"), 0, "b6b0c340-9964-4ac8-a3ba-401a71544e78", null, null, null, null, "admin@meinsight.org", true, null, false, null, false, null, null, null, null, "ADMIN@MEINSIGHT.ORG", new Guid("ac69be75-b9bd-44cf-a6a4-fb5b5e328079"), "AQAAAAEAACcQAAAAEFV1NAk577zPPoiW85Lymay6Z+1zmcK1lJskFkGG2wfZIax7x9nDBLiWOqcjBEkqAA==", null, true, "b6b0c340-9964-4ac8-a3ba-401a71544e78", false, "admin@meinsight.org" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { new Guid("a6ffbcf8-8aa5-4427-bd56-d6e226e1fbf7"), new Guid("170dc8a3-945c-42f5-9a00-360e138fdeab") });
+                values: new object[] { new Guid("460dd3ac-42f4-417d-9ed5-58eb2659601d"), new Guid("b6b0c340-9964-4ac8-a3ba-401a71544e78") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -1781,6 +1835,16 @@ namespace MEInsight.Web.Data.Migrations
                 name: "IX_Participant_RefSexId",
                 table: "Participant",
                 column: "RefSexId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ParticipantData_ParticipantId",
+                table: "ParticipantData",
+                column: "ParticipantId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ParticipantData_RefParticipantDataSourceId",
+                table: "ParticipantData",
+                column: "RefParticipantDataSourceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Partner_RefPartnerSectorId",
@@ -2027,6 +2091,9 @@ namespace MEInsight.Web.Data.Migrations
                 name: "GroupEvaluation");
 
             migrationBuilder.DropTable(
+                name: "ParticipantData");
+
+            migrationBuilder.DropTable(
                 name: "Partner");
 
             migrationBuilder.DropTable(
@@ -2061,6 +2128,9 @@ namespace MEInsight.Web.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "ProgramAssessment");
+
+            migrationBuilder.DropTable(
+                name: "RefParticipantDataSource");
 
             migrationBuilder.DropTable(
                 name: "RefPartnerSector");

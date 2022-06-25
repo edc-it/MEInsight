@@ -5,15 +5,18 @@ using MEInsight.Entities.Programs;
 using MEInsight.Entities.Reference;
 using MEInsight.Entities.TLM;
 using MEInsight.Web.Extensions;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace MEInsight.Web.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid>
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
-
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IHttpContextAccessor httpContextAccessor)
             : base(options)
         {
@@ -100,75 +103,26 @@ namespace MEInsight.Web.Data
         public DbSet<GroupEnrollment> GroupEnrollments { get; set; } = null!;
         public DbSet<GroupEvaluation> GroupEvaluations { get; set; } = null!;
 
+        // JSON NoSQL Hybrid Participant
+        public DbSet<ParticipantData> ParticipantData { get; set; } = null!;
+        public DbSet<RefParticipantDataSource> ParticipantDataSources { get; set; } = null!;
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
 
             base.OnModelCreating(builder);
 
             //Entities.Core
-            builder.Entity<Organization>().HasQueryFilter(p => !p.IsDeleted).ToTable("Organization");
+            builder.Entity<Organization>().HasQueryFilter(p => !p.IsDeleted);
 
-            builder.Entity<School>().ToTable("School");
-            builder.Entity<Partner>().ToTable("Partner");
+            builder.Entity<SchoolPeriod>().HasQueryFilter(p => !p.IsDeleted);
+            builder.Entity<SchoolEnrollment>().HasQueryFilter(p => !p.IsDeleted);
+            builder.Entity<SchoolClassroom>().HasQueryFilter(p => !p.IsDeleted);
+            builder.Entity<Participant>().HasQueryFilter(p => !p.IsDeleted);
 
-            builder.Entity<SchoolPeriod>().HasQueryFilter(p => !p.IsDeleted).ToTable("SchoolPeriod");
-            builder.Entity<SchoolEnrollment>().HasQueryFilter(p => !p.IsDeleted).ToTable("SchoolEnrollment");
-            builder.Entity<SchoolClassroom>().HasQueryFilter(p => !p.IsDeleted).ToTable("SchoolClassroom");
-            builder.Entity<Participant>().HasQueryFilter(p => !p.IsDeleted).ToTable("Participant");
-
-            builder.Entity<Student>().ToTable("Student");
-            builder.Entity<Teacher>().ToTable("Teacher");
-            builder.Entity<EducationAdministrator>().ToTable("EducationAdministrator");
-            //Entities.Reference
-            builder.Entity<RefOrganizationType>().ToTable("RefOrganizationType");
-            builder.Entity<RefSchoolType>().ToTable("RefSchoolType");
-            builder.Entity<RefSchoolLocation>().ToTable("RefSchoolLocation");
-            builder.Entity<RefSchoolLanguage>().ToTable("RefSchoolLanguage");
-            builder.Entity<RefSchoolAdministrationType>().ToTable("RefSchoolAdministrationType");
-            builder.Entity<RefSchoolCluster>().ToTable("RefSchoolCluster");
-            builder.Entity<RefSchoolStatus>().ToTable("RefSchoolStatus");
-
-            builder.Entity<RefPartnerType>().ToTable("RefPartnerType");
-            builder.Entity<RefPartnerSector>().ToTable("RefPartnerSector");
-
-            builder.Entity<RefParticipantType>().ToTable("RefParticipantType");
-            builder.Entity<RefParticipantCohort>().ToTable("RefParticipantCohort");
-            builder.Entity<RefSex>().ToTable("RefSex");
-            builder.Entity<RefDisabilityType>().ToTable("RefDisabilityType");
-
-            builder.Entity<RefStudentType>().ToTable("RefStudentType");
-            builder.Entity<RefStudentSpecialization>().ToTable("RefStudentSpecialization");
-            builder.Entity<RefStudentYearOfStudy>().ToTable("RefStudentYearOfStudy");
-
-            builder.Entity<RefTeacherType>().ToTable("RefTeacherType");
-            builder.Entity<RefTeacherPosition>().ToTable("RefTeacherPosition");
-            builder.Entity<RefTeacherEmploymentType>().ToTable("RefTeacherEmploymentType");
-
-            builder.Entity<RefEducationAdministratorType>().ToTable("RefEducationAdministratorType");
-            builder.Entity<RefEducationAdministratorPosition>().ToTable("RefEducationAdministratorPosition");
-            builder.Entity<RefEducationAdministratorOffice>().ToTable("RefEducationAdministratorOffice");
-
-            builder.Entity<RefGradeLevel>().ToTable("RefGradeLevel");
-            builder.Entity<RefEnrollmentStatus>().ToTable("RefEnrollmentStatus");
-            builder.Entity<RefEvaluationStatus>().ToTable("RefEvaluationStatus");
-            builder.Entity<RefAssessmentType>().ToTable("RefAssessmentType");
-
-            builder.Entity<RefProgramType>().ToTable("RefProgramType");
-            builder.Entity<RefProgramDeliveryType>().ToTable("RefProgramDeliveryType");
-            builder.Entity<RefAttendanceUnit>().ToTable("RefAttendanceUnit");
-
-            builder.Entity<RefTLMDistributionStatus>().ToTable("RefTLMDistributionStatus");
-            builder.Entity<RefTLMLanguage>().ToTable("RefTLMLanguage");
-            builder.Entity<RefTLMMaterialSet>().ToTable("RefTLMMaterialSet");
-            builder.Entity<RefTLMSubject>().ToTable("RefTLMSubject");
-            builder.Entity<RefTLMGroup>().ToTable("RefTLMGroup");
-            builder.Entity<RefTLMMaterialType>().ToTable("RefTLMMaterialType");
-
-            builder.Entity<RefLocation>().ToTable("RefLocation");
-            builder.Entity<RefLocationType>().ToTable("RefLocationType");
 
             //Entities.TLM
-            builder.Entity<TLMDistribution>().HasQueryFilter(p => !p.IsDeleted).ToTable("TLMDistribution");
+            builder.Entity<TLMDistribution>().HasQueryFilter(p => !p.IsDeleted);
 
             builder.Entity<TLMDistribution>()
                 .HasOne(m => m.OrganizationsFrom)
@@ -180,22 +134,42 @@ namespace MEInsight.Web.Data
                 .WithMany(t => t.TLMDistributionsTo)
                 .HasForeignKey(m => m.OrganizationIdTo);
 
-            builder.Entity<TLMDistributionDetail>().HasQueryFilter(p => !p.IsDeleted).ToTable("TLMDistributionDetail");
-            builder.Entity<TLMDistributionPeriod>().HasQueryFilter(p => !p.IsDeleted).ToTable("TLMDistributionPeriod");
-            builder.Entity<TLMMaterial>().HasQueryFilter(p => !p.IsDeleted).ToTable("TLMMaterial");
+            builder.Entity<TLMDistributionDetail>().HasQueryFilter(p => !p.IsDeleted);
+            builder.Entity<TLMDistributionPeriod>().HasQueryFilter(p => !p.IsDeleted);
+            builder.Entity<TLMMaterial>().HasQueryFilter(p => !p.IsDeleted);
 
             //Entities.Programs
-            builder.Entity<MEInsight.Entities.Programs.Program>().HasQueryFilter(p => !p.IsDeleted).ToTable("Program");
-            builder.Entity<ProgramAssessment>().HasQueryFilter(p => !p.IsDeleted).ToTable("ProgramAssessment");
-            builder.Entity<Group>().HasQueryFilter(p => !p.IsDeleted).ToTable("Group");
-            builder.Entity<GroupEnrollment>().HasQueryFilter(p => !p.IsDeleted).ToTable("GroupEnrollment");
-            builder.Entity<GroupEnrollment>().HasIndex(t => t.ParticipantId);
+            builder.Entity<MEInsight.Entities.Programs.Program>().HasQueryFilter(p => !p.IsDeleted);
+            builder.Entity<ProgramAssessment>().HasQueryFilter(p => !p.IsDeleted);
+            builder.Entity<Group>().HasQueryFilter(p => !p.IsDeleted);
 
-            builder.Entity<GroupEvaluation>().HasQueryFilter(p => !p.IsDeleted).ToTable("GroupEvaluation");
+            builder.Entity<GroupEnrollment>(entity =>
+            {
+                entity.HasQueryFilter(p => !p.IsDeleted);
+                entity.HasIndex(t => t.ParticipantId);
+
+                entity.HasOne(d => d.Groups)
+                    .WithMany(p => p.GroupEnrollments)
+                    .HasForeignKey(d => d.GroupId)
+                    .OnDelete(DeleteBehavior.ClientCascade);
+            });
+
+            builder.Entity<GroupEvaluation>().HasQueryFilter(p => !p.IsDeleted);
             builder.Entity<GroupEvaluation>().HasIndex(t => t.GroupEnrollmentId);
 
+            builder.Entity<ParticipantData>()
+                .HasQueryFilter(p => !p.IsDeleted)
+                .Property(b => b.ExtendedData).HasColumnName("Data");
+
+            builder.Entity<RefParticipantDataSource>();
+
+            builder.Entity<ApplicationUser>().HasQueryFilter(p => !p.IsDeleted);
+
+            // Seed database
             builder.Seed();
+
         }
+
         //Override SaveChanges - enables Soft-Delete
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
@@ -243,6 +217,7 @@ namespace MEInsight.Web.Data
 
                         case EntityState.Deleted:
                             entry.State = EntityState.Modified;
+                            //Soft delete cascade
                             entry.CurrentValues["IsDeleted"] = true;
                             entry.CurrentValues["CreatedDate"] = entry.GetDatabaseValues()?.GetValue<object>("CreatedDate");
                             entry.CurrentValues["CreatedBy"] = entry.GetDatabaseValues()?.GetValue<object>("CreatedBy");
@@ -250,10 +225,33 @@ namespace MEInsight.Web.Data
                             entry.CurrentValues["ModifiedBy"] = entry.GetDatabaseValues()?.GetValue<object>("ModifiedBy");
                             entry.CurrentValues["DeletedDate"] = DateTimeOffset.UtcNow;
                             entry.CurrentValues["DeletedBy"] = userName;
+                            foreach (var navigationEntry in entry.Navigations.Where(x => !((IReadOnlyNavigation)x.Metadata).IsOnDependent))
+                            {
+                                if (navigationEntry is CollectionEntry collectionEntry)
+                                {
+                                    foreach (var dependentEntry in collectionEntry.CurrentValue!)
+                                    {
+                                        HandleDependent(Entry(dependentEntry));
+                                    }
+                                }
+                                else
+                                {
+                                    var dependentEntry = navigationEntry.CurrentValue;
+                                    if (dependentEntry != null)
+                                    {
+                                        HandleDependent(Entry(dependentEntry));
+                                    }
+                                }
+                            }
                             break;
                     }
                 }
             }
+        }
+
+        private static void HandleDependent(EntityEntry entry)
+        {
+            entry.CurrentValues["IsDeleted"] = true;
         }
     }
 }

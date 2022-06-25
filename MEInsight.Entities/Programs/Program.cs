@@ -9,10 +9,6 @@ using Microsoft.EntityFrameworkCore;
 namespace MEInsight.Entities.Programs
 {
     [Table("Program")]
-    [Index("RefAttendanceUnitId", Name = "IX_Program_RefAttendanceUnitId")]
-    [Index("RefOrganizationTypeId", Name = "IX_Program_RefOrganizationTypeId")]
-    [Index("RefProgramDeliveryTypeId", Name = "IX_Program_RefProgramDeliveryTypeId")]
-    [Index("RefProgramTypeId", Name = "IX_Program_RefProgramTypeId")]
     public class Program : BaseEntity
     {
         public Program()

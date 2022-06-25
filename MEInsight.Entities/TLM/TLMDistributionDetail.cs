@@ -8,8 +8,6 @@ using System.Text;
 namespace MEInsight.Entities.TLM
 {
     [Table("TLMDistributionDetail")]
-    //[Index("TlmdistributionId", Name = "IX_TLMDistributionDetail_TLMDistributionId")]
-    //[Index("TlmmaterialId", Name = "IX_TLMDistributionDetail_TLMMaterialId")]
     public class TLMDistributionDetail : BaseEntity
     {
         [Key]

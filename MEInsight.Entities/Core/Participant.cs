@@ -1,9 +1,5 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 using System.Runtime.Serialization;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
@@ -13,12 +9,6 @@ using MEInsight.Entities.Programs;
 namespace MEInsight.Entities.Core
 {
     [Table("Participant")]
-    [Index("OrganizationId", Name = "IX_Participant_OrganizationId")]
-    [Index("RefDisabilityTypeId", Name = "IX_Participant_RefDisabilityTypeId")]
-    [Index("RefLocationId", Name = "IX_Participant_RefLocationId")]
-    [Index("RefParticipantCohortId", Name = "IX_Participant_RefParticipantCohortId")]
-    [Index("RefParticipantTypeId", Name = "IX_Participant_RefParticipantTypeId")]
-    [Index("RefSexId", Name = "IX_Participant_RefSexId")]
     public class Participant : BaseEntity
     {
         public Participant()

@@ -9,10 +9,6 @@ using Microsoft.EntityFrameworkCore;
 namespace MEInsight.Entities.Core
 {
     [Table("SchoolEnrollment")]
-    [Index("OrganizationId", Name = "IX_SchoolEnrollment_OrganizationId")]
-    [Index("RefGradeLevelId", Name = "IX_SchoolEnrollment_RefGradeLevelId")]
-    [Index("RefParticipantTypeId", Name = "IX_SchoolEnrollment_RefParticipantTypeId")]
-    [Index("SchoolPeriodId", Name = "IX_SchoolEnrollment_SchoolPeriodId")]
     public class SchoolEnrollment : BaseEntity
     {
         [Key]

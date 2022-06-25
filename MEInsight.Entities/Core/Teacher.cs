@@ -10,9 +10,6 @@ using Microsoft.EntityFrameworkCore;
 namespace MEInsight.Entities.Core
 {
     [Table("Teacher")]
-    [Index("RefTeacherEmploymentTypeId", Name = "IX_Teacher_RefTeacherEmploymentTypeId")]
-    [Index("RefTeacherPositionId", Name = "IX_Teacher_RefTeacherPositionId")]
-    [Index("RefTeacherTypeId", Name = "IX_Teacher_RefTeacherTypeId")]
     public class Teacher : Participant
     {
         public Teacher()

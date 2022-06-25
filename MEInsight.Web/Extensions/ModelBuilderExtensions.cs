@@ -20,9 +20,15 @@ namespace MEInsight.Web.Extensions
             string adminOrganizationName = "Management Organization";
             string adminOrganizationCode = "MO01";
 
-            Guid adminRoleId = Guid.NewGuid(); 
-            Guid adminUserId = Guid.NewGuid(); 
-            Guid adminOrganizationId = Guid.NewGuid();
+            Guid adminUserId = new("b6b0c340-9964-4ac8-a3ba-401a71544e78");
+            Guid adminRoleId = new("460dd3ac-42f4-417d-9ed5-58eb2659601d");
+            Guid readRoleId = new("7f398148-6a9c-4ccf-9e34-7a45499b952c");
+            Guid createRoleId = new("f6c162a2-378d-4953-b099-e8e07bf362e8");
+            Guid editRoleId = new("7a22b248-da2b-44ce-8e10-30aa2b43fae1");
+            Guid deleteRoleId = new("1d8a40e6-c44c-4b32-9271-6d5c248abc33");
+            Guid melOfficerRoleId = new("73c1fe42-1822-4674-aaeb-50acc84a1dfb");
+            Guid melRoleId = new("16522b51-3d81-446e-ac98-a7a49cc93b12");
+            Guid adminOrganizationId = new("ac69be75-b9bd-44cf-a6a4-fb5b5e328079");
 
             builder.Entity<RefOrganizationType>()
                 .HasData(
@@ -52,8 +58,8 @@ namespace MEInsight.Web.Extensions
                 UserName = adminUserName,
                 Email = adminUserName,
                 NormalizedUserName = adminUserName.ToUpper(),
-                ConcurrencyStamp = Guid.NewGuid().ToString(),
-                SecurityStamp = Guid.NewGuid().ToString(),
+                ConcurrencyStamp = adminUserId.ToString(),
+                SecurityStamp = adminUserId.ToString(),
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
                 TwoFactorEnabled = false,
@@ -70,12 +76,12 @@ namespace MEInsight.Web.Extensions
             builder.Entity<ApplicationRole>()
                 .HasData(
                     new ApplicationRole() { Id = adminRoleId, Name = "Administrator", Description = "Administrator Role" },
-                    new ApplicationRole() { Id = Guid.NewGuid(), Name = "Read", Description = "Read only Role" },
-                    new ApplicationRole() { Id = Guid.NewGuid(), Name = "Create", Description = "Create only Role" },
-                    new ApplicationRole() { Id = Guid.NewGuid(), Name = "Edit", Description = "Create and Edit Role" },
-                    new ApplicationRole() { Id = Guid.NewGuid(), Name = "Delete", Description = "Create, Edit, and Delete Role" },
-                    new ApplicationRole() { Id = Guid.NewGuid(), Name = "MELOfficer", Description = "Monitoring, Evaluation and Learning Officer Role" },
-                    new ApplicationRole() { Id = Guid.NewGuid(), Name = "MEL", Description = "Monitoring, Evaluation and Learning Role" }
+                    new ApplicationRole() { Id = readRoleId, Name = "Read", Description = "Read only Role" },
+                    new ApplicationRole() { Id = createRoleId, Name = "Create", Description = "Create only Role" },
+                    new ApplicationRole() { Id = editRoleId, Name = "Edit", Description = "Create and Edit Role" },
+                    new ApplicationRole() { Id = deleteRoleId, Name = "Delete", Description = "Create, Edit, and Delete Role" },
+                    new ApplicationRole() { Id = melOfficerRoleId, Name = "MELOfficer", Description = "Monitoring, Evaluation and Learning Officer Role" },
+                    new ApplicationRole() { Id = melRoleId, Name = "MEL", Description = "Monitoring, Evaluation and Learning Role" }
                 );
 
             builder.Entity<IdentityUserRole<Guid>>(entity =>

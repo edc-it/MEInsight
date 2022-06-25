@@ -10,8 +10,6 @@ using Microsoft.EntityFrameworkCore;
 namespace MEInsight.Entities.Reference
 {
     [Table("RefLocation")]
-    [Index("ParentLocationId", Name = "IX_RefLocation_ParentLocationId")]
-    [Index("RefLocationTypeId", Name = "IX_RefLocation_RefLocationTypeId")]
     public class RefLocation
     {
         public RefLocation()
@@ -27,7 +25,7 @@ namespace MEInsight.Entities.Reference
         [MaxLength(25)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Display(Name = "Location Id")]
-        [Remote(action: "VerifyLocationCode", controller: "RemoteValidations", HttpMethod = "POST", ErrorMessage = "This Code already exists.", AdditionalFields = "LocationCodeInitialValue")]
+        [Remote(action: "VerifyLocationCode", areaName: "", controller: "RemoteValidations", HttpMethod = "POST", ErrorMessage = "This Code already exists.", AdditionalFields = "LocationCodeInitialValue")]
         [Column(Order = 0)]
         public string RefLocationId { get; set; } = null!;
 
@@ -57,11 +55,14 @@ namespace MEInsight.Entities.Reference
         // Navigation properties
         [ForeignKey("RefLocationTypeId")]
         [Display(Name = "Location Type")]
-        public virtual RefLocationType LocationTypes { get; set; } = null!;
+        public virtual RefLocationType? LocationTypes { get; set; } = null!;
 
         [ForeignKey("ParentLocationId")]
         [Display(Name = "Parent Location")]
         public virtual RefLocation? ParentLocations { get; set; }
+
+        //TODO
+        // Add LocationReference
 
         public virtual ICollection<RefLocation> Locations { get; set; }
         public virtual ICollection<Organization> Organizations { get; set; }

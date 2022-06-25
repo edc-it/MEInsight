@@ -10,9 +10,6 @@ using MEInsight.Entities.Reference;
 namespace MEInsight.Entities.Programs
 {
     [Table("GroupEnrollment")]
-    [Index("GroupId", Name = "IX_GroupEnrollment_GroupId")]
-    [Index("ParticipantId", Name = "IX_GroupEnrollment_ParticipantId")]
-    [Index("RefEnrollmentStatusId", Name = "IX_GroupEnrollment_RefEnrollmentStatusId")]
     public class GroupEnrollment : BaseEntity
     {
         public GroupEnrollment()
@@ -27,14 +24,16 @@ namespace MEInsight.Entities.Programs
         [Column(Order = 1)]
         public Guid GroupEnrollmentId { get; set; }
 
+        //TODO Fix required
+        [Required(ErrorMessage = "The {0} field is required.")]
         [Display(Name = "Group")]
         [Column(Order = 2)]
-        public Guid? GroupId { get; set; }
+        public Guid GroupId { get; set; }
 
         [Required(ErrorMessage = "The {0} field is required.")]
         [Display(Name = "Participant")]
         [Column(Order = 3)]
-        public Guid ParticipantId { get; set; }
+        public Guid? ParticipantId { get; set; }
         
         [DataType(DataType.Date)]
         [Display(Name = "Enrollment Date")]
@@ -55,12 +54,10 @@ namespace MEInsight.Entities.Programs
         public int? RefEnrollmentStatusId { get; set; }
         
         [ForeignKey("ParticipantId")]
-        [InverseProperty("GroupEnrollments")]
         [Display(Name = "Participant")]
         public virtual Participant? Participants { get; set; } = null!;
 
         [ForeignKey("GroupId")]
-        [InverseProperty("GroupEnrollments")]
         [Display(Name = "Group")]
         public virtual Group? Groups { get; set; }
 

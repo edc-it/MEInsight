@@ -11,10 +11,6 @@ using MEInsight.Entities.Reference;
 namespace MEInsight.Entities.Programs
 {
     [Table("Group")]
-    [Index("OrganizationId", Name = "IX_Group_OrganizationId")]
-    [Index("ParticipantId", Name = "IX_Group_ParticipantId")]
-    [Index("ProgramId", Name = "IX_Group_ProgramId")]
-    [Index("RefGradeLevelId", Name = "IX_Group_RefGradeLevelId")]
     public class Group : BaseEntity
     {
         public Group()
@@ -37,7 +33,7 @@ namespace MEInsight.Entities.Programs
         [Required(ErrorMessage = "The {0} field is required.")]
         [Display(Name = "Program")]
         [Column(Order = 2)]
-        public int ProgramId { get; set; }
+        public int? ProgramId { get; set; }
 
         [Required(ErrorMessage = "The {0} field is required.")]
         [StringLength(100)]
@@ -101,12 +97,10 @@ namespace MEInsight.Entities.Programs
 
         [ForeignKey("OrganizationId")]
         [Display(Name = "Organization")]
-        [InverseProperty("Groups")]
         public virtual Organization? Organizations { get; set; }
 
         [ForeignKey("ProgramId")]
         [Display(Name = "Program")]
-        [InverseProperty("Groups")]
         public virtual Program? Programs { get; set; }
 
         [ForeignKey("ParticipantId")]

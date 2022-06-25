@@ -10,8 +10,6 @@ using MEInsight.Entities.Reference;
 namespace MEInsight.Entities.Core
 {
     [Table("Partner")]
-    [Index("RefPartnerSectorId", Name = "IX_Partner_RefPartnerSectorId")]
-    [Index("RefPartnerTypeId", Name = "IX_Partner_RefPartnerTypeId")]
     public class Partner : Organization
     {
 

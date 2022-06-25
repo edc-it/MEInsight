@@ -9,10 +9,6 @@ using System.Text;
 namespace MEInsight.Entities.Programs
 {
     [Table("ProgramAssessment")]
-    [Index("ProgramId", Name = "IX_ProgramAssessment_ProgramId")]
-    [Index("RefAssessmentTypeId", Name = "IX_ProgramAssessment_RefAssessmentTypeId")]
-    [Index("RefAttendanceUnitId", Name = "IX_ProgramAssessment_RefAttendanceUnitId")]
-    [Index("RefEvaluationStatusId", Name = "IX_ProgramAssessment_RefEvaluationStatusId")]
     public class ProgramAssessment : BaseEntity
     {
         public ProgramAssessment()

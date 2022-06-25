@@ -12,14 +12,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MEInsight.Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220610004114_CreateApplicationSchema")]
+    [Migration("20220625143557_CreateApplicationSchema")]
     partial class CreateApplicationSchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.5")
+                .HasAnnotation("ProductVersion", "6.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -116,27 +116,27 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("OrganizationId");
 
-                    b.HasIndex(new[] { "ParentOrganizationId" }, "IX_Organization_ParentOrganizationId");
+                    b.HasIndex("ParentOrganizationId");
 
-                    b.HasIndex(new[] { "RefLocationId" }, "IX_Organization_RefLocationId");
+                    b.HasIndex("RefLocationId");
 
-                    b.HasIndex(new[] { "RefOrganizationTypeId" }, "IX_Organization_RefOrganizationTypeId");
+                    b.HasIndex("RefOrganizationTypeId");
 
-                    b.ToTable("Organization", (string)null);
+                    b.ToTable("Organization");
 
                     b.HasData(
                         new
                         {
-                            OrganizationId = new Guid("d28cdcc2-211b-47f2-984b-82a01bf6c9e5"),
+                            OrganizationId = new Guid("ac69be75-b9bd-44cf-a6a4-fb5b5e328079"),
                             CreatedBy = "admin@meinsight.org",
-                            CreatedDate = new DateTimeOffset(new DateTime(2022, 6, 10, 0, 41, 14, 309, DateTimeKind.Unspecified).AddTicks(7220), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedDate = new DateTimeOffset(new DateTime(2022, 6, 25, 14, 35, 57, 11, DateTimeKind.Unspecified).AddTicks(677), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             IsOrganizationUnit = true,
                             IsTenant = true,
                             OrganizationCode = "MO01",
                             OrganizationName = "Management Organization",
                             RefOrganizationTypeId = 1,
-                            RegistrationDate = new DateTime(2022, 6, 10, 0, 41, 14, 309, DateTimeKind.Utc).AddTicks(7245)
+                            RegistrationDate = new DateTime(2022, 6, 25, 14, 35, 57, 11, DateTimeKind.Utc).AddTicks(706)
                         });
                 });
 
@@ -271,19 +271,80 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("ParticipantId");
 
-                    b.HasIndex(new[] { "OrganizationId" }, "IX_Participant_OrganizationId");
+                    b.HasIndex("OrganizationId");
 
-                    b.HasIndex(new[] { "RefDisabilityTypeId" }, "IX_Participant_RefDisabilityTypeId");
+                    b.HasIndex("RefDisabilityTypeId");
 
-                    b.HasIndex(new[] { "RefLocationId" }, "IX_Participant_RefLocationId");
+                    b.HasIndex("RefLocationId");
 
-                    b.HasIndex(new[] { "RefParticipantCohortId" }, "IX_Participant_RefParticipantCohortId");
+                    b.HasIndex("RefParticipantCohortId");
 
-                    b.HasIndex(new[] { "RefParticipantTypeId" }, "IX_Participant_RefParticipantTypeId");
+                    b.HasIndex("RefParticipantTypeId");
 
-                    b.HasIndex(new[] { "RefSexId" }, "IX_Participant_RefSexId");
+                    b.HasIndex("RefSexId");
 
-                    b.ToTable("Participant", (string)null);
+                    b.ToTable("Participant");
+                });
+
+            modelBuilder.Entity("MEInsight.Entities.Core.ParticipantData", b =>
+                {
+                    b.Property<Guid>("ParticipantDataId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(0);
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTimeOffset?>("CreatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTimeOffset?>("DeletedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("ExtendedData")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Data");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTimeOffset?>("ModifiedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("ParticipantCode")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnOrder(3);
+
+                    b.Property<Guid?>("ParticipantId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(2);
+
+                    b.Property<int?>("RefParticipantDataSourceId")
+                        .HasColumnType("int")
+                        .HasColumnOrder(4);
+
+                    b.Property<DateTime>("RegistrationDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnOrder(1);
+
+                    b.HasKey("ParticipantDataId");
+
+                    b.HasIndex("ParticipantId");
+
+                    b.HasIndex("RefParticipantDataSourceId");
+
+                    b.ToTable("ParticipantData");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Core.SchoolClassroom", b =>
@@ -339,11 +400,11 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("SchoolClassroomId");
 
-                    b.HasIndex(new[] { "OrganizationId" }, "IX_SchoolClassroom_OrganizationId");
+                    b.HasIndex("OrganizationId");
 
-                    b.HasIndex(new[] { "RefGradeLevelId" }, "IX_SchoolClassroom_RefGradeLevelId");
+                    b.HasIndex("RefGradeLevelId");
 
-                    b.ToTable("SchoolClassroom", (string)null);
+                    b.ToTable("SchoolClassroom");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Core.SchoolEnrollment", b =>
@@ -415,15 +476,15 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("SchoolEnrollmentId");
 
-                    b.HasIndex(new[] { "OrganizationId" }, "IX_SchoolEnrollment_OrganizationId");
+                    b.HasIndex("OrganizationId");
 
-                    b.HasIndex(new[] { "RefGradeLevelId" }, "IX_SchoolEnrollment_RefGradeLevelId");
+                    b.HasIndex("RefGradeLevelId");
 
-                    b.HasIndex(new[] { "RefParticipantTypeId" }, "IX_SchoolEnrollment_RefParticipantTypeId");
+                    b.HasIndex("RefParticipantTypeId");
 
-                    b.HasIndex(new[] { "SchoolPeriodId" }, "IX_SchoolEnrollment_SchoolPeriodId");
+                    b.HasIndex("SchoolPeriodId");
 
-                    b.ToTable("SchoolEnrollment", (string)null);
+                    b.ToTable("SchoolEnrollment");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Core.SchoolPeriod", b =>
@@ -475,7 +536,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("SchoolPeriodId");
 
-                    b.ToTable("SchoolPeriod", (string)null);
+                    b.ToTable("SchoolPeriod");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Identity.ApplicationRole", b =>
@@ -512,50 +573,50 @@ namespace MEInsight.Web.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a6ffbcf8-8aa5-4427-bd56-d6e226e1fbf7"),
-                            ConcurrencyStamp = "2bb78266-f596-476f-9702-732d0c06a739",
+                            Id = new Guid("460dd3ac-42f4-417d-9ed5-58eb2659601d"),
+                            ConcurrencyStamp = "c2e3be34-efa7-4a61-b639-8b16d7819291",
                             Description = "Administrator Role",
                             Name = "Administrator"
                         },
                         new
                         {
-                            Id = new Guid("7dd268bd-e3c2-48f7-b143-7785509e2bd7"),
-                            ConcurrencyStamp = "be50ac5e-d70c-430f-aac7-c732b0afe29a",
+                            Id = new Guid("7f398148-6a9c-4ccf-9e34-7a45499b952c"),
+                            ConcurrencyStamp = "e535f752-3328-4ca8-b447-713032f3cb61",
                             Description = "Read only Role",
                             Name = "Read"
                         },
                         new
                         {
-                            Id = new Guid("c814d6a8-08f8-4f14-bcbb-fa65569bec51"),
-                            ConcurrencyStamp = "82f7e5ce-005c-4ff9-81bf-b6c7df287292",
+                            Id = new Guid("f6c162a2-378d-4953-b099-e8e07bf362e8"),
+                            ConcurrencyStamp = "0553c867-2216-40fd-8bfb-ff9a655b1280",
                             Description = "Create only Role",
                             Name = "Create"
                         },
                         new
                         {
-                            Id = new Guid("bf2adec9-5b5b-4251-bce1-a8a5cc619f3b"),
-                            ConcurrencyStamp = "96bcaa7a-b87e-4dae-82c9-04de0180632a",
+                            Id = new Guid("7a22b248-da2b-44ce-8e10-30aa2b43fae1"),
+                            ConcurrencyStamp = "4d596934-a01c-4d18-bce9-8ba1692d78c9",
                             Description = "Create and Edit Role",
                             Name = "Edit"
                         },
                         new
                         {
-                            Id = new Guid("4ceca73e-b85c-424d-981a-78f11ace7c9d"),
-                            ConcurrencyStamp = "decdd185-8cb0-41d2-a186-3f11205ae135",
+                            Id = new Guid("1d8a40e6-c44c-4b32-9271-6d5c248abc33"),
+                            ConcurrencyStamp = "cce59a0a-7c4c-422f-bf34-5387670e3f86",
                             Description = "Create, Edit, and Delete Role",
                             Name = "Delete"
                         },
                         new
                         {
-                            Id = new Guid("9318cd39-3636-4752-a7b4-339692a10ea6"),
-                            ConcurrencyStamp = "f41e83a4-32c7-4af0-a41a-e5fe59269709",
+                            Id = new Guid("73c1fe42-1822-4674-aaeb-50acc84a1dfb"),
+                            ConcurrencyStamp = "42f64a95-e2d7-42c2-972f-0b76847a726e",
                             Description = "Monitoring, Evaluation and Learning Officer Role",
                             Name = "MELOfficer"
                         },
                         new
                         {
-                            Id = new Guid("93655472-90eb-44f5-9408-d6d62b008c59"),
-                            ConcurrencyStamp = "b15576c7-b355-434a-97b0-931879902aa2",
+                            Id = new Guid("16522b51-3d81-446e-ac98-a7a49cc93b12"),
+                            ConcurrencyStamp = "d5cc9d02-e25f-4b6e-8628-bc6e067edf97",
                             Description = "Monitoring, Evaluation and Learning Role",
                             Name = "MEL"
                         });
@@ -574,6 +635,20 @@ namespace MEInsight.Web.Data.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTimeOffset?>("CreatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTimeOffset?>("DeletedDate")
+                        .HasColumnType("datetimeoffset");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -585,6 +660,9 @@ namespace MEInsight.Web.Data.Migrations
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("LastName")
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
@@ -593,6 +671,13 @@ namespace MEInsight.Web.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTimeOffset?>("ModifiedDate")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("NormalizedEmail")
@@ -642,17 +727,18 @@ namespace MEInsight.Web.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("170dc8a3-945c-42f5-9a00-360e138fdeab"),
+                            Id = new Guid("b6b0c340-9964-4ac8-a3ba-401a71544e78"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f67f78de-4d5d-40e2-9a25-7d8212f974de",
+                            ConcurrencyStamp = "b6b0c340-9964-4ac8-a3ba-401a71544e78",
                             Email = "admin@meinsight.org",
                             EmailConfirmed = true,
+                            IsDeleted = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN@MEINSIGHT.ORG",
-                            OrganizationId = new Guid("d28cdcc2-211b-47f2-984b-82a01bf6c9e5"),
-                            PasswordHash = "AQAAAAEAACcQAAAAEE1oOiWvhl82d2ZcEcKVd/dHUgZv9La9ImkjdgKMNfcn7LGqK6n1IhwmNwtDZNoHBA==",
+                            OrganizationId = new Guid("ac69be75-b9bd-44cf-a6a4-fb5b5e328079"),
+                            PasswordHash = "AQAAAAEAACcQAAAAEFV1NAk577zPPoiW85Lymay6Z+1zmcK1lJskFkGG2wfZIax7x9nDBLiWOqcjBEkqAA==",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "2ae5991f-47ad-432c-90c7-855b03dbb2cc",
+                            SecurityStamp = "b6b0c340-9964-4ac8-a3ba-401a71544e78",
                             TwoFactorEnabled = false,
                             UserName = "admin@meinsight.org"
                         });
@@ -735,7 +821,8 @@ namespace MEInsight.Web.Data.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnOrder(7);
 
-                    b.Property<int>("ProgramId")
+                    b.Property<int?>("ProgramId")
+                        .IsRequired()
                         .HasColumnType("int")
                         .HasColumnOrder(2);
 
@@ -753,15 +840,15 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("GroupId");
 
-                    b.HasIndex(new[] { "OrganizationId" }, "IX_Group_OrganizationId");
+                    b.HasIndex("OrganizationId");
 
-                    b.HasIndex(new[] { "ParticipantId" }, "IX_Group_ParticipantId");
+                    b.HasIndex("ParticipantId");
 
-                    b.HasIndex(new[] { "ProgramId" }, "IX_Group_ProgramId");
+                    b.HasIndex("ProgramId");
 
-                    b.HasIndex(new[] { "RefGradeLevelId" }, "IX_Group_RefGradeLevelId");
+                    b.HasIndex("RefGradeLevelId");
 
-                    b.ToTable("Group", (string)null);
+                    b.ToTable("Group");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Programs.GroupEnrollment", b =>
@@ -793,7 +880,7 @@ namespace MEInsight.Web.Data.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnOrder(5);
 
-                    b.Property<Guid?>("GroupId")
+                    b.Property<Guid>("GroupId")
                         .HasColumnType("uniqueidentifier")
                         .HasColumnOrder(2);
 
@@ -807,7 +894,8 @@ namespace MEInsight.Web.Data.Migrations
                     b.Property<DateTimeOffset?>("ModifiedDate")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<Guid>("ParticipantId")
+                    b.Property<Guid?>("ParticipantId")
+                        .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnOrder(3);
 
@@ -821,15 +909,13 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("GroupEnrollmentId");
 
+                    b.HasIndex("GroupId");
+
                     b.HasIndex("ParticipantId");
 
-                    b.HasIndex(new[] { "GroupId" }, "IX_GroupEnrollment_GroupId");
+                    b.HasIndex("RefEnrollmentStatusId");
 
-                    b.HasIndex(new[] { "ParticipantId" }, "IX_GroupEnrollment_ParticipantId");
-
-                    b.HasIndex(new[] { "RefEnrollmentStatusId" }, "IX_GroupEnrollment_RefEnrollmentStatusId");
-
-                    b.ToTable("GroupEnrollment", (string)null);
+                    b.ToTable("GroupEnrollment");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Programs.GroupEvaluation", b =>
@@ -891,13 +977,11 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasIndex("GroupEnrollmentId");
 
-                    b.HasIndex(new[] { "GroupEnrollmentId" }, "IX_GroupEvaluation_GroupEnrollmentId");
+                    b.HasIndex("ProgramAssessmentId");
 
-                    b.HasIndex(new[] { "ProgramAssessmentId" }, "IX_GroupEvaluation_ProgramAssessmentId");
+                    b.HasIndex("RefEvaluationStatusId");
 
-                    b.HasIndex(new[] { "RefEvaluationStatusId" }, "IX_GroupEvaluation_RefEvaluationStatusId");
-
-                    b.ToTable("GroupEvaluation", (string)null);
+                    b.ToTable("GroupEvaluation");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Programs.Program", b =>
@@ -978,15 +1062,15 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("ProgramId");
 
-                    b.HasIndex(new[] { "RefAttendanceUnitId" }, "IX_Program_RefAttendanceUnitId");
+                    b.HasIndex("RefAttendanceUnitId");
 
-                    b.HasIndex(new[] { "RefOrganizationTypeId" }, "IX_Program_RefOrganizationTypeId");
+                    b.HasIndex("RefOrganizationTypeId");
 
-                    b.HasIndex(new[] { "RefProgramDeliveryTypeId" }, "IX_Program_RefProgramDeliveryTypeId");
+                    b.HasIndex("RefProgramDeliveryTypeId");
 
-                    b.HasIndex(new[] { "RefProgramTypeId" }, "IX_Program_RefProgramTypeId");
+                    b.HasIndex("RefProgramTypeId");
 
-                    b.ToTable("Program", (string)null);
+                    b.ToTable("Program");
 
                     b.HasData(
                         new
@@ -1088,15 +1172,15 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("ProgramAssessmentId");
 
-                    b.HasIndex(new[] { "ProgramId" }, "IX_ProgramAssessment_ProgramId");
+                    b.HasIndex("ProgramId");
 
-                    b.HasIndex(new[] { "RefAssessmentTypeId" }, "IX_ProgramAssessment_RefAssessmentTypeId");
+                    b.HasIndex("RefAssessmentTypeId");
 
-                    b.HasIndex(new[] { "RefAttendanceUnitId" }, "IX_ProgramAssessment_RefAttendanceUnitId");
+                    b.HasIndex("RefAttendanceUnitId");
 
-                    b.HasIndex(new[] { "RefEvaluationStatusId" }, "IX_ProgramAssessment_RefEvaluationStatusId");
+                    b.HasIndex("RefEvaluationStatusId");
 
-                    b.ToTable("ProgramAssessment", (string)null);
+                    b.ToTable("ProgramAssessment");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefAssessmentType", b =>
@@ -1122,7 +1206,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("RefAssessmentTypeId");
 
-                    b.ToTable("RefAssessmentType", (string)null);
+                    b.ToTable("RefAssessmentType");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefAttendanceUnit", b =>
@@ -1154,7 +1238,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("RefAttendanceUnitId");
 
-                    b.ToTable("RefAttendanceUnit", (string)null);
+                    b.ToTable("RefAttendanceUnit");
 
                     b.HasData(
                         new
@@ -1196,7 +1280,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("RefDisabilityTypeId");
 
-                    b.ToTable("RefDisabilityType", (string)null);
+                    b.ToTable("RefDisabilityType");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefEducationAdministratorOffice", b =>
@@ -1222,7 +1306,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("RefEducationAdministratorOfficeId");
 
-                    b.ToTable("RefEducationAdministratorOffice", (string)null);
+                    b.ToTable("RefEducationAdministratorOffice");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefEducationAdministratorPosition", b =>
@@ -1248,7 +1332,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("RefEducationAdministratorPositionId");
 
-                    b.ToTable("RefEducationAdministratorPosition", (string)null);
+                    b.ToTable("RefEducationAdministratorPosition");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefEducationAdministratorType", b =>
@@ -1274,7 +1358,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("RefEducationAdministratorTypeId");
 
-                    b.ToTable("RefEducationAdministratorType", (string)null);
+                    b.ToTable("RefEducationAdministratorType");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefEnrollmentStatus", b =>
@@ -1300,7 +1384,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("RefEnrollmentStatusId");
 
-                    b.ToTable("RefEnrollmentStatus", (string)null);
+                    b.ToTable("RefEnrollmentStatus");
 
                     b.HasData(
                         new
@@ -1346,7 +1430,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("RefEvaluationStatusId");
 
-                    b.ToTable("RefEvaluationStatus", (string)null);
+                    b.ToTable("RefEvaluationStatus");
 
                     b.HasData(
                         new
@@ -1391,7 +1475,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("RefGradeLevelId");
 
-                    b.ToTable("RefGradeLevel", (string)null);
+                    b.ToTable("RefGradeLevel");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefLocation", b =>
@@ -1425,11 +1509,11 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("RefLocationId");
 
-                    b.HasIndex(new[] { "ParentLocationId" }, "IX_RefLocation_ParentLocationId");
+                    b.HasIndex("ParentLocationId");
 
-                    b.HasIndex(new[] { "RefLocationTypeId" }, "IX_RefLocation_RefLocationTypeId");
+                    b.HasIndex("RefLocationTypeId");
 
-                    b.ToTable("RefLocation", (string)null);
+                    b.ToTable("RefLocation");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefLocationType", b =>
@@ -1459,7 +1543,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("RefLocationTypeId");
 
-                    b.ToTable("RefLocationType", (string)null);
+                    b.ToTable("RefLocationType");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefOrganizationType", b =>
@@ -1485,7 +1569,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("RefOrganizationTypeId");
 
-                    b.ToTable("RefOrganizationType", (string)null);
+                    b.ToTable("RefOrganizationType");
 
                     b.HasData(
                         new
@@ -1525,7 +1609,33 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("RefParticipantCohortId");
 
-                    b.ToTable("RefParticipantCohort", (string)null);
+                    b.ToTable("RefParticipantCohort");
+                });
+
+            modelBuilder.Entity("MEInsight.Entities.Reference.RefParticipantDataSource", b =>
+                {
+                    b.Property<int>("RefParticipantDataSourceId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnOrder(0);
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RefParticipantDataSourceId"), 1L, 1);
+
+                    b.Property<string>("ParticipantDataSource")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)")
+                        .HasColumnOrder(2);
+
+                    b.Property<string>("ParticipantDataSourceCode")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)")
+                        .HasColumnOrder(1);
+
+                    b.HasKey("RefParticipantDataSourceId");
+
+                    b.ToTable("RefParticipantDataSource");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefParticipantType", b =>
@@ -1551,7 +1661,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("RefParticipantTypeId");
 
-                    b.ToTable("RefParticipantType", (string)null);
+                    b.ToTable("RefParticipantType");
 
                     b.HasData(
                         new
@@ -1597,7 +1707,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("RefPartnerSectorId");
 
-                    b.ToTable("RefPartnerSector", (string)null);
+                    b.ToTable("RefPartnerSector");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefPartnerType", b =>
@@ -1623,7 +1733,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("RefPartnerTypeId");
 
-                    b.ToTable("RefPartnerType", (string)null);
+                    b.ToTable("RefPartnerType");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefProgramDeliveryType", b =>
@@ -1646,7 +1756,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("RefProgramDeliveryTypeId");
 
-                    b.ToTable("RefProgramDeliveryType", (string)null);
+                    b.ToTable("RefProgramDeliveryType");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefProgramType", b =>
@@ -1669,7 +1779,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("RefProgramTypeId");
 
-                    b.ToTable("RefProgramType", (string)null);
+                    b.ToTable("RefProgramType");
 
                     b.HasData(
                         new
@@ -1703,7 +1813,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("RefSchoolAdministrationTypeId");
 
-                    b.ToTable("RefSchoolAdministrationType", (string)null);
+                    b.ToTable("RefSchoolAdministrationType");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefSchoolCluster", b =>
@@ -1734,7 +1844,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasIndex(new[] { "RefLocationId" }, "IX_RefSchoolCluster_RefLocationId");
 
-                    b.ToTable("RefSchoolCluster", (string)null);
+                    b.ToTable("RefSchoolCluster");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefSchoolLanguage", b =>
@@ -1760,7 +1870,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("RefSchoolLanguageId");
 
-                    b.ToTable("RefSchoolLanguage", (string)null);
+                    b.ToTable("RefSchoolLanguage");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefSchoolLocation", b =>
@@ -1786,7 +1896,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("RefSchoolLocationId");
 
-                    b.ToTable("RefSchoolLocation", (string)null);
+                    b.ToTable("RefSchoolLocation");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefSchoolStatus", b =>
@@ -1812,7 +1922,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("RefSchoolStatusId");
 
-                    b.ToTable("RefSchoolStatus", (string)null);
+                    b.ToTable("RefSchoolStatus");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefSchoolType", b =>
@@ -1838,7 +1948,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("RefSchoolTypeId");
 
-                    b.ToTable("RefSchoolType", (string)null);
+                    b.ToTable("RefSchoolType");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefSex", b =>
@@ -1861,7 +1971,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("RefSexId");
 
-                    b.ToTable("RefSex", (string)null);
+                    b.ToTable("RefSex");
 
                     b.HasData(
                         new
@@ -1901,7 +2011,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("RefStudentSpecializationId");
 
-                    b.ToTable("RefStudentSpecialization", (string)null);
+                    b.ToTable("RefStudentSpecialization");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefStudentType", b =>
@@ -1927,7 +2037,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("RefStudentTypeId");
 
-                    b.ToTable("RefStudentType", (string)null);
+                    b.ToTable("RefStudentType");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefStudentYearOfStudy", b =>
@@ -1953,7 +2063,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("RefStudentYearOfStudyId");
 
-                    b.ToTable("RefStudentYearOfStudy", (string)null);
+                    b.ToTable("RefStudentYearOfStudy");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefTeacherEmploymentType", b =>
@@ -1979,7 +2089,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("RefTeacherEmploymentTypeId");
 
-                    b.ToTable("RefTeacherEmploymentType", (string)null);
+                    b.ToTable("RefTeacherEmploymentType");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefTeacherPosition", b =>
@@ -2005,7 +2115,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("RefTeacherPositionId");
 
-                    b.ToTable("RefTeacherPosition", (string)null);
+                    b.ToTable("RefTeacherPosition");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefTeacherType", b =>
@@ -2031,7 +2141,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("RefTeacherTypeId");
 
-                    b.ToTable("RefTeacherType", (string)null);
+                    b.ToTable("RefTeacherType");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefTLMDistributionStatus", b =>
@@ -2057,7 +2167,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("RefTLMDistributionStatusId");
 
-                    b.ToTable("RefTLMDistributionStatus", (string)null);
+                    b.ToTable("RefTLMDistributionStatus");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefTLMGroup", b =>
@@ -2083,7 +2193,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("RefTLMGroupId");
 
-                    b.ToTable("RefTLMGroup", (string)null);
+                    b.ToTable("RefTLMGroup");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefTLMLanguage", b =>
@@ -2109,7 +2219,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("RefTLMLanguageId");
 
-                    b.ToTable("RefTLMLanguage", (string)null);
+                    b.ToTable("RefTLMLanguage");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefTLMMaterialSet", b =>
@@ -2135,7 +2245,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("RefTLMMaterialSetId");
 
-                    b.ToTable("RefTLMMaterialSet", (string)null);
+                    b.ToTable("RefTLMMaterialSet");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefTLMMaterialType", b =>
@@ -2161,7 +2271,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("RefTLMMaterialTypeId");
 
-                    b.ToTable("RefTLMMaterialType", (string)null);
+                    b.ToTable("RefTLMMaterialType");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefTLMSubject", b =>
@@ -2187,7 +2297,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("RefTLMSubjectId");
 
-                    b.ToTable("RefTLMSubject", (string)null);
+                    b.ToTable("RefTLMSubject");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.TLM.TLMDistribution", b =>
@@ -2274,17 +2384,17 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("TLMDistributionId");
 
+                    b.HasIndex("OrganizationIdFrom");
+
+                    b.HasIndex("OrganizationIdTo");
+
                     b.HasIndex("ParentTLMDistributionId");
 
                     b.HasIndex("RefTLMDistributionStatusId");
 
                     b.HasIndex("TLMDistributionPeriodId");
 
-                    b.HasIndex(new[] { "OrganizationIdFrom" }, "IX_TLMDistribution_OrganizationIdFrom");
-
-                    b.HasIndex(new[] { "OrganizationIdTo" }, "IX_TLMDistribution_OrganizationIdTo");
-
-                    b.ToTable("TLMDistribution", (string)null);
+                    b.ToTable("TLMDistribution");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.TLM.TLMDistributionDetail", b =>
@@ -2349,7 +2459,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasIndex("TLMMaterialId");
 
-                    b.ToTable("TLMDistributionDetail", (string)null);
+                    b.ToTable("TLMDistributionDetail");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.TLM.TLMDistributionPeriod", b =>
@@ -2414,7 +2524,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasKey("TLMDistributionPeriodId");
 
-                    b.ToTable("TLMDistributionPeriod", (string)null);
+                    b.ToTable("TLMDistributionPeriod");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.TLM.TLMMaterial", b =>
@@ -2526,7 +2636,7 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.HasIndex("RefTLMSubjectId");
 
-                    b.ToTable("TLMMaterial", (string)null);
+                    b.ToTable("TLMMaterial");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -2617,8 +2727,8 @@ namespace MEInsight.Web.Data.Migrations
                     b.HasData(
                         new
                         {
-                            RoleId = new Guid("a6ffbcf8-8aa5-4427-bd56-d6e226e1fbf7"),
-                            UserId = new Guid("170dc8a3-945c-42f5-9a00-360e138fdeab")
+                            RoleId = new Guid("460dd3ac-42f4-417d-9ed5-58eb2659601d"),
+                            UserId = new Guid("b6b0c340-9964-4ac8-a3ba-401a71544e78")
                         });
                 });
 
@@ -2659,13 +2769,13 @@ namespace MEInsight.Web.Data.Migrations
                         .HasColumnType("int")
                         .HasColumnOrder(1);
 
-                    b.HasIndex(new[] { "RefEducationAdministratorOfficeId" }, "IX_EducationAdministrator_RefEducationAdministratorOfficeId");
+                    b.HasIndex("RefEducationAdministratorOfficeId");
 
-                    b.HasIndex(new[] { "RefEducationAdministratorPositionId" }, "IX_EducationAdministrator_RefEducationAdministratorPositionId");
+                    b.HasIndex("RefEducationAdministratorPositionId");
 
-                    b.HasIndex(new[] { "RefEducationAdministratorTypeId" }, "IX_EducationAdministrator_RefEducationAdministratorTypeId");
+                    b.HasIndex("RefEducationAdministratorTypeId");
 
-                    b.ToTable("EducationAdministrator", (string)null);
+                    b.ToTable("EducationAdministrator");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Core.Partner", b =>
@@ -2686,11 +2796,11 @@ namespace MEInsight.Web.Data.Migrations
                         .HasColumnType("int")
                         .HasColumnOrder(2);
 
-                    b.HasIndex(new[] { "RefPartnerSectorId" }, "IX_Partner_RefPartnerSectorId");
+                    b.HasIndex("RefPartnerSectorId");
 
-                    b.HasIndex(new[] { "RefPartnerTypeId" }, "IX_Partner_RefPartnerTypeId");
+                    b.HasIndex("RefPartnerTypeId");
 
-                    b.ToTable("Partner", (string)null);
+                    b.ToTable("Partner");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Core.School", b =>
@@ -2739,19 +2849,19 @@ namespace MEInsight.Web.Data.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasColumnOrder(1);
 
-                    b.HasIndex(new[] { "RefSchoolAdministrationTypeId" }, "IX_School_RefSchoolAdministrationTypeId");
+                    b.HasIndex("RefSchoolAdministrationTypeId");
 
-                    b.HasIndex(new[] { "RefSchoolClusterId" }, "IX_School_RefSchoolClusterId");
+                    b.HasIndex("RefSchoolClusterId");
 
-                    b.HasIndex(new[] { "RefSchoolLanguageId" }, "IX_School_RefSchoolLanguageId");
+                    b.HasIndex("RefSchoolLanguageId");
 
-                    b.HasIndex(new[] { "RefSchoolLocationId" }, "IX_School_RefSchoolLocationId");
+                    b.HasIndex("RefSchoolLocationId");
 
-                    b.HasIndex(new[] { "RefSchoolStatusId" }, "IX_School_RefSchoolStatusId");
+                    b.HasIndex("RefSchoolStatusId");
 
-                    b.HasIndex(new[] { "RefSchoolTypeId" }, "IX_School_RefSchoolTypeId");
+                    b.HasIndex("RefSchoolTypeId");
 
-                    b.ToTable("School", (string)null);
+                    b.ToTable("School");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Core.Student", b =>
@@ -2780,13 +2890,13 @@ namespace MEInsight.Web.Data.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasColumnOrder(1);
 
-                    b.HasIndex(new[] { "RefStudentSpecializationId" }, "IX_Student_RefStudentSpecializationId");
+                    b.HasIndex("RefStudentSpecializationId");
 
-                    b.HasIndex(new[] { "RefStudentTypeId" }, "IX_Student_RefStudentTypeId");
+                    b.HasIndex("RefStudentTypeId");
 
-                    b.HasIndex(new[] { "RefStudentYearOfStudyId" }, "IX_Student_RefStudentYearOfStudyId");
+                    b.HasIndex("RefStudentYearOfStudyId");
 
-                    b.ToTable("Student", (string)null);
+                    b.ToTable("Student");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Core.Teacher", b =>
@@ -2810,13 +2920,13 @@ namespace MEInsight.Web.Data.Migrations
                         .HasColumnType("int")
                         .HasColumnOrder(1);
 
-                    b.HasIndex(new[] { "RefTeacherEmploymentTypeId" }, "IX_Teacher_RefTeacherEmploymentTypeId");
+                    b.HasIndex("RefTeacherEmploymentTypeId");
 
-                    b.HasIndex(new[] { "RefTeacherPositionId" }, "IX_Teacher_RefTeacherPositionId");
+                    b.HasIndex("RefTeacherPositionId");
 
-                    b.HasIndex(new[] { "RefTeacherTypeId" }, "IX_Teacher_RefTeacherTypeId");
+                    b.HasIndex("RefTeacherTypeId");
 
-                    b.ToTable("Teacher", (string)null);
+                    b.ToTable("Teacher");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Core.Organization", b =>
@@ -2885,6 +2995,21 @@ namespace MEInsight.Web.Data.Migrations
                     b.Navigation("ParticipantTypes");
 
                     b.Navigation("Sex");
+                });
+
+            modelBuilder.Entity("MEInsight.Entities.Core.ParticipantData", b =>
+                {
+                    b.HasOne("MEInsight.Entities.Core.Participant", "Participants")
+                        .WithMany()
+                        .HasForeignKey("ParticipantId");
+
+                    b.HasOne("MEInsight.Entities.Reference.RefParticipantDataSource", "ParticipantDataSources")
+                        .WithMany("ParticipantData")
+                        .HasForeignKey("RefParticipantDataSourceId");
+
+                    b.Navigation("ParticipantDataSources");
+
+                    b.Navigation("Participants");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Core.SchoolClassroom", b =>
@@ -2983,7 +3108,9 @@ namespace MEInsight.Web.Data.Migrations
                 {
                     b.HasOne("MEInsight.Entities.Programs.Group", "Groups")
                         .WithMany("GroupEnrollments")
-                        .HasForeignKey("GroupId");
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
 
                     b.HasOne("MEInsight.Entities.Core.Participant", "Participants")
                         .WithMany("GroupEnrollments")
@@ -3526,6 +3653,11 @@ namespace MEInsight.Web.Data.Migrations
             modelBuilder.Entity("MEInsight.Entities.Reference.RefParticipantCohort", b =>
                 {
                     b.Navigation("Participants");
+                });
+
+            modelBuilder.Entity("MEInsight.Entities.Reference.RefParticipantDataSource", b =>
+                {
+                    b.Navigation("ParticipantData");
                 });
 
             modelBuilder.Entity("MEInsight.Entities.Reference.RefParticipantType", b =>

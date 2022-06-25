@@ -11,11 +11,6 @@ using System.Text;
 namespace MEInsight.Entities.TLM
 {
     [Table("TLMDistribution")]
-    [Index("OrganizationIdFrom", Name = "IX_TLMDistribution_OrganizationIdFrom")]
-    [Index("OrganizationIdTo", Name = "IX_TLMDistribution_OrganizationIdTo")]
-    //[Index("ParentTlmdistributionId", Name = "IX_TLMDistribution_ParentTLMDistributionId")]
-    //[Index("RefTlmdistributionStatusId", Name = "IX_TLMDistribution_RefTLMDistributionStatusId")]
-    //[Index("TlmdistributionPeriodId", Name = "IX_TLMDistribution_TLMDistributionPeriodId")]
     public class TLMDistribution : BaseEntity
     {
         public TLMDistribution()

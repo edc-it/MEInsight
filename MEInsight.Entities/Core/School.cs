@@ -10,12 +10,6 @@ using Microsoft.EntityFrameworkCore;
 namespace MEInsight.Entities.Core
 {
     [Table("School")]
-    [Index("RefSchoolAdministrationTypeId", Name = "IX_School_RefSchoolAdministrationTypeId")]
-    [Index("RefSchoolClusterId", Name = "IX_School_RefSchoolClusterId")]
-    [Index("RefSchoolLanguageId", Name = "IX_School_RefSchoolLanguageId")]
-    [Index("RefSchoolLocationId", Name = "IX_School_RefSchoolLocationId")]
-    [Index("RefSchoolStatusId", Name = "IX_School_RefSchoolStatusId")]
-    [Index("RefSchoolTypeId", Name = "IX_School_RefSchoolTypeId")]
     public class School : Organization
     {
         public School()
@@ -86,11 +80,6 @@ namespace MEInsight.Entities.Core
         [ForeignKey("RefSchoolClusterId")]
         [Display(Name = "School Cluster")]
         public virtual RefSchoolCluster? SchoolClusters { get; set; }
-
-        //[ForeignKey("PartnerId")]
-        //[InverseProperty("Schools")]
-        //[Display(Name = "Partner")]
-        //public virtual Partner? Partners { get; set; }
 
         [ForeignKey("RefSchoolStatusId")]
         [Display(Name = "Status")]

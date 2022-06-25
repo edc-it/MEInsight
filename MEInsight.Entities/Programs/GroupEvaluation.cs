@@ -9,9 +9,6 @@ using MEInsight.Entities.Reference;
 namespace MEInsight.Entities.Programs
 {
     [Table("GroupEvaluation")]
-    [Index("GroupEnrollmentId", Name = "IX_GroupEvaluation_GroupEnrollmentId")]
-    [Index("ProgramAssessmentId", Name = "IX_GroupEvaluation_ProgramAssessmentId")]
-    [Index("RefEvaluationStatusId", Name = "IX_GroupEvaluation_RefEvaluationStatusId")]
     public class GroupEvaluation : BaseEntity
     {
         [Key]

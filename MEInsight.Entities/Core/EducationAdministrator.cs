@@ -1,17 +1,10 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using MEInsight.Entities.Reference;
-using Microsoft.EntityFrameworkCore;
 
 namespace MEInsight.Entities.Core
 {
     [Table("EducationAdministrator")]
-    [Index("RefEducationAdministratorOfficeId", Name = "IX_EducationAdministrator_RefEducationAdministratorOfficeId")]
-    [Index("RefEducationAdministratorPositionId", Name = "IX_EducationAdministrator_RefEducationAdministratorPositionId")]
-    [Index("RefEducationAdministratorTypeId", Name = "IX_EducationAdministrator_RefEducationAdministratorTypeId")]
     public class EducationAdministrator : Participant
     {
 
