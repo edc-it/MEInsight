@@ -13,6 +13,7 @@ namespace MEInsight.Entities.Core
         public SchoolPeriod()
         {
             SchoolEnrollments = new HashSet<SchoolEnrollment>();
+            SchoolClassrooms = new HashSet<SchoolClassroom>();
         }
 
         [Key]
@@ -38,6 +39,7 @@ namespace MEInsight.Entities.Core
         public DateTime? EndDate { get; set; }
 
         public virtual ICollection<SchoolEnrollment> SchoolEnrollments { get; set; }
+        public virtual ICollection<SchoolClassroom> SchoolClassrooms { get; set; }
 
     }
 }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MEInsight.Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220625143557_CreateApplicationSchema")]
+    [Migration("20220706005314_CreateApplicationSchema")]
     partial class CreateApplicationSchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -129,14 +129,14 @@ namespace MEInsight.Web.Data.Migrations
                         {
                             OrganizationId = new Guid("ac69be75-b9bd-44cf-a6a4-fb5b5e328079"),
                             CreatedBy = "admin@meinsight.org",
-                            CreatedDate = new DateTimeOffset(new DateTime(2022, 6, 25, 14, 35, 57, 11, DateTimeKind.Unspecified).AddTicks(677), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedDate = new DateTimeOffset(new DateTime(2022, 7, 6, 0, 53, 14, 344, DateTimeKind.Unspecified).AddTicks(1673), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             IsOrganizationUnit = true,
                             IsTenant = true,
                             OrganizationCode = "MO01",
                             OrganizationName = "Management Organization",
                             RefOrganizationTypeId = 1,
-                            RegistrationDate = new DateTime(2022, 6, 25, 14, 35, 57, 11, DateTimeKind.Utc).AddTicks(706)
+                            RegistrationDate = new DateTime(2022, 7, 6, 0, 53, 14, 344, DateTimeKind.Utc).AddTicks(1696)
                         });
                 });
 
@@ -356,11 +356,11 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.Property<int?>("Classes")
                         .HasColumnType("int")
-                        .HasColumnOrder(5);
+                        .HasColumnOrder(6);
 
                     b.Property<int?>("Classrooms")
                         .HasColumnType("int")
-                        .HasColumnOrder(4);
+                        .HasColumnOrder(5);
 
                     b.Property<string>("CreatedBy")
                         .HasMaxLength(50)
@@ -392,17 +392,23 @@ namespace MEInsight.Web.Data.Migrations
 
                     b.Property<int>("RefGradeLevelId")
                         .HasColumnType("int")
-                        .HasColumnOrder(3);
+                        .HasColumnOrder(4);
 
                     b.Property<DateTime>("RegistrationDate")
                         .HasColumnType("datetime2")
                         .HasColumnOrder(1);
+
+                    b.Property<int>("SchoolPeriodId")
+                        .HasColumnType("int")
+                        .HasColumnOrder(3);
 
                     b.HasKey("SchoolClassroomId");
 
                     b.HasIndex("OrganizationId");
 
                     b.HasIndex("RefGradeLevelId");
+
+                    b.HasIndex("SchoolPeriodId");
 
                     b.ToTable("SchoolClassroom");
                 });
@@ -574,49 +580,49 @@ namespace MEInsight.Web.Data.Migrations
                         new
                         {
                             Id = new Guid("460dd3ac-42f4-417d-9ed5-58eb2659601d"),
-                            ConcurrencyStamp = "c2e3be34-efa7-4a61-b639-8b16d7819291",
+                            ConcurrencyStamp = "607a6456-df2f-4103-9e03-29d9991b59f9",
                             Description = "Administrator Role",
                             Name = "Administrator"
                         },
                         new
                         {
                             Id = new Guid("7f398148-6a9c-4ccf-9e34-7a45499b952c"),
-                            ConcurrencyStamp = "e535f752-3328-4ca8-b447-713032f3cb61",
+                            ConcurrencyStamp = "f37aabae-9a63-410b-9985-c90951d74d1d",
                             Description = "Read only Role",
                             Name = "Read"
                         },
                         new
                         {
                             Id = new Guid("f6c162a2-378d-4953-b099-e8e07bf362e8"),
-                            ConcurrencyStamp = "0553c867-2216-40fd-8bfb-ff9a655b1280",
+                            ConcurrencyStamp = "c759091d-40b6-4f27-959f-9d43ac6198ec",
                             Description = "Create only Role",
                             Name = "Create"
                         },
                         new
                         {
                             Id = new Guid("7a22b248-da2b-44ce-8e10-30aa2b43fae1"),
-                            ConcurrencyStamp = "4d596934-a01c-4d18-bce9-8ba1692d78c9",
+                            ConcurrencyStamp = "7213400f-a284-44bb-9ef6-e00eef8b5ef2",
                             Description = "Create and Edit Role",
                             Name = "Edit"
                         },
                         new
                         {
                             Id = new Guid("1d8a40e6-c44c-4b32-9271-6d5c248abc33"),
-                            ConcurrencyStamp = "cce59a0a-7c4c-422f-bf34-5387670e3f86",
+                            ConcurrencyStamp = "d8182d22-d806-4ea4-a90b-79d9141d2b8a",
                             Description = "Create, Edit, and Delete Role",
                             Name = "Delete"
                         },
                         new
                         {
                             Id = new Guid("73c1fe42-1822-4674-aaeb-50acc84a1dfb"),
-                            ConcurrencyStamp = "42f64a95-e2d7-42c2-972f-0b76847a726e",
+                            ConcurrencyStamp = "b4bb33f3-f752-4c92-a5a6-73f5eb93f729",
                             Description = "Monitoring, Evaluation and Learning Officer Role",
                             Name = "MELOfficer"
                         },
                         new
                         {
                             Id = new Guid("16522b51-3d81-446e-ac98-a7a49cc93b12"),
-                            ConcurrencyStamp = "d5cc9d02-e25f-4b6e-8628-bc6e067edf97",
+                            ConcurrencyStamp = "e985f221-04f8-4285-9634-6948f7ae0d8a",
                             Description = "Monitoring, Evaluation and Learning Role",
                             Name = "MEL"
                         });
@@ -736,7 +742,7 @@ namespace MEInsight.Web.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN@MEINSIGHT.ORG",
                             OrganizationId = new Guid("ac69be75-b9bd-44cf-a6a4-fb5b5e328079"),
-                            PasswordHash = "AQAAAAEAACcQAAAAEFV1NAk577zPPoiW85Lymay6Z+1zmcK1lJskFkGG2wfZIax7x9nDBLiWOqcjBEkqAA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIyMe9d6DGz0ozH+HB3HKdMxXZP3tr/DIxVGshvE/xM04ynMtPE4nb9qMSDuBJZclQ==",
                             PhoneNumberConfirmed = true,
                             SecurityStamp = "b6b0c340-9964-4ac8-a3ba-401a71544e78",
                             TwoFactorEnabled = false,
@@ -3026,7 +3032,15 @@ namespace MEInsight.Web.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("MEInsight.Entities.Core.SchoolPeriod", "SchoolPeriods")
+                        .WithMany("SchoolClassrooms")
+                        .HasForeignKey("SchoolPeriodId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("GradeLevels");
+
+                    b.Navigation("SchoolPeriods");
 
                     b.Navigation("Schools");
                 });
@@ -3547,6 +3561,8 @@ namespace MEInsight.Web.Data.Migrations
 
             modelBuilder.Entity("MEInsight.Entities.Core.SchoolPeriod", b =>
                 {
+                    b.Navigation("SchoolClassrooms");
+
                     b.Navigation("SchoolEnrollments");
                 });
 

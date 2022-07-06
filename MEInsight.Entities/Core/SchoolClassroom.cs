@@ -30,18 +30,26 @@ namespace MEInsight.Entities.Core
         [Column(Order = 2)]
         public Guid OrganizationId { get; set; }
 
-        [Display(Name = "Grade Level")]
+        [Display(Name = "School Period")]
         [Column(Order = 3)]
+        public int SchoolPeriodId { get; set; }
+
+        [Display(Name = "Grade Level")]
+        [Column(Order = 4)]
         public int RefGradeLevelId { get; set; }
 
         [Display(Name = "Classrooms")]
-        [Column(Order = 4)]
+        [Column(Order = 5)]
         public int? Classrooms { get; set; }
 
         [Display(Name = "Classes")]
-        [Column(Order = 5)]
+        [Column(Order = 6)]
         public int? Classes { get; set; }
-        
+
+        [ForeignKey("SchoolPeriodId")]
+        [Display(Name = "School Period")]
+        public virtual SchoolPeriod SchoolPeriods { get; set; } = null!;
+
         [ForeignKey("OrganizationId")]
         [Display(Name = "School")]
         public virtual School Schools { get; set; } = null!;

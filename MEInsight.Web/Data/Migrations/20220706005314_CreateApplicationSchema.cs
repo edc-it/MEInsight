@@ -1375,6 +1375,7 @@ namespace MEInsight.Web.Data.Migrations
                     SchoolClassroomId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     RegistrationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     OrganizationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SchoolPeriodId = table.Column<int>(type: "int", nullable: false),
                     RefGradeLevelId = table.Column<int>(type: "int", nullable: false),
                     Classrooms = table.Column<int>(type: "int", nullable: true),
                     Classes = table.Column<int>(type: "int", nullable: true),
@@ -1400,6 +1401,12 @@ namespace MEInsight.Web.Data.Migrations
                         column: x => x.OrganizationId,
                         principalTable: "School",
                         principalColumn: "OrganizationId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_SchoolClassroom_SchoolPeriod_SchoolPeriodId",
+                        column: x => x.SchoolPeriodId,
+                        principalTable: "SchoolPeriod",
+                        principalColumn: "SchoolPeriodId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -1592,13 +1599,13 @@ namespace MEInsight.Web.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("16522b51-3d81-446e-ac98-a7a49cc93b12"), "d5cc9d02-e25f-4b6e-8628-bc6e067edf97", "Monitoring, Evaluation and Learning Role", "MEL", null },
-                    { new Guid("1d8a40e6-c44c-4b32-9271-6d5c248abc33"), "cce59a0a-7c4c-422f-bf34-5387670e3f86", "Create, Edit, and Delete Role", "Delete", null },
-                    { new Guid("460dd3ac-42f4-417d-9ed5-58eb2659601d"), "c2e3be34-efa7-4a61-b639-8b16d7819291", "Administrator Role", "Administrator", null },
-                    { new Guid("73c1fe42-1822-4674-aaeb-50acc84a1dfb"), "42f64a95-e2d7-42c2-972f-0b76847a726e", "Monitoring, Evaluation and Learning Officer Role", "MELOfficer", null },
-                    { new Guid("7a22b248-da2b-44ce-8e10-30aa2b43fae1"), "4d596934-a01c-4d18-bce9-8ba1692d78c9", "Create and Edit Role", "Edit", null },
-                    { new Guid("7f398148-6a9c-4ccf-9e34-7a45499b952c"), "e535f752-3328-4ca8-b447-713032f3cb61", "Read only Role", "Read", null },
-                    { new Guid("f6c162a2-378d-4953-b099-e8e07bf362e8"), "0553c867-2216-40fd-8bfb-ff9a655b1280", "Create only Role", "Create", null }
+                    { new Guid("16522b51-3d81-446e-ac98-a7a49cc93b12"), "e985f221-04f8-4285-9634-6948f7ae0d8a", "Monitoring, Evaluation and Learning Role", "MEL", null },
+                    { new Guid("1d8a40e6-c44c-4b32-9271-6d5c248abc33"), "d8182d22-d806-4ea4-a90b-79d9141d2b8a", "Create, Edit, and Delete Role", "Delete", null },
+                    { new Guid("460dd3ac-42f4-417d-9ed5-58eb2659601d"), "607a6456-df2f-4103-9e03-29d9991b59f9", "Administrator Role", "Administrator", null },
+                    { new Guid("73c1fe42-1822-4674-aaeb-50acc84a1dfb"), "b4bb33f3-f752-4c92-a5a6-73f5eb93f729", "Monitoring, Evaluation and Learning Officer Role", "MELOfficer", null },
+                    { new Guid("7a22b248-da2b-44ce-8e10-30aa2b43fae1"), "7213400f-a284-44bb-9ef6-e00eef8b5ef2", "Create and Edit Role", "Edit", null },
+                    { new Guid("7f398148-6a9c-4ccf-9e34-7a45499b952c"), "f37aabae-9a63-410b-9985-c90951d74d1d", "Read only Role", "Read", null },
+                    { new Guid("f6c162a2-378d-4953-b099-e8e07bf362e8"), "c759091d-40b6-4f27-959f-9d43ac6198ec", "Create only Role", "Create", null }
                 });
 
             migrationBuilder.InsertData(
@@ -1665,7 +1672,7 @@ namespace MEInsight.Web.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Organization",
                 columns: new[] { "OrganizationId", "Address", "Contact", "CreatedBy", "CreatedDate", "DeletedBy", "DeletedDate", "IsDeleted", "IsOrganizationUnit", "IsTenant", "Latitude", "Longitude", "ModifiedBy", "ModifiedDate", "OrganizationCode", "OrganizationName", "ParentOrganizationId", "Phone", "RefLocationId", "RefOrganizationTypeId", "RegistrationDate" },
-                values: new object[] { new Guid("ac69be75-b9bd-44cf-a6a4-fb5b5e328079"), null, null, "admin@meinsight.org", new DateTimeOffset(new DateTime(2022, 6, 25, 14, 35, 57, 11, DateTimeKind.Unspecified).AddTicks(677), new TimeSpan(0, 0, 0, 0, 0)), null, null, false, true, true, null, null, null, null, "MO01", "Management Organization", null, null, null, 1, new DateTime(2022, 6, 25, 14, 35, 57, 11, DateTimeKind.Utc).AddTicks(706) });
+                values: new object[] { new Guid("ac69be75-b9bd-44cf-a6a4-fb5b5e328079"), null, null, "admin@meinsight.org", new DateTimeOffset(new DateTime(2022, 7, 6, 0, 53, 14, 344, DateTimeKind.Unspecified).AddTicks(1673), new TimeSpan(0, 0, 0, 0, 0)), null, null, false, true, true, null, null, null, null, "MO01", "Management Organization", null, null, null, 1, new DateTime(2022, 7, 6, 0, 53, 14, 344, DateTimeKind.Utc).AddTicks(1696) });
 
             migrationBuilder.InsertData(
                 table: "Program",
@@ -1675,7 +1682,7 @@ namespace MEInsight.Web.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedBy", "CreatedDate", "DeletedBy", "DeletedDate", "Email", "EmailConfirmed", "FirstName", "IsDeleted", "LastName", "LockoutEnabled", "LockoutEnd", "ModifiedBy", "ModifiedDate", "NormalizedEmail", "NormalizedUserName", "OrganizationId", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("b6b0c340-9964-4ac8-a3ba-401a71544e78"), 0, "b6b0c340-9964-4ac8-a3ba-401a71544e78", null, null, null, null, "admin@meinsight.org", true, null, false, null, false, null, null, null, null, "ADMIN@MEINSIGHT.ORG", new Guid("ac69be75-b9bd-44cf-a6a4-fb5b5e328079"), "AQAAAAEAACcQAAAAEFV1NAk577zPPoiW85Lymay6Z+1zmcK1lJskFkGG2wfZIax7x9nDBLiWOqcjBEkqAA==", null, true, "b6b0c340-9964-4ac8-a3ba-401a71544e78", false, "admin@meinsight.org" });
+                values: new object[] { new Guid("b6b0c340-9964-4ac8-a3ba-401a71544e78"), 0, "b6b0c340-9964-4ac8-a3ba-401a71544e78", null, null, null, null, "admin@meinsight.org", true, null, false, null, false, null, null, null, null, "ADMIN@MEINSIGHT.ORG", new Guid("ac69be75-b9bd-44cf-a6a4-fb5b5e328079"), "AQAAAAEAACcQAAAAEIyMe9d6DGz0ozH+HB3HKdMxXZP3tr/DIxVGshvE/xM04ynMtPE4nb9qMSDuBJZclQ==", null, true, "b6b0c340-9964-4ac8-a3ba-401a71544e78", false, "admin@meinsight.org" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -1950,6 +1957,11 @@ namespace MEInsight.Web.Data.Migrations
                 name: "IX_SchoolClassroom_RefGradeLevelId",
                 table: "SchoolClassroom",
                 column: "RefGradeLevelId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SchoolClassroom_SchoolPeriodId",
+                table: "SchoolClassroom",
+                column: "SchoolPeriodId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SchoolEnrollment_OrganizationId",
