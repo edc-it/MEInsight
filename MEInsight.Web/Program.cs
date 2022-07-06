@@ -10,11 +10,17 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.Data.Sqlite;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+//var _connection = new SqliteConnection("Filename=:memory:");
+//_connection.Open();
+
+//builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(_connection));
 
 // Using Microsoft SQL Server
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
