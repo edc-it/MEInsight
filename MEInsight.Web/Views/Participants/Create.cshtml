@@ -9,7 +9,7 @@
 <h4>@Localizer["Participant"]</h4>
 <hr />
 <div class="row">
-    <div class="col-md-6 col-sm-8">
+    <div class="col-xl-7 col-lg-8 col-md-10 col-sm-12">
         <form asp-action="Create" id="main-form">
             <div asp-validation-summary="All" class="text-danger"></div>
             <input type="hidden" name="ParentId" value="@ViewBag.ParentId" />
@@ -213,6 +213,7 @@
                         {
 
                             var i = 0;
+
                             @foreach (var item in ViewData["RefLocationTypes"] as IEnumerable<MEInsight.Entities.Reference.RefLocationType>)
                             {
                                 @if (item.LocationLevel == 1)

@@ -130,14 +130,19 @@
                 <a id="cancelbutton" class="btn btn-secondary me-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
                     <i class="fas fa-times"></i> @Localizer["Cancel"]
                 </a>
-                @if (ViewBag.hasRelated != true)
+                @*@if (ViewBag.hasRelated != true)
                 {
                 <button id="submitbutton" type="submit" value="Delete" class="btn btn-danger ladda-button" data-style="expand-left" data-spinner-color="white">
                     <span class="ladda-label">
                         <i class="fas fa-check"></i> @Localizer["Delete"]
                     </span>
                 </button>
-                }
+                }*@
+                <button id="submitbutton" type="submit" value="Delete" class="btn btn-danger ladda-button" data-style="expand-left" data-spinner-color="white">
+                    <span class="ladda-label">
+                        <i class="fas fa-check"></i> @Localizer["Delete"]
+                    </span>
+                </button>
             </div>
             <!-- button group end -->
     </form>

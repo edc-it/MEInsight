@@ -1,39 +1,13 @@
-@model IEnumerable<MEInsight.Entities.Core.Participant>
-
-@{
-    ViewData["Title"] = @Localizer["Participant"].Value + " " + @Localizer["List"].Value;
-}
+﻿@model MEInsight.Web.ViewComponents.DetailsViewModel
 
 <!--content start-->
 <div class="slide-in-right">
-    <!--heading start-->
-    <div class="card mb-3 heading-panel">
-        <div class="card-body">
-            <h2 class="card-title mt-3 fw-bold mb-0">@Localizer["Participant"]</h2>
-            <span class="card-text text-muted">@Localizer["List of"] @Localizer["Participants"]</span>
-        </div>
-    </div>
-    <!--heading end-->
     <!--toolbars start-->
     <div class="row mb-3">
         <div class="col-sm-12 col-md-6 d-flex align-items-center justify-content-start">
             <div id="toolbar" class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                 <!--create start-->
                 <div class="btn-group btn-group-sm mb-2 me-3" role="group" aria-label="creategroup">
-                    <div policy="RequireCreateRole" class="btn-group btn-group-sm" role="group">
-                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-plus"></i> @Localizer["Create New"]
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="btnGroup1Drop1">
-                            <!--dropdown items by ParticipantType-->
-                            @foreach (var item in (IEnumerable<SelectListItem>)ViewBag.ParticipantTypeId)
-                            {
-                                <a asp-action="Create" asp-route-OrganizationId="@ViewBag.OrganizationId" asp-controller="Participants" asp-route-GroupId="@ViewBag.ParentId" asp-route-RefParticipantTypeId="@item.Value" role="button" class="btn btn-primary dropdown-item">
-                                    <i class="fas fa-plus"></i> @Localizer["New"] @item.Text
-                                </a>
-                            }
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -118,6 +92,7 @@
     </div>
     <!--footer buttons end-->
 </div><!--content end-->
+@Model.OrganizationId
 @section Styles {
     @{
         await Html.RenderPartialAsync("_ListStylesPartial");
@@ -146,8 +121,7 @@
                     contentType: "application/x-www-form-urlencoded",
                     data:
                         function(d) {
-                            //d.refParticipantTypeId = $('#RefParticipantTypeId option:selected').text();
-                            //d.selectedOrganizations = checked_ids;
+                            d.id = '@Model.OrganizationId';
                         },
                     type: "POST",
                     datatype: "json"

@@ -111,8 +111,7 @@ namespace MEInsight.Web.Controllers
             {
                 return NotFound();
             }
-
-            var organization = await _context.Organizations
+            var organization = await _context.Organizations.Include(o => o.Participants)
                 .Include(o => o.Locations!).ThenInclude(o => o.ParentLocations)
                 .Include(o => o.OrganizationTypes)
                 .Include(o => o.ParentOrganizations)
@@ -122,6 +121,8 @@ namespace MEInsight.Web.Controllers
             {
                 return NotFound();
             }
+
+            ViewData["HasParticipants"] = organization.Participants.Count;
 
             ViewData["ParentId"] = organization.ParentOrganizationId;
 
@@ -392,25 +393,25 @@ namespace MEInsight.Web.Controllers
                 return NotFound();
             }
 
-            int relatedCount = 0;
-            relatedCount += organization.Participants.Count;
-            ////relatedCount += organization.Schools.Count();
-            relatedCount += organization.Organizations.Count;
-            relatedCount += organization.Groups.Count;
-            relatedCount += organization.TLMDistributionsFrom.Count;
-            relatedCount += organization.TLMDistributionsTo.Count;
-            relatedCount += organization.Users.Count;
+            //int relatedCount = 0;
+            //relatedCount += organization.Participants.Count;
+            //////relatedCount += organization.Schools.Count();
+            //relatedCount += organization.Organizations.Count;
+            //relatedCount += organization.Groups.Count;
+            //relatedCount += organization.TLMDistributionsFrom.Count;
+            //relatedCount += organization.TLMDistributionsTo.Count;
+            //relatedCount += organization.Users.Count;
 
-            if (relatedCount > 0)
-            {
-                ViewData["hasRelated"] = true;
-            }
-            else
-            {
-                ViewData["hasRelated"] = false;
-            }
+            //if (relatedCount > 0)
+            //{
+            //    ViewData["hasRelated"] = true;
+            //}
+            //else
+            //{
+            //    ViewData["hasRelated"] = false;
+            //}
 
-            ViewData["RelatedCount"] = relatedCount;
+            //ViewData["RelatedCount"] = relatedCount;
             ViewData["ParentId"] = organization.ParentOrganizationId;
 
             return View(organization);
@@ -441,7 +442,12 @@ namespace MEInsight.Web.Controllers
 
         async Task RemoveChildren(Guid id)
         {
-            var children = await _context.Organizations.Where(x => x.ParentOrganizationId == id).ToListAsync();
+            var children = await _context.Organizations
+                .Include(x => x.Participants)
+                .Include(x => x.Groups)
+                .ThenInclude(x => x.GroupEnrollments).ThenInclude(x => x.GroupEvaluations)
+                .Where(x => x.ParentOrganizationId == id).ToListAsync();
+
             foreach (var child in children)
             {
                 await RemoveChildren(child.OrganizationId);

@@ -128,6 +128,7 @@ namespace MEInsight.Web.APIControllers
         // Used by datatables.net
         public async Task<ActionResult<IEnumerable<Participant>>> GetParticipantsPaginated()
         {
+
             if (_context.Participants == null)
             {
                 return NotFound();
@@ -151,26 +152,51 @@ namespace MEInsight.Web.APIControllers
                 {
                     return NotFound();
                 }
+                
+                var query = _context.Participants.AsQueryable();
 
-                var query = _context.Participants
-                    .Include(p => p.DisabilityTypes)
-                    .Include(p => p.Locations)
-                    .Include(p => p.Organizations)
-                    .Include(p => p.ParticipantCohorts)
-                    .Include(p => p.ParticipantTypes)
-                    .Include(p => p.Sex)
-                    .Select(p => new ParticipantsListViewModel
+                // Filtered by one OrganizationId
+                string? id = Request.Form["id"].FirstOrDefault();
+
+                if (id != null)
+                {
+                    Guid organizationId = new(id!);
+                    query = query
+                        .Where(x => x.OrganizationId == organizationId);
+                }
+                else
+                {
+                    if (organization.IsOrganizationUnit != true)
                     {
-                        Name = p.Name,
-                        ParticipantCode = p.ParticipantCode,
-                        ParticipantType = p.ParticipantTypes!.ParticipantType,
-                        Position = "",
-                        Sex = p.Sex!.Sex,
-                        OrganizationName = p.Organizations!.OrganizationName,
-                        RegistrationDate = p.RegistrationDate.ToShortDateString(),
-                        Location = p.Locations!.LocationName,
-                        ParticipantId = p.ParticipantId
-                    });
+                        query = query
+                            .Where(p => p.OrganizationId == organization.OrganizationId);
+                    }
+                    else
+                    {
+                        //Get Organization Hierarchy
+                        var AllOrganizations = await _context.Organizations
+                        .Select(x => new
+                        {
+                            x.OrganizationId,
+                            x.OrganizationName,
+                            x.RefOrganizationTypeId,
+                            x.ParentOrganizationId,
+                            x.IsOrganizationUnit
+                        }).ToListAsync();
+
+                        var lookup = AllOrganizations.ToLookup(x => x.ParentOrganizationId);
+                        var childOrganizations = lookup[organization.OrganizationId].SelectRecursive(x => lookup[x.OrganizationId]).ToList();
+
+                        var organizationIds = childOrganizations
+                                .Select(x => x.OrganizationId)
+                                    .ToList();
+                        organizationIds.Add(organization.OrganizationId);
+
+                        query = query
+                            .Where(p => organizationIds.Contains((Guid)p.OrganizationId!));
+                    }
+
+                }
 
                 // Datatables.net server-side POST request
                 var draw = HttpContext.Request.Form["draw"].FirstOrDefault();
@@ -187,8 +213,6 @@ namespace MEInsight.Web.APIControllers
                 //Paging Size (10, 20, 50,100) 
                 int pageSize = length != null ? Convert.ToInt32(length) : 0;
                 int skip = start != null ? Convert.ToInt32(start) : 0;
-                int recordsTotal = 0;
-
 
                 //Sorting
                 if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDirection)))
@@ -197,48 +221,61 @@ namespace MEInsight.Web.APIControllers
                     query = query.OrderBy(sortColumn + " " + sortColumnDirection);
                 }
 
-                //total number of rows counts
-                recordsTotal = query.Count();
-
                 //Paging (-1 == All rows)
                 if (pageSize != -1)
                 {
                     query = query.Skip(skip).Take(pageSize);
                 }
 
-                ////Search
+                //Search
                 if (!string.IsNullOrEmpty(searchValue))
                 {
-
-                    // TODO: update queries
-                    //query = query
-                    //    .Where(x => searchValue.ToLower().Contains(x.FirstName.ToLower()));
-                    //.Select(x=> x.).Where(m =>
-                    //               m.FirstName.ToLower().Contains(searchValue.ToLower())
-                    //               || m.MiddleName.ToLower().Contains(searchValue.ToLower())
-                    //               || m.LastName.ToLower().Contains(searchValue.ToLower())
-                    //               || m.OrganizationName.ToLower().Contains(searchValue.ToLower())
-                    //               ).ToListAsync();
-
+                    query = query
+                        .Where(x =>
+                            x.FirstName!.ToLower().Contains(searchValue.ToLower()) ||
+                            x.MiddleName!.ToLower().Contains(searchValue.ToLower()) ||
+                            x.LastName!.ToLower().Contains(searchValue.ToLower()) ||
+                            x.ParticipantCode!.ToLower().Contains(searchValue.ToLower()) ||
+                            x.Organizations!.OrganizationName!.ToLower().Contains(searchValue.ToLower())
+                            );
                 }
+
+                var data = await query
+                    .Include(p => p.Locations)
+                    .Include(p => p.Organizations)
+                    .Include(p => p.ParticipantTypes)
+                    .Include(p => p.Sex)
+                    .Select(p => new ParticipantsListViewModel()
+                    {
+                        Name = p.Name,
+                        ParticipantCode = p.ParticipantCode,
+                        ParticipantType = p.ParticipantTypes!.ParticipantType,
+                        Position = "",
+                        Sex = p.Sex!.Sex,
+                        OrganizationName = p.Organizations!.OrganizationName,
+                        RegistrationDate = p.RegistrationDate.ToShortDateString(),
+                        Location = p.Locations!.LocationName,
+                        ParticipantId = p.ParticipantId
+                    })
+                    .ToListAsync();
+                
+                int total = query.Count();
 
                 //Return JSON Data 
                 var jsonData = new
                 {
                     draw,
-                    recordsFiltered = recordsTotal,
-                    recordsTotal,
-                    data = await query.ToListAsync()
+                    recordsFiltered = total,
+                    recordsTotal = total,
+                    data
                 };
 
                 return Ok(jsonData);
             }
             catch (Exception)
             {
-
                 throw;
             }
-
         }
 
         private bool ParticipantExists(Guid id)

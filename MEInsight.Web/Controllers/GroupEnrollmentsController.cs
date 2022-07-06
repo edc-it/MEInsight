@@ -36,14 +36,6 @@ namespace MEL.Web.Controllers
             // SelectList for "Create New" (ParticipantType) button
             ViewData["ParticipantTypeId"] = new SelectList(_context.ParticipantTypes, "RefParticipantTypeId", "ParticipantType");
 
-            // GroupEnrollments List
-            var applicationDbContext = _context.GroupEnrollments
-                .Include(g => g.Participants!).ThenInclude(g => g.Sex)
-                .Include(g => g.Participants!.ParticipantTypes)
-                .Include(g => g.Groups)
-                .Include(g => g.EnrollmentStatus)
-                .Where(g => g.GroupId == id);
-
             // Group Details
             var group = await _context.Groups
                 .Include(g => g.Programs!).ThenInclude(g => g.ProgramAssessments)
@@ -67,7 +59,7 @@ namespace MEL.Web.Controllers
 
             ViewData["OrganizationId"] = group.OrganizationId;
 
-            return View(await applicationDbContext.ToListAsync());
+            return View();
         }
 
         // GET: Attendance

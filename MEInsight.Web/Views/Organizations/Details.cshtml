@@ -5,87 +5,88 @@
 }
 
 <h2>@Localizer["Details"]</h2>
+<div class="card text-bg-light mb-3">
+    <div class="card-header">
+            <h4 class="card-title">@Localizer["Organization"]</h4>
+        </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.RegistrationDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.RegistrationDate)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.OrganizationCode)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.OrganizationCode)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.OrganizationName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.OrganizationName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Contact)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Contact)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Phone)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Phone)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Address)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Address)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Latitude)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Latitude)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Longitude)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Longitude)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.IsOrganizationUnit)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.IsOrganizationUnit)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ParentOrganizations)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ParentOrganizations.OrganizationCode)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.OrganizationTypes)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.OrganizationTypes.OrganizationType)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Locations)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Locations.RefLocationId)
+            </dd>
+        </dl>
 
-<div>
-    <h4>@Localizer["Organization"]</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.RegistrationDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.RegistrationDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.OrganizationCode)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.OrganizationCode)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.OrganizationName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.OrganizationName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Contact)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Contact)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Phone)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Latitude)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Latitude)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Longitude)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Longitude)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.IsOrganizationUnit)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.IsOrganizationUnit)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ParentOrganizations)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ParentOrganizations.OrganizationCode)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.OrganizationTypes)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.OrganizationTypes.OrganizationType)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Locations)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Locations.RefLocationId)
-        </dd>
-    </dl>
-
-    <hr />
-    <dl class="row">
+        <hr />
+        <dl class="row">
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.CreatedBy)
             </dt>
@@ -110,18 +111,354 @@
             <dd class="col-sm-10">
                 @Model.ModifiedDate?.ToLocalTime().ToString()
             </dd>
-    </dl>
-
-
-</div>
-<div>
-        <!--footer buttons start-->
-        <div class="row mt-5">
-            <div class="col">
-                <a asp-action="Index" asp-route-id="@ViewBag.ParentId" class="btn btn-secondary me-1"><i class="fas fa-chevron-left"></i> @Localizer["Back to List"]</a>
-                <a policy="RequireEditRole" asp-action="Edit" asp-route-id="@Model.OrganizationId" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> @Localizer["Edit"]</a>
+        </dl>
+        <div>
+            <!--footer buttons start-->
+            <div class="row mt-5 mb-5">
+                <div class="col">
+                    <a asp-action="Index" asp-route-id="@ViewBag.ParentId" class="btn btn-secondary me-1"><i class="fas fa-chevron-left"></i> @Localizer["Back to List"]</a>
+                    <a policy="RequireEditRole" asp-action="Edit" asp-route-id="@Model.OrganizationId" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> @Localizer["Edit"]</a>
+                </div>
+                <div class="col text-end"></div>
             </div>
-            <div class="col text-end"></div>
+            <!--footer buttons end-->
         </div>
-        <!--footer buttons end-->
+    </div>
 </div>
+
+
+@if (ViewBag.HasParticipants > 0)
+{
+    <!--content start-->
+    <div class="card mb-3">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="true" href="#">Participants</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="true" href="#">Organizations</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">@Html.DisplayFor(model => model.OrganizationName) Participants</h5>
+            <!--datatable start-->
+            <!--toolbars start-->
+            <div class="row mb-3">
+                <div class="col-sm-12 col-md-6 d-flex align-items-center justify-content-start">
+                    <div id="toolbar" class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 d-flex align-items-center justify-content-end">
+                    <!--datatable search start-->
+                    <div class="input-group input-group-sm d-print-none mb-2">
+                        <span class="input-group-text"><i class="fa fa-search" aria-hidden="true"></i></span>
+                        <input id="searchbox" type="text" class="form-control" placeholder='@Localizer["Search"]' aria-describedby="searchbox">
+                        <button id="search-button" class="btn btn-sm btn-secondary" type="button">@Localizer["Search"]</button>
+                    </div>
+                    <!--datatable search end-->
+                </div>
+            </div>
+            <!--toolbars end-->
+            <div class="row">
+                <div class="col-sm-12">
+                    <!--table start-->
+                    <table id="datatable" class="table table-sm table-hover table-striped responsive no-wrap w-100">
+                        <thead>
+                            <tr>
+                                <th data-data="name" data-name="Name" data-responsivePriority="1">
+                                    @Localizer["Name"]
+                                </th>
+                                <th data-data="participantCode" data-name="ParticipantCode">
+                                    @Localizer["Participant Code"]
+                                </th>
+                                <th data-data="participantType" data-name="ParticipantType">
+                                    @Localizer["Participant Type"]
+                                </th>
+                                <th data-data="position" data-name="Position" data-visible="false">
+                                    @Localizer["Position"]
+                                </th>
+                                <th data-data="sex" data-name="Sex">
+                                    @Localizer["Sex"]
+                                </th>
+                                <th data-data="organizationName" data-name="OrganizationName">
+                                    @Localizer["Organization"]
+                                </th>
+                                <th data-data="registrationDate" data-name="RegistrationDate">
+                                    @Localizer["Registration Date"]
+                                </th>
+                                <th data-data="location" data-name="Location" data-visible="false">
+                                    @Localizer["Location"]
+                                </th>
+                                <th data-orderable="false" class="text-end d-print-none">
+                                    @Localizer["Actions"]
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-end"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!--table end-->
+                </div>
+            </div>
+            <!--datatable end-->
+            <!--datatable pagination start-->
+            <div class="row">
+                <div class="col-sm-12 col-md-5 d-flex align-items-center justify-content-start"><div class="" id="detailfooter"></div></div>
+                <div class="col-sm-12 col-md-7 d-flex align-items-center justify-content-end">
+                    <div class="" id="datatables-pagination"></div>
+                </div>
+            </div>
+            <!--datatable pagination end-->
+            <!--footer buttons start-->
+            <div class="row mt-5">
+                <div class="col">
+                </div>
+                <div class="col text-end"></div>
+            </div>
+            <!--footer buttons end-->
+
+
+        </div>
+    </div>
+    
+
+    <!--content end-->
+}
+
+@section Styles {
+    @{
+        await Html.RenderPartialAsync("_ListStylesPartial");
+    }
+    }
+    @section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ServerListScriptsPartial");
+    }
+    <script>
+        $(document).ready(function() {
+            // Use Datatables.net Internationalization i18n
+            function getDataTablesLanguage() {
+                var cultureInfo = '@System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName';
+                if (cultureInfo) {
+                    var path = '/lib/datatables/i18n/' + cultureInfo + '.json';
+                }
+                return path;
+            }
+            var options = {
+                // Initial order (sort) to apply to the table
+                order: [],
+                // Allows changing the paging display length of the table
+                lengthChange: true,
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                // Enables the display of a 'processing' indicator when the table is being processed (e.g. a sort).
+                processing: true,
+                // Server side processing
+                serverSide: true,
+                filter: true,
+                orderMulti: false,
+                // Highlight the columns being ordered in the table's body
+                orderClasses: false,
+                // Pagination button display options
+                pagingType: "full_numbers",
+                // Change the initial page length (number of rows per page)
+                pageLength: 25,
+                dom:
+                    "<'row'"
+                    + "<'col-sm-12 col-md-6 justify-content-start'>" // f
+                    + "<'col-sm-12 col-md-6 justify-content-end'>" // B
+                    + ">"
+                    + "<'row'<'col-sm-12 d-flex align-items-center'tr>>"
+                    + "<'row'"
+                    + "<'col-sm-12 col-md-6 col-form-label 'l>"
+                    + "<'col-sm-12 col-md-6 justify-content-end'p>"
+                    + ">"
+                    + "<'row'<'col-sm-12'i>"
+                    + ">"
+                ,
+                responsive: true,
+                autoWidth: true,
+                buttons1: {
+                    dom: {
+                        button: {
+                            className: 'btn btn-secondary btn-sm mb-2'
+                        }
+                    },
+                    buttons: [
+                        {
+                            extend: 'copy',
+                        },
+                        {
+                            extend: 'excelHtml5',
+                            charset: 'UTF-16LE',
+                            bom: true,
+                            fieldSeparator: ',',
+                            fieldBoundary: '"',
+                            exportOptions: {
+                                columns: ':not(:last-child)'
+                            },
+                            filename: function() {
+                                var date = new Date();
+                                var year = date.getFullYear();
+                                var month = date.getMonth() + 1;
+                                var day = date.getDate();
+                                var hour = date.getHours();
+                                var minutes = date.getMinutes();
+                                var datepart = ((year * 100 + month + 1) * 100 + day) + "_" + (hour * 100 + minutes);
+                                return document.title + "_" + datepart;
+                            }
+                        },
+                        {
+                            extend: 'colvis',
+                        },
+                        {
+                            extend: 'print',
+                            title: '',
+                            autoPrint: true,
+                            exportOptions: {
+                                columns: ':not(:last-child)',
+                                stripHtml: true,
+                                stripNewlines: true
+                            },
+                            customize: function(win) {
+                                $(win.document.body)
+                                    .css({
+                                        'font-size': '10pt',
+                                        'padding-top': '0px'
+                                    });
+
+                                $(win.document.body).find('table')
+                                    .addClass('compact table-bordered')
+                                    .css('font-size', 'inherit');
+
+                                //TODO: assign id
+                                var heading = $('.heading-panel').html();
+                                //TODO: assign id
+                                var panel = $('.info-panel').html();
+
+                                // PREPEND PRINT
+                                if (panel) {
+                                    $(win.document.body).prepend(
+                                        heading
+                                        + '<br>' +
+                                        panel
+                                    );
+                                }
+                                else {
+                                    $(win.document.body).prepend(
+                                        heading
+                                    );
+                                }
+
+                                // APPEND PRINT
+                                $(win.document.body).append(
+                                    $('.dataTables_info').text()
+                                    + '<br>'
+                                    + '@User?.Identity?.Name - @DateTime.Now.ToShortDateString()'
+                                );
+                            }
+                        }
+
+                    ]
+                },
+                language: {
+                    url: getDataTablesLanguage()
+                },
+                initComplete: function(settings, json) {
+                    // init buttons
+                    table.buttons(0, null)
+                        .container().appendTo('#toolbar');
+                }
+
+            };
+
+            var dataTableOptions = {
+                ...options,
+
+                ajax: {
+                    url: "/api/Participants/Paginated",
+                    type: "POST",
+                    datatype: "json",
+                    contentType: "application/x-www-form-urlencoded",
+                    data:
+                        function(d) {
+                            d.id = '@Model.OrganizationId';
+                        },
+                    type: "POST",
+                    datatype: "json",
+                    error: function(error) {
+                        if (error && error.status == 404) {
+                            self.notFound = true;
+                            window.location = "/Identity/Account/Login?ReturnUrl=" + window.location.pathname;
+                        }
+                    },
+                },
+                columnDefs: [
+                    {
+                        targets: [-1],
+                        data: null,
+                        width: '70px',
+                        className: 'text-end',
+                        render: function(data, type, row, meta) {
+                            var action = '<div class="btn-group btn-group-sm" role="group" aria-label="Actions">';
+                            action += '<td>';
+                            action += '<a href="/Participants/Details/' + row.participantId + '" class="btn btn-link text-gray btn-sm d-print-none btn-action" data-container="body" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Details"]"><i class="fas fa-info-circle fa-sm" aria-hidden="true"></i></a>';
+        @if (AuthorizationService.AuthorizeAsync(User, "RequireEditRole").GetAwaiter().GetResult().Succeeded)
+        {
+            @:action += '<a href="/Participants/Edit/' + row.participantId + '" class="btn btn-link text-gray btn-sm d-print-none btn-action" data-container="body" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Edit"]"><i class="fas fa-pencil-alt fa-sm" aria-hidden="true"></i></a>';
+        }
+
+        @if (AuthorizationService.AuthorizeAsync(User, "RequireDeleteRole").GetAwaiter().GetResult().Succeeded)
+        {
+            @:action += '<a href="/Participants/Delete/' + row.participantId + '" class="btn btn-link text-gray btn-sm d-print-none btn-action" data-container="body" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Delete"]"><i class="far fa-trash-alt fa-sm" aria-hidden="true"></i></a>';
+        }
+                                action += '</td>';
+                            action += '</div>';
+                            return action;
+                        }
+                    }],
+
+            }
+
+            //DATATABLE INIT AND OPTIONS
+            $.fn.dataTable.ext.classes.sPageButton = 'page-item btn-light'; // Change Pagination Button Class
+            $.fn.DataTable.ext.pager.numbers_length = 5;
+            $.fn.dataTable.ext.classes.sPaging = 'dataTables_paginate paging_ pagination-sm flex-wrap mt-2 mt-sm-auto';
+
+            var table = $('#datatable').DataTable(dataTableOptions);
+
+
+            // filter table
+            $("#search-button").on('click', function() {
+                var searchString = $('#searchbox').val();
+                table.search(searchString).draw();
+            });
+
+            //TOOLTIP INIT
+            $('[data-bs-toggle="tooltip"]').tooltip({
+                animation: true,
+                delay: { "show": 700, "hide": 100 },
+                trigger: 'hover'
+            });
+
+            $('.buttons-html5').tooltip({
+                animation: false,
+                delay: { "show": 700, "hide": 100 },
+                trigger: 'hover'
+            });
+
+        });
+    </script>
+}
