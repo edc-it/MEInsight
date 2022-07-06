@@ -54,7 +54,6 @@
             });
 
         // Disables Submit button after one click if form is valid
-        // sets "loading..." Ladda-button styles 
         // https://stackoverflow.com/questions/10111907/how-to-focus-invalid-fields-with-jquery-validate
         var validator = $('#main-form').validate({ /* settings */ });
         $('#submitbutton')
@@ -64,10 +63,9 @@
 
                 var form = $('#main-form');
                 if (form.valid()) {
-                    // activates ladda-button 'loading..' style and disables submit button after one click
-                    // var l = Ladda.create(this);
-                    // l.start();
-
+                    // activates button 'loading..' style and disables submit button after one click
+                    $('#submitbutton').addClass('disabled');
+                    $('.spinner-border').removeClass('d-none');
                     // disable cancel button after submit
                     $('#cancelbutton').addClass('disabled');
                     // submit form
