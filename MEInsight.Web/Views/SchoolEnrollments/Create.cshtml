@@ -1,0 +1,123 @@
+﻿@model MEInsight.Entities.Core.SchoolEnrollment
+
+@{
+    ViewData["Title"] = @Localizer["Create"].Value + " " + @Localizer["SchoolEnrollment"].Value;
+}
+
+<h2>@Localizer["Create"]</h2>
+
+<h4>@Localizer["SchoolEnrollment"]</h4>
+<hr />
+<div class="row">
+    <div class="col-xl-7 col-lg-8 col-md-10 col-sm-12">
+        <form asp-action="Create" id="main-form">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" name="ParentId" value="@ViewBag.ParentId" />
+            <div class="mb-3" asp-enabled="RegistrationDate">
+                <!--date start-->
+                <!-- use class .date to enable datepicker -->
+                <span><label asp-for="RegistrationDate" class="form-label"></label> <span class="text-muted small">(@System.Globalization.CultureInfo.CurrentUICulture)</span></span>
+                <div class="input-group date">
+                    <input asp-for="RegistrationDate" autocomplete="off" type="text" class="form-control" placeholder="@System.Globalization.DateTimeFormatInfo.CurrentInfo.ShortDatePattern" />
+                    <span class="input-group-text input-group-addon"><i class="far fa-calendar-alt"></i></span>
+                </div>
+                <span asp-validation-for="RegistrationDate" class="text-danger"></span>
+                <!--date end-->
+            </div>
+            
+            <div class="mb-3" asp-enabled="OrganizationId">
+                <!--fk select start-->
+                <label asp-for="OrganizationId" class="form-label"></label>
+                <select asp-for="OrganizationId" class="form-select" asp-items="ViewBag.OrganizationId">
+                    <option disabled selected></option>
+                </select>
+                <span asp-validation-for="OrganizationId" class="text-danger"></span>
+                <!--fk select end-->
+            </div>
+            
+            <div class="mb-3" asp-enabled="SchoolPeriodId">
+                <!--fk select start-->
+                <label asp-for="SchoolPeriodId" class="form-label"></label>
+                <select asp-for="SchoolPeriodId" class="form-select" asp-items="ViewBag.SchoolPeriodId">
+                    <option disabled selected></option>
+                </select>
+                <span asp-validation-for="SchoolPeriodId" class="text-danger"></span>
+                <!--fk select end-->
+            </div>
+            
+            <div class="mb-3" asp-enabled="RefParticipantTypeId">
+                <!--fk select start-->
+                <label asp-for="RefParticipantTypeId" class="form-label"></label>
+                <select asp-for="RefParticipantTypeId" class="form-select" asp-items="ViewBag.RefParticipantTypeId">
+                    <option disabled selected></option>
+                </select>
+                <span asp-validation-for="RefParticipantTypeId" class="text-danger"></span>
+                <!--fk select end-->
+            </div>
+            
+            <div class="mb-3" asp-enabled="RefGradeLevelId">
+                <!--fk select start-->
+                <label asp-for="RefGradeLevelId" class="form-label"></label>
+                <select asp-for="RefGradeLevelId" class="form-select" asp-items="ViewBag.RefGradeLevelId">
+                    <option disabled selected></option>
+                </select>
+                <span asp-validation-for="RefGradeLevelId" class="text-danger"></span>
+                <!--fk select end-->
+            </div>
+            
+            <div class="mb-3" asp-enabled="Male">
+                <!--input start-->
+                <label asp-for="Male" class="form-label"></label>
+                <input asp-for="Male" autocomplete="off" class="form-control" placeholder="" />
+                <span asp-validation-for="Male" class="text-danger"></span>
+                <!--input end-->
+            </div>
+            
+            <div class="mb-3" asp-enabled="Female">
+                <!--input start-->
+                <label asp-for="Female" class="form-label"></label>
+                <input asp-for="Female" autocomplete="off" class="form-control" placeholder="" />
+                <span asp-validation-for="Female" class="text-danger"></span>
+                <!--input end-->
+            </div>
+            
+            <div class="mb-3" asp-enabled="DisabledMale">
+                <!--input start-->
+                <label asp-for="DisabledMale" class="form-label"></label>
+                <input asp-for="DisabledMale" autocomplete="off" class="form-control" placeholder="" />
+                <span asp-validation-for="DisabledMale" class="text-danger"></span>
+                <!--input end-->
+            </div>
+            
+            <div class="mb-3" asp-enabled="DisabledFemale">
+                <!--input start-->
+                <label asp-for="DisabledFemale" class="form-label"></label>
+                <input asp-for="DisabledFemale" autocomplete="off" class="form-control" placeholder="" />
+                <span asp-validation-for="DisabledFemale" class="text-danger"></span>
+                <!--input end-->
+            </div>
+            
+            <!-- button group start -->
+            <div class="form-group text-right mt-5">
+                <a id="cancelbutton" class="btn btn-secondary mr-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
+                    <i class="fas fa-times"></i> @Localizer["Cancel"]
+                </a>
+                <button id="submitbutton" type="submit" value="Create" class="btn btn-primary">
+                    <span class="d-none spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    <span class="visually-hidden">Loading...</span>
+                    <i class="fas fa-check"></i> @Localizer["Create"]    
+                </button>
+            </div>
+            <!-- button group end -->
+        </form>
+    </div>
+</div>
+
+
+@section Styles {
+    @{await Html.RenderPartialAsync("_CreateStylesPartial");}
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{await Html.RenderPartialAsync("_CreateScriptsPartial");}
+}

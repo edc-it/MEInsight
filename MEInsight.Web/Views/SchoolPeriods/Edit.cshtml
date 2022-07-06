@@ -1,0 +1,62 @@
+﻿@model MEInsight.Entities.Core.SchoolPeriod
+
+@{
+    ViewData["Title"] = @Localizer["Edit"].Value + " " + @Localizer["SchoolPeriod"].Value;
+}
+
+<h2>@Localizer["Edit"]</h2>
+
+<h4>@Localizer["SchoolPeriod"]</h4>
+<hr />
+<div class="row">
+    <div class="col-xl-7 col-lg-8 col-md-10 col-sm-12">
+        <!--form start-->
+        <form asp-action="Edit" id="main-form">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" name="ParentId" value="@ViewBag.ParentId" />
+            <input type="hidden" asp-for="SchoolPeriodId" />
+            <div class="mb-3" asp-enabled="PeriodName">
+                <!--input start-->
+                <label asp-for="PeriodName" class="form-label"></label>
+                <input asp-for="PeriodName" autocomplete="off" class="form-control" />
+                <span asp-validation-for="PeriodName" class="text-danger"></span>
+                <!--input end-->
+            </div>
+            <div class="mb-3" asp-enabled="StartDate">
+                <!--input start-->
+                <label asp-for="StartDate" class="form-label"></label>
+                <input asp-for="StartDate" autocomplete="off" class="form-control" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+                <!--input end-->
+            </div>
+            <div class="mb-3" asp-enabled="EndDate">
+                <!--input start-->
+                <label asp-for="EndDate" class="form-label"></label>
+                <input asp-for="EndDate" autocomplete="off" class="form-control" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+                <!--input end-->
+            </div>
+            <!-- button group start -->
+            <div class="form-group text-right mt-5">
+                <a id="cancelbutton" class="btn btn-secondary mr-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
+                    <i class="fas fa-times"></i> @Localizer["Cancel"]
+                </a>
+                <button id="submitbutton" type="submit" value="Save" class="btn btn-primary">
+                    <span class="d-none spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    <span class="visually-hidden">Loading...</span>
+                    <i class="fas fa-check"></i> @Localizer["Save"]    
+                </button>
+            </div>
+            <!-- button group end -->
+        </form>
+        <!--form end-->
+    </div>
+</div>
+
+@section Styles {
+    @{await Html.RenderPartialAsync("_EditStylesPartial");}
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{await Html.RenderPartialAsync("_EditScriptsPartial");}
+}

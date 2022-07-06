@@ -1,0 +1,139 @@
+﻿@model MEInsight.Entities.Core.School
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>School</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SchoolCode" class="control-label"></label>
+                <input asp-for="SchoolCode" class="form-control" />
+                <span asp-validation-for="SchoolCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RefSchoolTypeId" class="control-label"></label>
+                <select asp-for="RefSchoolTypeId" class="form-control" asp-items="ViewBag.RefSchoolTypeId"></select>
+                <span asp-validation-for="RefSchoolTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RefSchoolLocationId" class="control-label"></label>
+                <select asp-for="RefSchoolLocationId" class="form-control" asp-items="ViewBag.RefSchoolLocationId"></select>
+                <span asp-validation-for="RefSchoolLocationId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RefSchoolLanguageId" class="control-label"></label>
+                <select asp-for="RefSchoolLanguageId" class="form-control" asp-items="ViewBag.RefSchoolLanguageId"></select>
+                <span asp-validation-for="RefSchoolLanguageId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RefSchoolAdministrationTypeId" class="control-label"></label>
+                <select asp-for="RefSchoolAdministrationTypeId" class="form-control" asp-items="ViewBag.RefSchoolAdministrationTypeId"></select>
+                <span asp-validation-for="RefSchoolAdministrationTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PartnerId" class="control-label"></label>
+                <input asp-for="PartnerId" class="form-control" />
+                <span asp-validation-for="PartnerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IsClusterCenter" class="control-label"></label>
+                <input asp-for="IsClusterCenter" class="form-control" />
+                <span asp-validation-for="IsClusterCenter" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RefSchoolClusterId" class="control-label"></label>
+                <select asp-for="RefSchoolClusterId" class="form-control" asp-items="ViewBag.RefSchoolClusterId"></select>
+                <span asp-validation-for="RefSchoolClusterId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RefSchoolStatusId" class="control-label"></label>
+                <select asp-for="RefSchoolStatusId" class="form-control" asp-items="ViewBag.RefSchoolStatusId"></select>
+                <span asp-validation-for="RefSchoolStatusId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HeadTeacher" class="control-label"></label>
+                <input asp-for="HeadTeacher" class="form-control" />
+                <span asp-validation-for="HeadTeacher" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="OrganizationId" />
+            <div class="form-group">
+                <label asp-for="RegistrationDate" class="control-label"></label>
+                <input asp-for="RegistrationDate" class="form-control" />
+                <span asp-validation-for="RegistrationDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrganizationCode" class="control-label"></label>
+                <input asp-for="OrganizationCode" class="form-control" />
+                <span asp-validation-for="OrganizationCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrganizationName" class="control-label"></label>
+                <input asp-for="OrganizationName" class="form-control" />
+                <span asp-validation-for="OrganizationName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RefOrganizationTypeId" class="control-label"></label>
+                <select asp-for="RefOrganizationTypeId" class="form-control" asp-items="ViewBag.RefOrganizationTypeId"></select>
+                <span asp-validation-for="RefOrganizationTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ParentOrganizationId" class="control-label"></label>
+                <select asp-for="ParentOrganizationId" class="form-control" asp-items="ViewBag.ParentOrganizationId"></select>
+                <span asp-validation-for="ParentOrganizationId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Contact" class="control-label"></label>
+                <input asp-for="Contact" class="form-control" />
+                <span asp-validation-for="Contact" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RefLocationId" class="control-label"></label>
+                <select asp-for="RefLocationId" class="form-control" asp-items="ViewBag.RefLocationId"></select>
+                <span asp-validation-for="RefLocationId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <textarea asp-for="Address" class="form-control"></textarea>
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Latitude" class="control-label"></label>
+                <input asp-for="Latitude" class="form-control" />
+                <span asp-validation-for="Latitude" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Longitude" class="control-label"></label>
+                <input asp-for="Longitude" class="form-control" />
+                <span asp-validation-for="Longitude" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsOrganizationUnit" /> @Html.DisplayNameFor(model => model.IsOrganizationUnit)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
