@@ -71,13 +71,53 @@ namespace MEInsight.Web.Controllers
 
         // GET: Teachers/Create
         [Authorize(Policy = "RequireCreateRole")]
-        public IActionResult Create(Guid? id)
+        public async Task<IActionResult> Create(Guid? id)
         {
 
             //if (id == null)
             //{
             //    return NotFound();
             //}
+
+            // *** For JSTree ***
+            //Logged User OrganizationId
+            Guid? userOrganizacionId = (await _userManager.GetUserAsync(HttpContext.User))?.OrganizationId;
+
+            if (userOrganizacionId == null)
+            {
+                return NotFound();
+            }
+
+            //Get Logged User Organization
+            var organization = await _context.Organizations
+                    .SingleOrDefaultAsync(o => o.OrganizationId == userOrganizacionId);
+
+            if (organization == null)
+            {
+                return NotFound();
+            }
+
+            //Returns the top hiearchy organization for JSTree
+            ViewData["ParentOrganizationId"] = organization.OrganizationId;
+
+            // *** Select Lists ***
+            // RefLocation
+            var locationTypes = _context.LocationTypes;
+            ViewData["RefLocationTypes"] = locationTypes;
+            ViewData["RefLocationTypesCount"] = locationTypes.Count();
+
+            ViewData["RefLocationId"] = new SelectList(_context.Locations
+                .Include(x => x.LocationTypes)
+                .Where(x =>
+                    x.LocationTypes.LocationLevel == 1 &&
+                    x.ParentLocationId == null)
+                .Select(x => new
+                {
+                    x.RefLocationId,
+                    x.LocationName
+                }), "RefLocationId", "LocationName");
+
+
 
             ViewData["ParentId"] = id;
             ViewData["RefDisabilityTypeId"] = new SelectList(_context.DisabilityTypes, "RefDisabilityTypeId", "DisabilityType");
