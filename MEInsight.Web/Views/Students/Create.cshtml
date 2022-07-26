@@ -382,4 +382,226 @@
 @section Scripts {
 @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 @{await Html.RenderPartialAsync("_CreateScriptsPartial");}
+
+<script>
+        $(document).ready(function() {
+
+            // *** FOR JSTREE ***
+            // Allows JQuery Validator to validate input hidden fields.
+            // The selected Organization in the JStree plugin is a hidden input field
+            // that its value gets updated on JStree change event.
+            // This validates the selection of the Organization in the JStree on submit
+            $("#main-form").data("validator").settings.ignore = "";
+
+            // Initialize and load the JStree plugin, loading the Organization hierarchy structure
+            // from the JSON request. The ['search'] plugin is enabled.
+            $('#tree').jstree({
+                'core': {
+                    'data': {
+                        "url": "/Requests/GetOrganizationTree/?id=@ViewBag.ParentOrganizationId",
+                        "dataType": "json"
+                    },
+                    "check_callback": false,
+                    'themes': {
+                        'name': 'proton',
+                        'responsive': true
+                    },
+                    'multiple': false
+                },
+                "search": {
+                    "case_sensitive": false,
+                    "show_only_matches": true,
+                    "show_only_matches_children": true
+                },
+                "plugins": ["search"]
+            });
+
+            // Expands or Collapses the JStree
+            var instance = $('#tree').jstree(true);
+            $("#collapse").on("click", function() {
+                instance.close_all();
+            });
+
+            $("#expand").on("click", function() {
+                instance.open_all();
+            });
+
+            // JStree Search on keyup
+            var to = false;
+            $('#tree-search').keyup(function() {
+                if (to) {
+                    clearTimeout(to);
+                }
+                to = setTimeout(function() {
+                    var v = $('#tree-search').val();
+                    $('#tree').jstree(true).search(v);
+                }, 250);
+            });
+
+            // JStree on node select, update hidden input field OrganizationId
+            // and display "You selected: " html.
+            $('#tree').on('changed.jstree', function(e, data) {
+                e.preventDefault();
+                if (data.selected) {
+                    $('#OrganizationId').val(data.selected);
+                    $('#SelectedOrganizationId').html(data.instance.get_selected(true)[0].text);
+                }
+            });
+
+            // If RefOrganizationTypeId = 2 (School),
+            // ViewBag.OrganizationId will no be null.
+            // This will pre-select the OrganizationId
+        @if (ViewBag.OrganizationId != null)
+        {
+            <text>
+                    // JStree loaded Callback - expand and select node
+                    $('#tree').on("ready.jstree", function(e, data) {
+                        data.instance._open_to(['@ViewBag.OrganizationId'], true);
+                        data.instance.select_node(['@ViewBag.OrganizationId'], true);
+                        $('#OrganizationId').val('@ViewBag.OrganizationId');
+                        $('#SelectedOrganizationId').html(data.instance.get_selected(true)[0].text);
+                    });
+            </text>
+        }
+
+                                            // *** LOCATIONS ***
+                                            // Counts the total number of available Location level inputs
+                                            var totalLocationLevels = $('[data-locationlevel]').length;
+
+            // JQuery select2 chained drop-downs by [data-locationlevel]
+            // On change or remove event clears select options and
+            // requests (Ajax) the new selected location options
+            $('[data-locationlevel]').select2({
+                theme: "bootstrap-5",
+                placeholder: " ",
+                dropdownAutoWidth: true,
+                width: '100%',
+                allowClear: true,
+                selectOnBlur: true,
+                language: 'en'
+            })
+                .bind("change remove", function(e) {
+                    e.preventDefault();
+
+                    var locationLevel = $(this).data('locationlevel');
+                    var locationId = $(this).val();
+
+                    if (locationId) {
+                        $('[data-locationlevel="' + (locationLevel + 1) + '"]').select2({
+                            placeholder: "@Localizer["Loading..."]",
+                            theme: "bootstrap-5",
+                            dropdownAutoWidth: true,
+                            width: '100%'
+                        })
+
+                        $.ajax({
+                            type: "Post",
+                            url: "/Requests/GetLocations/" + locationId,
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function(data) {
+                                if (data.length) {
+                                    for (var i = 1; i < (totalLocationLevels); i++) {
+                                        $('[data-locationlevel="' + (locationLevel + i) + '"]').empty().val();
+                                    }
+
+                                    $('[data-locationlevel="' + (locationLevel + 1) + '"]').append("<option value=''></option>");
+                                    $(data).each(function() {
+                                        $('[data-locationlevel="' + (locationLevel + 1) + '"]').append("<option value='" + this.refLocationId + "'>" + this.locationName + "</option>");
+                                    });
+                                    $('[data-locationlevel="' + (locationLevel + 1) + '"]').select2({
+                                        placeholder: "@Localizer["Select..."]",
+                                        selectOnBlur: true,
+                                        allowClear: true,
+                                        language: 'en',
+                                        theme: "bootstrap-5",
+                                        dropdownAutoWidth: true,
+                                        width: '100%'
+                                    });
+                                }
+                            }
+                        });
+                    }
+                    // if the parente level select was removed - clear chained select options
+                    // on each lower level select
+                    else {
+                        for (var i = 1; i < (totalLocationLevels); i++) {
+                            $('[data-locationlevel="' + (locationLevel + i) + '"]').empty()
+                                .select2({
+                                    placeholder: " ",
+                                    allowClear: true,
+                                    language: 'en',
+                                    theme: "bootstrap-5",
+                                    dropdownAutoWidth: true,
+                                    width: '100%'
+                                });
+                        }
+                    }
+                });
+
+            // *** STUDENTS ***
+            // Calculate Age from Birth Date
+            //https://stackoverflow.com/questions/4060004/calculate-age-given-the-birth-date-in-the-format-yyyymmdd/7091965#7091965
+            $('.date.birthdate')
+                .on('change', function(date) {
+                    if (date != null) {
+                        var today = new Date();
+                        var birthDate = $(this).datepicker('getDate');
+                        if (birthDate) {
+                            var age = today.getFullYear() - birthDate.getFullYear();
+                            var m = today.getMonth() - birthDate.getMonth();
+                            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                                age--;
+                            }
+                            if (age <= 0) {
+
+                                const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'top-end',
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    timerProgressBar: true,
+                                    didOpen: (toast) => {
+                                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                    }
+                                });
+
+                                const options = {
+                                    day: '2-digit',
+                                    month: '2-digit',
+                                    year: 'numeric',
+                                }
+
+                                formatedBirthDate = new Intl.DateTimeFormat('@System.Globalization.CultureInfo.CurrentUICulture', options).format(birthDate)
+
+                                Toast.fire({
+                                    icon: 'error',
+                                    title: '@Localizer["Incorrect date"]',
+                                    html: '@Localizer["Incorrect date"], ' + age + ' @Localizer["years old"], <br />' + formatedBirthDate + '<br /> @Localizer["Please verify."]'
+                                });
+                                $('#Age').val("");
+                                $(this).datepicker('clearDates');
+
+                            }
+                            else {
+                                $('#Age').val(age);
+                            }
+                        }
+                    }
+                });
+
+            // If Disability is true, display Disability Types options, else hide
+            $('input[name="Disability"]').on('click', function() {
+                if ($(this).val() == 'true') {
+                    $('.disabilityoptions').show();
+                }
+                else {
+                    $('#RefDisabilityTypeId').val('');
+                    $('.disabilityoptions').hide();
+                }
+            });
+        });
+</script>
+
 }
