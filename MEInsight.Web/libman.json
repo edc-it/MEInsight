@@ -4,7 +4,7 @@
   "libraries": [
     {
       "provider": "jsdelivr",
-      "library": "bootstrap@5.2.0-beta1",
+      "library": "bootstrap@5.2.0",
       "destination": "wwwroot/lib/bootstrap/",
       "files": [
         "LICENSE",
