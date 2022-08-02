@@ -13,7 +13,7 @@
         <form asp-action="Create" id="main-form">
             <div asp-validation-summary="All" class="text-danger"></div>
             <input type="hidden" name="ParentId" value="@ViewBag.ParentId" />
-
+            <input type="hidden" asp-for="RefParticipantTypeId" value="1" />
             @* participant *@
 
             <div class="card mb-3">
