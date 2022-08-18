@@ -174,10 +174,7 @@ namespace MEL.Web.Controllers
         [Authorize(Policy = "RequireDeleteRole")]
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null || _context.Programs == null) { return NotFound(); }
 
             var program = await _context.Programs
                 .Include(p => p.AttendanceUnits)
@@ -215,11 +212,19 @@ namespace MEL.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (_context.Programs == null)
+            {
+                return Problem("Entity set 'ApplicationDbContext.Program'  is null.");
+            }
             var program = await _context.Programs.FindAsync(id);
 
-            _context.Programs.Remove(program);
+            if (program != null)
+            {
+                _context.Programs.Remove(program);
+            }
+                        
             await _context.SaveChangesAsync();
-        
+
             TempData["messageType"] = "success";
             TempData["messageTitle"] = "RECORD DELETED";
             TempData["message"] = "Record successfully deleted";
