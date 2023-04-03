@@ -9,7 +9,6 @@
 <h4>@Localizer["Student"]</h4>
 <hr />
 <div class="row">
-    <div class="col-xl-7 col-lg-8 col-md-10 col-sm-12">
         <form asp-action="Create" id="main-form">
             <div asp-validation-summary="All" class="text-danger"></div>
             <input type="hidden" name="ParentId" value="@ViewBag.ParentId" />
@@ -17,7 +16,7 @@
             @* participant *@
 
             <div class="card mb-3">
-                <div class="card-header">
+                <div class="card-header bg-primary text-white">
                     Participant
                 </div>
                 <div class="card-body">
@@ -29,7 +28,7 @@
                         <!-- use class .date to enable datepicker -->
                         <div class="input-group mb-3 date">
                             <input asp-for="RegistrationDate" autocomplete="off" type="text" class="form-control"
-                                placeholder="@System.Globalization.DateTimeFormatInfo.CurrentInfo.ShortDatePattern" />
+                                   placeholder="@System.Globalization.DateTimeFormatInfo.CurrentInfo.ShortDatePattern" />
                             <span class="input-group-text input-group-addon">
                                 <i class="far fa-calendar-alt"></i>
                             </span>
@@ -39,109 +38,141 @@
                     </div>
 
                     <div class="card mb-3" asp-enabled="OrganizationId">
-                        <div class="card-header">
+                        <div class="card-header bg-primary text-white">
                             Organization
                         </div>
                         <div class="card-body">
                             <!--fk tree start-->
                             <div class="input-group input-group-sm">
                                 <input type="text" id="tree-search" autocomplete="off"
-                                    placeholder="@Localizer["Search"]" class="form-control search-input" value="" />
+                                       placeholder="@Localizer["Search"]" class="form-control search-input" value="" />
                                 <span class="input-group-text"><i class="fas fa-search"></i></span>
                             </div>
-                            <small><a href="#" id="collapse">@Localizer["collapse"]</a> / <a href="#"
-                                    id="expand">@Localizer["expand"]</a></small>
+                            <small>
+                                <a href="#" id="collapse">@Localizer["collapse"]</a> / <a href="#"
+                                                                                          id="expand">@Localizer["expand"]</a>
+                            </small>
                             <div id="tree-container" class="px-3 py-1">
                                 <div id="tree" class="mb-5"></div>
                             </div>
                             <input asp-for="OrganizationId" required type="hidden" />
                             <div class="border-top">
-                                <span>@Localizer["Selected organization"]: <span id="SelectedOrganizationId"><span
-                                            class="text-muted">@Localizer["none selected"]</span></span></span>
+                                <span>
+                                    @Localizer["Selected organization"]: <span id="SelectedOrganizationId">
+                                        <span class="text-muted">@Localizer["none selected"]</span>
+                                    </span>
+                                </span>
                             </div>
                             <span asp-validation-for="OrganizationId" class="text-danger"></span>
                             <!--fk tree end-->
                         </div>
                     </div>
 
-                    <div class="mb-3" asp-enabled="RefParticipantCohortId">
-                        <!--fk select start-->
+                <div class="row">
+                    <div class="mb-3 col-md-6" asp-enabled="RefParticipantCohortId">
+                        <div class="form-group">
+                            <!--fk select start-->
                         <label asp-for="RefParticipantCohortId" class="form-label"></label>
                         <select asp-for="RefParticipantCohortId" class="form-control form-select"
-                            asp-items="ViewBag.RefParticipantCohortId">
+                                asp-items="ViewBag.RefParticipantCohortId">
                             <option disabled selected></option>
                         </select>
                         <span asp-validation-for="RefParticipantCohortId" class="text-danger"></span>
                         <!--fk select end-->
+                        </div>
                     </div>
 
-                    <div class="mb-3 required" asp-enabled="ParticipantCode">
+                    <div class="mb-3 col-md-6 required" asp-enabled="ParticipantCode">
+                        <div class="form-group">
                         <!--input start-->
                         <label asp-for="ParticipantCode" class="form-label"></label>
                         <input asp-for="ParticipantCode" autocomplete="off" class="form-control" />
                         <span asp-validation-for="ParticipantCode" class="text-danger"></span>
                         <!--input end-->
+                        </div>
                     </div>
+                </div>
 
-                    <div class="mb-3 required" asp-enabled="FirstName">
+                <div class="row">
+
+                    <div class="mb-3 col-md-4 required" asp-enabled="FirstName">
+                        <div class="form-group">
                         <!--input start-->
                         <label asp-for="FirstName" class="form-label"></label>
                         <input asp-for="FirstName" autocomplete="off" class="form-control" />
                         <span asp-validation-for="FirstName" class="text-danger"></span>
                         <!--input end-->
+                        </div>
                     </div>
 
-                    <div class="mb-3" asp-enabled="MiddleName">
+                    <div class="mb-3 col-md-4" asp-enabled="MiddleName">
+                        <div class="form-group">
                         <!--input start-->
                         <label asp-for="MiddleName" class="form-label"></label>
                         <input asp-for="MiddleName" autocomplete="off" class="form-control" />
                         <span asp-validation-for="MiddleName" class="text-danger"></span>
                         <!--input end-->
+                        </div>
                     </div>
 
-                    <div class="mb-3 required" asp-enabled="LastName">
+                    <div class="mb-3 col-md-4 required" asp-enabled="LastName">
                         <!--input start-->
+                        <div class="form-group">
                         <label asp-for="LastName" class="form-label"></label>
                         <input asp-for="LastName" autocomplete="off" class="form-control" />
                         <span asp-validation-for="LastName" class="text-danger"></span>
                         <!--input end-->
+                        </div>
                     </div>
 
-                    <div class="mb-3 required" asp-enabled="RefSexId">
+                </div>                  
+
+                <div class="row">
+                    <div class="mb-3 col-md-4 required" asp-enabled="RefSexId">
                         <!--fk select start-->
+                        <div class="form-group">
                         <label asp-for="RefSexId" class="form-label"></label>
                         <select asp-for="RefSexId" class="form-control form-select" asp-items="ViewBag.RefSexId">
                             <option disabled selected></option>
                         </select>
                         <span asp-validation-for="RefSexId" class="text-danger"></span>
+                        </div>
                         <!--fk select end-->
                     </div>
 
-                    <div class="mb-3" asp-enabled="BirthDate">
+                    <div class="mb-3 col-md-4" asp-enabled="BirthDate">
                         <!--date start-->
+                     <div class="form-group">
+
                         <label asp-for="BirthDate" class="form-label"></label>
                         <span class="text-muted small">(@System.Globalization.CultureInfo.CurrentUICulture)</span>
                         <!-- use class .date to enable datepicker -->
                         <div class="input-group mb-2 date birthdate">
                             <input asp-for="BirthDate" autocomplete="off" type="text" class="form-control"
-                                placeholder="@System.Globalization.DateTimeFormatInfo.CurrentInfo.ShortDatePattern" />
+                                   placeholder="@System.Globalization.DateTimeFormatInfo.CurrentInfo.ShortDatePattern" />
                             <span class="input-group-text input-group-addon">
                                 <i class="far fa-calendar-alt"></i>
                             </span>
                         </div>
                         <span asp-validation-for="BirthDate" class="text-danger"></span>
                         <!--date end-->
+                        </div>
                     </div>
 
-                    <div class="mb-3" asp-enabled="Age">
+                    <div class="mb-3 col-md-4" asp-enabled="Age">
+                        <div class="form-group">
                         <!--input start-->
                         <label asp-for="Age" class="form-label"></label>
                         <input asp-for="Age" type="number" autocomplete="off" class="form-control" data-val="true" />
                         <span asp-validation-for="Age" class="text-danger"></span>
                         <!--input end-->
+                        </div>
                     </div>
-
+                </div>
                     <div class="card" asp-enabled="DisabilityPanel">
+                        <div class="card-header bg-primary text-white">
+                            Diability
+                        </div>
                         <div class="card-body pb-0">
                             <div class="mb-3">
                                 <label asp-for="Disability" class="form-label"></label>
@@ -158,7 +189,7 @@
                                 <!--fk select start-->
                                 <label asp-for="RefDisabilityTypeId" class="form-label"></label>
                                 <select asp-for="RefDisabilityTypeId" class="form-control form-select"
-                                    asp-items="ViewBag.RefDisabilityTypeId">
+                                        asp-items="ViewBag.RefDisabilityTypeId">
                                     <option disabled selected></option>
                                 </select>
                                 <span asp-validation-for="RefDisabilityTypeId" class="text-danger"></span>
@@ -168,51 +199,56 @@
                         </div>
                     </div>
 
-                    <div class="mb-3" asp-enabled="Phone">
+                <div class="row">
+                    <div class="mb-3 col-md-6" asp-enabled="Phone">
+                        <div class="form-group">
                         <!--input start-->
                         <label asp-for="Phone" class="form-label"></label>
                         <input asp-for="Phone" autocomplete="off" class="form-control" />
                         <span asp-validation-for="Phone" class="text-danger"></span>
                         <!--input end-->
+                        </div>
                     </div>
 
-                    <div class="mb-3" asp-enabled="Mobile">
+                    <div class="mb-3 col-md-6" asp-enabled="Mobile">
                         <!--input start-->
+                        <div class="form-group">
                         <label asp-for="Mobile" class="form-label"></label>
                         <input asp-for="Mobile" autocomplete="off" class="form-control" />
                         <span asp-validation-for="Mobile" class="text-danger"></span>
                         <!--input end-->
+                        </div>
                     </div>
+                </div>
 
-                    <div class="mb-3" asp-enabled="Email">
+                <div class="row">
+                    <div class="mb-3 col-md-6" asp-enabled="Email">
                         <!--input start-->
+                        <div class="form-group">
                         <label asp-for="Email" class="form-label"></label>
                         <input asp-for="Email" autocomplete="off" class="form-control" />
                         <span asp-validation-for="Email" class="text-danger"></span>
                         <!--input end-->
+                        </div>
                     </div>
 
-                    <div class="mb-3" asp-enabled="Facebook">
+                    <div class="mb-3 col-md-6" asp-enabled="Facebook">
                         <!--input start-->
+                        <div class="form-group">
                         <label asp-for="Facebook" class="form-label"></label>
                         <input asp-for="Facebook" autocomplete="off" class="form-control" />
                         <span asp-validation-for="Facebook" class="text-danger"></span>
                         <!--input end-->
+                        </div>
                     </div>
-
-                    <div class="mb-3" asp-enabled="InstantMessenger">
-                        <!--input start-->
-                        <label asp-for="InstantMessenger" class="form-label"></label>
-                        <input asp-for="InstantMessenger" autocomplete="off" class="form-control" />
-                        <span asp-validation-for="InstantMessenger" class="text-danger"></span>
-                        <!--input end-->
-                    </div>
+                </div>
+              
 
                     @*
-                        RefLocation is a self-referencing table with hierarchical (geo)locations.
-                        This foreach dynamically generates each required location input by location level
-                        i.e. Country -> Province -> District or Level1 -> Level2 -> Level 3 (LocationTypes by level)
-                        Only the last level RefLocationId is saved on this record.
+                    RefLocation is a self-referencing table with hierarchical (geo)locations.
+                    This foreach dynamically generates each required location input by location level
+                    i.e. Country -> Province -> District or Level1 -> Level2 -> Level 3 (LocationTypes by level)
+                    Only the last level RefLocationId is saved on this record.
                     *@
                     @{
                         // If RefLocationId is enabled
@@ -229,12 +265,16 @@
                                     <div class="mb-3 required">
                                         <label class="control-label">@item.LocationType</label>
                                         <select class="form-control required" data-locationlevel="@item.LocationLevel"
-                                id="RefLocation@{ @item.LocationLevel }Id" name="RefLocationId[@i]" data-val="true"
+                                id="RefLocation@{
+                                @item.LocationLevel
+ }Id" name="RefLocationId[@i]" data-val="true"
                                 asp-items="@ViewBag.RefLocationId" required>
                                             <option disabled selected></option>
                                         </select>
                                         <span class="text-danger field-validation-valid"
-                                data-valmsg-for="RefLocation@{ @item.LocationLevel }Id" data-valmsg-replace="true"></span>
+                                  data-valmsg-for="RefLocation@{
+                                @item.LocationLevel
+ }Id" data-valmsg-replace="true"></span>
                                     </div>
                                 }
                                 else
@@ -244,11 +284,13 @@
                                         <div class="mb-3 required">
                                             <label class="control-label">@item.LocationType</label>
                                             <select class="form-control required" data-locationlevel="@item.LocationLevel"
-                                id="RefLocation@{ @item.LocationLevel }Id" name="RefLocationId[@i]" data-val="true">
+                                    id="RefLocation@{
+                                @item.LocationLevel
+ }Id" name="RefLocationId[@i]" data-val="true">
                                                 <option disabled selected></option>
                                             </select>
                                             <span class="text-danger field-validation-valid" data-valmsg-for="RefLocationId"
-                                data-valmsg-replace="true"></span>
+                                  data-valmsg-replace="true"></span>
                                         </div>
                                     }
                                     else
@@ -258,12 +300,16 @@
                                             <div class="mb-3 required">
                                                 <label class="control-label">@item.LocationType</label>
                                                 <select class="form-control required" data-locationlevel="@item.LocationLevel"
-                                id="RefLocation@{ @item.LocationLevel }Id" name="RefLocationId[@i]" data-val="true"
-                                required>
+                                    id="RefLocation@{
+                                @item.LocationLevel
+ }Id" name="RefLocationId[@i]" data-val="true"
+                                    required>
                                                     <option disabled selected></option>
                                                 </select>
                                                 <span class="text-danger field-validation-valid"
-                                data-valmsg-for="RefLocation@{ @item.LocationLevel }Id" data-valmsg-replace="true"></span>
+                                  data-valmsg-for="RefLocation@{
+                                @item.LocationLevel
+ }Id" data-valmsg-replace="true"></span>
                                             </div>
                                         }
                                         else
@@ -271,11 +317,15 @@
                                             <div class="mb-3 required">
                                                 <label class="control-label">@item.LocationType</label>
                                                 <select class="form-control required" data-locationlevel="@item.LocationLevel"
-                                id="RefLocation@{ @item.LocationLevel }Id" name="RefLocationId[@i]" data-val="true">
+                                    id="RefLocation@{
+                                @item.LocationLevel
+ }Id" name="RefLocationId[@i]" data-val="true">
                                                     <option disabled selected></option>
                                                 </select>
                                                 <span class="text-danger field-validation-valid"
-                                data-valmsg-for="RefLocation@{ @item.LocationLevel }Id" data-valmsg-replace="true"></span>
+                                  data-valmsg-for="RefLocation@{
+                                @item.LocationLevel
+ }Id" data-valmsg-replace="true"></span>
                                             </div>
                                         }
                                     }
@@ -285,77 +335,104 @@
 
                         }
                     }
+                    <div class="row">
+                    <div class="mb-3 col-md-6" asp-enabled="InstantMessenger">
+                        <!--input start-->
+                        <div class="form-group">
+                        <label asp-for="InstantMessenger" class="form-label"></label>
+                        <input asp-for="InstantMessenger" autocomplete="off" class="form-control" />
+                        <span asp-validation-for="InstantMessenger" class="text-danger"></span>
+                        <!--input end-->
+                        </div>
+                    </div>
+                    <div class="mb-3 col-md-6">
+                    <div class="form-group">
+                        <label asp-for="AdditionalData" class="control-label"></label>
+                        <input asp-for="AdditionalData" class="form-control" />
+                        <span asp-validation-for="AdditionalData" class="text-danger"></span>
+                    </div>
+                    </div>
+                </div>
 
-                    <div class="mb-3" asp-enabled="Address">
+                <div class="mb-3" asp-enabled="Address">
                         <!--textarea start-->
                         <label asp-for="Address" class="form-label"></label>
                         <textarea asp-for="Address" class="form-control"></textarea>
                         <span asp-validation-for="Address" class="text-danger"></span>
                         <!--textarea end-->
                     </div>
-
-                    <div class="form-group">
-                        <label asp-for="AdditionalData" class="control-label"></label>
-                        <input asp-for="AdditionalData" class="form-control" />
-                        <span asp-validation-for="AdditionalData" class="text-danger"></span>
-                    </div>
+                    
                 </div>
             </div>
 
             <!-- student -->
 
             <div class="card mb-3">
-                <div class="card-header">
+                <div class="card-header bg-primary text-white">
                     Student
                 </div>
                 <div class="card-body">
-                    <div class="mb-3" asp-enabled="StudentCode">
+                    <div class="row">
+                <div class="mb-3 col-md-4" asp-enabled="StudentCode">
                         <!--input start-->
+                    <div class="form-group">
                         <label asp-for="StudentCode" class="form-label"></label>
                         <input asp-for="StudentCode" autocomplete="off" class="form-control" placeholder="" />
                         <span asp-validation-for="StudentCode" class="text-danger"></span>
+                    </div>
                         <!--input end-->
                     </div>
 
-                    <div class="mb-3" asp-enabled="RefStudentTypeId">
+                    <div class="mb-3 col-md-4" asp-enabled="RefStudentTypeId">
                         <!--fk select start-->
+                        <div class="form-group">
                         <label asp-for="RefStudentTypeId" class="form-label"></label>
                         <select asp-for="RefStudentTypeId" class="form-select" asp-items="ViewBag.RefStudentTypeId">
                             <option disabled selected></option>
                         </select>
                         <span asp-validation-for="RefStudentTypeId" class="text-danger"></span>
+                        </div>
                         <!--fk select end-->
                     </div>
 
-                    <div class="mb-3" asp-enabled="RefStudentSpecializationId">
+                    <div class="mb-3 col-md-4" asp-enabled="RefStudentSpecializationId">
                         <!--fk select start-->
+                        <div class="form-group">
                         <label asp-for="RefStudentSpecializationId" class="form-label"></label>
                         <select asp-for="RefStudentSpecializationId" class="form-select"
-                            asp-items="ViewBag.RefStudentSpecializationId">
+                                asp-items="ViewBag.RefStudentSpecializationId">
                             <option disabled selected></option>
                         </select>
                         <span asp-validation-for="RefStudentSpecializationId" class="text-danger"></span>
                         <!--fk select end-->
+                        </div>
                     </div>
+                </div>
 
-                    <div class="mb-3" asp-enabled="ParentGuardian">
+                <div class="row">
+                    <div class="mb-3 col-md-6" asp-enabled="ParentGuardian">
                         <!--input start-->
+                        <div class="form-group">
                         <label asp-for="ParentGuardian" class="form-label"></label>
                         <input asp-for="ParentGuardian" autocomplete="off" class="form-control" placeholder="" />
                         <span asp-validation-for="ParentGuardian" class="text-danger"></span>
+                        </div>
                         <!--input end-->
                     </div>
 
-                    <div class="mb-3" asp-enabled="RefStudentYearOfStudyId">
+                    <div class="mb-3 col-md-6" asp-enabled="RefStudentYearOfStudyId">
                         <!--fk select start-->
+                        <div class="form-group">
                         <label asp-for="RefStudentYearOfStudyId" class="form-label"></label>
                         <select asp-for="RefStudentYearOfStudyId" class="form-select"
-                            asp-items="ViewBag.RefStudentYearOfStudyId">
+                                asp-items="ViewBag.RefStudentYearOfStudyId">
                             <option disabled selected></option>
                         </select>
                         <span asp-validation-for="RefStudentYearOfStudyId" class="text-danger"></span>
                         <!--fk select end-->
+                        </div>
                     </div>
+                </div>
                 </div>
             </div>
 
@@ -372,19 +449,24 @@
             </div>
             <!-- button group end -->
         </form>
-    </div>
 </div>
 
 
 @section Styles {
-@{await Html.RenderPartialAsync("_CreateStylesPartial");}
-}
-@section Scripts {
-@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-@{await Html.RenderPartialAsync("_CreateScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_CreateStylesPartial");
+    }
+    }
+    @section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    @{
+        await Html.RenderPartialAsync("_CreateScriptsPartial");
+    }
 
-<script>
-        $(document).ready(function() {
+    <script>
+        $(document).ready(function () {
 
             // *** FOR JSTREE ***
             // Allows JQuery Validator to validate input hidden fields.
@@ -418,21 +500,21 @@
 
             // Expands or Collapses the JStree
             var instance = $('#tree').jstree(true);
-            $("#collapse").on("click", function() {
+            $("#collapse").on("click", function () {
                 instance.close_all();
             });
 
-            $("#expand").on("click", function() {
+            $("#expand").on("click", function () {
                 instance.open_all();
             });
 
             // JStree Search on keyup
             var to = false;
-            $('#tree-search').keyup(function() {
+            $('#tree-search').keyup(function () {
                 if (to) {
                     clearTimeout(to);
                 }
-                to = setTimeout(function() {
+                to = setTimeout(function () {
                     var v = $('#tree-search').val();
                     $('#tree').jstree(true).search(v);
                 }, 250);
@@ -440,7 +522,7 @@
 
             // JStree on node select, update hidden input field OrganizationId
             // and display "You selected: " html.
-            $('#tree').on('changed.jstree', function(e, data) {
+            $('#tree').on('changed.jstree', function (e, data) {
                 e.preventDefault();
                 if (data.selected) {
                     $('#OrganizationId').val(data.selected);
@@ -455,7 +537,7 @@
         {
             <text>
                     // JStree loaded Callback - expand and select node
-                    $('#tree').on("ready.jstree", function(e, data) {
+                    $('#tree').on("ready.jstree", function (e, data) {
                         data.instance._open_to(['@ViewBag.OrganizationId'], true);
                         data.instance.select_node(['@ViewBag.OrganizationId'], true);
                         $('#OrganizationId').val('@ViewBag.OrganizationId');
@@ -464,9 +546,9 @@
             </text>
         }
 
-                                            // *** LOCATIONS ***
-                                            // Counts the total number of available Location level inputs
-                                            var totalLocationLevels = $('[data-locationlevel]').length;
+                                                    // *** LOCATIONS ***
+                                                    // Counts the total number of available Location level inputs
+                                                    var totalLocationLevels = $('[data-locationlevel]').length;
 
             // JQuery select2 chained drop-downs by [data-locationlevel]
             // On change or remove event clears select options and
@@ -480,7 +562,7 @@
                 selectOnBlur: true,
                 language: 'en'
             })
-                .bind("change remove", function(e) {
+                .bind("change remove", function (e) {
                     e.preventDefault();
 
                     var locationLevel = $(this).data('locationlevel');
@@ -499,14 +581,14 @@
                             url: "/Requests/GetLocations/" + locationId,
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
-                            success: function(data) {
+                            success: function (data) {
                                 if (data.length) {
                                     for (var i = 1; i < (totalLocationLevels); i++) {
                                         $('[data-locationlevel="' + (locationLevel + i) + '"]').empty().val();
                                     }
 
                                     $('[data-locationlevel="' + (locationLevel + 1) + '"]').append("<option value=''></option>");
-                                    $(data).each(function() {
+                                    $(data).each(function () {
                                         $('[data-locationlevel="' + (locationLevel + 1) + '"]').append("<option value='" + this.refLocationId + "'>" + this.locationName + "</option>");
                                     });
                                     $('[data-locationlevel="' + (locationLevel + 1) + '"]').select2({
@@ -543,7 +625,7 @@
             // Calculate Age from Birth Date
             //https://stackoverflow.com/questions/4060004/calculate-age-given-the-birth-date-in-the-format-yyyymmdd/7091965#7091965
             $('.date.birthdate')
-                .on('change', function(date) {
+                .on('change', function (date) {
                     if (date != null) {
                         var today = new Date();
                         var birthDate = $(this).datepicker('getDate');
@@ -592,7 +674,7 @@
                 });
 
             // If Disability is true, display Disability Types options, else hide
-            $('input[name="Disability"]').on('click', function() {
+            $('input[name="Disability"]').on('click', function () {
                 if ($(this).val() == 'true') {
                     $('.disabilityoptions').show();
                 }
@@ -602,6 +684,6 @@
                 }
             });
         });
-</script>
+    </script>
 
 }
