@@ -1,0 +1,64 @@
+﻿@{
+    ViewData["Title"] = Localizer["Home Page"].Value;
+}
+
+<div class="row">
+    <div class="col">
+        <div class="p-5 mb-4 bg-light rounded-3">
+            <div class="container-fluid py-5">
+                <img class="ms-0 ps-0" src="~/images/MEInsightLogo-jumbotron.png" />
+                <p class="col-md-8 fs-4">@Localizer["An open source monitoring and evaluation data management system for international development projects"].</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-md-center p-5">
+    <div class="col">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">@Localizer["Enrollments"]</h5>
+                <p class="card-text">
+                    @Localizer["Navigate through your organizations, schools, partners, groups / cohorts, and participant enrollment lists"].
+                </p>
+            </div>
+            <div class="card-footer text-end">
+                <a asp-controller="Organizations" asp-action="Index" class="btn btn-sm btn-primary"><i class="fas fa-sitemap pe-1"></i> @Localizer["Enrollments"]</a>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">@Localizer["Participants"]</h5>
+                <p class="card-text">@Localizer["View all your active Participants, students, teachers, education administrators or other participant types"].</p>
+
+            </div>
+            <div class="card-footer text-end">
+                <a asp-controller="Participants" asp-action="Index" class="btn btn-sm btn-primary"><i class="fas fa-users pe-1"></i> @Localizer["Participants"]</a>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">@Localizer["Settings"]</h5>
+                <p class="card-text">@Localizer["Visualize and update your application settings, category lists and option choices"].</p>
+            </div>
+            <div class="card-footer text-end">
+                <a asp-controller="Home" asp-action="Index" asp-area="Settings" class="btn btn-sm btn-primary"><i class="fas fa-cog pe-1"></i> @Localizer["Settings"]</a>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">@Localizer["Documentation"]</h5>
+                <p class="card-text">@Localizer["Read the user guides and documentation"].</p>
+            </div>
+            <div class="card-footer text-end">
+                <a href="https://github.com/edc-it/MEInsight/" class="btn btn-sm btn-primary"><i class="fas fa-info-circle pe-1"></i> @Localizer["Documentation"]</a>
+            </div>
+        </div>
+    </div>
+</div>
+

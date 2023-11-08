@@ -1,0 +1,290 @@
+{
+  "version": "1.0",
+  "defaultProvider": "jsdelivr",
+  "libraries": [
+    {
+      "provider": "jsdelivr",
+      "library": "bootstrap@5.2.0",
+      "destination": "wwwroot/lib/bootstrap/",
+      "files": [
+        "LICENSE",
+        "dist/css/bootstrap-grid.css",
+        "dist/css/bootstrap-grid.css.map",
+        "dist/css/bootstrap-grid.min.css",
+        "dist/css/bootstrap-grid.min.css.map",
+        "dist/css/bootstrap-grid.rtl.css",
+        "dist/css/bootstrap-grid.rtl.css.map",
+        "dist/css/bootstrap-grid.rtl.min.css",
+        "dist/css/bootstrap-grid.rtl.min.css.map",
+        "dist/css/bootstrap-reboot.css",
+        "dist/css/bootstrap-reboot.css.map",
+        "dist/css/bootstrap-reboot.min.css",
+        "dist/css/bootstrap-reboot.min.css.map",
+        "dist/css/bootstrap-reboot.rtl.css",
+        "dist/css/bootstrap-reboot.rtl.css.map",
+        "dist/css/bootstrap-reboot.rtl.min.css",
+        "dist/css/bootstrap-reboot.rtl.min.css.map",
+        "dist/css/bootstrap-utilities.css",
+        "dist/css/bootstrap-utilities.css.map",
+        "dist/css/bootstrap-utilities.min.css",
+        "dist/css/bootstrap-utilities.min.css.map",
+        "dist/css/bootstrap-utilities.rtl.css",
+        "dist/css/bootstrap-utilities.rtl.css.map",
+        "dist/css/bootstrap-utilities.rtl.min.css",
+        "dist/css/bootstrap-utilities.rtl.min.css.map",
+        "dist/css/bootstrap.css",
+        "dist/css/bootstrap.css.map",
+        "dist/css/bootstrap.min.css",
+        "dist/css/bootstrap.min.css.map",
+        "dist/css/bootstrap.rtl.css",
+        "dist/css/bootstrap.rtl.css.map",
+        "dist/css/bootstrap.rtl.min.css",
+        "dist/css/bootstrap.rtl.min.css.map",
+        "dist/js/bootstrap.bundle.js",
+        "dist/js/bootstrap.bundle.js.map",
+        "dist/js/bootstrap.bundle.min.js",
+        "dist/js/bootstrap.bundle.min.js.map",
+        "dist/js/bootstrap.esm.js",
+        "dist/js/bootstrap.esm.js.map",
+        "dist/js/bootstrap.esm.min.js",
+        "dist/js/bootstrap.esm.min.js.map",
+        "dist/js/bootstrap.js",
+        "dist/js/bootstrap.js.map",
+        "dist/js/bootstrap.min.js",
+        "dist/js/bootstrap.min.js.map",
+        "scss/forms/_floating-labels.scss",
+        "scss/forms/_form-check.scss",
+        "scss/forms/_form-control.scss",
+        "scss/forms/_form-range.scss",
+        "scss/forms/_form-select.scss",
+        "scss/forms/_form-text.scss",
+        "scss/forms/_input-group.scss",
+        "scss/forms/_labels.scss",
+        "scss/forms/_validation.scss",
+        "scss/helpers/_clearfix.scss",
+        "scss/helpers/_color-bg.scss",
+        "scss/helpers/_colored-links.scss",
+        "scss/helpers/_position.scss",
+        "scss/helpers/_ratio.scss",
+        "scss/helpers/_stacks.scss",
+        "scss/helpers/_stretched-link.scss",
+        "scss/helpers/_text-truncation.scss",
+        "scss/helpers/_visually-hidden.scss",
+        "scss/helpers/_vr.scss",
+        "scss/mixins/_alert.scss",
+        "scss/mixins/_backdrop.scss",
+        "scss/mixins/_border-radius.scss",
+        "scss/mixins/_box-shadow.scss",
+        "scss/mixins/_breakpoints.scss",
+        "scss/mixins/_buttons.scss",
+        "scss/mixins/_caret.scss",
+        "scss/mixins/_clearfix.scss",
+        "scss/mixins/_color-scheme.scss",
+        "scss/mixins/_container.scss",
+        "scss/mixins/_deprecate.scss",
+        "scss/mixins/_forms.scss",
+        "scss/mixins/_gradients.scss",
+        "scss/mixins/_grid.scss",
+        "scss/mixins/_image.scss",
+        "scss/mixins/_list-group.scss",
+        "scss/mixins/_lists.scss",
+        "scss/mixins/_pagination.scss",
+        "scss/mixins/_reset-text.scss",
+        "scss/mixins/_resize.scss",
+        "scss/mixins/_table-variants.scss",
+        "scss/mixins/_text-truncate.scss",
+        "scss/mixins/_transition.scss",
+        "scss/mixins/_utilities.scss",
+        "scss/mixins/_visually-hidden.scss",
+        "scss/utilities/_api.scss",
+        "scss/vendor/_rfs.scss",
+        "scss/bootstrap-grid.scss",
+        "scss/bootstrap-reboot.scss",
+        "scss/bootstrap-utilities.scss",
+        "scss/bootstrap.scss",
+        "scss/_accordion.scss",
+        "scss/_alert.scss",
+        "scss/_badge.scss",
+        "scss/_breadcrumb.scss",
+        "scss/_button-group.scss",
+        "scss/_buttons.scss",
+        "scss/_card.scss",
+        "scss/_carousel.scss",
+        "scss/_close.scss",
+        "scss/_containers.scss",
+        "scss/_dropdown.scss",
+        "scss/_forms.scss",
+        "scss/_functions.scss",
+        "scss/_grid.scss",
+        "scss/_helpers.scss",
+        "scss/_images.scss",
+        "scss/_list-group.scss",
+        "scss/_maps.scss",
+        "scss/_mixins.scss",
+        "scss/_modal.scss",
+        "scss/_nav.scss",
+        "scss/_navbar.scss",
+        "scss/_offcanvas.scss",
+        "scss/_pagination.scss",
+        "scss/_placeholders.scss",
+        "scss/_popover.scss",
+        "scss/_progress.scss",
+        "scss/_reboot.scss",
+        "scss/_root.scss",
+        "scss/_spinners.scss",
+        "scss/_tables.scss",
+        "scss/_toasts.scss",
+        "scss/_tooltip.scss",
+        "scss/_transitions.scss",
+        "scss/_type.scss",
+        "scss/_utilities.scss",
+        "scss/_variables.scss"
+      ]
+    },
+    {
+      "library": "jquery@3.6.0",
+      "destination": "wwwroot/lib/jquery/",
+      "files": [
+        "dist/jquery.js",
+        "dist/jquery.min.js",
+        "dist/jquery.min.map",
+        "dist/jquery.slim.js",
+        "dist/jquery.slim.min.js",
+        "dist/jquery.slim.min.map",
+        "LICENSE.txt"
+      ]
+    },
+    {
+      "library": "jquery-validation@1.19.4",
+      "destination": "wwwroot/lib/jquery-validation/",
+      "files": [
+        "LICENSE.md",
+        "dist/localization/messages_fr.min.js",
+        "dist/localization/messages_fr.js",
+        "dist/localization/messages_es.min.js",
+        "dist/localization/messages_es.js",
+        "dist/additional-methods.js",
+        "dist/additional-methods.min.js",
+        "dist/jquery.validate.js",
+        "dist/jquery.validate.min.js"
+      ]
+    },
+    {
+      "provider": "cdnjs",
+      "library": "jquery-validation-unobtrusive@3.2.12",
+      "destination": "wwwroot/lib/jquery-validation-unobtrusive/",
+      "files": [
+        "jquery.validate.unobtrusive.min.js",
+        "jquery.validate.unobtrusive.js"
+      ]
+    },
+    {
+      "library": "bootstrap-datepicker@1.9.0",
+      "destination": "wwwroot/lib/bootstrap-datepicker/",
+      "files": [
+        "dist/css/bootstrap-datepicker.css",
+        "dist/css/bootstrap-datepicker.css.map",
+        "dist/css/bootstrap-datepicker.min.css",
+        "dist/js/bootstrap-datepicker.min.js",
+        "dist/js/bootstrap-datepicker.js",
+        "dist/locales/bootstrap-datepicker.fr.min.js",
+        "dist/locales/bootstrap-datepicker.es.min.js",
+        "dist/locales/bootstrap-datepicker.en-ZA.min.js",
+        "LICENSE"
+      ]
+    },
+    {
+      "library": "@fortawesome/fontawesome-free@6.1.1",
+      "destination": "wwwroot/lib/fontawesome-free/",
+      "files": [
+        "css/all.css",
+        "css/all.min.css",
+        "js/all.js",
+        "js/all.min.js",
+        "webfonts/fa-brands-400.ttf",
+        "webfonts/fa-brands-400.woff2",
+        "webfonts/fa-regular-400.ttf",
+        "webfonts/fa-regular-400.woff2",
+        "webfonts/fa-solid-900.ttf",
+        "webfonts/fa-solid-900.woff2",
+        "LICENSE.txt"
+      ]
+    },
+    {
+      "library": "node-waves@0.7.6",
+      "destination": "wwwroot/lib/node-waves/",
+      "files": [
+        "dist/waves.min.js.map",
+        "dist/waves.min.js",
+        "dist/waves.min.css",
+        "LICENSE"
+      ]
+    },
+    {
+      "library": "select2-bootstrap-5-theme@1.3.0",
+      "destination": "wwwroot/lib/select2-bootstrap-5-theme/",
+      "files": [
+        "LICENSE",
+        "dist/select2-bootstrap-5-theme.min.css"
+      ]
+    },
+    {
+      "library": "select2@4.1.0-rc.0",
+      "destination": "wwwroot/lib/select2/",
+      "files": [
+        "dist/css/select2.min.css",
+        "dist/js/select2.full.min.js",
+        "dist/js/select2.min.js",
+        "dist/js/i18n/en.js",
+        "dist/js/i18n/en.min.js",
+        "dist/js/i18n/es.js",
+        "dist/js/i18n/es.min.js",
+        "dist/js/i18n/fr.js",
+        "dist/js/i18n/fr.min.js",
+        "LICENSE.md"
+      ]
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "jstree@3.3.12",
+      "destination": "wwwroot/lib/jstree/",
+      "files": [
+        "LICENSE-MIT",
+        "dist/jstree.min.js",
+        "dist/themes/default/32px.png",
+        "dist/themes/default/40px.png",
+        "dist/themes/default/style.css",
+        "dist/themes/default/style.min.css",
+        "dist/themes/default/throbber.gif"
+      ]
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "inputmask@5.0.7",
+      "destination": "wwwroot/lib/inputmask/",
+      "files": [
+        "LICENSE.txt",
+        "dist/jquery.inputmask.min.js"
+      ]
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "sweetalert2@11.4.14",
+      "destination": "wwwroot/lib/sweetalert2/",
+      "files": [
+        "LICENSE",
+        "dist/sweetalert2.all.min.js",
+        "dist/sweetalert2.min.css",
+        "dist/sweetalert2.min.js"
+      ]
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "@sweetalert2/theme-bootstrap-4@5.0.11",
+      "destination": "wwwroot/lib/sweetalert2/dist/",
+      "files": [
+        "bootstrap-4.min.css"
+      ]
+    }
+  ]
+}

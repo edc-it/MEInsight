@@ -1,0 +1,120 @@
+﻿@model MEInsight.Entities.TLM.TLMDistributionDetail
+
+@{
+    ViewData["Title"] = @Localizer["TLM Distribution Detail"].Value + " " + @Localizer["Delete"].Value;
+}
+
+<h2>@Localizer["Delete"]</h2>
+
+<div>
+    <h4>@Localizer["TLM Distribution Detail"]</h4>
+    <hr />
+    @if (ViewBag.hasRelated == true)
+    {
+        <div class="alert alert-danger border-red-300 shadow-sm" role="alert">
+            <i class="fas fa-times-circle me-2"></i> @String.Format(Localizer.GetString("You cannot delete this record. You must first delete {0} related records."), ViewBag.RelatedCount ?? 0)
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger border-red-300 shadow-sm" role="alert">
+            <i class="fas fa-times-circle me-2"></i> @Localizer["Are you sure you want to delete this?"]
+        </div>
+    }
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RegistrationDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RegistrationDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TLMMaterials)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TLMMaterials.TLMMaterialCode)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TLMMaterials.TLMMaterialName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TLMMaterials.TLMMaterialName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.QuantityShipped)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.QuantityShipped)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.QuantityReceived)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.QuantityReceived)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Comment)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Comment)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TLMDistributions)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TLMDistributions.TrackingCode)
+        </dd>
+    </dl>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.CreatedDate?.ToLocalTime().ToString()
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ModifiedBy)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ModifiedBy)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.ModifiedDate?.ToLocalTime().ToString()
+        </dd>
+    </dl>
+
+    <form asp-action="Delete" id="main-form">
+        <input type="hidden" asp-for="TLMDistributionDetailId" />
+        <!-- button group start -->
+        <div class="mb-3 mt-5">
+            <a id="cancelbutton" class="btn btn-secondary me-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
+                <i class="fas fa-times"></i> @Localizer["Cancel"]
+            </a>
+            @if (ViewBag.hasRelated != true)
+            {
+                <button id="submitbutton" type="submit" value="Delete" class="btn btn-danger ladda-button" data-style="expand-left" data-spinner-color="white">
+                    <span class="ladda-label">
+                        <i class="fas fa-check"></i> @Localizer["Delete"]
+                    </span>
+                </button>
+            }
+        </div>
+        <!-- button group end -->
+    </form>
+</div>
+@section Styles {
+    @{await Html.RenderPartialAsync("_DeleteStylesPartial");}
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_DeleteScriptsPartial");}
+}

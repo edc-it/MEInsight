@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using MEInsight.Web.Extensions
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+
+    Guid? userOrganizacionId = (await UserManager.GetUserAsync(User))?.OrganizationId;
+
+    <li class="nav-item @Html.IsSelected(controller: "Organizations")">
+        <a class="nav-link text-white" asp-route-id="@userOrganizacionId" asp-controller="Organizations" asp-action="Index" asp-area="">
+            @Localizer["Enrollments"]
+        </a>
+    </li>
+
+    <li class="nav-item @Html.IsSelected(controller: "Participants")">
+        <a class="nav-link text-white" asp-route-id="@userOrganizacionId" asp-controller="Participants" asp-action="Index" asp-area="">
+            @Localizer["Participants"]
+        </a>
+    </li>
+
+    @*<li class="nav-item @Html.IsSelected(controller: "GroupEnrollments")">
+            <a class="nav-link text-white" asp-route-id="@userOrganizacionId" asp-controller="GroupEnrollments" asp-action="Index">
+                @Localizer["Groups"]
+            </a>
+        </li>
+    *@
+
+    <li asp-enabled="menuTLM" class="nav-item @Html.IsSelected(controller: "TLMDistributions") @Html.IsSelected(controller: "TLMDistributionDetails") @Html.IsSelected(controller: "TLMDistributionPeriods")">
+        <a class="nav-link text-white" asp-controller="TLMDistributionPeriods" asp-action="Index" title="Teaching and Learning Materials" asp-area="">
+            @Localizer["TLM"]
+        </a>
+    </li>
+}

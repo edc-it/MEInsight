@@ -1,0 +1,65 @@
+@model MEInsight.Entities.Reference.RefSex
+
+@{
+    ViewData["Title"] = @Localizer["Create"].Value + " " + @Localizer["Sex"].Value;
+}
+
+<h2>@Localizer["Create"]</h2>
+
+<h4>@Localizer["Sex"]</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6 col-sm-8">
+        <form asp-action="Create" id="main-form">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" name="ParentId" value="@ViewBag.ParentId" />
+            
+            <div class="mb-3" asp-enabled="RefSexId">
+                <!--input start-->
+                <label asp-for="RefSexId" class="form-label"></label>
+                <input asp-for="RefSexId" autocomplete="off" class="form-control" />
+                <span asp-validation-for="RefSexId" class="text-danger"></span>
+                <!--input end-->
+            </div>
+            
+            
+            <div class="mb-3" asp-enabled="Sex">
+                <!--input start-->
+                <label asp-for="Sex" class="form-label"></label>
+                <input asp-for="Sex" autocomplete="off" class="form-control" />
+                <span asp-validation-for="Sex" class="text-danger"></span>
+                <!--input end-->
+            </div>
+            
+            
+            <div class="mb-3" asp-enabled="SexId">
+                <!--input start-->
+                <label asp-for="SexId" class="form-label"></label>
+                <input asp-for="SexId" autocomplete="off" class="form-control" />
+                <span asp-validation-for="SexId" class="text-danger"></span>
+                <!--input end-->
+            </div>
+            
+            <!-- button group start -->
+            <div class="mb-3 text-end mt-5">
+                <a id="cancelbutton" class="btn btn-secondary me-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
+                    <i class="fas fa-times"></i> @Localizer["Cancel"]
+                </a>
+                <button id="submitbutton" type="submit" value="Create" class="btn btn-primary ladda-button" data-style="expand-left" data-spinner-color="white">
+                    <span class="ladda-label">
+                        <i class="fas fa-check"></i> @Localizer["Create"]
+                    </span>
+                </button>
+            </div>
+            <!-- button group end -->
+        </form>
+    </div>
+</div>
+
+@section Styles {
+    @{await Html.RenderPartialAsync("_CreateStylesPartial");}
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{await Html.RenderPartialAsync("_CreateScriptsPartial");}
+}

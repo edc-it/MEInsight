@@ -1,0 +1,8 @@
+[
+  {
+    "outputFile": "wwwroot/css/bootstrap-theme-endeavour.css",
+    "inputFile": "wwwroot/scss/bootstrap-theme-endeavour.scss",
+    "sourceMap": false,
+    "useNodeSass": false
+  }
+]

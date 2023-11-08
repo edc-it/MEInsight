@@ -1,0 +1,484 @@
+@model IEnumerable<MEInsight.Entities.Programs.GroupEnrollment>
+
+@{
+    ViewData["Title"] = @Localizer["Group Enrollments"].Value + " " + @Localizer["List"].Value;
+}
+
+<!--content start-->
+<div class="">
+    <!--heading start-->
+    <div class="card mb-3 heading-panel">
+        <div class="card-body">
+            <h2 class="card-title mt-3 fw-bold mb-0">@Localizer["Group Enrollments"]</h2>
+            <span class="card-text text-muted">@Localizer["List of"] @Localizer["Group Enrollments"]</span>
+        </div>
+    </div>
+    <!--heading end-->
+    <!--infopanel start-->
+    @await Component.InvokeAsync("InfoPanel", new { id = Convert.ToString(ViewBag.ParentId), controller = "GroupEnrollments" })
+    <!--infopanel end-->
+    <!--toolbars start-->
+    <div class="row mb-3">
+        <div class="col-sm-12 col-md-6 d-flex align-items-center justify-content-start">
+            <div id="toolbar" class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+
+
+                @if (ViewBag.Closed == true)
+                {
+                    <!--open button start-->
+                    <div policy="RequireMELRole" class="input-group input-group-sm mb-2 me-3" role="group" aria-label="closegroup">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white" id="basic-addon1">M&E:</span>
+                        </div>
+                        <button id="btn-open" type="button" class="btn btn-secondary btn-sm">
+                            <i class="fas fa-lock-alt"></i> @Localizer["Re-open Group"]
+                        </button>
+                    </div>
+                    <!--open button end-->
+                }
+                else
+                {
+                    <!--create start-->
+                    <div class="btn-group btn-group-sm mb-2" role="group" aria-label="creategroup">
+                        <!--button group start-->
+                        <!--create button dropdown start-->
+                        <div policy="RequireCreateRole" class="btn-group btn-group-sm" role="group">
+                            <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-plus"></i> @Localizer["Create New"]
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="btnGroup1Drop1">
+                                <!--dropdown items by ParticipantType-->
+                                @foreach (var item in (IEnumerable<SelectListItem>)ViewBag.ParticipantTypeId)
+                                {
+                                    <a asp-action="Create" asp-route-OrganizationId="@ViewBag.OrganizationId" asp-controller="Participants" asp-route-GroupId="@ViewBag.ParentId" asp-route-RefParticipantTypeId="@item.Value" role="button" class="btn btn-primary dropdown-item">
+                                        <i class="fas fa-plus"></i> @Localizer["New"] @item.Text
+                                    </a>
+                                }
+
+                            </div>
+                        </div>
+                        <!--enroll button start-->
+                        <a policy="RequireCreateRole" asp-route-id="@ViewBag.ParentId" asp-action="Create" class="btn btn-primary"><i class="fas fa-user-plus"></i> @Localizer["Add Existing"]</a>
+                        <!--enroll button end-->
+                        <!--create button dropdown end-->
+                        @*<a policy="RequireCreateRole" asp-route-id="@ViewBag.ParentId" asp-action="Enroll" class="btn btn-secondary"><i class="fas fa-user-plus"></i> @Localizer["Enroll Existing"]</a>*@
+                        <!--update attendance button start-->
+                        <a policy="RequireEditRole" asp-route-id="@ViewBag.ParentId" asp-action="Attendance" class="btn btn-secondary"><i class="far fa-calendar-alt"></i> @Localizer["Update Attendance"]</a>
+                        <!--update attendance button end-->
+
+                    </div>
+                    <!--create end-->
+                    <!--close button start-->
+                    <div policy="RequireMELOfficerRole" class="btn-group btn-group-sm mb-2" role="group" aria-label="closegroup">
+                        <button id="btn-close" type="button" class="btn btn-warning">
+                            <i class="fas fa-unlock-alt"></i> @Localizer["Close"]
+                        </button>
+                    </div>
+                    <!--close button end-->
+                }
+
+
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 d-flex align-items-center justify-content-end">
+            <!--datatable search start-->
+            <div class="input-group input-group-sm d-print-none mb-2">
+                <span class="input-group-text"><i class="fa fa-search" aria-hidden="true"></i></span>
+                <input id="searchbox" type="text" class="form-control" placeholder='@Localizer["Search"]' aria-describedby="searchbox">
+                <button id="search-button" class="btn btn-sm btn-secondary" type="button">@Localizer["Search"]</button>
+            </div>
+            <!--datatable search end-->
+        </div>
+    </div>
+    <!--toolbars end-->
+    <!--datatable start-->
+    <div class="row">
+        <div class="col-sm-12">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">@Localizer["Attendance"]</a>
+                </li>
+                @if (ViewBag.HasAssessements == true)
+                {
+                    <li class="nav-item">
+                        <a asp-route-id="@ViewBag.ParentId" asp-action="Index" asp-controller="GroupEvaluations" class="nav-link">@Localizer["Evaluations"]</a>
+                    </li>
+                }
+
+            </ul>
+            <!--table start-->
+            <table id="datatable" class="table table-sm table-hover table-striped responsive no-wrap w-100">
+                <thead>
+                    <tr>
+                        <th data-data="name" data-name="Name" data-responsivePriority="1">
+                            @Localizer["Name"]
+                        </th>
+                        <th data-data="participantCode" data-name="ParticipantCode">
+                            @Localizer["Participant Code"]
+                        </th>
+                        <th data-data="sex" data-name="Sex">
+                            @Localizer["Sex"]
+                        </th>
+                        <th data-data="attendance" data-name="Attendance">
+                            @Localizer["Attendance"]
+                        </th>
+                        <th data-data="enrollmentStatus" data-name="EnrollmentStatus">
+                            @Localizer["Enrollment Status"]
+                        </th>
+                        <th data-orderable="false" class="text-end d-print-none">@Localizer["Actions"]</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <!--table end-->
+        </div>
+    </div>
+    <!--datatable end-->
+    <!--datatable pagination start-->
+    <div class="row">
+        <div class="col-sm-12 col-md-5 d-flex align-items-center justify-content-start"><div class="" id="detailfooter"></div></div>
+        <div class="col-sm-12 col-md-7 d-flex align-items-center justify-content-end">
+            <div class="" id="datatables-pagination"></div>
+        </div>
+    </div>
+    <!--datatable pagination end-->
+    <!--footer buttons start-->
+    <div class="row mt-5">
+        <div class="col">
+        </div>
+        <div class="col text-end"></div>
+    </div>
+    <!--footer buttons end-->
+</div><!--content end-->
+@section Styles {
+    @{
+    <link href="~/lib/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/lib/sweetalert2/dist/bootstrap-4.min.css" rel="stylesheet" asp-append-version="true" />
+        await Html.RenderPartialAsync("_ListStylesPartial");
+    }
+    }
+    @section Scripts {
+    @{
+    <script src="~/lib/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js" asp-append-version="true"></script>
+    <script src="~/lib/sweetalert2/dist/sweetalert2.all.min.js" asp-append-version="true"></script>
+        await Html.RenderPartialAsync("_ServerListScriptsPartial");
+    }
+
+    <script>
+        $(document).ready(function() {
+            // Use Datatables.net Internationalization i18n
+            function getDataTablesLanguage() {
+                var cultureInfo = '@System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName';
+                if (cultureInfo) {
+                    var path = '/lib/datatables/i18n/' + cultureInfo + '.json';
+                }
+                return path;
+            }
+
+            var dataTableOptions = {
+                ajax: {
+                    url: "/api/GroupEnrollments/Paginated",
+                    type: "POST",
+                    datatype: "json",
+                    contentType: "application/x-www-form-urlencoded",
+                    data:
+                        function(d) {
+                            d.id = "@ViewBag.ParentId";
+                        },
+                    type: "POST",
+                    datatype: "json"
+                },
+                // Initial order (sort) to apply to the table
+                order: [],
+                // Allows changing the paging display length of the table
+                lengthChange: true,
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                // Enables the display of a 'processing' indicator when the table is being processed (e.g. a sort).
+                processing: true,
+                // Server side processing
+                serverSide: true,
+                filter: true,
+                orderMulti: false,
+
+                // ?
+                searchHighlight: true,
+                // Highlight the columns being ordered in the table's body
+                orderClasses: false,
+                // Pagination button display options
+                pagingType: "full_numbers",
+                // Change the initial page length (number of rows per page)
+                pageLength: 25,
+                dom:
+                    "<'row'"
+                    + "<'col-sm-12 col-md-6 justify-content-start'>" // f
+                    + "<'col-sm-12 col-md-6 justify-content-end'>" // B
+                    + ">"
+                    + "<'row'<'col-sm-12 d-flex align-items-center'tr>>"
+                    + "<'row'"
+                    + "<'col-sm-12 col-md-6 col-form-label 'l>"
+                    + "<'col-sm-12 col-md-6 justify-content-end'p>"
+                    + ">"
+                    + "<'row'<'col-sm-12'i>"
+                    + ">"
+                ,
+                responsive: true,
+                autoWidth: true,
+                columnDefs: [
+                    {
+                        targets:[0],
+                        className: 'text-bold'
+                    },
+                    {
+                        targets: [-1],
+                        data: null,
+                        width: '70px',
+                        className: 'text-end',
+                        render: function(data, type, row, meta) {
+                            var action = '<div class="btn-group btn-group-sm" role="group" aria-label="Actions">';
+                            action += '<td>';
+                            action += '<a href="/GroupEnrollments/Details/' + row.groupEnrollmentId + '" class="btn btn-link text-gray btn-sm d-print-none btn-action" data-container="body" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Details"]"><i class="fas fa-info-circle fa-sm" aria-hidden="true"></i></a>';
+                            @if (ViewBag.Closed != true)
+                            {
+                                @if (AuthorizationService.AuthorizeAsync(User, "RequireEditRole").GetAwaiter().GetResult().Succeeded)
+                                {
+                                    @:action += '<a href="/GroupEnrollments/Edit/' + row.groupEnrollmentId + '" class="btn btn-link text-gray btn-sm d-print-none btn-action" data-container="body" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Edit"]"><i class="fas fa-pencil-alt fa-sm" aria-hidden="true"></i></a>';
+                                }
+
+                                @if (AuthorizationService.AuthorizeAsync(User, "RequireEditRole").GetAwaiter().GetResult().Succeeded)
+                                {
+                                    @:action += '<a href="/Participants/Edit/' + row.participantId + '?GroupId=' + row.groupId + '" class="btn btn-link text-gray btn-sm d-print-none btn-action" data-container="body" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Edit"]"><i class="fas fa-user-edit fa-sm" aria-hidden="true"></i></a>';
+                                }
+
+                                @if (AuthorizationService.AuthorizeAsync(User, "RequireDeleteRole").GetAwaiter().GetResult().Succeeded)
+                                {
+                                    @:action += '<a href="/GroupEnrollments/Delete/' + row.groupEnrollmentId + '" class="btn btn-link text-gray btn-sm d-print-none btn-action" data-container="body" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="@Localizer["Delete"]"><i class="far fa-trash-alt fa-sm" aria-hidden="true"></i></a>';
+                                }
+
+                            }
+                            
+                            action += '</td>';
+                            action += '</div>';
+                            return action;
+                        }
+                    }],
+                buttons: {
+                    dom: {
+                        button: {
+                            className: 'btn btn-secondary btn-sm mb-2'
+                        }
+                    },
+                    buttons: [
+                        {
+                            extend: 'copy',
+                        },
+                        {
+                            extend: 'excelHtml5',
+                            charset: 'UTF-16LE',
+                            bom: true,
+                            fieldSeparator: ',',
+                            fieldBoundary: '"',
+                            exportOptions: {
+                                columns: ':not(:last-child)'
+                            },
+                            filename: function() {
+                                var date = new Date();
+                                var year = date.getFullYear();
+                                var month = date.getMonth() + 1;
+                                var day = date.getDate();
+                                var hour = date.getHours();
+                                var minutes = date.getMinutes();
+                                var datepart = ((year * 100 + month + 1) * 100 + day) + "_" + (hour * 100 + minutes);
+                                return document.title + "_" + datepart;
+                            }
+                        },
+                        {
+                            extend: 'colvis',
+                        },
+                        {
+                            extend: 'print',
+                            title: '',
+                            autoPrint: true,
+                            exportOptions: {
+                                columns: ':not(:last-child)',
+                                stripHtml: true,
+                                stripNewlines: true
+                            },
+                            customize: function(win) {
+                                $(win.document.body)
+                                    .css({
+                                        'font-size': '10pt',
+                                        'padding-top': '0px'
+                                    });
+
+                                $(win.document.body).find('table')
+                                    .addClass('compact table-bordered')
+                                    .css('font-size', 'inherit');
+
+                                //TODO: assign id
+                                var heading = $('.heading-panel').html();
+                                //TODO: assign id
+                                var panel = $('.info-panel').html();
+
+                                // PREPEND PRINT
+                                if (panel) {
+                                    $(win.document.body).prepend(
+                                        heading
+                                        + '<br>' +
+                                        panel
+                                    );
+                                }
+                                else {
+                                    $(win.document.body).prepend(
+                                        heading
+                                    );
+                                }
+
+                                // APPEND PRINT
+                                $(win.document.body).append(
+                                    $('.dataTables_info').text()
+                                    + '<br>'
+                                    + '@User?.Identity?.Name - @DateTime.Now.ToShortDateString()'
+                                );
+                            }
+                        }
+
+                    ]
+                },
+                language: {
+                    url: getDataTablesLanguage()
+                },
+                initComplete: function(settings, json) {
+                    // init buttons
+                    table.buttons(0, null)
+                        .container().appendTo('#toolbar');
+                }
+            }
+
+            //DATATABLE INIT AND OPTIONS
+            $.fn.dataTable.ext.classes.sPageButton = 'page-item btn-light'; // Change Pagination Button Class
+            $.fn.DataTable.ext.pager.numbers_length = 5;
+            $.fn.dataTable.ext.classes.sPaging = 'dataTables_paginate paging_ pagination-sm flex-wrap mt-2 mt-sm-auto';
+
+            var table = $('#datatable').DataTable(dataTableOptions);
+
+
+            // filter table
+            $("#search-button").on('click', function() {
+                var searchString = $('#searchbox').val();
+                table.search(searchString).draw();
+            });
+
+            //TOOLTIP INIT
+            $('[data-bs-toggle="tooltip"]').tooltip({
+                animation: true,
+                delay: { "show": 700, "hide": 100 },
+                trigger: 'hover'
+            });
+
+            $('.buttons-html5').tooltip({
+                animation: false,
+                delay: { "show": 700, "hide": 100 },
+                trigger: 'hover'
+            });
+
+            $('#btn-close').on('click', function() {
+                Swal.fire({
+                    title: '@Localizer["Complete Enrollment"]',
+                    html: '<div class="mb-3"><div class="form-text">@Localizer["You will set this group as Completed. Please enter Completion Date:"]</div>' +
+                        '<input id="close-date" data-date-autoclose="true" autocomplete="off" type="text" class="form-control" placeholder="@System.Globalization.DateTimeFormatInfo.CurrentInfo.ShortDatePattern" /></div>',
+                    stopKeydownPropagation: false,
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Confirm',
+                    width: '20rem',
+                    didOpen: () => {
+                        $('#close-date').datepicker();
+                    },
+                    preConfirm: () => {
+                        var selecteddate = $('#close-date').datepicker('getDate');
+                        if (selecteddate == null) {
+                            Swal.showValidationMessage(`Please select a date`)
+                        }
+                    },
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var selecteddate = document.getElementById("close-date").value;
+                        if (selecteddate != null) {
+                            $.ajax({
+                                type: "post",
+                                url: "/Requests/CloseGroup?id=" + "@ViewBag.ParentId" + "&completionDate=" + selecteddate,
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: function(data) {
+                                    if (data.status) {
+                                        Swal.fire({
+                                            text: 'Group closed',
+                                            confirmButtonText: 'Ok',
+                                            confirmButtonColor: '#3085d6',
+                                            width: '20rem'
+                                        }).then((result) => {
+                                            if (result.isConfirmed) {
+                                                window.location.replace("@Url.Action("Index", "GroupEnrollments", new { id = ViewBag.ParentId })");
+                                            }
+                                        })
+                                    }
+                                }
+                            });
+                        }
+                    } else if (result.isDenied) {
+                        Swal.fire('Changes are not saved', '', 'info')
+                    }
+                })
+            });
+
+            $('#btn-open').on('click', function() {
+                Swal.fire({
+                    title: '@Localizer["Re-open Group"]',
+                    text: "@Localizer["Are you sure you want to reopen this Group? Reopening will reset Completion status for all enrolled participants. Updating attendance will be allowed."]",
+                    stopKeydownPropagation: false,
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Confirm',
+                    width: '20rem'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: "post",
+                            url: "/Requests/OpenGroup?id=" + "@ViewBag.ParentId",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function(data) {
+                                if (data.status) {
+                                    Swal.fire({
+                                        text: 'Group open',
+                                        confirmButtonColor: '#3085d6',
+                                        confirmButtonText: 'Ok',
+                                        width: '20rem'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            window.location.replace("@Url.Action("Index", "GroupEnrollments", new { id = ViewBag.ParentId })");
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                        Swal.fire('Saved!', '', 'success');
+                    } else if (result.isDenied) {
+                        Swal.fire('Changes are not saved', '', 'info')
+                    }
+                })
+            });
+        });
+    </script>
+}

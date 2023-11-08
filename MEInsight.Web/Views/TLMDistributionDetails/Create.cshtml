@@ -1,0 +1,93 @@
+﻿@model MEInsight.Entities.TLM.TLMDistributionDetail
+
+@{
+    ViewData["Title"] = @Localizer["Create"].Value + " " + @Localizer["TLM Distribution Detail"].Value;
+}
+
+<h2>@Localizer["Create"]</h2>
+
+<h4>@Localizer["TLM Distribution Detail"]</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6 col-sm-8">
+        <form asp-action="Create" id="main-form">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" name="TLMDistributionId" value="@ViewBag.ParentId" />
+            <div class="mb-3" asp-enabled="RegistrationDate">
+                <!--date start-->
+                <label asp-for="RegistrationDate" class="form-label"></label>
+                <span class="text-muted small">(@System.Globalization.CultureInfo.CurrentUICulture)</span>
+                <!-- use class .date to enable datepicker -->
+                <div class="input-group mb-3 date">
+                    <input asp-for="RegistrationDate" autocomplete="off" type="text" class="form-control" placeholder="@System.Globalization.DateTimeFormatInfo.CurrentInfo.ShortDatePattern" />
+                    <span class="input-group-text input-group-addon">
+                        <i class="far fa-calendar-alt"></i>
+                    </span>
+                </div>
+                <span asp-validation-for="RegistrationDate" class="text-danger"></span>
+                <!--date end-->
+            </div>
+
+            <div class="mb-3" asp-enabled="TLMMaterialId">
+                <!--fk select start-->
+                <label asp-for="TLMMaterialId" class="form-label"></label>
+                <select asp-for="TLMMaterialId" class="form-control form-select select2" asp-items="ViewBag.TLMMaterialId">
+                    <option disabled selected></option>
+                </select>
+                <span asp-validation-for="TLMMaterialId" class="text-danger"></span>
+                <!--fk select end-->
+            </div>
+
+            <div class="mb-3" asp-enabled="QuantityShipped">
+                <!--input start-->
+                <label asp-for="QuantityShipped" class="form-label"></label>
+                <input asp-for="QuantityShipped" autocomplete="off" class="form-control" />
+                <span asp-validation-for="QuantityShipped" class="text-danger"></span>
+                <!--input end-->
+            </div>
+
+            <div class="mb-3" asp-enabled="QuantityReceived">
+                <!--input start-->
+                <label asp-for="QuantityReceived" class="form-label"></label>
+                <input asp-for="QuantityReceived" autocomplete="off" class="form-control" />
+                <span asp-validation-for="QuantityReceived" class="text-danger"></span>
+                <!--input end-->
+            </div>
+
+            <div class="mb-3" asp-enabled="Comment">
+                <!--input start-->
+                <label asp-for="Comment" class="form-label"></label>
+                <input asp-for="Comment" autocomplete="off" class="form-control" />
+                <span asp-validation-for="Comment" class="text-danger"></span>
+                <!--input end-->
+            </div>
+
+            <!-- button group start -->
+            <div class="mb-3 text-end mt-5">
+                <a id="cancelbutton" class="btn btn-secondary me-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
+                    <i class="fas fa-times"></i> @Localizer["Cancel"]
+                </a>
+                <button id="submitbutton" type="submit" value="Create" class="btn btn-primary ladda-button" data-style="expand-left" data-spinner-color="white">
+                    <span class="ladda-label">
+                        <i class="fas fa-check"></i> @Localizer["Create"]
+                    </span>
+                </button>
+            </div>
+            <!-- button group end -->
+        </form>
+    </div>
+</div>
+
+@section Styles {
+    @{
+        await Html.RenderPartialAsync("_CreateStylesPartial");
+    }
+    }
+    @section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    @{
+        await Html.RenderPartialAsync("_CreateScriptsPartial");
+    }
+    }

@@ -1,0 +1,57 @@
+﻿@model MEInsight.Web.Areas.Settings.Models.ViewModels.UsersResetPasswordViewModel
+
+@{
+    ViewData["Title"] = @Localizer["Reset Password"].Value + " " + @Localizer["User"].Value;
+}
+
+<h2>@Localizer["Edit"]</h2>
+
+<h4>@Localizer["User"]</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6 col-sm-8">
+        <!--form start-->
+        <form asp-action="Reset" id="main-form">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" name="ParentId" value="@ViewBag.ParentId" />
+            <input type="hidden" asp-for="Email" />
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-control" autocomplete="off" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Password" class="form-label"></label>
+                <input asp-for="Password" class="form-control" autocomplete="off" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="ConfirmPassword" class="form-label"></label>
+                <input asp-for="ConfirmPassword" class="form-control" autocomplete="off" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+
+            <!-- button group start -->
+            <div class="mb-3 text-end mt-5">
+                <a id="cancelbutton" class="btn btn-secondary me-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
+                    <i class="fas fa-times"></i> @Localizer["Cancel"]
+                </a>
+                <button id="submitbutton" type="submit" value="Reset" class="btn btn-primary ladda-button" data-style="expand-left" data-spinner-color="white">
+                    <span class="ladda-label">
+                        <i class="fas fa-redo"></i> @Localizer["Reset"]
+                    </span>
+                </button>
+            </div>
+            <!-- button group end -->
+        </form>
+        <!--form end-->
+    </div>
+</div>
+
+@section Styles {
+    @{await Html.RenderPartialAsync("_EditStylesPartial");}
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{await Html.RenderPartialAsync("_EditScriptsPartial");}
+}

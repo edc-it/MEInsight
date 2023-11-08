@@ -1,0 +1,43 @@
+@model MEInsight.Entities.Reference.RefTLMLanguage
+
+@{
+    ViewData["Title"] = @Localizer["TLM Language"].Value + " " + @Localizer["Details"].Value;
+}
+
+<h2>@Localizer["Details"]</h2>
+
+<div>
+    <h4>@Localizer["TLM Language"]</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TLMLanguageCode)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TLMLanguageCode)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TLMLanguage)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TLMLanguage)
+        </dd>
+    </dl>
+
+    <hr />
+    <dl class="row">
+    </dl>
+
+
+</div>
+<div>
+        <!--footer buttons start-->
+        <div class="row mt-5">
+            <div class="col">
+                <a asp-action="Index" asp-route-id="@ViewBag.ParentId" class="btn btn-secondary me-1"><i class="fas fa-chevron-left"></i> @Localizer["Back to List"]</a>
+                <a policy="RequireEditRole" asp-action="Edit" asp-route-id="@Model.RefTLMLanguageId" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> @Localizer["Edit"]</a>
+            </div>
+            <div class="col text-end"></div>
+        </div>
+        <!--footer buttons end-->
+</div>

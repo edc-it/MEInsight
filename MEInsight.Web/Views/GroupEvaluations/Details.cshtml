@@ -1,0 +1,91 @@
+﻿@model MEInsight.Entities.Programs.GroupEvaluation
+
+@{
+    ViewData["Title"] = @Localizer["GroupEvaluation"].Value + " " + @Localizer["Details"].Value;
+}
+
+<h2>@Localizer["Details"]</h2>
+
+<div>
+    <h4>@Localizer["GroupEvaluation"]</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EvaluationDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EvaluationDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Score)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Score)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StatusDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StatusDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.GroupEnrollments)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.GroupEnrollments.GroupEnrollmentId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ProgramAssessments)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ProgramAssessments.AssessmentName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EvaluationStatus)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EvaluationStatus.EvaluationStatus)
+        </dd>
+    </dl>
+
+    <hr />
+    <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CreatedBy)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Model.CreatedDate?.ToLocalTime().ToString()
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ModifiedBy)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ModifiedBy)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ModifiedDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Model.ModifiedDate?.ToLocalTime().ToString()
+            </dd>
+    </dl>
+
+
+</div>
+<div>
+        <!--footer buttons start-->
+        <div class="row mt-5">
+            <div class="col">
+                <a asp-action="Index" asp-route-id="@ViewBag.ParentId" class="btn btn-secondary me-1"><i class="fas fa-chevron-left"></i> @Localizer["Back to List"]</a>
+                <a policy="RequireEditRole" asp-action="Edit" asp-route-id="@Model.GroupEvaluationId" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> @Localizer["Edit"]</a>
+            </div>
+            <div class="col text-end"></div>
+        </div>
+        <!--footer buttons end-->
+</div>

@@ -1,0 +1,92 @@
+﻿@model MEInsight.Entities.Programs.GroupEvaluation
+
+@{
+    ViewData["Title"] = @Localizer["Edit"].Value + " " + @Localizer["GroupEvaluation"].Value;
+}
+
+<h2>@Localizer["Edit"]</h2>
+
+<h4>@Localizer["GroupEvaluation"]</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6 col-sm-8">
+        <!--form start-->
+        <form asp-action="Edit" id="main-form">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" name="ParentId" value="@ViewBag.ParentId" />
+            <input type="hidden" asp-for="GroupEvaluationId" />
+            <div class="mb-3" asp-enabled="GroupEnrollmentId">
+                <!--fk select start-->
+                <label asp-for="GroupEnrollmentId" class="form-label"></label>
+                <select asp-for="GroupEnrollmentId" class="form-control form-select" asp-items="ViewBag.GroupEnrollmentId">
+                </select>
+                <span asp-validation-for="GroupEnrollmentId" class="text-danger"></span>
+                <!--fk select end-->
+            </div>
+            
+            <div class="mb-3" asp-enabled="EvaluationDate">
+                <!--input start-->
+                <label asp-for="EvaluationDate" class="form-label"></label>
+                <input asp-for="EvaluationDate" autocomplete="off" class="form-control" />
+                <span asp-validation-for="EvaluationDate" class="text-danger"></span>
+                <!--input end-->
+            </div>
+            
+            <div class="mb-3" asp-enabled="ProgramAssessmentId">
+                <!--fk select start-->
+                <label asp-for="ProgramAssessmentId" class="form-label"></label>
+                <select asp-for="ProgramAssessmentId" class="form-control form-select" asp-items="ViewBag.ProgramAssessmentId">
+                </select>
+                <span asp-validation-for="ProgramAssessmentId" class="text-danger"></span>
+                <!--fk select end-->
+            </div>
+            
+            <div class="mb-3" asp-enabled="Score">
+                <!--input start-->
+                <label asp-for="Score" class="form-label"></label>
+                <input asp-for="Score" autocomplete="off" class="form-control" />
+                <span asp-validation-for="Score" class="text-danger"></span>
+                <!--input end-->
+            </div>
+            
+            <div class="mb-3" asp-enabled="StatusDate">
+                <!--input start-->
+                <label asp-for="StatusDate" class="form-label"></label>
+                <input asp-for="StatusDate" autocomplete="off" class="form-control" />
+                <span asp-validation-for="StatusDate" class="text-danger"></span>
+                <!--input end-->
+            </div>
+            
+            <div class="mb-3" asp-enabled="RefEvaluationStatusId">
+                <!--fk select start-->
+                <label asp-for="RefEvaluationStatusId" class="form-label"></label>
+                <select asp-for="RefEvaluationStatusId" class="form-control form-select" asp-items="ViewBag.RefEvaluationStatusId">
+                </select>
+                <span asp-validation-for="RefEvaluationStatusId" class="text-danger"></span>
+                <!--fk select end-->
+            </div>
+            
+            <!-- button group start -->
+            <div class="mb-3 text-end mt-5">
+                <a id="cancelbutton" class="btn btn-secondary me-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
+                    <i class="fas fa-times"></i> @Localizer["Cancel"]
+                </a>
+                <button id="submitbutton" type="submit" value="Save" class="btn btn-primary ladda-button" data-style="expand-left" data-spinner-color="white">
+                    <span class="ladda-label">
+                        <i class="fas fa-check"></i> @Localizer["Save"]
+                    </span>
+                </button>
+            </div>
+            <!-- button group end -->
+        </form>
+        <!--form end-->
+    </div>
+</div>
+
+@section Styles {
+    @{await Html.RenderPartialAsync("_EditStylesPartial");}
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{await Html.RenderPartialAsync("_EditScriptsPartial");}
+}

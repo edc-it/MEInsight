@@ -1,0 +1,161 @@
+﻿@model IEnumerable<MEInsight.Entities.Core.School>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index MUNIR</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SchoolCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PartnerId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsClusterCenter)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HeadTeacher)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SchoolTypes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SchoolLocations)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SchoolLanguages)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SchoolAdministrationTypes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SchoolClusters)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SchoolStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegistrationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrganizationCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrganizationName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contact)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Latitude)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Longitude)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsOrganizationUnit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParentOrganizations)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrganizationTypes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Locations)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SchoolCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PartnerId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsClusterCenter)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HeadTeacher)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SchoolTypes.SchoolType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SchoolLocations.SchoolLocation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SchoolLanguages.SchoolLanguage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SchoolAdministrationTypes.SchoolAdministrationType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SchoolClusters.SchoolCluster)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SchoolStatus.SchoolStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegistrationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrganizationCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrganizationName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Contact)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Latitude)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Longitude)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsOrganizationUnit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParentOrganizations.OrganizationCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrganizationTypes.OrganizationType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Locations.RefLocationId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.OrganizationId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.OrganizationId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.OrganizationId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

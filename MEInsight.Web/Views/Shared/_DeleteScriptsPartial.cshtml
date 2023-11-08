@@ -1,0 +1,51 @@
+﻿<script src="~/lib/sweetalert2/dist/sweetalert2.all.min.js" asp-append-version="true"></script>
+
+<script>
+    $(document).ready(function() {
+
+        // Disables Submit button after one click if form is valid
+        // sets "loading..." Ladda-button styles
+        // https://stackoverflow.com/questions/10111907/how-to-focus-invalid-fields-with-jquery-validate
+        $('#submitbutton')
+            .on('click', function(e) {
+                // prevents default submit
+                e.preventDefault();
+                // activates button 'loading..' style and disables submit button after one click
+                //TODO
+                //$('.spinner').removeClass('d-none');
+                //$('#submitbutton').addClass('disabled');
+                //// disable cancel button after submit
+                //$('#cancelbutton').addClass('disabled');
+                //TODO --replace with
+                //    <!-- button group start -->
+                //<div class="form-group text-right mt-5">
+                //    <a id="cancelbutton" class="btn btn-secondary mr-2" asp-action="Index">
+                //        <i class="fas fa-times"></i> Cancel
+                //    </a>
+                //    <button id="submitbutton" type="submit" value="Create" class="btn btn-primary">
+                //        <span class="d-none spinner spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                //        <i class="fas fa-check"></i> Create
+                //    </button>
+                //</div>
+                //<!-- button group end -->
+
+                Swal.fire({
+                    toast: true,
+                    title: '@Localizer["Are you sure?"]',
+                    text: "Deleting this record will delete ALL related records. This cannot be undone.",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var form = $('#main-form');
+                        form.submit();
+                    }
+                });
+
+
+            });
+    });
+</script>

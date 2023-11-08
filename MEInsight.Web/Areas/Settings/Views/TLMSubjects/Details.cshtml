@@ -1,0 +1,43 @@
+@model MEInsight.Entities.Reference.RefTLMSubject
+
+@{
+    ViewData["Title"] = @Localizer["TLM Subject"].Value + " " + @Localizer["Details"].Value;
+}
+
+<h2>@Localizer["Details"]</h2>
+
+<div>
+    <h4>@Localizer["TLM Subject"]</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TLMSubjectCode)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TLMSubjectCode)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TLMSubject)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TLMSubject)
+        </dd>
+    </dl>
+
+    <hr />
+    <dl class="row">
+    </dl>
+
+
+</div>
+<div>
+        <!--footer buttons start-->
+        <div class="row mt-5">
+            <div class="col">
+                <a asp-action="Index" asp-route-id="@ViewBag.ParentId" class="btn btn-secondary me-1"><i class="fas fa-chevron-left"></i> @Localizer["Back to List"]</a>
+                <a policy="RequireEditRole" asp-action="Edit" asp-route-id="@Model.RefTLMSubjectId" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> @Localizer["Edit"]</a>
+            </div>
+            <div class="col text-end"></div>
+        </div>
+        <!--footer buttons end-->
+</div>

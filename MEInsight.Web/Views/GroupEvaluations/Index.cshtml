@@ -1,0 +1,239 @@
+﻿@model List<MEInsight.Entities.Programs.GroupEvaluation>
+
+@{
+    ViewData["Title"] = @Localizer["Group Evaluations"].Value + " " + @Localizer["List"].Value;
+}
+
+<!--content start-->
+<div class="">
+    <!--heading start-->
+    <div class="card mb-3 heading-panel">
+        <div class="card-body">
+            <h2 class="card-title mt-3 fw-bold mb-0">@Localizer["Group Evaluations"]</h2>
+            <span class="card-text text-muted">@Localizer["List of"] @Localizer["Group Evaluations"]</span>
+        </div>
+    </div>
+    <!--heading end-->
+    @await Component.InvokeAsync("InfoPanel", new { id = Convert.ToString(ViewBag.ParentId), controller = "GroupEnrollments" })
+    <!--toolbars start-->
+    <div class="row mb-3">
+        <div class="col-sm-12 col-md-6 d-flex align-items-center justify-content-start">
+            <div id="toolbar" class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+
+                @if (ViewBag.Closed == true)
+                {
+                    <!--open button start-->
+                    <div policy="RequireMELRole" class="input-group input-group-sm mb-2 me-3" role="group" aria-label="closegroup">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white" id="basic-addon1">M&E:</span>
+                        </div>
+                        <button id="btn-open" type="button" class="btn btn-secondary btn-sm">
+                            <i class="fas fa-lock-alt"></i> @Localizer["Re-open Group"]
+                        </button>
+                    </div>
+                    <!--open button end-->
+                }
+                else
+                {
+                    <!--create start-->
+                    <div class="btn-group btn-group-sm mb-2" role="group" aria-label="creategroup">
+                        <!--button group start-->
+                        <!--create button dropdown start-->
+                        <div policy="RequireCreateRole" class="btn-group btn-group-sm" role="group">
+                            <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-plus"></i> @Localizer["Create New"]
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="btnGroup1Drop1">
+                                <!--dropdown items by ParticipantType-->
+                                @foreach (var item in (IEnumerable<SelectListItem>)ViewBag.ParticipantTypeId)
+                                {
+                                    <a asp-action="Create" asp-route-OrganizationId="@ViewBag.OrganizationId" asp-controller="Participants" asp-route-GroupId="@ViewBag.ParentId" asp-route-RefParticipantTypeId="@item.Value" role="button" class="btn btn-primary dropdown-item">
+                                        <i class="fas fa-plus"></i> @Localizer["New"] @item.Text
+                                    </a>
+                                }
+
+                            </div>
+                        </div>
+                        <!--create button dropdown end-->
+                        @*<a policy="RequireCreateRole" asp-route-id="@ViewBag.ParentId" asp-action="Enroll" class="btn btn-secondary"><i class="fas fa-user-plus"></i> @Localizer["Enroll Existing"]</a>*@
+                        <!--update evaluations button start-->
+                        <a policy="RequireEditRole" asp-route-id="@ViewBag.ParentId" asp-action="Score" class="btn btn-secondary"><i class="fas fa-certificate"></i> @Localizer["Update Evaluations"]</a>
+                        <!--update evaluations button end-->
+                    </div>
+
+                    <!--close button start-->
+                    <div policy="RequireMELOfficerRole" class="btn-group btn-group-sm mb-2" role="group" aria-label="closegroup">
+                        <button id="btn-close" type="button" class="btn btn-warning">
+                            <i class="fas fa-unlock-alt"></i> @Localizer["Close"]
+                        </button>
+                    </div>
+                    <!--close button end-->
+                }
+
+
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 d-flex align-items-center justify-content-end">
+            <!--datatable search start-->
+            <div class="input-group input-group-sm d-print-none mb-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-search" aria-hidden="true"></i></span>
+                </div>
+                <input id="searchbox" type="text" class="form-control" placeholder='@Localizer["Search"]' aria-describedby="searchbox">
+            </div>
+            <!--datatable search end-->
+        </div>
+    </div>
+    <!--toolbars end-->
+    <!--datatable start-->
+    <div class="row">
+        <div class="col-sm-12">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a asp-route-id="@ViewBag.ParentId" asp-action="Index" asp-controller="GroupEnrollments" class="nav-link">@Localizer["Attendance"]</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">@Localizer["Evaluations"]</a>
+                </li>
+            </ul>
+            <!--table start-->
+            <table id="datatable" class="table table-sm table-hover table-striped responsive no-wrap w-100">
+                <thead>
+                    <tr>
+                        <th data-priority="1">
+                            @Localizer["Name"]
+                        </th>
+                        <th>
+                            @Localizer["Participant Code"]
+                        </th>
+                        <th>
+                            @Localizer["Sex"]
+                        </th>
+                        @for (int d = 0; d < Model.Select(x => x.ProgramAssessments).Distinct().Count(); d++)
+                        {
+                            <th data-priority="1" data-orderable="false" data-width="150px" class="text-end pe-0">
+                                <div style="white-space:normal;">
+                                    <span style="cursor:default;" title="@Html.Raw(Model[d].ProgramAssessments.AssessmentName)">
+                                        @Html.Raw(Model[d].ProgramAssessments.AssessmentName)
+                                    </span>
+                                </div>
+                            </th>
+                        }
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ var participant = Model.Select(x => new
+                        {
+                            x.GroupEnrollments
+                        }).Distinct().ToList();
+                    }
+                    @{int f = 0; }
+                    @for (int d = 0; d < participant.Count(); d++)
+                    {
+                        <tr>
+                            <td class="text-uppercase text-bold">
+                                @Html.Raw(participant[d].GroupEnrollments.Participants.Name)
+                            </td>
+                            <td>
+                                @Html.Raw(participant[d].GroupEnrollments.Participants.ParticipantCode)
+                            </td>
+                            <td>
+                                @Html.Raw(participant[d].GroupEnrollments.Participants.Sex.SexId)
+                            </td>
+                            @{ var programAssessment = Model.Where(x => x.GroupEnrollments.GroupEnrollmentId == participant[d].GroupEnrollments.GroupEnrollmentId).ToList(); }
+                            @for (int i = 0; i < programAssessment.Count; i++)
+                            {
+                                <td id="marks" class="text-end">
+                                    @Html.Raw(programAssessment[i].Score)
+                                </td>
+                                f++;
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <!--table end-->
+        </div>
+    </div>
+    <!--datatable end-->
+    <!--datatable pagination start-->
+    <div class="row">
+        <div class="col-sm-12 col-md-5 d-flex align-items-center justify-content-start"><div class="" id="detailfooter"></div></div>
+        <div class="col-sm-12 col-md-7 d-flex align-items-center justify-content-end">
+            <div class="" id="datatables-pagination"></div>
+        </div>
+    </div>
+    <!--datatable pagination end-->
+    <!--footer buttons start-->
+    <div class="row mt-5">
+        <div class="col">
+        </div>
+        <div class="col text-end"></div>
+    </div>
+    <!--footer buttons end-->
+</div><!--content end-->
+
+@section Styles {
+    @{await Html.RenderPartialAsync("_ListStylesPartial");}
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ListScriptsPartial");}
+
+    <script>
+        $(document).ready(function () {
+            var closePrompt = bootbox.prompt({
+                show: false,
+                size: "medium",
+                title: '@Localizer["Complete Enrollment"]',
+                message: "@Localizer["You will set this group as Completed. Please enter Completion Date:"]",
+                inputType: "date",
+                required: true,
+                callback: function (result) {
+                    if (result) {
+                        $.ajax({
+                            type: "post",
+                            url: "/Requests/CloseGroup?id=" + "@ViewBag.ParentId" + "&completionDate=" + result,
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (data) {
+                                if (data.status) {
+                                    window.location.replace("@Url.Action("Index", "GroupEvaluations", new { id = ViewBag.ParentId })");
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+
+            $('#btn-close').on('click', function () {
+                closePrompt.modal('show');
+            });
+
+
+            $('#btn-open').on('click', function () {
+                bootbox.confirm({
+                    size: "medium",
+                    title: '@Localizer["Re-open Group"]',
+                    message: "@Localizer["Are you sure you want to reopen this Group? Reopening will reset Completion status for all enrolled participants. Updating attendance will be allowed."]",
+                    callback: function (result) {
+                        if (result) {
+                            $.ajax({
+                                type: "post",
+                                url: "/Requests/OpenGroup?id=" + "@ViewBag.ParentId",
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: function (data) {
+                                    if (data.status) {
+                                        window.location.replace("@Url.Action("Index", "GroupEvaluations", new { id = ViewBag.ParentId })");
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+
+        });
+    </script>
+}

@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Data Imports";
+}
+
+<h1>Data Import</h1>
+
+<div class="row">
+    <div class="col-sm-5">
+        <div class="card ">
+            <div class="card-header">
+                @Localizer["Upload import template"]
+            </div>
+            <div class="card-body">
+                <small class="text-muted card-text">@Localizer["Formats accepted: .xlsx"]</small><br />
+                <small class="text-muted card-text">@Localizer["Max file size: 50MB"]</small><br />
+                <form method="post" enctype="multipart/form-data" asp-controller="DataImports" asp-action="Upload">
+                    @*<input type="hidden" name="id" value="@Model.GroupId" />*@
+                    <label for="formFile" class="form-label">Import file</label>
+                    <div class="input-group mb-3">
+                        <input class="form-control" type="file" name="file" id="formFile" placeholder="@Localizer["Choose file"]">
+                        <button class="btn btn-secondary" type="submit" id="button-addon2"><i class="fas fa-upload"></i> @Localizer["Upload"]</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

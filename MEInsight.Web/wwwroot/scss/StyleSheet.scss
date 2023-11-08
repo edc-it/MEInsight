@@ -1,0 +1,213 @@
+﻿/*
+  OPCIONES:
+    COLORES:
+      - blue → azul
+      - indigo → morado
+      - purple → violeta
+      - pink → rosa
+      - red → rojo
+      - orange → naranja
+      - yellow → amarillo
+      - green → verde
+      - teal → verde azulado
+      - cyan → cian
+      - gray → gris
+      - white → blanco/negro (diferente del gris)
+      - dark → oscuro
+      - light → claro
+      - gmz → paleta de Grupo Mezzana
+      - evp → paleta de Express Vip Pizzas
+      - evs → paleta de Express Vip Sweets
+      - eve → paleta de Express Vip Events
+      - msk → paleta de Masakali Pizza
+
+    INTENSIDADES:
+      - 100 → Más brillo, menos saturación.
+      - 200
+      - 300
+      - 400
+      - 500
+      - 600
+      - 700
+      - 800
+      - 900 → Menos brillo, más saturación.
+
+    ELEMENTOS:
+      - text → color de texto
+      - bg → color de fondo
+      - border → color de borde
+*/
+
+$white: #fff !default;
+$black: #000 !default;
+
+$blue: #007bff !default;
+$indigo: #6610f2 !default;
+$purple: #6f42c1 !default;
+$pink: #e83e8c !default;
+$red: #dc3545 !default;
+$orange: #fd7e14 !default;
+$yellow: #ffc107 !default;
+$green: #28a745 !default;
+$teal: #20c997 !default;
+$cyan: #17a2b8 !default;
+$gray: #BAB1AD !default;
+$gray-dark: #403734 !default;
+$dark: #212529 !default;
+$light: #f8f9fa !default;
+$gmz: #546122 !default;
+$evp: #3c974c !default;
+$evs: #E0457B !default;
+$eve: #d38851 !default;
+$msk: #546122 !default;
+
+$color-variants: ( 100: -10%, 200: -25%, 300: -50%, 400: -75%, 500: 100%, 600: 75%, 700: 50%, 800: 25%, 900: 15% );
+
+$colors: () !default;
+$colors: map-merge(( "blue": $blue, "indigo": $indigo, "purple": $purple, "pink": $pink, "red": $red, "orange": $orange, "yellow": $yellow, "green": $green, "teal": $teal, "cyan": $cyan, "white": $white, "gray": $gray, "gray-dark": $gray-dark, "dark": $dark, "light": $light, "eve": $eve, "gmz": $gmz, "evp": $evp, "evs": $evs, "msk": $msk ), $colors);
+
+//  Add color variants to $colors
+@each $color-name, $color in $colors {
+    @each $variant-name, $percent in $color-variants {
+        $mix-color: if($percent < 0%, white, black);
+        $colors: map-merge($colors, ($color-name+'-'+$variant-name: mix($color, $mix-color, abs($percent))));
+    }
+}
+
+/* remap grays */
+
+$gray-100: map-get($colors, gray-100);
+$gray-200: map-get($colors, gray-200);
+$gray-300: map-get($colors, gray-300);
+$gray-400: map-get($colors, gray-400);
+$gray-500: map-get($colors, gray-500);
+$gray-600: map-get($colors, gray-600);
+$gray-700: map-get($colors, gray-700);
+$gray-800: map-get($colors, gray-800);
+$gray-900: map-get($colors, gray-900);
+
+$enable-hover-media-query: true;
+
+/* Bootstrap 4 mixins - no change */
+
+@mixin hover {
+    // TODO: re-enable along with mq4-hover-shim
+    //  @if $enable-hover-media-query {
+    //    // See Media Queries Level 4: https://drafts.csswg.org/mediaqueries/#hover
+    //    // Currently shimmed by https://github.com/twbs/mq4-hover-shim
+    //    @media (hover: hover) {
+    //      &:hover { @content }
+    //    }
+    //  }
+    //  @else {
+    &:hover {
+        @content;
+    }
+    //  }
+}
+
+@mixin hover-focus {
+    @if $enable-hover-media-query {
+        &:focus {
+            @content;
+        }
+
+        @include hover {
+            @content;
+        }
+    }
+    @else {
+        &:focus,
+        &:hover {
+            @content;
+        }
+    }
+}
+
+@mixin text-emphasis-variant($parent, $color) {
+    #{$parent} {
+        color: $color !important;
+    }
+
+    a#{$parent} {
+        @include hover-focus {
+            color: darken($color, 10%) !important;
+        }
+    }
+}
+
+@mixin bg-variant($parent, $color) {
+    #{$parent} {
+        background-color: $color !important;
+    }
+
+    a#{$parent} {
+        @include hover-focus {
+            background-color: darken($color, 10%) !important;
+        }
+    }
+}
+
+// Color contrast - from Bootstrap 4 utilities - no change
+@function color-yiq($color) {
+    $r: red($color);
+    $g: green($color);
+    $b: blue($color);
+
+    $yiq: (($r * 299) + ($g * 587) + ($b * 114)) / 1000;
+
+    @if ($yiq >= 150) {
+        @return $dark;
+    }
+    @else {
+        @return $light;
+    }
+}
+
+/* from Bootstrap 4 utilities - replaced $theme-colors with $colors */
+
+// text colors
+@each $color, $value in $colors {
+    @include text-emphasis-variant(".text-#{$color}", $value);
+}
+
+// background colors
+@each $color, $value in $colors {
+    @include bg-variant(".bg-#{$color}", $value);
+}
+
+// background text contrast
+@each $color, $value in $colors {
+    .bg-#{$color} {
+        color: color-yiq($value);
+    }
+}
+
+// border colors
+@each $color, $value in $colors {
+    .border-#{$color} {
+        border-color: $value !important;
+    }
+}
+
+// button colors
+@each $color, $value in $colors {
+    .btn-#{$color} {
+        background-color: $value !important;
+        border-color: $value !important;
+        color: color-yiq($value);
+    }
+
+    .btn-#{$color}:hover {
+        background-color: darken($value, 5%) !important;
+        border-color: darken($value, 10%) !important;
+        color: color-yiq($value);
+    }
+
+    .btn-#{$color}:focus {
+        background-color: darken($value, 10%) !important;
+        border-color: darken($value, 15%) !important;
+        color: color-yiq(darken($value, 10%));
+        box-shadow: 0 0 0 0.25rem rgb($value, .5);
+    }
+}

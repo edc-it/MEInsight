@@ -1,0 +1,134 @@
+﻿@model MEInsight.Entities.Programs.ProgramAssessment
+
+@{
+    ViewData["Title"] = @Localizer["Create"].Value + " " + @Localizer["Program Assessment"].Value;
+}
+
+<h2>@Localizer["Create"]</h2>
+
+<h4>@Localizer["Program Assessment"]</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6 col-sm-8">
+        <form asp-action="Create" id="main-form">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" name="ParentId" value="@ViewBag.ParentId" />
+            <div class="mb-3" asp-enabled="ProgramId">
+                <!--fk select start-->
+                <label asp-for="ProgramId" class="form-label"></label>
+                <select asp-for="ProgramId" class ="form-control form-select" asp-items="ViewBag.ProgramId">
+                    <option disabled selected></option>
+                </select>
+                <span asp-validation-for="ProgramId" class="text-danger"></span>
+                <!--fk select end-->
+            </div>
+            
+            <div class="mb-3" asp-enabled="AssessmentName">
+                <!--input start-->
+                <label asp-for="AssessmentName" class="form-label"></label>
+                <input asp-for="AssessmentName" autocomplete="off" class="form-control" />
+                <span asp-validation-for="AssessmentName" class="text-danger"></span>
+                <!--input end-->
+            </div>
+            
+            <div class="mb-3" asp-enabled="RefAssessmentTypeId">
+                <!--fk select start-->
+                <label asp-for="RefAssessmentTypeId" class="form-label"></label>
+                <select asp-for="RefAssessmentTypeId" class ="form-control form-select" asp-items="ViewBag.RefAssessmentTypeId">
+                    <option disabled selected></option>
+                </select>
+                <span asp-validation-for="RefAssessmentTypeId" class="text-danger"></span>
+                <!--fk select end-->
+            </div>
+            
+            <div class="mb-3" asp-enabled="Description">
+                <!--textarea start-->
+                <label asp-for="Description" class="form-label"></label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+                <!--textarea end-->
+            </div>
+            
+            <div class="mb-3" asp-enabled="Max">
+                <!--input start-->
+                <label asp-for="Max" class="form-label"></label>
+                <input asp-for="Max" autocomplete="off" class="form-control" />
+                <span asp-validation-for="Max" class="text-danger"></span>
+                <!--input end-->
+            </div>
+            
+            <div class="mb-3" asp-enabled="Min">
+                <!--input start-->
+                <label asp-for="Min" class="form-label"></label>
+                <input asp-for="Min" autocomplete="off" class="form-control" />
+                <span asp-validation-for="Min" class="text-danger"></span>
+                <!--input end-->
+            </div>
+            
+            <div class="mb-3" asp-enabled="RefAttendanceUnitId">
+                <!--fk select start-->
+                <label asp-for="RefAttendanceUnitId" class="form-label"></label>
+                <select asp-for="RefAttendanceUnitId" class ="form-control form-select" asp-items="ViewBag.RefAttendanceUnitId">
+                    <option disabled selected></option>
+                </select>
+                <span asp-validation-for="RefAttendanceUnitId" class="text-danger"></span>
+                <!--fk select end-->
+            </div>
+            
+            <div class="mb-3" asp-enabled="MaximumScore">
+                <!--input start-->
+                <label asp-for="MaximumScore" class="form-label"></label>
+                <input asp-for="MaximumScore" autocomplete="off" class="form-control" />
+                <span asp-validation-for="MaximumScore" class="text-danger"></span>
+                <!--input end-->
+            </div>
+            
+            <div class="mb-3" asp-enabled="MinimumScore">
+                <!--input start-->
+                <label asp-for="MinimumScore" class="form-label"></label>
+                <input asp-for="MinimumScore" autocomplete="off" class="form-control" />
+                <span asp-validation-for="MinimumScore" class="text-danger"></span>
+                <!--input end-->
+            </div>
+            
+            <div class="mb-3" asp-enabled="CompletionScore">
+                <!--input start-->
+                <label asp-for="CompletionScore" class="form-label"></label>
+                <input asp-for="CompletionScore" autocomplete="off" class="form-control" />
+                <span asp-validation-for="CompletionScore" class="text-danger"></span>
+                <!--input end-->
+            </div>
+            
+            <div class="mb-3" asp-enabled="RefEvaluationStatusId">
+                <!--fk select start-->
+                <label asp-for="RefEvaluationStatusId" class="form-label"></label>
+                <select asp-for="RefEvaluationStatusId" class ="form-control form-select" asp-items="ViewBag.RefEvaluationStatusId">
+                    <option disabled selected></option>
+                </select>
+                <span asp-validation-for="RefEvaluationStatusId" class="text-danger"></span>
+                <!--fk select end-->
+            </div>
+            
+            <!-- button group start -->
+            <div class="mb-3 text-end mt-5">
+                <a id="cancelbutton" class="btn btn-secondary me-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
+                    <i class="fas fa-times"></i> @Localizer["Cancel"]
+                </a>
+                <button id="submitbutton" type="submit" value="Create" class="btn btn-primary ladda-button" data-style="expand-left" data-spinner-color="white">
+                    <span class="ladda-label">
+                        <i class="fas fa-check"></i> @Localizer["Create"]
+                    </span>
+                </button>
+            </div>
+            <!-- button group end -->
+        </form>
+    </div>
+</div>
+
+@section Styles {
+    @{await Html.RenderPartialAsync("_CreateStylesPartial");}
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{await Html.RenderPartialAsync("_CreateScriptsPartial");}
+}

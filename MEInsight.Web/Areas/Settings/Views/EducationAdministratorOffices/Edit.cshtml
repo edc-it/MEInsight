@@ -1,0 +1,59 @@
+@model MEInsight.Entities.Reference.RefEducationAdministratorOffice
+
+@{
+    ViewData["Title"] = @Localizer["Edit"].Value + " " + @Localizer["Education Administrator Office"].Value;
+}
+
+<h2>@Localizer["Edit"]</h2>
+
+<h4>@Localizer["Education Administrator Office"]</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6 col-sm-8">
+        <!--form start-->
+        <form asp-action="Edit" id="main-form">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" name="ParentId" value="@ViewBag.ParentId" />
+            <input type="hidden" asp-for="RefEducationAdministratorOfficeId" />
+            
+            <div class="mb-3" asp-enabled="EducationAdministratorOfficeCode">
+                <!--input start-->
+                <label asp-for="EducationAdministratorOfficeCode" class="form-label"></label>
+                <input asp-for="EducationAdministratorOfficeCode" autocomplete="off" class="form-control" />
+                <span asp-validation-for="EducationAdministratorOfficeCode" class="text-danger"></span>
+                <!--input end-->
+            </div>
+            
+            
+            <div class="mb-3" asp-enabled="EducationAdministratorOffice">
+                <!--input start-->
+                <label asp-for="EducationAdministratorOffice" class="form-label"></label>
+                <input asp-for="EducationAdministratorOffice" autocomplete="off" class="form-control" />
+                <span asp-validation-for="EducationAdministratorOffice" class="text-danger"></span>
+                <!--input end-->
+            </div>
+            
+            <!-- button group start -->
+            <div class="mb-3 text-end mt-5">
+                <a id="cancelbutton" class="btn btn-secondary me-2" asp-action="Index" asp-route-id="@ViewBag.ParentId">
+                    <i class="fas fa-times"></i> @Localizer["Cancel"]
+                </a>
+                <button id="submitbutton" type="submit" value="Save" class="btn btn-primary ladda-button" data-style="expand-left" data-spinner-color="white">
+                    <span class="ladda-label">
+                        <i class="fas fa-check"></i> @Localizer["Save"]
+                    </span>
+                </button>
+            </div>
+            <!-- button group end -->
+        </form>
+        <!--form end-->
+    </div>
+</div>
+
+@section Styles {
+    @{await Html.RenderPartialAsync("_EditStylesPartial");}
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{await Html.RenderPartialAsync("_EditScriptsPartial");}
+}
